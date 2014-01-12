@@ -30,13 +30,6 @@ public class BashModuleExtensionProvider implements ModuleExtensionProvider<Bash
 
 	@NotNull
 	@Override
-	public Class<BashModuleExtension> getImmutableClass()
-	{
-		return BashModuleExtension.class;
-	}
-
-	@NotNull
-	@Override
 	public BashModuleExtension createImmutable(@NotNull String s, @NotNull Module module)
 	{
 		return new BashModuleExtension(s, module);
