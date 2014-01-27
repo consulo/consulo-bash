@@ -115,6 +115,15 @@ public class BashModuleExtension extends ModuleExtensionImpl<BashModuleExtension
 	}
 
 	@Override
+	public void commit(@NotNull BashModuleExtension mutableModuleExtension)
+	{
+		super.commit(mutableModuleExtension);
+
+		setOperationMode(mutableModuleExtension.getOperationMode());
+		setMapping(mutableModuleExtension.getMapping());
+	}
+
+	@Override
 	protected void loadStateImpl(@NotNull Element element)
 	{
 		super.loadStateImpl(element);
