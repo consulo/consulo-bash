@@ -15,12 +15,9 @@ import com.intellij.openapi.roots.ModifiableRootModel;
  */
 public class BashMutableModuleExtension extends BashModuleExtension implements MutableModuleExtension<BashModuleExtension>
 {
-	private BashModuleExtension myOriginal;
-
-	public BashMutableModuleExtension(@NotNull String id, @NotNull Module module, @NotNull BashModuleExtension original)
+	public BashMutableModuleExtension(@NotNull String id, @NotNull Module module)
 	{
 		super(id, module);
-		myOriginal = original;
 	}
 
 	@Nullable
@@ -37,16 +34,10 @@ public class BashMutableModuleExtension extends BashModuleExtension implements M
 	}
 
 	@Override
-	public boolean isModified()
+	public boolean isModified(@NotNull BashModuleExtension extension)
 	{
-		return myIsEnabled != myOriginal.isEnabled() ||
-				myOperationMode != myOriginal.getOperationMode() ||
-				!myMapping.equals(myOriginal.myMapping);
-	}
-
-	@Override
-	public void commit()
-	{
-		myOriginal.commit(this);
+		return myIsEnabled != extension.isEnabled() ||
+				myOperationMode != extension.getOperationMode() ||
+				!myMapping.equals(extension.myMapping);
 	}
 }

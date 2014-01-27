@@ -37,8 +37,8 @@ public class BashModuleExtensionProvider implements ModuleExtensionProvider<Bash
 
 	@NotNull
 	@Override
-	public BashMutableModuleExtension createMutable(@NotNull String s, @NotNull Module module, @NotNull BashModuleExtension bashModuleExtension)
+	public BashMutableModuleExtension createMutable(@NotNull String s, @NotNull Module module)
 	{
-		return new BashMutableModuleExtension(s, module, bashModuleExtension);
+		return new BashMutableModuleExtension(s, module);
 	}
 }
