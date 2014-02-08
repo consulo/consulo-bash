@@ -18,12 +18,14 @@
 
 package com.ansorgit.plugins.bash.structureview;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.TreeBasedStructureViewBuilder;
 import com.intellij.lang.PsiStructureViewFactory;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Creates the structure view builder for Bash files.
@@ -33,17 +35,25 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Joachim Ansorg
  */
-public class BashStructureViewFactory implements PsiStructureViewFactory {
-    public StructureViewBuilder getStructureViewBuilder(final PsiFile psiFile) {
-        return new TreeBasedStructureViewBuilder() {
-            @NotNull
-            public StructureViewModel createStructureViewModel() {
-                return new BashStructureViewModel(psiFile);
-            }
+public class BashStructureViewFactory implements PsiStructureViewFactory
+{
+	@Override
+	public StructureViewBuilder getStructureViewBuilder(final PsiFile psiFile)
+	{
+		return new TreeBasedStructureViewBuilder()
+		{
+			@Override
+			@NotNull
+			public StructureViewModel createStructureViewModel(@Nullable Editor editor)
+			{
+				return new BashStructureViewModel(psiFile);
+			}
 
-            public boolean isRootNodeShown() {
-                return false;
-            }
-        };
-    }
+			@Override
+			public boolean isRootNodeShown()
+			{
+				return false;
+			}
+		};
+	}
 }
