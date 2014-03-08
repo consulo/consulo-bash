@@ -162,7 +162,11 @@
         <stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashIncludeCommandIndex"/>
         <stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashVarDefIndex"/>
 
-		<moduleExtensionProvider key="bash" allow-mixin="true"
-								 implementationClass="org.mustbe.consulo.bash.module.extension.BashModuleExtensionProvider"/>
+		<moduleExtensionProvider key="bash"
+								 allowMixin="true"
+								 icon="/icons/bash-16.png"
+								 name="Bash"
+								 mutableClass="org.mustbe.consulo.bash.module.extension.BashMutableModuleExtension"
+								 immutableClass="org.mustbe.consulo.bash.module.extension.BashModuleExtension"/>
     </extensions>
 </idea-plugin>

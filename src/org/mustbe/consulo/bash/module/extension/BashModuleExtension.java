@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.ansorgit.plugins.bash.settings.facet.OperationMode;
 import com.ansorgit.plugins.bash.settings.facet.ui.FileMode;
-import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.containers.ContainerUtil;
@@ -27,7 +27,7 @@ public class BashModuleExtension extends ModuleExtensionImpl<BashModuleExtension
 
 	protected Map<VirtualFile, FileMode> myMapping = new HashMap<VirtualFile, FileMode>();
 
-	public BashModuleExtension(@NotNull String id, @NotNull Module module)
+	public BashModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
 	{
 		super(id, module);
 	}
