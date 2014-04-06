@@ -18,10 +18,24 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.vars;
 
+import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.bashShellVars;
+import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.bashShellVars_v4;
+import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.bourneShellVars;
+import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.localVarDefCommands;
+
+import java.util.List;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
-import com.ansorgit.plugins.bash.lang.psi.api.*;
+import com.ansorgit.plugins.bash.lang.psi.api.BashCharSequence;
+import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
+import com.ansorgit.plugins.bash.lang.psi.api.BashReference;
+import com.ansorgit.plugins.bash.lang.psi.api.BashString;
+import com.ansorgit.plugins.bash.lang.psi.api.ResolveProcessor;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashCommand;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashAssignmentList;
@@ -33,10 +47,16 @@ import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashIdentifierUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
+import com.intellij.codeInsight.daemon.EmptyResolveMessageProvider;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiComment;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.ResolveState;
+import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.impl.source.resolve.reference.impl.CachingReference;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
@@ -44,13 +64,6 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.BindablePsiReference;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-
-import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.*;
 
 /**
  * Date: 14.04.2009
@@ -321,7 +334,8 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
         return BashPsiUtils.findDocumentationElementComments(this);
     }
 
-    private static final class CachedVarDefReference extends CachingReference implements BashReference, BindablePsiReference {
+    private static final class CachedVarDefReference extends CachingReference implements BashReference, BindablePsiReference, EmptyResolveMessageProvider
+	{
         private final BashVarDefImpl bashVarDef;
 
         public CachedVarDefReference(BashVarDefImpl bashVarDef) {

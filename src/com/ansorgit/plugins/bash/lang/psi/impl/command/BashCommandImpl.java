@@ -43,6 +43,7 @@ import com.ansorgit.plugins.bash.lang.psi.impl.Keys;
 import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import com.google.common.collect.Lists;
+import com.intellij.codeInsight.daemon.EmptyResolveMessageProvider;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.Key;
@@ -336,7 +337,8 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
         }
     }
 
-    private static class CachedFunctionReference<T extends StubElement> extends CachingReference implements BashReference {
+    private static class CachedFunctionReference<T extends StubElement> extends CachingReference implements BashReference, EmptyResolveMessageProvider
+	{
         private final BashCommandImpl<T> cmd;
 
         public CachedFunctionReference(BashCommandImpl<T> cmd) {

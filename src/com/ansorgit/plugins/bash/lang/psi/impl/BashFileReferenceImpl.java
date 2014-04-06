@@ -18,12 +18,15 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashCharSequence;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFileReference;
 import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiFileUtils;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
+import com.intellij.codeInsight.daemon.EmptyResolveMessageProvider;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -33,8 +36,6 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.impl.CachingReference;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> implements BashFileReference {
     private PsiReference cachingReference;
@@ -80,7 +81,8 @@ public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> 
     }
 
 
-    private static class CachingFileReference extends CachingReference {
+    private static class CachingFileReference extends CachingReference implements EmptyResolveMessageProvider
+	{
         private final BashFileReferenceImpl fileReference;
 
         public CachingFileReference(BashFileReferenceImpl fileReference) {
