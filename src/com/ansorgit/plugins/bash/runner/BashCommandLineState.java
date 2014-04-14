@@ -69,8 +69,8 @@ public class BashCommandLineState extends CommandLineState {
             commandLine.setWorkDirectory(runConfiguration.getWorkingDirectory());
         }
 
-        commandLine.setEnvParams(runConfiguration.getEnvs());
-        commandLine.setPassParentEnvs(runConfiguration.isPassParentEnvs());
+        commandLine.getEnvironment().putAll(runConfiguration.getEnvs());
+        commandLine.setPassParentEnvironment(runConfiguration.isPassParentEnvs());
 
         return commandLine;
     }
