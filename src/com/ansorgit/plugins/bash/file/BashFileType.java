@@ -138,7 +138,7 @@ public class BashFileType extends LanguageFileType implements FileTypeIdentifiab
             }
 
             DirectoryIndex directoryIndex = DirectoryIndex.getInstance(project);
-            if (directoryIndex == null || !directoryIndex.isInitialized()) {
+            if (directoryIndex == null) {
                 return false;
             }
 
