@@ -18,6 +18,7 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
+import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.openapi.editor.Document;
@@ -26,9 +27,9 @@ import com.intellij.openapi.editor.ReadOnlyFragmentModificationException;
 import com.intellij.openapi.editor.ReadOnlyModificationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElementWithSubtreeChangeNotifier;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * THis quickfix replaces a simple variable usage with the equivalent parameter expansion form.
@@ -61,7 +62,7 @@ public class ReplaceVarWithParamExpansionQuickfix extends AbstractBashQuickfix i
         try {
             Document document = file.getViewProvider().getDocument();
             document.replaceString(textRange.getStartOffset(), textRange.getEndOffset(), "${" + variableName + "}");
-            file.subtreeChanged();
+			((PsiElementWithSubtreeChangeNotifier)file).subtreeChanged();
         } catch (ReadOnlyModificationException e) {
             //ignore
         } catch (ReadOnlyFragmentModificationException e) {
