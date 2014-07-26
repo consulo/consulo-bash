@@ -19,6 +19,7 @@
 package com.ansorgit.plugins.bash.lang.lexer;
 
 import com.intellij.lexer.Lexer;
+import com.intellij.lexer.MergeFunction;
 import com.intellij.lexer.MergingLexerAdapterBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -32,36 +33,52 @@ import com.intellij.psi.tree.TokenSet;
  *
  * @author Joachim Ansorg
  */
-class MergingLexer extends MergingLexerAdapterBase {
+class MergingLexer extends MergingLexerAdapterBase
+{
 
-    /**
-     * Create a merging lexer which works with the merge definitions given in the mergeTuples parameter.
-     *
-     * @param original    The original lexer, used as a delegate
-     * @param mergeTuples The token merge definitions.
-     */
-    public MergingLexer(final Lexer original, final MergeTuple... mergeTuples) {
-        super(original, new MergeFunction() {
-            @Override
-            public IElementType merge(IElementType type, Lexer lexer) {
-                for (final MergeTuple currentTuple : mergeTuples) {
-                    final TokenSet tokensToMerge = currentTuple.getTokensToMerge();
+	private final MergeFunction myMergeFunction;
 
-                    if (tokensToMerge.contains(type)) {
-                        IElementType current = lexer.getTokenType();
-                        //merge all upcoming tokens into the target token type
-                        while (tokensToMerge.contains(current)) {
-                            lexer.advance();
+	/**
+	 * Create a merging lexer which works with the merge definitions given in the mergeTuples parameter.
+	 *
+	 * @param original    The original lexer, used as a delegate
+	 * @param mergeTuples The token merge definitions.
+	 */
+	public MergingLexer(final Lexer original, final MergeTuple... mergeTuples)
+	{
+		super(original);
+		myMergeFunction = new MergeFunction()
+		{
+			@Override
+			public IElementType merge(IElementType type, Lexer lexer)
+			{
+				for(final MergeTuple currentTuple : mergeTuples)
+				{
+					final TokenSet tokensToMerge = currentTuple.getTokensToMerge();
 
-                            current = lexer.getTokenType();
-                        }
+					if(tokensToMerge.contains(type))
+					{
+						IElementType current = lexer.getTokenType();
+						//merge all upcoming tokens into the target token type
+						while(tokensToMerge.contains(current))
+						{
+							lexer.advance();
 
-                        return currentTuple.getTargetType();
-                    }
-                }
+							current = lexer.getTokenType();
+						}
 
-                return type;
-            }
-        });
-    }
+						return currentTuple.getTargetType();
+					}
+				}
+
+				return type;
+			}
+		};
+	}
+
+	@Override
+	public MergeFunction getMergeFunction()
+	{
+		return myMergeFunction;
+	}
 }
