@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting;
 
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.BashComponents;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.intellij.codeHighlighting.Pass;
@@ -33,8 +35,6 @@ import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiModificationTracker;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Factory which provides text editor post highlighter for the Bash file type.
@@ -56,7 +56,7 @@ public class BashPostHighlightingPassFactory extends AbstractProjectComponent im
     }
 
     public void projectOpened() {
-        registrar.registerTextEditorHighlightingPass(this, new int[]{Pass.UPDATE_ALL}, null, true, Pass.POST_UPDATE_ALL);
+        registrar.registerTextEditorHighlightingPass(this, new int[]{Pass.UPDATE_ALL}, null, true, Pass.UPDATE_ALL);
     }
 
     @NonNls

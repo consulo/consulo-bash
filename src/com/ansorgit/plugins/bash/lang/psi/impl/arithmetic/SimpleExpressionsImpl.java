@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.arithmetic;
 
+import java.util.List;
+
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.SimpleExpression;
@@ -25,8 +27,6 @@ import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-
-import java.util.List;
 
 /**
  * User: jansorg

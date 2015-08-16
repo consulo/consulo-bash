@@ -154,7 +154,7 @@ public class PostHighlightingPass extends TextEditorHighlightingPass
 		}
 
 		UpdateHighlightersUtil.setHighlightersToEditor(myProject, myDocument, startOffset, endOffset, highlights, getColorsScheme(),
-				Pass.POST_UPDATE_ALL);
+				Pass.UPDATE_ALL);
 		BashPostHighlightingPassFactory.markFileUpToDate(file);
 	}
 }
