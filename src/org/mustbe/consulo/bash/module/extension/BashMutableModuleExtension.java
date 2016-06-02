@@ -1,12 +1,15 @@
 package org.mustbe.consulo.bash.module.extension;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import org.consulo.module.extension.MutableModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.RequiredDispatchThread;
 import com.ansorgit.plugins.bash.settings.facet.ui.BashFacetUI;
 import com.intellij.openapi.roots.ModuleRootLayer;
+import com.intellij.openapi.ui.VerticalFlowLayout;
 
 /**
  * @author VISTALL
@@ -19,11 +22,14 @@ public class BashMutableModuleExtension extends BashModuleExtension implements M
 		super(id, moduleRootLayer);
 	}
 
+	@RequiredDispatchThread
 	@Nullable
 	@Override
 	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
 	{
-		return wrapToNorth(new BashFacetUI(this));
+		JPanel panel = new JPanel(new VerticalFlowLayout(true, false));
+		panel.add(new BashFacetUI(this));
+		return panel;
 	}
 
 	@Override
