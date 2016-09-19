@@ -30,9 +30,9 @@ import com.intellij.openapi.editor.ReadOnlyFragmentModificationException;
 import com.intellij.openapi.editor.ReadOnlyModificationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElementWithSubtreeChangeNotifier;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
+import consulo.psi.PsiElementWithSubtreeChangeNotifier;
 
 /**
  * Quickfix to register an unknown / unresolved variable as a globally defined variable.

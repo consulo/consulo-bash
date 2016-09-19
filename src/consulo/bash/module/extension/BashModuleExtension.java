@@ -1,21 +1,21 @@
-package org.mustbe.consulo.bash.module.extension;
+package consulo.bash.module.extension;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import org.consulo.module.extension.impl.ModuleExtensionImpl;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.ansorgit.plugins.bash.settings.facet.OperationMode;
 import com.ansorgit.plugins.bash.settings.facet.ui.FileMode;
-import com.intellij.openapi.roots.ModuleRootLayer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.hash.HashMap;
+import consulo.extension.impl.ModuleExtensionImpl;
+import consulo.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL

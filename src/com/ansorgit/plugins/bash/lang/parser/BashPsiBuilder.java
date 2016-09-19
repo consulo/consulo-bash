@@ -18,17 +18,17 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
+import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import com.ansorgit.plugins.bash.lang.BashVersion;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.util.ForwardingMarker;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.impl.PsiBuilderAdapter;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Stack;
-import org.apache.commons.lang.StringUtils;
-import org.jetbrains.annotations.Nullable;
+import consulo.lang.LanguageVersion;
 
 /**
  * The PsiBuilder which has been enhanced to be more helpful for Bash parsing.
@@ -44,14 +44,11 @@ public class BashPsiBuilder extends PsiBuilderAdapter implements PsiBuilder {
     static final Logger log = Logger.getInstance("#bash.BashPsiBuilder");
     private final Stack<Boolean> errorsStatusStack = new Stack<Boolean>();
     private final BashTokenRemapper tokenRemapper;
-    private final BashVersion bashVersion;
-    private Project project;
+    private final BashVersion bashVersion = BashVersion.Bash_v4;
 
-    public BashPsiBuilder(Project project, PsiBuilder wrappedBuilder, BashVersion bashVersion) {
+    public BashPsiBuilder(LanguageVersion<?> languageVersion, PsiBuilder wrappedBuilder) {
         super(wrappedBuilder);
 
-        this.project = project;
-        this.bashVersion = bashVersion;
         this.tokenRemapper = new BashTokenRemapper(this);
         setTokenTypeRemapper(tokenRemapper);
     }
@@ -209,10 +206,6 @@ public class BashPsiBuilder extends PsiBuilderAdapter implements PsiBuilder {
         } else if (log.isDebugEnabled()) {
             log.debug("Supressed psi error: " + message);
         }
-    }
-
-    public Project getProject() {
-        return project;
     }
 
     /**

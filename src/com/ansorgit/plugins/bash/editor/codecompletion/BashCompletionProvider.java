@@ -18,22 +18,25 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
-import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.intellij.codeInsight.completion.*;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.ProcessingContext;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.completion.PrefixMatcher;
+import com.intellij.psi.PsiElement;
+import com.intellij.util.ProcessingContext;
+import consulo.codeInsight.completion.CompletionProvider;
 
 /**
  * Abstract base class for completion providers in Bash files.
  */
-abstract class BashCompletionProvider extends CompletionProvider<CompletionParameters> {
+abstract class BashCompletionProvider implements CompletionProvider
+{
     public BashCompletionProvider() {
     }
 
@@ -44,7 +47,7 @@ abstract class BashCompletionProvider extends CompletionProvider<CompletionParam
     }
 
     @Override
-    protected final void addCompletions(@NotNull CompletionParameters parameters,
+    public final void addCompletions(@NotNull CompletionParameters parameters,
                                         ProcessingContext context,
                                         @NotNull CompletionResultSet resultWithoutPrefix) {
 

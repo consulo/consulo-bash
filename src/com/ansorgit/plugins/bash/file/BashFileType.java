@@ -25,7 +25,7 @@ import javax.swing.Icon;
 
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.bash.module.extension.BashModuleExtension;
+import consulo.bash.module.extension.BashModuleExtension;
 import com.ansorgit.plugins.bash.lang.Bash;
 import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.settings.facet.ui.FileMode;

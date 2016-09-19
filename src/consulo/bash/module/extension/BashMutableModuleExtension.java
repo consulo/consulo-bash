@@ -1,15 +1,15 @@
-package org.mustbe.consulo.bash.module.extension;
+package consulo.bash.module.extension;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.consulo.module.extension.MutableModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.RequiredDispatchThread;
 import com.ansorgit.plugins.bash.settings.facet.ui.BashFacetUI;
-import com.intellij.openapi.roots.ModuleRootLayer;
 import com.intellij.openapi.ui.VerticalFlowLayout;
+import consulo.annotations.RequiredDispatchThread;
+import consulo.module.extension.MutableModuleExtension;
+import consulo.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL

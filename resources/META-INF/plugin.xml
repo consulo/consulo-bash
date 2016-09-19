@@ -16,157 +16,155 @@
   ~ limitations under the License.
   -->
 <idea-plugin>
-    <name>BashSupport</name>
-    <category>Custom Languages</category>
+	<id>consulo.bash</id>
+	<name>BashSupport</name>
+	<category>Custom Languages</category>
 	<version>SNAPSHOT</version>
-    <vendor url="http://www.ansorg-it.com/" email="mail@ansorg-it.com">Joachim Ansorg
-    </vendor>
+	<vendor url="http://www.ansorg-it.com/" email="mail@ansorg-it.com">Joachim Ansorg</vendor>
 
-    <application-components>
-        <component>
-            <implementation-class>com.ansorgit.plugins.bash.editor.codecompletion.BashPathCommandCompletion
-            </implementation-class>
-        </component>
-    </application-components>
+	<application-components>
+		<component>
+			<implementation-class>com.ansorgit.plugins.bash.editor.codecompletion.BashPathCommandCompletion
+			</implementation-class>
+		</component>
+	</application-components>
 
-    <project-components>
-        <component>
-            <implementation-class>
-                com.ansorgit.plugins.bash.settings.BashProjectSettingsConfigurable
-            </implementation-class>
-        </component>
+	<project-components>
+		<component>
+			<implementation-class>
+				com.ansorgit.plugins.bash.settings.BashProjectSettingsConfigurable
+			</implementation-class>
+		</component>
 
-        <component>
-            <implementation-class>com.ansorgit.plugins.bash.settings.BashProjectSettingsComponent</implementation-class>
-        </component>
+		<component>
+			<implementation-class>com.ansorgit.plugins.bash.settings.BashProjectSettingsComponent</implementation-class>
+		</component>
 
-        <component>
-            <implementation-class>
-                com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting.RemoveHighlightingPassFactory
-            </implementation-class>
-        </component>
+		<component>
+			<implementation-class>
+				com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting.RemoveHighlightingPassFactory
+			</implementation-class>
+		</component>
 
-<!--
-        <component>
-            <implementation-class>
-                com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting.BashPostHighlightingPassFactory
-            </implementation-class>
-        </component>
--->
-    </project-components>
+		<!--
+				<component>
+					<implementation-class>
+						com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting.BashPostHighlightingPassFactory
+					</implementation-class>
+				</component>
+		-->
+	</project-components>
 
-    <!-- Plugin's module components -->
-    <module-components>
-    </module-components>
-
-    <actions>
-        <action id="Bash.NewBashScript" class="com.ansorgit.plugins.bash.actions.NewBashFileAction"
-                text="Bash Script" description="Create new Bash script file" require-module-extensions="bash">
-            <add-to-group group-id="NewGroup" relative-to-action="NDNewFile" anchor="after"/>
-        </action>
+	<actions>
+		<action id="Bash.NewBashScript" class="com.ansorgit.plugins.bash.actions.NewBashFileAction"
+				text="Bash Script" description="Create new Bash script file" require-module-extensions="bash">
+			<add-to-group group-id="NewGroup" relative-to-action="NDNewFile" anchor="after"/>
+		</action>
 
 
-        <!-- A subset of the REPL actions that should be displayed in the panel toolbar. -->
-        <group id="Bash.REPL.Group" text="Bash REPL" description="Bash" popup="false" require-module-extensions="bash"
+		<!-- A subset of the REPL actions that should be displayed in the panel toolbar. -->
+		<group id="Bash.REPL.Group" text="Bash REPL" description="Bash" popup="false" require-module-extensions="bash"
 			   can-use-project-as-default="true">
 
-            <action id="com.ansorgit.plugins.bash.actions.AddReplAction"
-                    class="com.ansorgit.plugins.bash.actions.AddReplAction" text="Add new Bash console"
-                    description="Open a new Bash console window">
-            </action>
+			<action id="com.ansorgit.plugins.bash.actions.AddReplAction"
+					class="com.ansorgit.plugins.bash.actions.AddReplAction" text="Add new Bash console"
+					description="Open a new Bash console window">
+			</action>
 
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </group>
-    </actions>
+			<add-to-group group-id="ToolsMenu" anchor="last"/>
+		</group>
+	</actions>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <fileTypeFactory implementation="com.ansorgit.plugins.bash.file.BashFileTypeLoader"/>
+	<extensions defaultExtensionNs="com.intellij">
+		<fileTypeFactory implementation="com.ansorgit.plugins.bash.file.BashFileTypeLoader"/>
 
-        <!-- Syntax highlighting -->
-        <syntaxHighlighter key="Bash"
-                           implementationClass="com.ansorgit.plugins.bash.editor.highlighting.BashSyntaxHighlighter"/>
-        <colorSettingsPage implementation="com.ansorgit.plugins.bash.editor.highlighting.BashColorsAndFontsPage"/>
+		<!-- Syntax highlighting -->
+		<syntaxHighlighter key="Bash"
+						   implementationClass="com.ansorgit.plugins.bash.editor.highlighting.BashSyntaxHighlighter"/>
+		<colorSettingsPage implementation="com.ansorgit.plugins.bash.editor.highlighting.BashColorsAndFontsPage"/>
 
-        <additionalTextAttributes scheme="Default" file="colors/BashDefault.xml"/>
-        <additionalTextAttributes scheme="Darcula" file="colors/BashDarcula.xml"/>
+		<additionalTextAttributes scheme="Default" file="colors/BashDefault.xml"/>
+		<additionalTextAttributes scheme="Darcula" file="colors/BashDarcula.xml"/>
 
-        <!--Language extensions -->
-        <lang.braceMatcher language="Bash"
-                           implementationClass="com.ansorgit.plugins.bash.editor.highlighting.BashBraceMatcher"/>
+		<!--Language extensions -->
+		<lang.braceMatcher language="Bash"
+						   implementationClass="com.ansorgit.plugins.bash.editor.highlighting.BashBraceMatcher"/>
 
-        <lang.commenter language="Bash"
-                        implementationClass="com.ansorgit.plugins.bash.editor.highlighting.BashCommenter"/>
+		<lang.commenter language="Bash"
+						implementationClass="com.ansorgit.plugins.bash.editor.highlighting.BashCommenter"/>
 
-        <lang.parserDefinition language="Bash"
-                               implementationClass="com.ansorgit.plugins.bash.lang.parser.BashParserDefinition"/>
+		<lang.parserDefinition language="Bash"
+							   implementationClass="com.ansorgit.plugins.bash.lang.parser.BashParserDefinition"/>
 
-        <lang.foldingBuilder language="Bash"
-                             implementationClass="com.ansorgit.plugins.bash.editor.codefolding.BashFoldingBuilder"/>
+		<lang.foldingBuilder language="Bash"
+							 implementationClass="com.ansorgit.plugins.bash.editor.codefolding.BashFoldingBuilder"/>
 
-        <lang.psiStructureViewFactory language="Bash"
-                                      implementationClass="com.ansorgit.plugins.bash.structureview.BashStructureViewFactory"/>
+		<lang.psiStructureViewFactory language="Bash"
+									  implementationClass="com.ansorgit.plugins.bash.structureview.BashStructureViewFactory"/>
 
-        <lang.refactoringSupport language="Bash"
-                                 implementationClass="com.ansorgit.plugins.bash.refactoring.BashRefactoringSupport"/>
+		<lang.refactoringSupport language="Bash"
+								 implementationClass="com.ansorgit.plugins.bash.refactoring.BashRefactoringSupport"/>
 
-        <lang.documentationProvider language="Bash"
-                                    implementationClass="com.ansorgit.plugins.bash.documentation.BashDocumentationProvider"/>
+		<lang.documentationProvider language="Bash"
+									implementationClass="com.ansorgit.plugins.bash.documentation.BashDocumentationProvider"/>
 
-        <lang.findUsagesProvider language="Bash"
-                                 implementationClass="com.ansorgit.plugins.bash.editor.usages.BashFindUsagesProvider"/>
+		<lang.findUsagesProvider language="Bash"
+								 implementationClass="com.ansorgit.plugins.bash.editor.usages.BashFindUsagesProvider"/>
 
-        <lang.formatter language="Bash"
-                        implementationClass="com.ansorgit.plugins.bash.editor.formatting.BashFormattingModelBuilder"/>
+		<lang.formatter language="Bash"
+						implementationClass="com.ansorgit.plugins.bash.editor.formatting.BashFormattingModelBuilder"/>
 
-        <lang.tokenSeparatorGenerator language="Bash"
-                                      implementationClass="com.ansorgit.plugins.bash.refactoring.BashTokenSeparatorGenerator"/>
+		<lang.tokenSeparatorGenerator language="Bash"
+									  implementationClass="com.ansorgit.plugins.bash.refactoring.BashTokenSeparatorGenerator"/>
 
-        <languageInjector implementation="com.ansorgit.plugins.bash.lang.BashInjector"/>
+		<languageInjector implementation="com.ansorgit.plugins.bash.lang.BashInjector"/>
 
-        <readWriteAccessDetector
-                implementation="com.ansorgit.plugins.bash.editor.accessDetector.BashReadWriteAccessDetector"/>
+		<readWriteAccessDetector
+				implementation="com.ansorgit.plugins.bash.editor.accessDetector.BashReadWriteAccessDetector"/>
 
-        <completion.contributor language="Bash"
-                                implementationClass="com.ansorgit.plugins.bash.editor.codecompletion.BashCompletionContributor"/>
+		<completion.contributor language="Bash"
+								implementationClass="com.ansorgit.plugins.bash.editor.codecompletion.BashCompletionContributor"/>
 
-        <!--
-        <weigher key="completionSorting"
-                 implementationClass="com.ansorgit.plugins.bash.editor.codecompletion.BashVariableCompletionWeigher"/>
-        -->
+		<!--
+		<weigher key="completionSorting"
+				 implementationClass="com.ansorgit.plugins.bash.editor.codecompletion.BashVariableCompletionWeigher"/>
+		-->
 
-        <inspectionToolProvider id="BashInspectionProvider"
-                                implementation="com.ansorgit.plugins.bash.editor.inspections.InspectionProvider"/>
+		<inspectionToolProvider id="BashInspectionProvider"
+								implementation="com.ansorgit.plugins.bash.editor.inspections.InspectionProvider"/>
 
-        <annotator language="Bash" implementationClass="com.ansorgit.plugins.bash.editor.annotator.BashAnnotator"/>
+		<annotator language="Bash" implementationClass="com.ansorgit.plugins.bash.editor.annotator.BashAnnotator"/>
 
-        <codeInsight.lineMarkerProvider language="Bash"
-                                        implementationClass="com.ansorgit.plugins.bash.editor.BashLineMarkerProvider"/>
+		<codeInsight.lineMarkerProvider language="Bash"
+										implementationClass="com.ansorgit.plugins.bash.editor.BashLineMarkerProvider"/>
 
-        <configurationType implementation="com.ansorgit.plugins.bash.runner.BashConfigurationType"/>
-        <configurationProducer implementation="com.ansorgit.plugins.bash.runner.BashRunConfigurationProducer"/>
-        <programRunner implementation="com.ansorgit.plugins.bash.runner.BashRunner"/>
+		<configurationType implementation="com.ansorgit.plugins.bash.runner.BashConfigurationType"/>
+		<configurationProducer implementation="com.ansorgit.plugins.bash.runner.BashRunConfigurationProducer"/>
+		<programRunner implementation="com.ansorgit.plugins.bash.runner.BashRunner"/>
 
-        <!-- Repl-->
-        <!--
-        <projectService serviceInterface="com.ansorgit.plugins.bash.repl.ReplManager"
-                        serviceImplementation="com.ansorgit.plugins.bash.repl.ReplManager"/>
-        -->
+		<!-- Repl-->
+		<!--
+		<projectService serviceInterface="com.ansorgit.plugins.bash.repl.ReplManager"
+						serviceImplementation="com.ansorgit.plugins.bash.repl.ReplManager"/>
+		-->
 
-        <!-- stubs -->
-        <stubElementTypeHolder class="com.ansorgit.plugins.bash.lang.parser.BashElementTypes"/>
+		<!-- stubs -->
+		<stubElementTypeHolder class="com.ansorgit.plugins.bash.lang.parser.BashElementTypes"/>
 
-        <stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashFunctionNameIndex"/>
-        <stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashScriptNameIndex"/>
-        <stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashFullScriptNameIndex"/>
-        <stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashIncludedFilenamesIndex"/>
-        <stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashIncludeCommandIndex"/>
-        <stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashVarDefIndex"/>
+		<stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashFunctionNameIndex"/>
+		<stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashScriptNameIndex"/>
+		<stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashFullScriptNameIndex"/>
+		<stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashIncludedFilenamesIndex"/>
+		<stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashIncludeCommandIndex"/>
+		<stubIndex implementation="com.ansorgit.plugins.bash.lang.psi.stubs.index.BashVarDefIndex"/>
 
 		<moduleExtensionProvider key="bash"
 								 allowMixin="true"
 								 icon="/icons/bash-16.png"
 								 name="Bash"
-								 mutableClass="org.mustbe.consulo.bash.module.extension.BashMutableModuleExtension"
-								 immutableClass="org.mustbe.consulo.bash.module.extension.BashModuleExtension"/>
-    </extensions>
+								 mutableClass="consulo.bash.module.extension.BashMutableModuleExtension"
+								 immutableClass="consulo.bash.module.extension.BashModuleExtension"/>
+
+		<iconDescriptorUpdater implementation="consulo.bash.BashIconDescriptorUpdater" />
+	</extensions>
 </idea-plugin>

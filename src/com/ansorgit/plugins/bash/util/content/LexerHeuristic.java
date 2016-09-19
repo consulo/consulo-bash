@@ -57,7 +57,7 @@ class LexerHeuristic implements ContentHeuristic {
 	public double isBashFile(File file, String data, Project project) {
         ParserDefinition definition = LanguageParserDefinitions.INSTANCE.forLanguage(BashFileType.BASH_LANGUAGE);
 
-        Lexer lexer = definition.createLexer(project, BashLanguage.INSTANCE.getVersions()[0]);
+        Lexer lexer = definition.createLexer(BashLanguage.INSTANCE.getVersions()[0]);
         lexer.start(data);
 
         int tokenCount = 0;

@@ -22,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.mustbe.consulo.bash.module.extension.BashMutableModuleExtension;
+import consulo.bash.module.extension.BashMutableModuleExtension;
 import com.ansorgit.plugins.bash.settings.facet.OperationMode;
 import com.intellij.util.ui.tree.TreeUtil;
 

@@ -18,19 +18,20 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
-import com.ansorgit.plugins.bash.lang.psi.api.command.BashCommand;
-import com.ansorgit.plugins.bash.util.SystemPathUtil;
-import com.intellij.execution.process.CapturingProcessHandler;
-import com.intellij.execution.process.ProcessOutput;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NonNls;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
+
+import org.jetbrains.annotations.NonNls;
+import com.ansorgit.plugins.bash.lang.psi.api.command.BashCommand;
+import com.ansorgit.plugins.bash.util.SystemPathUtil;
+import com.intellij.execution.process.CapturingProcessHandler;
+import com.intellij.execution.process.ProcessOutput;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 
 /**
  * Provides documentation by calling the systems info program and converts the output to html.
@@ -94,7 +95,7 @@ class SystemInfopageDocSource implements DocumentationSource, CachableDocumentat
         //info -w locates an info file, exit status == 1 means that there is no info file 
         ProcessBuilder processBuilder = new ProcessBuilder(infoExecutable, "-w", commandName);
 
-        CapturingProcessHandler processHandler = new CapturingProcessHandler(processBuilder.start(), Charset.forName(CHARSET_NAME));
+        CapturingProcessHandler processHandler = new CapturingProcessHandler(processBuilder.start(), Charset.forName(CHARSET_NAME), StringUtil.join(processBuilder.command(), " "));
         ProcessOutput output = processHandler.runProcess(TIMEOUT_IN_MILLISECONDS);
 
         return output.getExitCode() == 0;
@@ -103,7 +104,7 @@ class SystemInfopageDocSource implements DocumentationSource, CachableDocumentat
     String loadPlainTextInfoPage(String commandName) throws IOException {
         ProcessBuilder processBuilder = new ProcessBuilder(infoExecutable, "-o", "-", commandName);
 
-        CapturingProcessHandler processHandler = new CapturingProcessHandler(processBuilder.start(), Charset.forName(CHARSET_NAME));
+        CapturingProcessHandler processHandler = new CapturingProcessHandler(processBuilder.start(), Charset.forName(CHARSET_NAME), StringUtil.join(processBuilder.command(), " "));
         ProcessOutput output = processHandler.runProcess(TIMEOUT_IN_MILLISECONDS);
 
         if (output.getExitCode() != 0) {
@@ -121,7 +122,7 @@ class SystemInfopageDocSource implements DocumentationSource, CachableDocumentat
 
         ProcessBuilder processBuilder = new ProcessBuilder(txt2htmlExecutable, "--infile", "-");
 
-        CapturingProcessHandler processHandler = new MyCapturingProcessHandler(processBuilder.start(), infoPageData);
+        CapturingProcessHandler processHandler = new MyCapturingProcessHandler(processBuilder.start(), infoPageData, StringUtil.join(processBuilder.command(), " "));
 
         ProcessOutput output = processHandler.runProcess(TIMEOUT_IN_MILLISECONDS);
         if (output.getExitCode() != 0) {
@@ -156,8 +157,8 @@ class SystemInfopageDocSource implements DocumentationSource, CachableDocumentat
     private class MyCapturingProcessHandler extends CapturingProcessHandler {
         private final String stdinData;
 
-        public MyCapturingProcessHandler(Process process, String stdinData) {
-            super(process, Charset.forName(SystemInfopageDocSource.CHARSET_NAME));
+        public MyCapturingProcessHandler(Process process, String stdinData, String commandLine) {
+            super(process, Charset.forName(SystemInfopageDocSource.CHARSET_NAME), commandLine);
             this.stdinData = stdinData;
         }
 

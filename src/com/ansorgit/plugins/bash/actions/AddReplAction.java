@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.actions;
 
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.bash.module.extension.BashModuleExtension;
+import consulo.bash.module.extension.BashModuleExtension;
 import com.ansorgit.plugins.bash.runner.repl.BashConsoleRunner;
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.intellij.openapi.actionSystem.AnAction;

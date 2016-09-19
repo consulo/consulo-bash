@@ -1,17 +1,17 @@
-package org.mustbe.consulo.bash;
+package consulo.bash;
 
 import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.intellij.icons.AllIcons;
-import com.intellij.ide.IconDescriptor;
-import com.intellij.ide.IconDescriptorUpdater;
 import com.intellij.psi.PsiElement;
+import consulo.ide.IconDescriptor;
+import consulo.ide.IconDescriptorUpdater;
 
 /**
  * @author VISTALL
  * @since 19.11.13.
  */
-public class BaseIconDescriptorUpdater implements IconDescriptorUpdater
+public class BashIconDescriptorUpdater implements IconDescriptorUpdater
 {
 	@Override
 	public void updateIcon(@NotNull IconDescriptor iconDescriptor, @NotNull PsiElement element, int i)
