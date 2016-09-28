@@ -21,53 +21,60 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
-import com.google.common.collect.MapMaker;
-import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.Nullable;
-
+import java.util.HashMap;
 import java.util.Map;
+
+import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.PsiElement;
 
 /**
  * Caches the result of the delegate documentation source after the first invocation for a certain command name.
  * The cache is done in a weak key hash map to prevent too much memory allocation.
- * <p/>
+ * <p>
  * The urls are not cached.
- * <p/>
+ * <p>
  * User: jansorg
  * Date: 08.05.2010
  * Time: 12:59:53
  */
-class CachingDocumentationSource implements DocumentationSource {
-    private final CachableDocumentationSource delegate;
+class CachingDocumentationSource implements DocumentationSource
+{
+	private final CachableDocumentationSource delegate;
 
-    //strong values to compare keys with equals(...)
-    private final Map<String, String> documentationCache = new MapMaker().softValues().makeMap();
+	//strong values to compare keys with equals(...)
+	private final Map<String, String> documentationCache = new HashMap<>();
 
-    public CachingDocumentationSource(CachableDocumentationSource source) {
-        this.delegate = source;
-    }
+	public CachingDocumentationSource(CachableDocumentationSource source)
+	{
+		this.delegate = source;
+	}
 
-    @Nullable
-    public String documentation(PsiElement element, PsiElement originalElement) {
-        String key = delegate.findCacheKey(element, originalElement);
-        if (key == null) {
-            return delegate.documentation(element, originalElement);
-        }
+	@Nullable
+	public String documentation(PsiElement element, PsiElement originalElement)
+	{
+		String key = delegate.findCacheKey(element, originalElement);
+		if(key == null)
+		{
+			return delegate.documentation(element, originalElement);
+		}
 
-        if (!documentationCache.containsKey(key) || documentationCache.get(key) == null) {
-            String data = delegate.documentation(element, originalElement);
-            if (data == null) {
-                return null;
-            }
+		if(!documentationCache.containsKey(key) || documentationCache.get(key) == null)
+		{
+			String data = delegate.documentation(element, originalElement);
+			if(data == null)
+			{
+				return null;
+			}
 
-            documentationCache.put(key, data);
-        }
+			documentationCache.put(key, data);
+		}
 
-        return documentationCache.get(key);
-    }
+		return documentationCache.get(key);
+	}
 
-    @Nullable
-    public String documentationUrl(PsiElement element, PsiElement originalElement) {
-        return delegate.documentationUrl(element, originalElement);
-    }
+	@Nullable
+	public String documentationUrl(PsiElement element, PsiElement originalElement)
+	{
+		return delegate.documentationUrl(element, originalElement);
+	}
 }
