@@ -57,11 +57,11 @@ import com.intellij.ui.TreeTableSpeedSearch;
 import com.intellij.ui.treeStructure.treetable.TreeTable;
 import com.intellij.ui.treeStructure.treetable.TreeTableCellRenderer;
 import com.intellij.ui.treeStructure.treetable.TreeTableModel;
-import com.intellij.util.IconUtil;
 import com.intellij.util.containers.Convertor;
 import com.intellij.util.containers.HashMap;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
+import consulo.fileTypes.impl.VfsIconUtil;
 
 abstract class AbstractFileTreeTable<T> extends TreeTable {
     private final MyModel<T> myModel;
@@ -464,7 +464,7 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
                 setText(file.getPresentableUrl());
             }
 
-            setIcon(IconUtil.getIcon(file, 0, null));
+            setIcon(VfsIconUtil.getIcon(file, 0, null));
             return this;
         }
     }
