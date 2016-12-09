@@ -42,7 +42,7 @@ public final class BashLexer extends MergingLexer implements BashTokenTypes
 		super(new FlexAdapter(new _BashLexer(BashVersion.Bash_v4, null)), MergeTuple.create(TokenSet.create(STRING_CHAR), WORD));
 	}
 
-	public BashLexer(LanguageVersion<?> languageVersion)
+	public BashLexer(LanguageVersion languageVersion)
 	{
 		super(new FlexAdapter(new _BashLexer(BashVersion.Bash_v4, null)), MergeTuple.create(TokenSet.create(STRING_CHAR), WORD));
 	}
