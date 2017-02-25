@@ -46,7 +46,7 @@ public class BashPsiBuilder extends PsiBuilderAdapter implements PsiBuilder {
     private final BashTokenRemapper tokenRemapper;
     private final BashVersion bashVersion = BashVersion.Bash_v4;
 
-    public BashPsiBuilder(LanguageVersion<?> languageVersion, PsiBuilder wrappedBuilder) {
+    public BashPsiBuilder(LanguageVersion languageVersion, PsiBuilder wrappedBuilder) {
         super(wrappedBuilder);
 
         this.tokenRemapper = new BashTokenRemapper(this);
