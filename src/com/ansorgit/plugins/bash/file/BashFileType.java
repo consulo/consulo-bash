@@ -23,9 +23,7 @@ import java.util.List;
 
 import javax.swing.Icon;
 
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
-import consulo.bash.module.extension.BashModuleExtension;
 import com.ansorgit.plugins.bash.lang.Bash;
 import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.settings.facet.ui.FileMode;
@@ -41,8 +39,10 @@ import com.intellij.openapi.project.DumbServiceImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectUtil;
 import com.intellij.openapi.roots.impl.DirectoryIndex;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import consulo.bash.module.extension.BashModuleExtension;
 
 /**
  * The file type implementation for Bash files.
@@ -123,7 +123,7 @@ public class BashFileType extends LanguageFileType implements FileTypeIdentifiab
             return true;
         } else if (!file.isInLocalFileSystem()) {
             return false;
-        } else if (StringUtils.isEmpty(file.getExtension())) {
+        } else if (StringUtil.isEmpty(file.getExtension())) {
             //no extensions, special checks (looking at the content, etc)
 
             //guess project

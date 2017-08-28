@@ -18,6 +18,7 @@
 
 package com.ansorgit.plugins.bash.editor.usages;
 
+import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.lang.lexer.BashLexer;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
@@ -29,11 +30,10 @@ import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.tree.TokenSet;
-import org.apache.commons.lang.StringUtils;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * The find usages provider implementation for Bash.
@@ -94,10 +94,10 @@ public class BashFindUsagesProvider implements FindUsagesProvider, BashTokenType
         }
 
         if (element instanceof BashCommand) {
-            return StringUtils.stripToEmpty(((BashCommand) element).getReferencedCommandName());
+            return StringUtil.notNullize(((BashCommand) element).getReferencedCommandName());
         }
 
-        return StringUtils.stripToEmpty(((PsiNamedElement) element).getName());
+        return StringUtil.notNullize(((PsiNamedElement) element).getName());
     }
 
     @NotNull

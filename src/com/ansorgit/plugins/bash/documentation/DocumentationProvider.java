@@ -18,12 +18,12 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import org.apache.commons.lang.StringUtils;
-
-import java.util.List;
 
 /**
  * This class encapsulates the documentation retrieval.
@@ -63,7 +63,7 @@ class DocumentationProvider {
             log.info("Trying with " + source);
 
             String doc = source.documentation(element, originalElement);
-            if (StringUtils.stripToNull(doc) != null) {
+            if (StringUtil.nullize(doc) != null) {
                 return doc;
             }
         }
@@ -82,7 +82,7 @@ class DocumentationProvider {
         log.info("documentationUrl for " + element);
         for (DocumentationSource source : sourceList) {
             String url = source.documentationUrl(element, originalElement);
-            if (StringUtils.stripToNull(url) != null) {
+            if (StringUtil.nullize(url) != null) {
                 return url;
             }
         }

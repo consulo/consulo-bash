@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.util;
 
-import org.apache.commons.lang.StringUtils;
+import com.intellij.openapi.util.text.StringUtil;
 
 /**
  * User: jansorg
@@ -27,7 +27,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class BashIdentifierUtil {
     public static boolean isValidIdentifier(String name) {
-        return StringUtils.stripToNull(name) != null && !name.contains(" ");
+        return StringUtil.nullize(name) != null && !name.contains(" ");
     }
 
     private BashIdentifierUtil() {

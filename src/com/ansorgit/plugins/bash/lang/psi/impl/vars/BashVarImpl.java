@@ -18,7 +18,6 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.vars;
 
-import org.apache.commons.lang.math.NumberUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
@@ -37,6 +36,7 @@ import com.ansorgit.plugins.bash.lang.psi.util.BashResolveUtil;
 import com.intellij.codeInsight.daemon.EmptyResolveMessageProvider;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.ResolveState;
@@ -121,7 +121,7 @@ public class BashVarImpl extends BashBaseStubElementImpl<StubElement> implements
         }
 
         //slower fallback which checks if the parameter is  a number
-        int numericValue = NumberUtils.toInt(getReferencedName(), -1);
+        int numericValue = StringUtil.parseInt(getReferencedName(), -1);
         return numericValue >= 0;
 
     }

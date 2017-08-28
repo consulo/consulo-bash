@@ -18,14 +18,12 @@
 
 package com.ansorgit.plugins.bash.lang.valueExpansion;
 
-import com.intellij.openapi.util.text.StringUtil;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.intellij.openapi.util.text.StringUtil;
 
 /**
  * Class to work with expansions.
@@ -38,7 +36,7 @@ import java.util.List;
  */
 public class ValueExpansionUtil {
     public static boolean isValid(String spec, boolean enhancedSyntax) {
-        if (StringUtils.isEmpty(spec)) {
+        if (StringUtil.isEmpty(spec)) {
             return false;
         }
 
@@ -134,16 +132,16 @@ public class ValueExpansionUtil {
         String first = startEnd.get(0);
         String second = startEnd.get(1);
         String stepSpec = enhancedSyntax && startEnd.size() == 3 ? startEnd.get(2) : "";
-        int step = NumberUtils.toInt(stepSpec, 1);
-        if (NumberUtils.toInt(first, 1) > NumberUtils.toInt(second, 1) && stepSpec.isEmpty()) {
+        int step = StringUtil.parseInt(stepSpec, 1);
+        if (StringUtil.parseInt(first, 1) > StringUtil.parseInt(second, 1) && stepSpec.isEmpty()) {
             step = -1;
         }
-        boolean hasValidStep = stepSpec.isEmpty() || NumberUtils.isNumber(stepSpec);
+        boolean hasValidStep = stepSpec.isEmpty() || StringUtil.parseInt(stepSpec, Integer.MIN_VALUE) != Integer.MIN_VALUE;
 
-        if (NumberUtils.isNumber(first) && NumberUtils.isNumber(second) && hasValidStep) {
+        if (StringUtil.parseInt(first, Integer.MIN_VALUE) !=  Integer.MIN_VALUE && StringUtil.parseInt(second,  Integer.MIN_VALUE) !=  Integer.MIN_VALUE && hasValidStep) {
             //numeric range
-            int current = NumberUtils.toInt(first);
-            int end = NumberUtils.toInt(second);
+            int current = StringUtil.parseInt(first, 0);
+            int end = StringUtil.parseInt(second, 0);
 
             //find out if the numbers are padded. If yes, add ad left padding (in enhanced mode only)
             int padTargetWidth = -1;

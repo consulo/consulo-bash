@@ -18,6 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashShebang;
 import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
@@ -25,11 +26,10 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.StubElement;
-import org.apache.commons.lang.StringUtils;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Date: 16.04.2009
@@ -47,7 +47,7 @@ public class BashShebangImpl extends BashBaseStubElementImpl<StubElement> implem
 
     public String shellCommand(boolean withParams) {
         String allText = getText();
-        if (StringUtils.isEmpty(allText)) {
+        if (StringUtil.isEmpty(allText)) {
             //fixme?
             return null;
         }

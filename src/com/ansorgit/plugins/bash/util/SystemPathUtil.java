@@ -18,13 +18,13 @@
 
 package com.ansorgit.plugins.bash.util;
 
-import org.apache.commons.lang.StringUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.util.text.StringUtil;
 
 /**
  * User: jansorg
@@ -37,7 +37,7 @@ public class SystemPathUtil {
 
     @Nullable
     public static String findBestExecutable(@NotNull String commandName) {
-        List<String> paths = Arrays.asList(StringUtils.split(System.getenv("PATH"), File.pathSeparatorChar));
+        List<String> paths = StringUtil.split(System.getenv("PATH"), File.pathSeparator);
 
         return findBestExecutable(commandName, paths);
     }

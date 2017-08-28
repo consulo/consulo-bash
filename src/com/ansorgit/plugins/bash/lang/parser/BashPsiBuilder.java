@@ -18,7 +18,6 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import com.ansorgit.plugins.bash.lang.BashVersion;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
@@ -26,6 +25,7 @@ import com.ansorgit.plugins.bash.lang.parser.util.ForwardingMarker;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.impl.PsiBuilderAdapter;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Stack;
 import consulo.lang.LanguageVersion;
@@ -71,7 +71,7 @@ public class BashPsiBuilder extends PsiBuilderAdapter implements PsiBuilder {
                 return "";
             }
 
-            return StringUtils.repeat(" ", length);
+            return StringUtil.repeat(" ", length);
         }
 
         return getTokenText();

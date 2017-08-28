@@ -18,6 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
@@ -30,8 +31,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import org.apache.commons.lang.BooleanUtils;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.util.ObjectUtil;
 
 /**
  * PSI implementation for a Bash file.
@@ -60,7 +60,7 @@ public class BashFileImpl extends PsiFileBase implements BashFile {
             return false;
         }
 
-        boolean walkDeep = BooleanUtils.toBooleanDefaultIfNull(processor.getHint(Keys.FILE_WALK_GO_DEEP), true);
+        boolean walkDeep = ObjectUtil.notNull(processor.getHint(Keys.FILE_WALK_GO_DEEP), true);
         boolean moreProcessing = true;
         if (walkDeep) {
             PsiElement child = getFirstChild();
