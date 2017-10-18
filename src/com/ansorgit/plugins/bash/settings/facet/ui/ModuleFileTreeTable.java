@@ -107,7 +107,7 @@ class ModuleFileTreeTable extends AbstractFileTreeTable<FileMode> {
             Presentation templatePresentation = changeAction.getTemplatePresentation();
             final JComponent comboComponent = changeAction.createCustomComponent(templatePresentation);
 
-            DataContext dataContext = SimpleDataContext.getSimpleContext(PlatformDataKeys.VIRTUAL_FILE.getName(),
+            DataContext dataContext = SimpleDataContext.getSimpleContext(PlatformDataKeys.VIRTUAL_FILE,
                     myVirtualFile,
                     SimpleDataContext.getProjectContext(getModule().getProject()));
 
