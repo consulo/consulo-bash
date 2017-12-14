@@ -18,7 +18,6 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
-import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.util.ParserUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,7 +42,7 @@ public class ParserUtilTest {
 
     @Test
     public void testCheckNext() {
-        BashPsiBuilder b = new BashPsiBuilder(null, new MockPsiBuilder(BACKQUOTE, BACKQUOTE), Bash_v3);
+        BashPsiBuilder b = new BashPsiBuilder(new MockPsiBuilder(BACKQUOTE, BACKQUOTE), Bash_v3);
         Assert.assertTrue(ParserUtil.hasNextTokens(b, false, BACKQUOTE));
         Assert.assertTrue(ParserUtil.hasNextTokens(b, false, BACKQUOTE, BACKQUOTE));
         Assert.assertFalse(ParserUtil.hasNextTokens(b, false, WORD));
@@ -51,14 +50,14 @@ public class ParserUtilTest {
 
     @Test
     public void testLookahead() {
-        BashPsiBuilder b = new BashPsiBuilder(null, new MockPsiBuilder(WORD, WHITESPACE, WHITESPACE,  NUMBER), Bash_v3);
+        BashPsiBuilder b = new BashPsiBuilder(new MockPsiBuilder(WORD, WHITESPACE, WHITESPACE,  NUMBER), Bash_v3);
         Assert.assertEquals(WORD, b.lookAhead(0));
         Assert.assertEquals(NUMBER, b.lookAhead(1));
     }
 
     @Test
     public void testLookaheadRaw() {
-        BashPsiBuilder b = new BashPsiBuilder(null, new MockPsiBuilder(WORD, WHITESPACE, WHITESPACE,  NUMBER), Bash_v3);
+        BashPsiBuilder b = new BashPsiBuilder(new MockPsiBuilder(WORD, WHITESPACE, WHITESPACE,  NUMBER), Bash_v3);
         Assert.assertEquals(WORD, b.rawLookup(0));
         Assert.assertEquals(WHITESPACE, b.rawLookup(1));
         Assert.assertEquals(WHITESPACE, b.rawLookup(2));

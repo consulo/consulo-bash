@@ -44,7 +44,7 @@ public class BashParser implements PsiParser {
 
     @NotNull
     public ASTNode parse(final IElementType root, final PsiBuilder psiBuilder, LanguageVersion languageVersion) {
-        final BashPsiBuilder builder = new BashPsiBuilder(languageVersion, psiBuilder);
+        final BashPsiBuilder builder = new BashPsiBuilder(psiBuilder, null);
 
         if (debugMode) {
             log.info("Enabling parser's debug mode...");

@@ -20,44 +20,48 @@ package com.ansorgit.plugins.bash.lang.psi.arithmetic;
 
 import com.ansorgit.plugins.bash.BashTestUtils;
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
-import com.intellij.codeInsight.CodeInsightTestCase;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import org.junit.Assert;
+import junit.framework.TestCase;
 
 /**
  * User: jansorg
  * Date: 17.07.2010
  * Time: 12:51:15
  */
-public abstract class AbstractArithExprTest extends CodeInsightTestCase {
-    protected ArithmeticExpression configureTopArithExpression() throws Exception {
-        VirtualFile file = configure();
-        setupCursorAndSelection(myEditor);
+public abstract class AbstractArithExprTest extends TestCase
+{
+	protected ArithmeticExpression configureTopArithExpression() throws Exception
+	{
+		/*VirtualFile file = configure();
+		setupCursorAndSelection(myEditor);
 
-        PsiFile psi = getFile();
+		PsiFile psi = getFile();
 
-        PsiElement element = psi.findElementAt(getEditor().getCaretModel().getOffset());
-        Assert.assertNotNull(element);
+		PsiElement element = psi.findElementAt(getEditor().getCaretModel().getOffset());
+		Assert.assertNotNull(element);
 
-        element = element.getParent();
-        Assert.assertTrue("element is of invalid type " + element, element instanceof ArithmeticExpression);
+		element = element.getParent();
+		Assert.assertTrue("element is of invalid type " + element, element instanceof ArithmeticExpression);
 
-        //find the top expression
-        ArithmeticExpression start = (ArithmeticExpression) element;
-        while (start.getParent() instanceof ArithmeticExpression) {
-            start = (ArithmeticExpression) start.getParent();
-        }
+		//find the top expression
+		ArithmeticExpression start = (ArithmeticExpression) element;
+		while(start.getParent() instanceof ArithmeticExpression)
+		{
+			start = (ArithmeticExpression) start.getParent();
+		}
 
-        return start;
-    }
+		return start; */
+		return null;
+	}
 
-    protected VirtualFile configure() throws Exception {
-        return configureByFile(getTestName(false) + ".bash", "");
-    }
+	protected VirtualFile configure() throws Exception
+	{
+		// return configureByFile(getTestName(false) + ".bash", "");
+		return null;
+	}
 
-    protected String getTestDataPath() {
-        return BashTestUtils.getBasePath() + "/psi/arithmetic/";
-    }
+	protected String getTestDataPath()
+	{
+		return BashTestUtils.getBasePath() + "/psi/arithmetic/";
+	}
 }

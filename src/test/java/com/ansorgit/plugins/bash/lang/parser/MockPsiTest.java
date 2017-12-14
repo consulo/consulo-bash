@@ -18,13 +18,13 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.ansorgit.plugins.bash.lang.BashVersion;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.intellij.psi.tree.IElementType;
 import junit.framework.Assert;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * This is the base class for the parser tests. It takes a mock parsing function and a set of tokens which
@@ -85,7 +85,7 @@ public abstract class MockPsiTest implements BashTokenTypes {
     public void mockTest(BashVersion version, MockFunction f, int expectedCount, List<String> textTokens, IElementType... elements) {
         final MockPsiBuilder mockBuilder = builderFor(textTokens, elements);
         //fixme project
-        BashPsiBuilder psi = new BashPsiBuilder(null, mockBuilder, version);
+        BashPsiBuilder psi = new BashPsiBuilder(mockBuilder, null);
 
         Assert.assertTrue(f.preCheck(psi));
 
@@ -107,7 +107,7 @@ public abstract class MockPsiTest implements BashTokenTypes {
 
     public void mockTestError(BashVersion version, MockFunction f, boolean checkResult, List<String> textTokens, IElementType... elements) {
         MockPsiBuilder mockPsiBuilder = builderFor(textTokens, elements);
-        BashPsiBuilder bashPsiBuilder = new BashPsiBuilder(null, mockPsiBuilder, version);
+        BashPsiBuilder bashPsiBuilder = new BashPsiBuilder(mockPsiBuilder, null);
 
         boolean ok = f.apply(bashPsiBuilder);
         assertErrors(mockPsiBuilder);
@@ -134,7 +134,7 @@ public abstract class MockPsiTest implements BashTokenTypes {
 
     public void mockTestSuccessWithErrors(BashVersion bashVersion, MockFunction f, List<String> strings, IElementType... elements) {
         final MockPsiBuilder mockBuilder = builderFor(strings, elements);
-        BashPsiBuilder psi = new BashPsiBuilder(null, mockBuilder, bashVersion);
+        BashPsiBuilder psi = new BashPsiBuilder(mockBuilder, null);
 
         Assert.assertTrue(f.preCheck(psi));
 
@@ -152,7 +152,7 @@ public abstract class MockPsiTest implements BashTokenTypes {
 
     public void mockTestFail(BashVersion version, MockFunction f, IElementType... elements) {
         MockPsiBuilder mockPsiBuilder = builderFor(Collections.<String>emptyList(), elements);
-        BashPsiBuilder bashPsiBuilder = new BashPsiBuilder(null, mockPsiBuilder, version);
+        BashPsiBuilder bashPsiBuilder = new BashPsiBuilder(mockPsiBuilder, null);
 
         boolean ok = f.apply(bashPsiBuilder);
         Assert.assertFalse("Expected the parsing to fail with a result of false.", ok);

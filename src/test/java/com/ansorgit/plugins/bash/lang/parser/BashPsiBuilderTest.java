@@ -1,10 +1,10 @@
 package com.ansorgit.plugins.bash.lang.parser;
 
-import com.ansorgit.plugins.bash.lang.BashVersion;
+import java.util.Collections;
+
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Collections;
+import com.ansorgit.plugins.bash.lang.BashVersion;
 
 /**
  * User: jansorg
@@ -14,7 +14,7 @@ import java.util.Collections;
 public class BashPsiBuilderTest extends MockPsiTest {
     @Test
     public void testWhitespaceDisabled() throws Exception {
-        BashPsiBuilder builder = new BashPsiBuilder(null, builderFor(Collections.<String>emptyList(), NUMBER, WHITESPACE, WORD), BashVersion.Bash_v4);
+        BashPsiBuilder builder = new BashPsiBuilder(builderFor(Collections.<String>emptyList(), NUMBER, WHITESPACE, WORD), BashVersion.Bash_v4);
 
         Assert.assertEquals(NUMBER, builder.getTokenType());
 
@@ -24,7 +24,7 @@ public class BashPsiBuilderTest extends MockPsiTest {
 
     @Test
     public void testWhitespaceEnabled() throws Exception {
-        BashPsiBuilder builder = new BashPsiBuilder(null, builderFor(Collections.<String>emptyList(), NUMBER, WHITESPACE, WORD, WHITESPACE, NUMBER), BashVersion.Bash_v4);
+        BashPsiBuilder builder = new BashPsiBuilder(builderFor(Collections.<String>emptyList(), NUMBER, WHITESPACE, WORD, WHITESPACE, NUMBER), BashVersion.Bash_v4);
         Assert.assertEquals(NUMBER, builder.getTokenType());
 
         builder.advanceLexer();

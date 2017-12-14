@@ -28,7 +28,6 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Stack;
-import consulo.lang.LanguageVersion;
 
 /**
  * The PsiBuilder which has been enhanced to be more helpful for Bash parsing.
@@ -46,7 +45,7 @@ public class BashPsiBuilder extends PsiBuilderAdapter implements PsiBuilder {
     private final BashTokenRemapper tokenRemapper;
     private final BashVersion bashVersion = BashVersion.Bash_v4;
 
-    public BashPsiBuilder(LanguageVersion languageVersion, PsiBuilder wrappedBuilder) {
+    public BashPsiBuilder(PsiBuilder wrappedBuilder, BashVersion bashVersion) {
         super(wrappedBuilder);
 
         this.tokenRemapper = new BashTokenRemapper(this);

@@ -18,13 +18,13 @@
 
 package com.ansorgit.plugins.bash.lang.lexer;
 
-import com.ansorgit.plugins.bash.lang.BashVersion;
-import com.intellij.psi.tree.IElementType;
+import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.*;
+
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.*;
+import com.ansorgit.plugins.bash.lang.BashVersion;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Tests the bash lexer.
@@ -773,7 +773,7 @@ public class BashLexerTest {
     }
 
     private void testTokenization(BashVersion version, String code, IElementType... expectedTokens) {
-        BashLexer lexer = new BashLexer(version);
+        BashLexer lexer = new BashLexer(null);
         lexer.start(code);
 
         int i = 1;

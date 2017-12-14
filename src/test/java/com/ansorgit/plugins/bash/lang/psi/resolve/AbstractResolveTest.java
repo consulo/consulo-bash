@@ -18,30 +18,29 @@
 
 package com.ansorgit.plugins.bash.lang.psi.resolve;
 
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
+import org.jetbrains.annotations.NonNls;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
-import com.intellij.testFramework.ResolveTestCase;
 import com.intellij.testFramework.TestDataFile;
-import org.jetbrains.annotations.NonNls;
-
-import java.io.File;
+import com.intellij.testFramework.UsefulTestCase;
 
 /**
  * User: jansorg
  * Date: 15.06.2010
  * Time: 21:09:35
  */
-public abstract class AbstractResolveTest extends ResolveTestCase {
-    protected PsiReference configure() throws Exception {
-        return configureByFile(getTestName(false) + ".bash");
-    }
+public abstract class AbstractResolveTest extends UsefulTestCase
+{
+	protected PsiFile myFile;
+	protected PsiReference configure() throws Exception
+	{
+		//return configureByFile(getTestName(false) + ".bash");
+		return null;
+	}
 
-    protected PsiFile addFile(@TestDataFile @NonNls String filePath) throws Exception {
-        final String fullPath = getTestDataPath() + filePath;
+	protected PsiFile addFile(@TestDataFile @NonNls String filePath) throws Exception
+	{
+		/*final String fullPath = getTestDataPath() + filePath;
         final VirtualFile vFile = LocalFileSystem.getInstance().findFileByPath(fullPath.replace(File.separatorChar, '/'));
         assertNotNull("file " + filePath + " not found", vFile);
 
@@ -49,6 +48,7 @@ public abstract class AbstractResolveTest extends ResolveTestCase {
 
         final String fileName = vFile.getName();
 
-        return createFile(myModule, myFile.getVirtualFile().getParent(), fileName, fileText);
-    }
+        return createFile(myModule, myFile.getVirtualFile().getParent(), fileName, fileText);   */
+		return null;
+	}
 }

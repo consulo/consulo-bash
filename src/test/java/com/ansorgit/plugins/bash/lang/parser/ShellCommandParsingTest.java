@@ -157,11 +157,11 @@ public class ShellCommandParsingTest extends MockPsiTest {
     public void testIsBackquoteCommand() {
         //`a`
         final MockPsiBuilder mockBuilder = new MockPsiBuilder(BACKQUOTE, WORD, BACKQUOTE);
-        BashPsiBuilder b = new BashPsiBuilder(null, mockBuilder, Bash_v3);
+        BashPsiBuilder b = new BashPsiBuilder(mockBuilder, Bash_v3);
         Assert.assertTrue(Parsing.shellCommand.backtickParser.isValid(b));
 
         //`echo` echo a ``
-        b = new BashPsiBuilder(null, new MockPsiBuilder(BACKQUOTE, WORD, BACKQUOTE, WORD, WORD, BACKQUOTE, BACKQUOTE), Bash_v3);
+        b = new BashPsiBuilder(new MockPsiBuilder(BACKQUOTE, WORD, BACKQUOTE, WORD, WORD, BACKQUOTE, BACKQUOTE), Bash_v3);
         Assert.assertTrue(Parsing.shellCommand.backtickParser.isValid(b));
 
         //invalid: ``echo a`
@@ -169,28 +169,28 @@ public class ShellCommandParsingTest extends MockPsiTest {
         //Assert.assertFalse(Parsing.shellCommand.isBackquoteCommand(b));
 
         //`echo` `echo a`
-        b = new BashPsiBuilder(null, new MockPsiBuilder(BACKQUOTE, WORD, BACKQUOTE, BACKQUOTE, WORD, BACKQUOTE), Bash_v3);
+        b = new BashPsiBuilder(new MockPsiBuilder(BACKQUOTE, WORD, BACKQUOTE, BACKQUOTE, WORD, BACKQUOTE), Bash_v3);
         Assert.assertTrue(Parsing.shellCommand.backtickParser.isValid(b));
 
 
         //``echo a``
-        b = new BashPsiBuilder(null, new MockPsiBuilder(BACKQUOTE, BACKQUOTE, WORD, WORD, BACKQUOTE, BACKQUOTE), Bash_v3);
+        b = new BashPsiBuilder(new MockPsiBuilder(BACKQUOTE, BACKQUOTE, WORD, WORD, BACKQUOTE, BACKQUOTE), Bash_v3);
         Assert.assertTrue(Parsing.shellCommand.backtickParser.isValid(b));
 
         //``
-        b = new BashPsiBuilder(null, new MockPsiBuilder(BACKQUOTE, BACKQUOTE), Bash_v3);
+        b = new BashPsiBuilder(new MockPsiBuilder(BACKQUOTE, BACKQUOTE), Bash_v3);
         Assert.assertTrue(Parsing.shellCommand.backtickParser.isValid(b));
 
         //````
-        b = new BashPsiBuilder(null, new MockPsiBuilder(BACKQUOTE, BACKQUOTE, BACKQUOTE, BACKQUOTE), Bash_v3);
+        b = new BashPsiBuilder(new MockPsiBuilder(BACKQUOTE, BACKQUOTE, BACKQUOTE, BACKQUOTE), Bash_v3);
         Assert.assertTrue(Parsing.shellCommand.backtickParser.isValid(b));
 
         //``````
-        b = new BashPsiBuilder(null, new MockPsiBuilder(BACKQUOTE, BACKQUOTE, BACKQUOTE, BACKQUOTE), Bash_v3);
+        b = new BashPsiBuilder(new MockPsiBuilder(BACKQUOTE, BACKQUOTE, BACKQUOTE, BACKQUOTE), Bash_v3);
         Assert.assertTrue(Parsing.shellCommand.backtickParser.isValid(b));
 
         //`
-        b = new BashPsiBuilder(null, new MockPsiBuilder(BACKQUOTE), Bash_v3);
+        b = new BashPsiBuilder(new MockPsiBuilder(BACKQUOTE), Bash_v3);
         Assert.assertTrue(Parsing.shellCommand.backtickParser.isValid(b));
     }
 

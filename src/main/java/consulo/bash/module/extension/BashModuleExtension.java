@@ -14,7 +14,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.hash.HashMap;
-import consulo.extension.impl.ModuleExtensionImpl;
+import consulo.module.extension.impl.ModuleExtensionImpl;
 import consulo.roots.ModuleRootLayer;
 
 /**
@@ -25,7 +25,7 @@ public class BashModuleExtension extends ModuleExtensionImpl<BashModuleExtension
 {
 	protected OperationMode myOperationMode = OperationMode.IgnoreAll;
 
-	protected Map<VirtualFile, FileMode> myMapping = new HashMap<VirtualFile, FileMode>();
+	protected Map<VirtualFile, FileMode> myMapping = new HashMap<>();
 
 	public BashModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
 	{
@@ -68,7 +68,7 @@ public class BashModuleExtension extends ModuleExtensionImpl<BashModuleExtension
 		modeElement.setAttribute("type", myOperationMode.name());
 		element.addContent(modeElement);
 
-		List<VirtualFile> files = new ArrayList<VirtualFile>(myMapping.keySet());
+		List<VirtualFile> files = new ArrayList<>(myMapping.keySet());
 		ContainerUtil.quickSort(files, new Comparator<VirtualFile>()
 		{
 			@Override

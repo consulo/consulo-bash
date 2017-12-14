@@ -18,131 +18,161 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import com.ansorgit.plugins.bash.BashTestUtils;
-import com.ansorgit.plugins.bash.editor.inspections.InspectionProvider;
-import com.intellij.codeInspection.*;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.testFramework.InspectionTestCase;
+import java.util.Arrays;
+
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
+import com.ansorgit.plugins.bash.BashTestUtils;
+import com.ansorgit.plugins.bash.editor.inspections.InspectionProvider;
+import com.intellij.codeInspection.InspectionManager;
+import com.intellij.codeInspection.LocalInspectionTool;
+import com.intellij.codeInspection.LocalInspectionToolSession;
+import com.intellij.codeInspection.ProblemDescriptor;
+import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiNamedElement;
+import com.intellij.testFramework.UsefulTestCase;
 
 /**
  * User: jansorg
  * Date: 01.07.2010
  * Time: 18:48:20
  */
-public abstract class AbstractInspectionTestCase extends InspectionTestCase {
-    protected AbstractInspectionTestCase(Class<?> inspectionClass) {
-        if (!Arrays.asList(new InspectionProvider().getInspectionClasses()).contains(inspectionClass)) {
-            throw new IllegalStateException("The inspection is not registered in the inspection provider");
-        }
-    }
+public abstract class AbstractInspectionTestCase extends UsefulTestCase
+{
+	protected AbstractInspectionTestCase(Class<?> inspectionClass)
+	{
+		if(!Arrays.asList(new InspectionProvider().getInspectionClasses()).contains(inspectionClass))
+		{
+			throw new IllegalStateException("The inspection is not registered in the inspection provider");
+		}
+	}
 
-    protected String getTestDataPath() {
-        return BashTestUtils.getBasePath() + "/psi/inspection/";
-    }
+	protected void doTest(String string, LocalInspectionTool inspectionTool)
+	{
+		throw new UnsupportedOperationException("");
+	}
 
-    protected LocalInspectionTool withOnTheFly(final LocalInspectionTool delegate) {
-        return new MyLocalInspectionTool(delegate);
-    }
+	protected String getTestDataPath()
+	{
+		return BashTestUtils.getBasePath() + "/psi/inspection/";
+	}
 
-    private static class MyLocalInspectionTool extends LocalInspectionTool {
-        private final LocalInspectionTool delegate;
+	protected LocalInspectionTool withOnTheFly(final LocalInspectionTool delegate)
+	{
+		return new MyLocalInspectionTool(delegate);
+	}
 
-        public MyLocalInspectionTool(LocalInspectionTool delegate) {
-            this.delegate = delegate;
-        }
+	private static class MyLocalInspectionTool extends LocalInspectionTool
+	{
+		private final LocalInspectionTool delegate;
 
-        @Nls
-        @NotNull
-        @Override
-        public String getGroupDisplayName() {
-            return delegate.getGroupDisplayName();
-        }
+		public MyLocalInspectionTool(LocalInspectionTool delegate)
+		{
+			this.delegate = delegate;
+		}
 
-        @Override
-        @NotNull
-        public String[] getGroupPath() {
-            return delegate.getGroupPath();
-        }
+		@Nls
+		@NotNull
+		@Override
+		public String getGroupDisplayName()
+		{
+			return delegate.getGroupDisplayName();
+		}
 
-        @Nls
-        @NotNull
-        @Override
-        public String getDisplayName() {
-            return delegate.getDisplayName();
-        }
+		@Override
+		@NotNull
+		public String[] getGroupPath()
+		{
+			return delegate.getGroupPath();
+		}
 
-        @NotNull
-        @Override
-        public String getShortName() {
-            return delegate.getShortName();
-        }
+		@Nls
+		@NotNull
+		@Override
+		public String getDisplayName()
+		{
+			return delegate.getDisplayName();
+		}
 
-        @NotNull
-        @Override
-        public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
-            return delegate.buildVisitor(holder, true);
-        }
+		@NotNull
+		@Override
+		public String getShortName()
+		{
+			return delegate.getShortName();
+		}
 
-        @Override
-        @Nullable
-        public PsiNamedElement getProblemElement(PsiElement psiElement) {
-            return delegate.getProblemElement(psiElement);
-        }
+		@NotNull
+		@Override
+		public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly)
+		{
+			return delegate.buildVisitor(holder, true);
+		}
 
-        @Override
-        public void inspectionStarted(LocalInspectionToolSession session, boolean isOnTheFly) {
-            delegate.inspectionStarted(session, isOnTheFly);
-        }
+		@Override
+		@Nullable
+		public PsiNamedElement getProblemElement(PsiElement psiElement)
+		{
+			return delegate.getProblemElement(psiElement);
+		}
 
-        @Override
-        public void inspectionFinished(LocalInspectionToolSession session, ProblemsHolder problemsHolder) {
-            delegate.inspectionFinished(session, problemsHolder);
-        }
+		@Override
+		public void inspectionStarted(LocalInspectionToolSession session, boolean isOnTheFly)
+		{
+			delegate.inspectionStarted(session, isOnTheFly);
+		}
 
-        @Override
-        @Deprecated
-        public void inspectionFinished(LocalInspectionToolSession session) {
-            delegate.inspectionFinished(session);
-        }
+		@Override
+		public void inspectionFinished(LocalInspectionToolSession session, ProblemsHolder problemsHolder)
+		{
+			delegate.inspectionFinished(session, problemsHolder);
+		}
 
-        @Override
-        @NotNull
-        @NonNls
-        public String getID() {
-            return delegate.getID();
-        }
+		@Override
+		@Deprecated
+		public void inspectionFinished(LocalInspectionToolSession session)
+		{
+			delegate.inspectionFinished(session);
+		}
 
-        @Override
-        @Nullable
-        @NonNls
-        public String getAlternativeID() {
-            return delegate.getAlternativeID();
-        }
+		@Override
+		@NotNull
+		@NonNls
+		public String getID()
+		{
+			return delegate.getID();
+		}
 
-        @Override
-        public boolean runForWholeFile() {
-            return delegate.runForWholeFile();
-        }
+		@Override
+		@Nullable
+		@NonNls
+		public String getAlternativeID()
+		{
+			return delegate.getAlternativeID();
+		}
 
-        @Override
-        @Nullable
-        public ProblemDescriptor[] checkFile(@NotNull PsiFile file, @NotNull InspectionManager manager, boolean isOnTheFly) {
-            return delegate.checkFile(file, manager, isOnTheFly);
-        }
+		@Override
+		public boolean runForWholeFile()
+		{
+			return delegate.runForWholeFile();
+		}
 
-        @Override
-        @NotNull
-        public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly, LocalInspectionToolSession session) {
-            return delegate.buildVisitor(holder, true, session);
-        }
-    }
+		@Override
+		@Nullable
+		public ProblemDescriptor[] checkFile(@NotNull PsiFile file, @NotNull InspectionManager manager, boolean isOnTheFly)
+		{
+			return delegate.checkFile(file, manager, isOnTheFly);
+		}
+
+		@Override
+		@NotNull
+		public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly, LocalInspectionToolSession session)
+		{
+			return delegate.buildVisitor(holder, true, session);
+		}
+	}
 }

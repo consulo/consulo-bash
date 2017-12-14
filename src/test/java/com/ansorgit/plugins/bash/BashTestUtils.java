@@ -18,11 +18,10 @@
 
 package com.ansorgit.plugins.bash;
 
-import org.apache.commons.lang.StringUtils;
-
 import java.io.File;
-import java.net.URISyntaxException;
 import java.net.URL;
+
+import com.intellij.openapi.util.text.StringUtil;
 
 public final class BashTestUtils {
 
@@ -44,7 +43,7 @@ public final class BashTestUtils {
     }
 
     private static String computeBasePath() {
-        String configuredDir = StringUtils.stripToNull(System.getenv("BASHSUPPORT_TESTDATA"));
+        String configuredDir = StringUtil.nullize(System.getenv("BASHSUPPORT_TESTDATA"));
         if (configuredDir != null) {
             File dir = new File(configuredDir);
             if (dir.isDirectory() && dir.exists()) {
