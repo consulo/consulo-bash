@@ -18,13 +18,14 @@
 
 package com.ansorgit.plugins.bash.actions;
 
+import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashStrings;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
+import consulo.awt.TargetAWT;
 
 /**
  * Date: 17.04.2009
@@ -32,36 +33,44 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Joachim Ansorg
  */
-public class NewBashFileAction extends NewBashActionBase {
-    private static final Logger log = Logger.getInstance("#NewActionBase");
+public class NewBashFileAction extends NewBashActionBase
+{
+	private static final Logger log = Logger.getInstance("#NewActionBase");
 
-    public NewBashFileAction() {
-        super(BashStrings.message("newfile.menu.action.text"),
-                BashStrings.message("newfile.menu.action.description"),
-                BashIcons.BASH_FILE_ICON);
-    }
+	public NewBashFileAction()
+	{
+		super(BashStrings.message("newfile.menu.action.text"), BashStrings.message("newfile.menu.action.description"), TargetAWT.to(BashIcons.BASH_FILE_ICON));
+	}
 
 
-    protected String getDialogPrompt() {
-        return BashStrings.message("newfile.dialog.prompt");
-    }
+	protected String getDialogPrompt()
+	{
+		return BashStrings.message("newfile.dialog.prompt");
+	}
 
-    protected String getDialogTitle() {
-        return BashStrings.message("newfile.dialog.title");
-    }
+	protected String getDialogTitle()
+	{
+		return BashStrings.message("newfile.dialog.title");
+	}
 
-    protected String getCommandName() {
-        return BashStrings.message("newfile.command.name");
-    }
+	protected String getCommandName()
+	{
+		return BashStrings.message("newfile.command.name");
+	}
 
-    protected String getActionName(PsiDirectory directory, String newName) {
-        return BashStrings.message("newfile.menu.action.text");
-    }
+	protected String getActionName(PsiDirectory directory, String newName)
+	{
+		return BashStrings.message("newfile.menu.action.text");
+	}
 
-    @NotNull
-    protected PsiElement[] doCreate(String newName, PsiDirectory directory) {
-        PsiFile file = createFileFromTemplate(directory, newName, "bash-script.sh");
-        PsiElement child = file.getLastChild();
-        return child != null ? new PsiElement[]{file, child} : new PsiElement[]{file};
-    }
+	@NotNull
+	protected PsiElement[] doCreate(String newName, PsiDirectory directory)
+	{
+		PsiFile file = createFileFromTemplate(directory, newName, "bash-script.sh");
+		PsiElement child = file.getLastChild();
+		return child != null ? new PsiElement[]{
+				file,
+				child
+		} : new PsiElement[]{file};
+	}
 }

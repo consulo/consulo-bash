@@ -18,6 +18,7 @@
 
 package com.ansorgit.plugins.bash.runner;
 
+import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashInterpreterDetection;
 import com.intellij.execution.configurations.ConfigurationFactory;
@@ -26,9 +27,7 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.configurations.RunConfigurationModule;
 import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
+import consulo.ui.image.Image;
 
 /**
  * This code is based on the intellij-batch plugin.
@@ -44,7 +43,7 @@ public class BashConfigurationType implements ConfigurationType {
         return "Bash run configuration";
     }
 
-    public Icon getIcon() {
+    public Image getIcon() {
         return BashIcons.BASH_FILE_ICON;
     }
 

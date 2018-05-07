@@ -21,6 +21,7 @@ package com.ansorgit.plugins.bash.util;
 import javax.swing.Icon;
 
 import com.intellij.openapi.util.IconLoader;
+import consulo.ui.image.Image;
 
 /**
  * Contains the paths for the various Bash icons.
@@ -31,7 +32,7 @@ public interface BashIcons {
 
 	Icon BASH_LARGE_ICON = IconLoader.findIcon("/icons/bash-64.png");
 
-    Icon BASH_FILE_ICON = IconLoader.findIcon("/icons/bash-16.png");
+    Image BASH_FILE_ICON = IconLoader.findIcon("/icons/bash-16.png");
 
     Icon FUNCTION_DEF_ICON = IconLoader.findIcon("/icons/function-16.png");
 

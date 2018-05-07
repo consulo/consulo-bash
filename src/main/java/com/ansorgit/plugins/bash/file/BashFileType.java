@@ -21,8 +21,6 @@ package com.ansorgit.plugins.bash.file;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.lang.Bash;
 import com.ansorgit.plugins.bash.lang.BashLanguage;
@@ -43,6 +41,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import consulo.bash.module.extension.BashModuleExtension;
+import consulo.ui.image.Image;
 
 /**
  * The file type implementation for Bash files.
@@ -95,7 +94,7 @@ public class BashFileType extends LanguageFileType implements FileTypeIdentifiab
     }
 
     @Override
-	public Icon getIcon() {
+	public Image getIcon() {
         return BashIcons.BASH_FILE_ICON;
     }
 

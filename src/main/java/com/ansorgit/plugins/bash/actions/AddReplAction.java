@@ -19,6 +19,7 @@
 package com.ansorgit.plugins.bash.actions;
 
 import org.jetbrains.annotations.Nullable;
+import consulo.awt.TargetAWT;
 import consulo.bash.module.extension.BashModuleExtension;
 import com.ansorgit.plugins.bash.runner.repl.BashConsoleRunner;
 import com.ansorgit.plugins.bash.util.BashIcons;
@@ -36,7 +37,7 @@ public class AddReplAction extends AnAction {
     private static final com.intellij.openapi.diagnostic.Logger log = com.intellij.openapi.diagnostic.Logger.getInstance("AddReplAction");
 
     public AddReplAction() {
-        getTemplatePresentation().setIcon(BashIcons.BASH_FILE_ICON);
+        super(TargetAWT.to(BashIcons.BASH_FILE_ICON));
     }
 
     @Override

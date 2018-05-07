@@ -18,7 +18,13 @@
 
 package com.ansorgit.plugins.bash.editor.highlighting;
 
-import com.ansorgit.plugins.bash.util.BashIcons;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.google.common.collect.Maps;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
@@ -26,24 +32,11 @@ import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
 import com.intellij.openapi.util.io.StreamUtil;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
 
 public class BashColorsAndFontsPage implements ColorSettingsPage {
     @NotNull
     public String getDisplayName() {
         return "Bash";
-    }
-
-    @Nullable
-    public Icon getIcon() {
-        return BashIcons.BASH_FILE_ICON;
     }
 
     private static final AttributesDescriptor[] ATTRS =
