@@ -21,7 +21,6 @@ package com.ansorgit.plugins.bash.actions;
 import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashStrings;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -35,8 +34,6 @@ import consulo.awt.TargetAWT;
  */
 public class NewBashFileAction extends NewBashActionBase
 {
-	private static final Logger log = Logger.getInstance("#NewActionBase");
-
 	public NewBashFileAction()
 	{
 		super(BashStrings.message("newfile.menu.action.text"), BashStrings.message("newfile.menu.action.description"), TargetAWT.to(BashIcons.BASH_FILE_ICON));
