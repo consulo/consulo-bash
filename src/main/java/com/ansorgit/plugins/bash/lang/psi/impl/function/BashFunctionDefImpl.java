@@ -52,6 +52,7 @@ import com.intellij.psi.scope.util.PsiScopesUtilCore;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 
 /**
@@ -171,7 +172,7 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
             }
 
             public Icon getIcon(boolean open) {
-                return IconDescriptorUpdaters.getIcon(BashFunctionDefImpl.this, 0);
+                return TargetAWT.to(IconDescriptorUpdaters.getIcon(BashFunctionDefImpl.this, 0));
             }
         };
     }

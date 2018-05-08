@@ -34,6 +34,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiNamedElement;
+import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 
 /**
@@ -74,7 +75,7 @@ class BashStructureViewElement implements StructureViewTreeElement {
             }
 
             public Icon getIcon(boolean open) {
-                return IconDescriptorUpdaters.getIcon(myElement, 0);
+                return TargetAWT.to(IconDescriptorUpdaters.getIcon(myElement, 0));
             }
         };
     }

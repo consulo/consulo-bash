@@ -61,6 +61,7 @@ import com.intellij.util.containers.Convertor;
 import com.intellij.util.containers.HashMap;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
+import consulo.awt.TargetAWT;
 import consulo.fileTypes.impl.VfsIconUtil;
 
 abstract class AbstractFileTreeTable<T> extends TreeTable {
@@ -464,7 +465,7 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
                 setText(file.getPresentableUrl());
             }
 
-            setIcon(VfsIconUtil.getIcon(file, 0, null));
+            setIcon(TargetAWT.to(VfsIconUtil.getIcon(file, 0, null)));
             return this;
         }
     }
