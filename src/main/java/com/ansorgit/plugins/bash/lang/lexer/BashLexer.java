@@ -19,7 +19,6 @@
 package com.ansorgit.plugins.bash.lang.lexer;
 
 import com.ansorgit.plugins.bash.lang.BashVersion;
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.psi.tree.TokenSet;
 import consulo.lang.LanguageVersion;
 
@@ -39,11 +38,11 @@ public final class BashLexer extends MergingLexer implements BashTokenTypes
 {
 	public BashLexer()
 	{
-		super(new FlexAdapter(new _BashLexer(BashVersion.Bash_v4, null)), MergeTuple.create(TokenSet.create(STRING_CHAR), WORD));
+		super(new _BashLexer(BashVersion.Bash_v4), MergeTuple.create(TokenSet.create(STRING_CHAR), WORD));
 	}
 
 	public BashLexer(LanguageVersion languageVersion)
 	{
-		super(new FlexAdapter(new _BashLexer(BashVersion.Bash_v4, null)), MergeTuple.create(TokenSet.create(STRING_CHAR), WORD));
+		super(new _BashLexer(BashVersion.Bash_v4), MergeTuple.create(TokenSet.create(STRING_CHAR), WORD));
 	}
 }

@@ -29,7 +29,7 @@
 
 package com.ansorgit.plugins.bash.lang.lexer;
 
-import com.intellij.lexer.FlexLexer;
+import com.intellij.lexer.LexerBase;
 import com.intellij.psi.tree.IElementType;
 import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.*;
 
@@ -38,12 +38,12 @@ import com.intellij.util.containers.Stack;
 %%
 
 %class _BashLexer
-%implements FlexLexer
+%extends LexerBase
 %unicode
 %public
 %char
 
-%function advance
+%function advanceImpl
 %type IElementType
 
 %{
@@ -51,8 +51,7 @@ import com.intellij.util.containers.Stack;
   private int openParenths = 0;
   private boolean isBash4 = false;
 
-  public _BashLexer(com.ansorgit.plugins.bash.lang.BashVersion version, java.io.Reader in) {
-    this(in);
+  public _BashLexer(com.ansorgit.plugins.bash.lang.BashVersion version) {
     this.isBash4 = com.ansorgit.plugins.bash.lang.BashVersion.Bash_v4.equals(version);
   }
 
