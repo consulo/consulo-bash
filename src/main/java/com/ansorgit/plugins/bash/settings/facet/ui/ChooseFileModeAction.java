@@ -24,6 +24,12 @@
  */
 package com.ansorgit.plugins.bash.settings.facet.ui;
 
+import java.util.List;
+
+import javax.swing.JComponent;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
@@ -34,11 +40,6 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.util.List;
 
 abstract class ChooseFileModeAction extends ComboBoxAction {
     private final VirtualFile myVirtualFile;
@@ -95,7 +96,7 @@ abstract class ChooseFileModeAction extends ComboBoxAction {
     }
 
     @NotNull
-    protected DefaultActionGroup createPopupActionGroup(final JComponent button) {
+    public DefaultActionGroup createPopupActionGroup(final JComponent button) {
         return createGroup(true);
     }
 
