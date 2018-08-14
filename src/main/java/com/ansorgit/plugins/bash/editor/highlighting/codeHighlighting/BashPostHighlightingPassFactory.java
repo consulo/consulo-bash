@@ -18,19 +18,16 @@
 
 package com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting;
 
-import org.jetbrains.annotations.NonNls;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NotNull;
-import com.ansorgit.plugins.bash.BashComponents;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.intellij.codeHighlighting.Pass;
 import com.intellij.codeHighlighting.TextEditorHighlightingPass;
 import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
-import com.intellij.codeHighlighting.TextEditorHighlightingPassRegistrar;
 import com.intellij.codeInsight.daemon.ProblemHighlightFilter;
 import com.intellij.codeInsight.daemon.impl.FileStatusMap;
-import com.intellij.openapi.components.AbstractProjectComponent;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
@@ -38,47 +35,43 @@ import com.intellij.psi.util.PsiModificationTracker;
 
 /**
  * Factory which provides text editor post highlighter for the Bash file type.
- * <p/>
+ * <p>
  * This code is based on IntelliJ's PostHighlightingPassFactory .
  */
-public class BashPostHighlightingPassFactory extends AbstractProjectComponent implements TextEditorHighlightingPassFactory {
-    private static final Key<Long> LAST_POST_PASS_TIMESTAMP = Key.create("BASH_LAST_POST_PASS_TIMESTAMP");
-    private TextEditorHighlightingPassRegistrar registrar;
+public class BashPostHighlightingPassFactory implements TextEditorHighlightingPassFactory
+{
+	private static final Key<Long> LAST_POST_PASS_TIMESTAMP = Key.create("BASH_LAST_POST_PASS_TIMESTAMP");
 
-    protected BashPostHighlightingPassFactory(Project project, TextEditorHighlightingPassRegistrar highlightingPassRegistrar) {
-        super(project);
-        registrar = highlightingPassRegistrar;
-    }
+	@Override
+	public void register(@Nonnull Registrar registrar)
+	{
+		registrar.registerTextEditorHighlightingPass(this, new int[]{Pass.UPDATE_ALL}, null, true, Pass.UPDATE_ALL);
+	}
 
-    public static void markFileUpToDate(@NotNull PsiFile file) {
-        long lastStamp = PsiModificationTracker.SERVICE.getInstance(file.getProject()).getModificationCount();
-        file.putUserData(LAST_POST_PASS_TIMESTAMP, lastStamp);
-    }
+	public static void markFileUpToDate(@NotNull PsiFile file)
+	{
+		long lastStamp = PsiModificationTracker.SERVICE.getInstance(file.getProject()).getModificationCount();
+		file.putUserData(LAST_POST_PASS_TIMESTAMP, lastStamp);
+	}
 
-    public void projectOpened() {
-        registrar.registerTextEditorHighlightingPass(this, new int[]{Pass.UPDATE_ALL}, null, true, Pass.UPDATE_ALL);
-    }
+	public TextEditorHighlightingPass createHighlightingPass(@NotNull PsiFile file, @NotNull Editor editor)
+	{
+		TextRange textRange = FileStatusMap.getDirtyTextRange(editor, Pass.UPDATE_ALL);
+		if(textRange == null)
+		{
+			Long lastStamp = file.getUserData(LAST_POST_PASS_TIMESTAMP);
+			long currentStamp = PsiModificationTracker.SERVICE.getInstance(file.getProject()).getModificationCount();
+			if(lastStamp != null && lastStamp == currentStamp || !ProblemHighlightFilter.shouldHighlightFile(file))
+			{
+				return null;
+			}
+		}
 
-    @NonNls
-    @NotNull
-    public String getComponentName() {
-        return BashComponents.PostHighlighterFactory;
-    }
+		if(file instanceof BashFile)
+		{
+			return new PostHighlightingPass(file.getProject(), file, editor, editor.getDocument());
+		}
 
-    public TextEditorHighlightingPass createHighlightingPass(@NotNull PsiFile file, @NotNull Editor editor) {
-        TextRange textRange = FileStatusMap.getDirtyTextRange(editor, Pass.UPDATE_ALL);
-        if (textRange == null) {
-            Long lastStamp = file.getUserData(LAST_POST_PASS_TIMESTAMP);
-            long currentStamp = PsiModificationTracker.SERVICE.getInstance(myProject).getModificationCount();
-            if (lastStamp != null && lastStamp == currentStamp || !ProblemHighlightFilter.shouldHighlightFile(file)) {
-                return null;
-            }
-        }
-
-        if (file instanceof BashFile) {
-            return new PostHighlightingPass(file.getProject(), file, editor, editor.getDocument());
-        }
-
-        return null;
-    }
+		return null;
+	}
 }

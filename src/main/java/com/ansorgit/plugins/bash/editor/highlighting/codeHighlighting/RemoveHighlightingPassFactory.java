@@ -18,45 +18,34 @@
 
 package com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting;
 
-import com.ansorgit.plugins.bash.BashComponents;
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.intellij.codeHighlighting.TextEditorHighlightingPass;
 import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
-import com.intellij.codeHighlighting.TextEditorHighlightingPassRegistrar;
-import com.intellij.openapi.components.AbstractProjectComponent;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.markup.HighlighterLayer;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Factory which provides text editor highlighters for the Bash file type.
  */
-public class RemoveHighlightingPassFactory extends AbstractProjectComponent implements TextEditorHighlightingPassFactory {
-    private TextEditorHighlightingPassRegistrar myRegistrar;
+public class RemoveHighlightingPassFactory implements TextEditorHighlightingPassFactory
+{
+	@Override
+	public void register(@Nonnull Registrar registrar)
+	{
+		registrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassFactory.Registrar.Anchor.AFTER, HighlighterLayer.ADDITIONAL_SYNTAX, true);
+	}
 
-    protected RemoveHighlightingPassFactory(Project project, TextEditorHighlightingPassRegistrar highlightingPassRegistrar) {
-        super(project);
-        myRegistrar = highlightingPassRegistrar;
-    }
+	public TextEditorHighlightingPass createHighlightingPass(@NotNull PsiFile file, @NotNull Editor editor)
+	{
+		if(file instanceof BashFile)
+		{
+			return new RemoveHighlightingPass(file.getProject(), (BashFile) file, editor);
+		}
 
-    public void projectOpened() {
-        myRegistrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassRegistrar.Anchor.AFTER, HighlighterLayer.ADDITIONAL_SYNTAX, false, true);
-    }
-
-    @NonNls
-    @NotNull
-    public String getComponentName() {
-        return BashComponents.RemoveHighlighterFactory;
-    }
-
-    public TextEditorHighlightingPass createHighlightingPass(@NotNull PsiFile file, @NotNull Editor editor) {
-        if (file instanceof BashFile) {
-            return new RemoveHighlightingPass(file.getProject(), (BashFile) file, editor);
-        }
-
-        return null;
-    }
+		return null;
+	}
 }
