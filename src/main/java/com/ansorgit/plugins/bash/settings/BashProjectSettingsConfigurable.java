@@ -18,16 +18,13 @@
 
 package com.ansorgit.plugins.bash.settings;
 
-import com.ansorgit.plugins.bash.BashComponents;
-import com.ansorgit.plugins.bash.util.BashIcons;
-import com.intellij.openapi.components.ProjectComponent;
+import javax.swing.JComponent;
+
+import org.jetbrains.annotations.Nls;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
+import consulo.annotations.RequiredDispatchThread;
 
 /**
  * Date: 12.05.2009
@@ -35,72 +32,63 @@ import javax.swing.*;
  *
  * @author Joachim Ansorg
  */
-public class BashProjectSettingsConfigurable implements ProjectComponent, Configurable {
-    private BashProjectSettingsPane settingsPanel;
-    private final Project project;
+public class BashProjectSettingsConfigurable implements Configurable
+{
+	private BashProjectSettingsPane settingsPanel;
+	private final Project project;
 
-    public BashProjectSettingsConfigurable(Project project) {
-        this.project = project;
-    }
+	public BashProjectSettingsConfigurable(Project project)
+	{
+		this.project = project;
+	}
 
-    @NotNull
-    public String getComponentName() {
-        return BashComponents.BASH_LOADER + ".ProjectSettingsConfigurable";
-    }
+	@Nls
+	public String getDisplayName()
+	{
+		return "Bash";
+	}
 
-    public void initComponent() {
-    }
+	@RequiredDispatchThread
+	public JComponent createComponent()
+	{
+		if(settingsPanel == null)
+		{
+			settingsPanel = new BashProjectSettingsPane();
+		}
 
-    public void disposeComponent() {
-        if (settingsPanel != null) {
-            this.settingsPanel.dispose();
-            this.settingsPanel = null;
-        }
-    }
+		return settingsPanel.getPanel();
+	}
 
-    @Nls
-    public String getDisplayName() {
-        return "BashSupport";
-    }
+	@RequiredDispatchThread
+	public boolean isModified()
+	{
+		if(settingsPanel == null)
+		{
+			return false;
+		}
 
-    public Icon getIcon() {
-        return BashIcons.BASH_LARGE_ICON;
-    }
+		return settingsPanel.isModified(BashProjectSettings.storedSettings(project));
+	}
 
-    public String getHelpTopic() {
-        return null;
-    }
+	@RequiredDispatchThread
+	public void apply() throws ConfigurationException
+	{
+		settingsPanel.storeSettings(BashProjectSettings.storedSettings(project));
+	}
 
-    public JComponent createComponent() {
-        if (settingsPanel == null) {
-            settingsPanel = new BashProjectSettingsPane();
-        }
+	@RequiredDispatchThread
+	public void reset()
+	{
+		settingsPanel.setData(BashProjectSettings.storedSettings(project));
+	}
 
-        return settingsPanel.getPanel();
-    }
-
-    public boolean isModified() {
-        if (settingsPanel == null) {
-            return false;
-        }
-
-        return settingsPanel.isModified(BashProjectSettings.storedSettings(project));
-    }
-
-    public void apply() throws ConfigurationException {
-        settingsPanel.storeSettings(BashProjectSettings.storedSettings(project));
-    }
-
-    public void reset() {
-        settingsPanel.setData(BashProjectSettings.storedSettings(project));
-    }
-
-    public void disposeUIResources() {
-    }
-
-    public void projectOpened() {
-    }
-
-    public void projectClosed() {
-    }
+	@RequiredDispatchThread
+	public void disposeUIResources()
+	{
+		if(settingsPanel != null)
+		{
+			this.settingsPanel.dispose();
+			this.settingsPanel = null;
+		}
+	}
 }

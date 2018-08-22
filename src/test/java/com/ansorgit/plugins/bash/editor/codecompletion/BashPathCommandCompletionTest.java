@@ -18,8 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
-import junit.framework.Assert;
 import org.junit.Test;
+import junit.framework.Assert;
 
 /**
  */
@@ -27,7 +27,6 @@ public class BashPathCommandCompletionTest {
     @Test
     public void testFindUpperLimit() throws Exception {
         BashPathCommandCompletion completion = new BashPathCommandCompletion();
-        completion.initComponent();
 
         Assert.assertEquals("abd", completion.findUpperLimit("abc"));
         Assert.assertEquals("abz", completion.findUpperLimit("aby"));

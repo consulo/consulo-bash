@@ -18,47 +18,30 @@
 
 package com.ansorgit.plugins.bash.settings;
 
-import org.jetbrains.annotations.NotNull;
+import javax.inject.Singleton;
+
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
 
 /**
  * User: jansorg
  * Date: Oct 30, 2009
  * Time: 9:12:54 PM
  */
-@State(
-        name = "BashSupportProjectSettings",
-        storages = { @Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/bash.xml")}
-)
-public class BashProjectSettingsComponent implements PersistentStateComponent<BashProjectSettings>, ProjectComponent {
-    private BashProjectSettings settings = new BashProjectSettings();
+@Singleton
+@State(name = "BashSupportProjectSettings", storages = @Storage("bash.xml"))
+public class BashProjectSettingsComponent implements PersistentStateComponent<BashProjectSettings>
+{
+	private BashProjectSettings settings = new BashProjectSettings();
 
-    public BashProjectSettings getState() {
-        return settings;
-    }
+	public BashProjectSettings getState()
+	{
+		return settings;
+	}
 
-    public void loadState(BashProjectSettings state) {
-        this.settings = state;
-    }
-
-    public void projectOpened() {
-    }
-
-    public void projectClosed() {
-    }
-
-    @NotNull
-    public String getComponentName() {
-        return "BashSupportProject";
-    }
-
-    public void initComponent() {
-    }
-
-    public void disposeComponent() {
-    }
+	public void loadState(BashProjectSettings state)
+	{
+		this.settings = state;
+	}
 }
