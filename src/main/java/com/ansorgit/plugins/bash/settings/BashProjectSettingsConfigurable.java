@@ -85,10 +85,6 @@ public class BashProjectSettingsConfigurable implements Configurable
 	@RequiredDispatchThread
 	public void disposeUIResources()
 	{
-		if(settingsPanel != null)
-		{
-			this.settingsPanel.dispose();
-			this.settingsPanel = null;
-		}
+		this.settingsPanel = null;
 	}
 }

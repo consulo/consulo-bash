@@ -18,18 +18,24 @@
 
 package com.ansorgit.plugins.bash.settings;
 
-import com.intellij.openapi.util.text.StringUtil;
-import org.picocontainer.Disposable;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.swing.*;
-import java.util.*;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+import com.intellij.openapi.util.text.StringUtil;
 
 /**
  * User: jansorg
  * Date: Oct 30, 2009
  * Time: 9:18:52 PM
  */
-public class BashProjectSettingsPane implements Disposable {
+public class BashProjectSettingsPane {
     private JPanel settingsPane;
     private JTextArea globalVarList;
     private JCheckBox globalVarAutocompletion;
@@ -38,9 +44,6 @@ public class BashProjectSettingsPane implements Disposable {
     private JCheckBox autocompleteInternalCommands;
     private JCheckBox enableFormatterCheckbox;
     private JCheckBox autocompletePathCommands;
-
-    public void dispose() {
-    }
 
     public void setData(BashProjectSettings settings) {
         globalVarAutocompletion.setSelected(settings.isAutcompleteGlobalVars());
