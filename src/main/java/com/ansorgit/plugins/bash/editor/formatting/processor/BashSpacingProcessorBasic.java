@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.formatting.processor;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.editor.formatting.BashBlock;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
@@ -38,7 +40,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class BashSpacingProcessorBasic implements BashElementTypes, BashTokenTypes {
     private static final Logger log = Logger.getInstance("SpacingProcessorBasic");
@@ -312,7 +313,7 @@ public abstract class BashSpacingProcessorBasic implements BashElementTypes, Bas
      * @param node
      * @return True if the on of the nodes is embedded in a string
      */
-    private static boolean hasParentNodeType(@NotNull ASTNode node, @NotNull IElementType parentNodeType) {
+    private static boolean hasParentNodeType(@Nonnull ASTNode node, @Nonnull IElementType parentNodeType) {
         while (node != null) {
             IElementType currentType = node.getElementType();
             if (currentType == parentNodeType) {

@@ -24,7 +24,7 @@ import java.util.List;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashBlock;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFunctionDefName;
@@ -65,11 +65,11 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
         super(astNode, "bash function()");
     }
 
-    public BashFunctionDefImpl(@NotNull BashFunctionDefStub stub, @NotNull IStubElementType nodeType) {
+    public BashFunctionDefImpl(@Nonnull BashFunctionDefStub stub, @Nonnull IStubElementType nodeType) {
         super(stub, nodeType, null);
     }
 
-    public PsiElement setName(@NotNull @NonNls String name) throws IncorrectOperationException {
+    public PsiElement setName(@Nonnull @NonNls String name) throws IncorrectOperationException {
         if (StringUtil.isEmpty(name)) {
             return null;
         }
@@ -128,7 +128,7 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
         return BashPsiUtils.findDocumentationElementComments(this);
     }
 
-    @NotNull
+    @Nonnull
     public List<BashVar> findReferencedParameters() {
         //call the visitor to find all uses of the parameter varaiables
         Collection<BashVar> usedVariables = PsiTreeUtil.collectElementsOfType(this, BashVar.class);
@@ -182,7 +182,7 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitFunctionDef(this);
         } else {
@@ -191,7 +191,7 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
     }
 
     @Override
-    public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
         if (!processor.execute(this, state)) {
             return false;
         }

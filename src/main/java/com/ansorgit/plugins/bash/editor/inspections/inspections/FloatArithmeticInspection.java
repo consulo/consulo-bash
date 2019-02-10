@@ -26,7 +26,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * This inspection detects floating point arithmetic using Bash arithmetic (so it probably does not produce
@@ -40,19 +40,19 @@ import org.jetbrains.annotations.NotNull;
 public class FloatArithmeticInspection extends AbstractBashInspection {
 
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "FloatArithmetic";
     }
 
-    @NotNull
+    @Nonnull
     public String getShortName() {
         return "Integer division with remainder found.";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "Integer division with remainder. Maybe you wanted floating point arithmetic (unsupported in Bash)?";
     }
@@ -62,15 +62,15 @@ public class FloatArithmeticInspection extends AbstractBashInspection {
         return "Detects floating point quotients in static expressions (e.g. '3/4') which give a probably unexpected result.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.INFO;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitArithmeticExpression(ArithmeticExpression expression) {

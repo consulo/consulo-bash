@@ -29,7 +29,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Set;
 
@@ -43,20 +43,20 @@ import java.util.Set;
  */
 public class RecursiveIncludeFileInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "RecursiveInclusion";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getShortName() {
         return "Recursive file inclusion";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return "Recursive file inclusion";
@@ -67,15 +67,15 @@ public class RecursiveIncludeFileInspection extends AbstractBashInspection {
         return "Checks for recursive file inclusion. Currently it can highlight the inclusion of a file in itself..";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.WARNING;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitIncludeCommand(BashIncludeCommand includeCommand) {

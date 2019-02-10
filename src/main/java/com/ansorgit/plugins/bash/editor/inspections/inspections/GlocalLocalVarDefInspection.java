@@ -30,7 +30,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.localVarDefCommands;
 
@@ -45,19 +45,19 @@ import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.localVarDefCommand
 public class GlocalLocalVarDefInspection extends AbstractBashInspection {
 
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "GlobalLocalVarDef";
     }
 
-    @NotNull
+    @Nonnull
     public String getShortName() {
         return "Global definition of local var";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "Global definition of a local variable";
     }
@@ -67,9 +67,9 @@ public class GlocalLocalVarDefInspection extends AbstractBashInspection {
         return "If a local variable has been declared on the global level it is invalid.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitVarDef(BashVarDef varDef) {

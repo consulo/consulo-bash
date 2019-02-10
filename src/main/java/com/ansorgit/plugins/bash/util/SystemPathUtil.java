@@ -19,11 +19,10 @@
 package com.ansorgit.plugins.bash.util;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.util.text.StringUtil;
 
 /**
@@ -36,14 +35,14 @@ public class SystemPathUtil {
     }
 
     @Nullable
-    public static String findBestExecutable(@NotNull String commandName) {
+    public static String findBestExecutable(@Nonnull String commandName) {
         List<String> paths = StringUtil.split(System.getenv("PATH"), File.pathSeparator);
 
         return findBestExecutable(commandName, paths);
     }
 
     @Nullable
-    public static String findBestExecutable(@NotNull String commandName, @NotNull List<String> paths) {
+    public static String findBestExecutable(@Nonnull String commandName, @Nonnull List<String> paths) {
         for (String path : paths) {
             String executablePath = findExecutable(commandName, path);
             if (executablePath != null) {
@@ -55,7 +54,7 @@ public class SystemPathUtil {
     }
 
     @Nullable
-    public static String findExecutable(@NotNull String commandName, String path) {
+    public static String findExecutable(@Nonnull String commandName, String path) {
         String fullPath = path + File.separatorChar + commandName;
         File command = new File(fullPath);
         return command.exists() ? command.getAbsolutePath() : null;

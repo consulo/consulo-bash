@@ -27,8 +27,8 @@ import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDefContainer;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.PsiNamedElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 
@@ -62,6 +62,6 @@ public interface BashFunctionDef extends BashPsiElement, PsiNamedElement, Naviga
      *
      * @return The list of parameter variable uses
      */
-    @NotNull
+    @Nonnull
     List<BashVar> findReferencedParameters();
 }

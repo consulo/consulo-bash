@@ -25,9 +25,12 @@ import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.localVarDefCommand
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -85,7 +88,7 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
         cachingReference = new CachedVarDefReference(this);
     }
 
-    public BashVarDefImpl(@NotNull BashVarDefStub stub, @NotNull IStubElementType nodeType) {
+    public BashVarDefImpl(@Nonnull BashVarDefStub stub, @Nonnull IStubElementType nodeType) {
         super(stub, nodeType, "Bash var def");
         cachingReference = new CachedVarDefReference(this);
     }
@@ -99,7 +102,7 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
         return element.getText();
     }
 
-    public PsiElement setName(@NotNull @NonNls String newName) throws IncorrectOperationException {
+    public PsiElement setName(@Nonnull @NonNls String newName) throws IncorrectOperationException {
         if (!BashIdentifierUtil.isValidIdentifier(newName)) {
             throw new IncorrectOperationException("can't have an empty name");
         }
@@ -146,7 +149,7 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
      *
      * @return The element which represents the left part of the assignment.
      */
-    @NotNull
+    @Nonnull
     public PsiElement findAssignmentWord() {
         PsiElement element = findChildByType(accepted);
         if (element != null) {
@@ -239,10 +242,10 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
     }
 
     @Override
-    public boolean processDeclarations(@NotNull PsiScopeProcessor processor,
-                                       @NotNull ResolveState resolveState,
+    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor,
+                                       @Nonnull ResolveState resolveState,
                                        PsiElement lastParent,
-                                       @NotNull PsiElement place) {
+                                       @Nonnull PsiElement place) {
         return processor.execute(this, resolveState);
     }
 
@@ -258,7 +261,7 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
         return this;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public BashReference getReference() {
         return cachingReference;
@@ -279,7 +282,7 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitVarDef(this);
         } else {
@@ -362,7 +365,7 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
             return bashVarDef.getAssignmentNameTextRange();
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public String getCanonicalText() {
             return bashVarDef.getReferencedName();
@@ -375,7 +378,7 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
         }
 
         @Override
-        public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+        public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
             if (isReferenceTo(element)) {
                 return bashVarDef;
             }
@@ -384,7 +387,7 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
             return handleElementRename(element.getText());
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public Object[] getVariants() {
             return EMPTY_VARIANTS;
@@ -412,7 +415,7 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
             return null;
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public String getUnresolvedMessagePattern() {
             return "unresolved";

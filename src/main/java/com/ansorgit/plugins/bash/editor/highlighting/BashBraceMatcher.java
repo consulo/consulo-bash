@@ -23,8 +23,8 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Braces matcher for bash files. Referenced by the plugin.xml file.
@@ -48,7 +48,7 @@ public class BashBraceMatcher implements PairedBraceMatcher {
         return PAIRS;
     }
 
-    public boolean isPairedBracesAllowedBeforeType(@NotNull final IElementType lbraceType, @Nullable final IElementType tokenType) {
+    public boolean isPairedBracesAllowedBeforeType(@Nonnull final IElementType lbraceType, @Nullable final IElementType tokenType) {
         return BashTokenTypes.WHITESPACE == tokenType
                 || BashTokenTypes.commentTokens.contains(tokenType)
                 || tokenType == BashTokenTypes.SEMI

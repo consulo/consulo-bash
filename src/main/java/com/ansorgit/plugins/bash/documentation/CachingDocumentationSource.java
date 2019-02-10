@@ -24,7 +24,7 @@ package com.ansorgit.plugins.bash.documentation;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.psi.PsiElement;
 
 /**

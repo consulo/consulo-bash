@@ -23,7 +23,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Replaces an existing, but invalid shebang command with a known command.
@@ -42,12 +42,12 @@ public class ShebangQuickfix extends AbstractBashQuickfix {
         this.command = command;
     }
 
-    @NotNull
+    @Nonnull
     public String getName() {
         return "Replace with " + command;
     }
 
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+    public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         shebang.updateCommand(command);
     }
 }

@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.annotator;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.editor.highlighting.BashSyntaxHighlighter;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.api.BashBackquote;
@@ -46,7 +48,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiRecursiveElementVisitor;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * The annotator for the the Bash language.
@@ -62,7 +63,7 @@ public class BashAnnotator implements Annotator {
             TokenSet.create(BashTokenTypes.STRING2),
             BashTokenTypes.arithLiterals);
 
-    public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder annotationHolder) {
+    public void annotate(@Nonnull PsiElement element, @Nonnull AnnotationHolder annotationHolder) {
         if (element instanceof BashBackquote) {
             annotateBackquote(element, annotationHolder);
         } else if (element instanceof BashHereDoc) {

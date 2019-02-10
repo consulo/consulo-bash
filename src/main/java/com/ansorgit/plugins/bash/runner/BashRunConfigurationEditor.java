@@ -20,7 +20,7 @@ package com.ansorgit.plugins.bash.runner;
 
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 
@@ -47,7 +47,7 @@ public class BashRunConfigurationEditor extends SettingsEditor<BashRunConfigurat
     }
 
     @Override
-    @NotNull
+    @Nonnull
     protected JComponent createEditor() {
         return myForm.getRootPanel();
     }

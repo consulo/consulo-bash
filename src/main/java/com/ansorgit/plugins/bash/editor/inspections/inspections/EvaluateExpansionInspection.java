@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.EvaluateExpansionQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashExpansion;
@@ -26,7 +28,6 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * This inspection detects expansions and offers a quickfix to calculate the expansion
@@ -38,20 +39,20 @@ import org.jetbrains.annotations.NotNull;
  */
 public class EvaluateExpansionInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "EvaluateExpression";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getShortName() {
         return "Evaluate expansion";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return "Evaluate an expansion";
@@ -62,15 +63,15 @@ public class EvaluateExpansionInspection extends AbstractBashInspection {
         return "Replaces a Bash expansion with the evaluated result. Only static value expansions are understood by this expansion, i.e. if an expansion contains a variable then the quickfix can not be applied.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.WARNING;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitExpansion(BashExpansion expansion) {

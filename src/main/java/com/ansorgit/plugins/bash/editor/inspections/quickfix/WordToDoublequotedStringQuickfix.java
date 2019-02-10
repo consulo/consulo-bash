@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Wraps a word like a in a quoted string, i.e. "a".
@@ -37,7 +37,7 @@ public class WordToDoublequotedStringQuickfix extends AbstractWordWrapQuickfix {
         return "\"" + text + "\"";
     }
 
-    @NotNull
+    @Nonnull
     public String getName() {
         return "Convert to quoted string \"...\"";
     }

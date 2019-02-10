@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.ansorgit.plugins.bash.editor.inspections.inspections.UnusedFunctionDefInspection;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFunctionDefName;
@@ -35,20 +35,20 @@ import com.intellij.util.Query;
 public class PostHighlightingPass extends TextEditorHighlightingPass
 {
 	private static final Logger LOG = Logger.getInstance("#com.intellij.codeInsight.daemon.impl.PostHighlightingPass");
-	@NotNull
+	@Nonnull
 	private final Project project;
-	@NotNull
+	@Nonnull
 	private final PsiFile file;
 	@Nullable
 	private final Editor editor;
-	@NotNull
+	@Nonnull
 	private final Document document;
 	private HighlightDisplayKey unusedSymbolInspection;
 	private int startOffset;
 	private int endOffset;
 	private Collection<HighlightInfo> highlights;
 
-	PostHighlightingPass(@NotNull Project project, @NotNull PsiFile file, @Nullable Editor editor, @NotNull Document document)
+	PostHighlightingPass(@Nonnull Project project, @Nonnull PsiFile file, @Nullable Editor editor, @Nonnull Document document)
 	{
 		super(project, document, true);
 
@@ -67,14 +67,14 @@ public class PostHighlightingPass extends TextEditorHighlightingPass
 		return highlights == null ? null : new ArrayList<HighlightInfo>(highlights);
 	}
 
-	public static HighlightInfo createUnusedSymbolInfo(@NotNull PsiElement element, @Nullable String message)
+	public static HighlightInfo createUnusedSymbolInfo(@Nonnull PsiElement element, @Nullable String message)
 	{
 		return HighlightInfo.newHighlightInfo(HighlightInfoType.UNUSED_SYMBOL).range(element).descriptionAndTooltip(message)
 				.create();
 	}
 
 	@Override
-	public void doCollectInformation(@NotNull final ProgressIndicator progress)
+	public void doCollectInformation(@Nonnull final ProgressIndicator progress)
 	{
 		final List<HighlightInfo> highlights = new ArrayList<HighlightInfo>();
 
@@ -82,7 +82,7 @@ public class PostHighlightingPass extends TextEditorHighlightingPass
 		this.highlights = highlights;
 	}
 
-	private void collectHighlights(@NotNull final List<HighlightInfo> result, @NotNull final ProgressIndicator progress)
+	private void collectHighlights(@Nonnull final List<HighlightInfo> result, @Nonnull final ProgressIndicator progress)
 	{
 		ApplicationManager.getApplication().assertReadAccessAllowed();
 

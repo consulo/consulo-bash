@@ -18,15 +18,16 @@
 
 package com.ansorgit.plugins.bash.lang.psi.stubs;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.ansorgit.plugins.bash.lang.psi.stubs.impl.BashFileStubImpl;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.DefaultStubBuilder;
 import com.intellij.psi.stubs.StubElement;
-import org.jetbrains.annotations.NotNull;
 
 public class BashFileStubBuilder extends DefaultStubBuilder {
-    protected StubElement createStubForFile(@NotNull final PsiFile file) {
+    protected StubElement createStubForFile(@Nonnull final PsiFile file) {
         if (file instanceof BashFile) {
             return new BashFileStubImpl((BashFile) file);
         }

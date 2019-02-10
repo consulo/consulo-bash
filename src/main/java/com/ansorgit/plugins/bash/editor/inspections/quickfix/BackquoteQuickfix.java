@@ -25,7 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Quickfix to convert a backtick command into a subshell command.
@@ -41,12 +41,12 @@ public class BackquoteQuickfix extends AbstractBashQuickfix {
         this.backquote = backquote;
     }
 
-    @NotNull
+    @Nonnull
     public String getName() {
         return "Replace with subshell command";
     }
 
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+    public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         Document document = PsiDocumentManager.getInstance(project).getDocument(file);
         if (document != null) {
             int endOffset = backquote.getTextRange().getEndOffset();

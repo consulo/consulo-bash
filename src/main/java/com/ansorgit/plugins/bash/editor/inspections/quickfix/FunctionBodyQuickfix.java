@@ -18,7 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.BashBlock;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.intellij.codeInsight.CodeInsightUtilBase;
@@ -46,12 +47,12 @@ public class FunctionBodyQuickfix extends AbstractBashQuickfix {
         this.functionDef = functionDef;
     }
 
-    @NotNull
+    @Nonnull
     public String getName() {
         return "Wrap function body in curly brackets";
     }
 
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+    public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         if (!CodeInsightUtilBase.getInstance().prepareFileForWrite(file)) {
             return;
         }

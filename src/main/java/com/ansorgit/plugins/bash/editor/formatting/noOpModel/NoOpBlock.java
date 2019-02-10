@@ -24,7 +24,7 @@ package com.ansorgit.plugins.bash.editor.formatting.noOpModel;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Collections;
 import java.util.List;
@@ -43,12 +43,12 @@ public class NoOpBlock implements Block {
         this.astNode = astNode;
     }
 
-    @NotNull
+    @Nonnull
     public TextRange getTextRange() {
         return astNode.getTextRange();
     }
 
-    @NotNull
+    @Nonnull
     public List<Block> getSubBlocks() {
         return Collections.emptyList();
     }
@@ -69,7 +69,7 @@ public class NoOpBlock implements Block {
         return null;
     }
 
-    @NotNull
+    @Nonnull
     public ChildAttributes getChildAttributes(int newChildIndex) {
         return new ChildAttributes(Indent.getNoneIndent(), Alignment.createAlignment());
         //return ChildAttributes.DELEGATE_TO_NEXT_CHILD;

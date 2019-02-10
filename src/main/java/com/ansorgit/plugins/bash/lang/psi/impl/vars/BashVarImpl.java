@@ -18,8 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.vars;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
@@ -62,7 +62,7 @@ public class BashVarImpl extends BashBaseStubElementImpl<StubElement> implements
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitVarUse(this);
         } else {
@@ -71,11 +71,11 @@ public class BashVarImpl extends BashBaseStubElementImpl<StubElement> implements
     }
 
     @Override
-    public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
         return processor.execute(this, state);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public BashReference getReference() {
         return cachingVarReference;
@@ -156,7 +156,7 @@ public class BashVarImpl extends BashBaseStubElementImpl<StubElement> implements
             return BashResolveUtil.resolve(bashVar, true);
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public String getUnresolvedMessagePattern() {
             return "unresolved var";
@@ -176,7 +176,7 @@ public class BashVarImpl extends BashBaseStubElementImpl<StubElement> implements
             return TextRange.from(1, getReferencedName().length());
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public String getCanonicalText() {
             return bashVar.getReferencedName();
@@ -197,7 +197,7 @@ public class BashVarImpl extends BashBaseStubElementImpl<StubElement> implements
         }
 
         @Override
-        public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+        public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
             if (isReferenceTo(element)) {
                 return bashVar;
             }
@@ -205,7 +205,7 @@ public class BashVarImpl extends BashBaseStubElementImpl<StubElement> implements
             return handleElementRename(element.getText());
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public Object[] getVariants() {
             return OBJECTS_EMPTY;

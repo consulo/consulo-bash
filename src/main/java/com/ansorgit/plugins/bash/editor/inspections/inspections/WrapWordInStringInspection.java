@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.WordToDoublequotedStringQuickfix;
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.WordToSinglequotedStringQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -28,7 +30,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Inspection which can wrap a word token inside of a string.
@@ -41,19 +42,19 @@ import org.jetbrains.annotations.NotNull;
  */
 public class WrapWordInStringInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "ConvertToString";
     }
 
-    @NotNull
+    @Nonnull
     public String getShortName() {
         return "Convert to string";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "Convert to a quoted or unquoted string";
     }
@@ -68,9 +69,9 @@ public class WrapWordInStringInspection extends AbstractBashInspection {
         return "This inspection can convert text which is not in a string into a string. For example \"echo a\" can be converted into \"echo 'a'\".";
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder problemsHolder, boolean b) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder problemsHolder, boolean b) {
         return new BashVisitor() {
             @Override
             public void visitCombinedWord(BashWord word) {

@@ -18,7 +18,8 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashInterpreterDetection;
 import com.intellij.execution.configurations.ConfigurationFactory;
@@ -47,7 +48,7 @@ public class BashConfigurationType implements ConfigurationType {
         return BashIcons.BASH_FILE_ICON;
     }
 
-    @NotNull
+    @Nonnull
     public String getId() {
         return "BashConfigurationType";
     }

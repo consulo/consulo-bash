@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.runner.repl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.ansorgit.plugins.bash.util.BashInterpreterDetection;
@@ -80,7 +80,7 @@ public class BashConsoleRunner extends AbstractConsoleRunnerWithHistory<Language
 		return new ColoredProcessHandler(process, null);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	protected ProcessBackedConsoleExecuteActionHandler createExecuteActionHandler()
 	{

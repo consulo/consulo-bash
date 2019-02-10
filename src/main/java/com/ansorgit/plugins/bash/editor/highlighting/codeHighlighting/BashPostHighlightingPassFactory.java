@@ -20,7 +20,6 @@ package com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting;
 
 import javax.annotation.Nonnull;
 
-import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.intellij.codeHighlighting.Pass;
 import com.intellij.codeHighlighting.TextEditorHighlightingPass;
@@ -48,13 +47,13 @@ public class BashPostHighlightingPassFactory implements TextEditorHighlightingPa
 		registrar.registerTextEditorHighlightingPass(this, new int[]{Pass.UPDATE_ALL}, null, true, Pass.UPDATE_ALL);
 	}
 
-	public static void markFileUpToDate(@NotNull PsiFile file)
+	public static void markFileUpToDate(@Nonnull PsiFile file)
 	{
 		long lastStamp = PsiModificationTracker.SERVICE.getInstance(file.getProject()).getModificationCount();
 		file.putUserData(LAST_POST_PASS_TIMESTAMP, lastStamp);
 	}
 
-	public TextEditorHighlightingPass createHighlightingPass(@NotNull PsiFile file, @NotNull Editor editor)
+	public TextEditorHighlightingPass createHighlightingPass(@Nonnull PsiFile file, @Nonnull Editor editor)
 	{
 		TextRange textRange = FileStatusMap.getDirtyTextRange(editor, Pass.UPDATE_ALL);
 		if(textRange == null)

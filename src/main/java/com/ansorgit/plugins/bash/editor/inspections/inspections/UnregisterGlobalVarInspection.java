@@ -29,7 +29,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Set;
 
@@ -41,20 +41,20 @@ import java.util.Set;
  */
 public class UnregisterGlobalVarInspection extends AbstractBashInspection {
     @Nls
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return "Unregister as a global variable";
     }
 
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "unregisterGlobalVariableInspection";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getShortName() {
         return "Unregister global variable";
@@ -65,13 +65,13 @@ public class UnregisterGlobalVarInspection extends AbstractBashInspection {
         return "Unknown variables can be registered as global variables to remove the error highlighting. This inspection provides an unregister action for already registered variables.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, boolean isOnTheFly) {
         return new UnresolvedVarVisitor(holder);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.ERROR;

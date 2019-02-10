@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
@@ -42,7 +42,7 @@ public class BashParser implements PsiParser {
     private static final String debugKey = "bashsupport.debug";
     private static final boolean debugMode = "true".equals(System.getProperty(debugKey)) || "true".equals(System.getenv(debugKey));
 
-    @NotNull
+    @Nonnull
     public ASTNode parse(final IElementType root, final PsiBuilder psiBuilder, LanguageVersion languageVersion) {
         final BashPsiBuilder builder = new BashPsiBuilder(psiBuilder, null);
 

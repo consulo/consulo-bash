@@ -18,15 +18,17 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public interface BashFileReference extends BashPsiElement {
     @Nullable
     PsiFile findReferencedFile();
 
-    @NotNull
+    @Nonnull
     String getFilename();
 
     /**

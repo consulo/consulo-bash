@@ -1,13 +1,13 @@
 package consulo.bash.module.extension;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.ansorgit.plugins.bash.settings.facet.ui.BashFacetUI;
 import com.intellij.openapi.ui.VerticalFlowLayout;
-import consulo.annotations.RequiredDispatchThread;
+import consulo.ui.RequiredUIAccess;
 import consulo.module.extension.MutableModuleExtension;
 import consulo.roots.ModuleRootLayer;
 
@@ -17,12 +17,12 @@ import consulo.roots.ModuleRootLayer;
  */
 public class BashMutableModuleExtension extends BashModuleExtension implements MutableModuleExtension<BashModuleExtension>
 {
-	public BashMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
+	public BashMutableModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer moduleRootLayer)
 	{
 		super(id, moduleRootLayer);
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	@Nullable
 	@Override
 	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
@@ -39,7 +39,7 @@ public class BashMutableModuleExtension extends BashModuleExtension implements M
 	}
 
 	@Override
-	public boolean isModified(@NotNull BashModuleExtension extension)
+	public boolean isModified(@Nonnull BashModuleExtension extension)
 	{
 		return myIsEnabled != extension.isEnabled() ||
 				myOperationMode != extension.getOperationMode() ||

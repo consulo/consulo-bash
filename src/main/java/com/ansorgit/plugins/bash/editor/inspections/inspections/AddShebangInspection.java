@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.AddShebangQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
@@ -30,7 +32,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * This inspection detects a missing shebang line and offers a file-level quickfix to add one.
@@ -42,19 +43,19 @@ import org.jetbrains.annotations.NotNull;
 public class AddShebangInspection extends AbstractBashInspection {
 
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "AddShebangLine";
     }
 
-    @NotNull
+    @Nonnull
     public String getShortName() {
         return "Add Shebang line";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "Add missing shebang line to file";
     }
@@ -66,7 +67,7 @@ public class AddShebangInspection extends AbstractBashInspection {
     }
 
     @Override
-    public ProblemDescriptor[] checkFile(@NotNull PsiFile file, @NotNull InspectionManager manager, boolean isOnTheFly) {
+    public ProblemDescriptor[] checkFile(@Nonnull PsiFile file, @Nonnull InspectionManager manager, boolean isOnTheFly) {
         PsiFile checkedFile = BashPsiUtils.findFileContext(file);
         if (checkedFile instanceof BashFile && !BashPsiUtils.isInjectedElement(file)) {
             BashFile bashFile = (BashFile) checkedFile;
@@ -83,9 +84,9 @@ public class AddShebangInspection extends AbstractBashInspection {
         return null;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitFile(BashFile file) {

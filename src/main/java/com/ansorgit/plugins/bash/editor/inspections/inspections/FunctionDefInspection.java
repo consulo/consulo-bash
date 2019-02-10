@@ -25,7 +25,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * In Bash a function definition must not have a command block as body. A body block is good style, though.
@@ -38,19 +38,19 @@ import org.jetbrains.annotations.NotNull;
  */
 public class FunctionDefInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "WrapFunction";
     }
 
-    @NotNull
+    @Nonnull
     public String getShortName() {
         return "Wrap function body";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "Wrap function body in {}";
     }
@@ -61,9 +61,9 @@ public class FunctionDefInspection extends AbstractBashInspection {
                 "offers a quickfix to automatically do this.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitFunctionDef(BashFunctionDef functionDef) {

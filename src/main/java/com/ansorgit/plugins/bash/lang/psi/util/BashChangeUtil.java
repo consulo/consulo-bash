@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.util;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
@@ -26,7 +28,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Date: 16.04.2009
@@ -37,8 +38,8 @@ import org.jetbrains.annotations.NotNull;
 public class BashChangeUtil {
     private static final String TEMP_FILE_NAME = "__.sh";
 
-    @NotNull
-    private static PsiFile createFileFromText(@NotNull final Project project, @NotNull final String name, @NotNull final FileType fileType, @NotNull final String text) {
+    @Nonnull
+    private static PsiFile createFileFromText(@Nonnull final Project project, @Nonnull final String name, @Nonnull final FileType fileType, @Nonnull final String text) {
         return PsiFileFactory.getInstance(project).createFileFromText(name, fileType, text);
     }
 

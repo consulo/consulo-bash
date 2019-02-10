@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.heredoc;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.ResolveProcessor;
 import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDocMarker;
@@ -35,7 +37,6 @@ import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Abstract base class for heredoc markers.
@@ -50,14 +51,14 @@ abstract class AbstractHeredocMarker extends BashBaseStubElementImpl<StubElement
     private final boolean expectLater;
 
 
-    public AbstractHeredocMarker(ASTNode astNode, String name, @NotNull Class<? extends BashPsiElement> otherEndsType, boolean expectLater) {
+    public AbstractHeredocMarker(ASTNode astNode, String name, @Nonnull Class<? extends BashPsiElement> otherEndsType, boolean expectLater) {
         super(astNode, name);
         this.otherEndsType = otherEndsType;
         this.expectLater = expectLater;
     }
 
     @Override
-    public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
         return processor.execute(this, state);
     }
 
@@ -66,7 +67,7 @@ abstract class AbstractHeredocMarker extends BashBaseStubElementImpl<StubElement
         return getText();
     }
 
-    public PsiElement setName(@NotNull @NonNls String newname) throws IncorrectOperationException {
+    public PsiElement setName(@Nonnull @NonNls String newname) throws IncorrectOperationException {
         if (!BashIdentifierUtil.isValidIdentifier(newname)) {
             throw new IncorrectOperationException("The name is empty");
         }
@@ -119,7 +120,7 @@ abstract class AbstractHeredocMarker extends BashBaseStubElementImpl<StubElement
         return setName(newElementName);
     }
 
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
         throw new IncorrectOperationException("Not yet implemented");
     }
 
@@ -127,7 +128,7 @@ abstract class AbstractHeredocMarker extends BashBaseStubElementImpl<StubElement
         return otherEndsType.isInstance(element) && element.getText().equals(getText());
     }
 
-    @NotNull
+    @Nonnull
     public Object[] getVariants() {
         return EMPTY;
     }

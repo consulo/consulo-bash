@@ -33,7 +33,7 @@ import com.intellij.psi.ResolveState;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 
@@ -46,20 +46,20 @@ import java.util.List;
  */
 public class DuplicateFunctionDefInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "DuplicateFunction";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getShortName() {
         return "Duplicate function";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return "Duplicate function definition";
@@ -71,15 +71,15 @@ public class DuplicateFunctionDefInspection extends AbstractBashInspection {
                 "positives if the earlier definition is inside of a conditional command.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.WARNING;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitFunctionDef(BashFunctionDef functionDef) {

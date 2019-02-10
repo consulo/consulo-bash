@@ -31,7 +31,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.util.PsiTreeUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Collection;
 import java.util.Set;
@@ -67,7 +67,7 @@ public class BashVarProcessor extends BashAbstractProcessor implements Keys {
         this.leaveInjectionHost = leaveInjectionHosts;
     }
 
-    public boolean execute(@NotNull PsiElement psiElement, ResolveState resolveState) {
+    public boolean execute(@Nonnull PsiElement psiElement, ResolveState resolveState) {
         if (visitedScopes.contains(psiElement)) {
             return true;
         }

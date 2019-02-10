@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFunctionDefName;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
@@ -30,7 +32,6 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Query;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Highlights unused function definitions.
@@ -42,20 +43,20 @@ public class UnusedFunctionDefInspection extends AbstractBashInspection implemen
     public static final String SHORT_NAME = "Unused function definition";
 
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "UnusedFunction";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getShortName() {
         return SHORT_NAME;
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return "Unused function definition";
@@ -66,9 +67,9 @@ public class UnusedFunctionDefInspection extends AbstractBashInspection implemen
         return "This inspection highlights function definitions which are never called in a Bash script.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitFunctionDef(BashFunctionDef functionDef) {

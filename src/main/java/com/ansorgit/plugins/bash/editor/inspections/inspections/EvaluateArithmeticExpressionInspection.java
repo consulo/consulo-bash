@@ -27,7 +27,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 
@@ -40,20 +40,20 @@ import java.util.List;
  */
 public class EvaluateArithmeticExpressionInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "EvaluateArithmeticExpression";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getShortName() {
         return "Evaluate arithmetic expression";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return "Evaluate an arithmetic expression";
@@ -64,15 +64,15 @@ public class EvaluateArithmeticExpressionInspection extends AbstractBashInspecti
         return "Replaces a static arithmetic expression with the result. For example the expression 1 + 3 * 4 would be replaced with the evaluated result of 13.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.WARNING;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitArithmeticExpression(ArithmeticExpression expression) {

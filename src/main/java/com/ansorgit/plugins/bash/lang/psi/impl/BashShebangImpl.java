@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashShebang;
 import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
@@ -84,7 +84,7 @@ public class BashShebangImpl extends BashBaseStubElementImpl<StubElement> implem
         return offset;
     }
 
-    @NotNull
+    @Nonnull
     public TextRange commandRange() {
         return TextRange.from(getShellCommandOffset(), shellCommand(false).length());
     }
@@ -108,7 +108,7 @@ public class BashShebangImpl extends BashBaseStubElementImpl<StubElement> implem
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitShebang(this);
         } else {

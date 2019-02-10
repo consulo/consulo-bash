@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api.vars;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.BashReference;
 import com.ansorgit.plugins.bash.lang.psi.api.DocumentationAwareElement;
@@ -25,7 +27,6 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.PsiNamedElement;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Date: 14.04.2009
@@ -62,7 +63,7 @@ public interface BashVarDef extends BashPsiElement, PsiNamedElement, PsiNameIden
      *
      * @return The name element
      */
-    @NotNull
+    @Nonnull
     PsiElement findAssignmentWord();
 
     /**
@@ -81,7 +82,7 @@ public interface BashVarDef extends BashPsiElement, PsiNamedElement, PsiNameIden
      */
     boolean hasAssignmentValue();
 
-    @NotNull
+    @Nonnull
     BashReference getReference();
 
     /**

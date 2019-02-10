@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.documentation;
 
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * A documentation source provides HTML formatted data for a given PSI element.

@@ -18,9 +18,10 @@
 
 package com.ansorgit.plugins.bash.lang.lexer;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * The definition of a Bash element type.
@@ -31,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Joachim Ansorg
  */
 public class BashElementType extends IElementType {
-    public BashElementType(@NotNull String debugName) {
+    public BashElementType(@Nonnull String debugName) {
         super(debugName, BashFileType.BASH_LANGUAGE);
     }
 

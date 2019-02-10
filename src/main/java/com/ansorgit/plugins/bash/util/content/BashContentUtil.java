@@ -21,7 +21,7 @@ package com.ansorgit.plugins.bash.util.content;
 import com.google.common.collect.Lists;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.File;
 import java.io.FileReader;
@@ -46,11 +46,11 @@ public class BashContentUtil {
             new LexerHeuristic(0.1d, 0.15d));
 
 
-    public static boolean isProbablyBashFile(@NotNull File file, double minProbabiliy, Project project) {
+    public static boolean isProbablyBashFile(@Nonnull File file, double minProbabiliy, Project project) {
         return computeBashProbability(file, minProbabiliy, project) >= minProbabiliy;
     }
 
-    public static double computeBashProbability(@NotNull File file, double minProbabiliy, Project project) {
+    public static double computeBashProbability(@Nonnull File file, double minProbabiliy, Project project) {
         if (!file.isFile() || !file.canRead()) {
             return 0;
         }

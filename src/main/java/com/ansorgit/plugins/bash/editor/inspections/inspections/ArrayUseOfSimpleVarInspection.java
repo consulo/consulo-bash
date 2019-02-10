@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
@@ -26,26 +28,25 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * This inspection detects use of array variables without array element qualifiers.
  */
 public class ArrayUseOfSimpleVarInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "ArrayUseOfSimple";
     }
 
-    @NotNull
+    @Nonnull
     public String getShortName() {
         return "Array use of a simple variable";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "Array use of a simple, non-array variable";
     }
@@ -60,9 +61,9 @@ public class ArrayUseOfSimpleVarInspection extends AbstractBashInspection {
         return true;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitVarUse(BashVar var) {

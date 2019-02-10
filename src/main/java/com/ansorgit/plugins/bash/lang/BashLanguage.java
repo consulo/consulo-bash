@@ -18,7 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.editor.highlighting.BashSyntaxHighlighter;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory;
@@ -45,7 +46,7 @@ public class BashLanguage extends Language
 	private static class BashHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory
 	{
 		@Override
-		@NotNull
+		@Nonnull
 		protected SyntaxHighlighter createHighlighter()
 		{
 			return new BashSyntaxHighlighter();

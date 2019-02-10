@@ -22,8 +22,9 @@ import java.util.Arrays;
 
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.ansorgit.plugins.bash.BashTestUtils;
 import com.ansorgit.plugins.bash.editor.inspections.InspectionProvider;
 import com.intellij.codeInspection.InspectionManager;
@@ -77,7 +78,7 @@ public abstract class AbstractInspectionTestCase extends UsefulTestCase
 		}
 
 		@Nls
-		@NotNull
+		@Nonnull
 		@Override
 		public String getGroupDisplayName()
 		{
@@ -85,30 +86,30 @@ public abstract class AbstractInspectionTestCase extends UsefulTestCase
 		}
 
 		@Override
-		@NotNull
+		@Nonnull
 		public String[] getGroupPath()
 		{
 			return delegate.getGroupPath();
 		}
 
 		@Nls
-		@NotNull
+		@Nonnull
 		@Override
 		public String getDisplayName()
 		{
 			return delegate.getDisplayName();
 		}
 
-		@NotNull
+		@Nonnull
 		@Override
 		public String getShortName()
 		{
 			return delegate.getShortName();
 		}
 
-		@NotNull
+		@Nonnull
 		@Override
-		public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly)
+		public PsiElementVisitor buildVisitor(@Nonnull ProblemsHolder holder, boolean isOnTheFly)
 		{
 			return delegate.buildVisitor(holder, true);
 		}
@@ -140,7 +141,7 @@ public abstract class AbstractInspectionTestCase extends UsefulTestCase
 		}
 
 		@Override
-		@NotNull
+		@Nonnull
 		@NonNls
 		public String getID()
 		{
@@ -163,14 +164,14 @@ public abstract class AbstractInspectionTestCase extends UsefulTestCase
 
 		@Override
 		@Nullable
-		public ProblemDescriptor[] checkFile(@NotNull PsiFile file, @NotNull InspectionManager manager, boolean isOnTheFly)
+		public ProblemDescriptor[] checkFile(@Nonnull PsiFile file, @Nonnull InspectionManager manager, boolean isOnTheFly)
 		{
 			return delegate.checkFile(file, manager, isOnTheFly);
 		}
 
 		@Override
-		@NotNull
-		public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly, LocalInspectionToolSession session)
+		@Nonnull
+		public PsiElementVisitor buildVisitor(@Nonnull ProblemsHolder holder, boolean isOnTheFly, LocalInspectionToolSession session)
 		{
 			return delegate.buildVisitor(holder, true, session);
 		}

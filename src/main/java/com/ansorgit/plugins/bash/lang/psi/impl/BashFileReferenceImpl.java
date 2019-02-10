@@ -18,8 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashCharSequence;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFileReference;
@@ -51,7 +51,7 @@ public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> 
         return (PsiFile) cachingReference.resolve();
     }
 
-    @NotNull
+    @Nonnull
     public String getFilename() {
         PsiElement firstParam = getFirstChild();
         if (firstParam instanceof BashCharSequence) {
@@ -72,7 +72,7 @@ public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> 
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitFileReference(this);
         } else {
@@ -104,7 +104,7 @@ public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> 
             return TextRange.from(0, fileReference.getTextLength());
         }
 
-        @NotNull
+        @Nonnull
         public String getCanonicalText() {
             return this.fileReference.getText();
         }
@@ -113,7 +113,7 @@ public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> 
             return BashPsiUtils.replaceElement(fileReference, BashChangeUtil.createWord(fileReference.getProject(), newName));
         }
 
-        public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+        public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
             throw new IncorrectOperationException("not supported");
         }
 
@@ -122,7 +122,7 @@ public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> 
             return element == this || element.equals(BashPsiFileUtils.findRelativeFile(containingFile, this.fileReference.getFilename()));
         }
 
-        @NotNull
+        @Nonnull
         public Object[] getVariants() {
             return PsiElement.EMPTY_ARRAY;
         }
@@ -135,7 +135,7 @@ public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> 
             return BashPsiFileUtils.findRelativeFile(containingFile, fileReference.getFilename());
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public String getUnresolvedMessagePattern() {
             return "unresolved";

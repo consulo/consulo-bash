@@ -21,7 +21,7 @@ package com.ansorgit.plugins.bash.lang.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesAndCommentsBinder;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * Wraps a PsiBuilder marker and keeps track whether it's still open or not.

@@ -18,7 +18,8 @@
 
 package com.ansorgit.plugins.bash.actions;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashStrings;
 import com.intellij.psi.PsiDirectory;
@@ -60,7 +61,7 @@ public class NewBashFileAction extends NewBashActionBase
 		return BashStrings.message("newfile.menu.action.text");
 	}
 
-	@NotNull
+	@Nonnull
 	protected PsiElement[] doCreate(String newName, PsiDirectory directory)
 	{
 		PsiFile file = createFileFromTemplate(directory, newName, "bash-script.sh");

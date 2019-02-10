@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.heredoc;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDocEndMarker;
@@ -25,7 +27,6 @@ import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDocStartMarker;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * User: jansorg
@@ -38,7 +39,7 @@ public class BashHereDocStartMarkerImpl extends AbstractHeredocMarker implements
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitHereDocStartMarker(this);
         } else {

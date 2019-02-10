@@ -21,8 +21,9 @@ package com.ansorgit.plugins.bash.lang.psi.impl.command;
 import java.util.Collection;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFileReference;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashIncludeCommand;
@@ -54,7 +55,7 @@ public class BashIncludeCommandImpl extends BashCommandImpl<BashIncludeCommandSt
         super(astNode, "Bash include command");
     }
 
-    public BashIncludeCommandImpl(@NotNull BashIncludeCommandStub stub, @NotNull IStubElementType nodeType) {
+    public BashIncludeCommandImpl(@Nonnull BashIncludeCommandStub stub, @Nonnull IStubElementType nodeType) {
         super(stub, nodeType, null);
     }
 
@@ -64,7 +65,7 @@ public class BashIncludeCommandImpl extends BashCommandImpl<BashIncludeCommandSt
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitIncludeCommand(this);
         } else {
@@ -113,7 +114,7 @@ public class BashIncludeCommandImpl extends BashCommandImpl<BashIncludeCommandSt
     }
 
     @Override
-    public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
         boolean result = PsiScopesUtilCore.walkChildrenScopes(this, processor, state, lastParent, place);
         if (!result) {
             //processing is done here

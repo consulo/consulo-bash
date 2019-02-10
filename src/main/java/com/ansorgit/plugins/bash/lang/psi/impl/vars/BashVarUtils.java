@@ -23,7 +23,7 @@ import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * User: jansorg
@@ -39,7 +39,7 @@ public class BashVarUtils {
      * @param definition       The reference definition
      * @return True if the candidate is a valid reference to the definition
      */
-    public static boolean isInDefinedScope(@NotNull PsiElement referenceElement, @NotNull BashVarDef definition) {
+    public static boolean isInDefinedScope(@Nonnull PsiElement referenceElement, @Nonnull BashVarDef definition) {
         if (definition.isFunctionScopeLocal()) {
             //the reference is a local variable, check if the candidate is in its scope
             return PsiTreeUtil.isAncestor(definition.findFunctionScope(), referenceElement, false);

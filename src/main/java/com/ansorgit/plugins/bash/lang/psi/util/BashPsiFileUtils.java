@@ -21,9 +21,10 @@ package com.ansorgit.plugins.bash.lang.psi.util;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * User: jansorg

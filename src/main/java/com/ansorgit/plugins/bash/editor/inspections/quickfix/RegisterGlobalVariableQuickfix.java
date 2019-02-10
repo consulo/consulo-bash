@@ -21,7 +21,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
 import com.intellij.openapi.application.ApplicationManager;
@@ -48,12 +49,12 @@ public class RegisterGlobalVariableQuickfix extends AbstractBashQuickfix {
         this.bashVar = bashVar;
     }
 
-    @NotNull
+    @Nonnull
     public String getName() {
         return "Register as global variable";
     }
 
-    public void invoke(@NotNull Project project, Editor editor, final PsiFile file) throws IncorrectOperationException {
+    public void invoke(@Nonnull Project project, Editor editor, final PsiFile file) throws IncorrectOperationException {
         String variableName = bashVar.getReference().getReferencedName();
         TextRange textRange = bashVar.getTextRange();
         BashProjectSettings.storedSettings(project).addGlobalVariable(variableName);

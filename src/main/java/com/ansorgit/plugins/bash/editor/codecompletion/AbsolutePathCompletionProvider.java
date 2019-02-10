@@ -25,7 +25,7 @@ import com.intellij.codeInsight.completion.*;
 import com.intellij.patterns.StandardPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.File;
 import java.util.List;
@@ -88,13 +88,13 @@ class AbsolutePathCompletionProvider extends BashCompletionProvider {
         }
 
         @Override
-        public boolean prefixMatches(@NotNull String name) {
+        public boolean prefixMatches(@Nonnull String name) {
             return name.startsWith(getPrefix());
         }
 
-        @NotNull
+        @Nonnull
         @Override
-        public PrefixMatcher cloneWithPrefix(@NotNull String prefix) {
+        public PrefixMatcher cloneWithPrefix(@Nonnull String prefix) {
             return new PathPrefixMatcher(prefix);
         }
     }

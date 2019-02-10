@@ -21,7 +21,7 @@ package com.ansorgit.plugins.bash.lang.parser.util;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesAndCommentsBinder;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * A forwarding marker implementation which is useful for enhancements which

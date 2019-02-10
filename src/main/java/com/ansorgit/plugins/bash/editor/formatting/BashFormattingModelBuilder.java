@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.formatting;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.editor.formatting.noOpModel.NoOpBlock;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
 import com.intellij.formatting.FormattingModel;
@@ -29,8 +31,8 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 /**
  * This code is based on code taken from the Groovy plugin.
@@ -38,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
  * @author ilyas, jansorg
  */
 public class BashFormattingModelBuilder implements FormattingModelBuilder {
-    @NotNull
+    @Nonnull
     public FormattingModel createModel(final PsiElement element, final CodeStyleSettings settings) {
         ASTNode node = element.getNode();
         assert node != null;

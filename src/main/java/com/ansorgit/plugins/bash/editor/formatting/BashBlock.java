@@ -31,10 +31,11 @@ import com.intellij.psi.PsiErrorElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.tree.ILazyParseableElementType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * Block implementation for the Bash formatter.
@@ -53,7 +54,7 @@ public class BashBlock implements Block, BashElementTypes {
 
     protected List<Block> mySubBlocks = null;
 
-    public BashBlock(@NotNull final ASTNode node, @Nullable final Alignment alignment, @NotNull final Indent indent, @Nullable final Wrap wrap, final CodeStyleSettings settings) {
+    public BashBlock(@Nonnull final ASTNode node, @Nullable final Alignment alignment, @Nonnull final Indent indent, @Nullable final Wrap wrap, final CodeStyleSettings settings) {
         myNode = node;
         myAlignment = alignment;
         myIndent = indent;
@@ -61,22 +62,22 @@ public class BashBlock implements Block, BashElementTypes {
         mySettings = settings;
     }
 
-    @NotNull
+    @Nonnull
     public ASTNode getNode() {
         return myNode;
     }
 
-    @NotNull
+    @Nonnull
     public CodeStyleSettings getSettings() {
         return mySettings;
     }
 
-    @NotNull
+    @Nonnull
     public TextRange getTextRange() {
         return myNode.getTextRange();
     }
 
-    @NotNull
+    @Nonnull
     public List<Block> getSubBlocks() {
         if (mySubBlocks == null) {
             mySubBlocks = BashBlockGenerator.generateSubBlocks(myNode, myAlignment, myWrap, mySettings, this);
@@ -115,7 +116,7 @@ public class BashBlock implements Block, BashElementTypes {
         return null;
     }
 
-    @NotNull
+    @Nonnull
     public ChildAttributes getChildAttributes(final int newChildIndex) {
         return getAttributesByParent();
     }
@@ -143,7 +144,7 @@ public class BashBlock implements Block, BashElementTypes {
      * @param node Tree node
      * @return true if node is incomplete
      */
-    public boolean isIncomplete(@NotNull final ASTNode node) {
+    public boolean isIncomplete(@Nonnull final ASTNode node) {
         if (node.getElementType() instanceof ILazyParseableElementType) {
             return false;
         }

@@ -21,7 +21,7 @@ package com.ansorgit.plugins.bash.lang.psi.api.arithmetic;
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import java.util.List;
 

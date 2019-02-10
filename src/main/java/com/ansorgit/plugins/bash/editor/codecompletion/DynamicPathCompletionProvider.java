@@ -28,7 +28,7 @@ import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import java.util.List;
 import java.util.Set;

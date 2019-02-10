@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.BackquoteQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashBackquote;
@@ -26,7 +28,6 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * This inspection can convert the backquote commands into subshell commands.
@@ -37,19 +38,19 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ConvertBackquoteInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "ReplaceWithSubshell";
     }
 
-    @NotNull
+    @Nonnull
     public String getShortName() {
         return "Replace with subshell";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "Convert backquote to subshell commands";
     }
@@ -64,15 +65,15 @@ public class ConvertBackquoteInspection extends AbstractBashInspection {
         return false;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.INFO;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder problemsHolder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder problemsHolder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitBackquoteCommand(BashBackquote backquote) {

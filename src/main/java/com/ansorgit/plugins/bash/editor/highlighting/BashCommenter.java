@@ -22,7 +22,7 @@ import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.intellij.lang.CodeDocumentationAwareCommenter;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * Comment handler for the Bash language.

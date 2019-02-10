@@ -22,7 +22,7 @@ import com.google.common.collect.Lists;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Collections;
 import java.util.List;
@@ -97,7 +97,7 @@ public class VfsCompletionUtil {
      * @param fileName The filename prefix to check
      * @return The list of matching files. May be empty, won't be null.
      */
-    public static List<PsiFile> matchingFiles(@NotNull PsiDirectory parent, @NotNull String fileName) {
+    public static List<PsiFile> matchingFiles(@Nonnull PsiDirectory parent, @Nonnull String fileName) {
         List<PsiFile> result = Lists.newLinkedList();
 
         for (PsiFile f : parent.getFiles()) {

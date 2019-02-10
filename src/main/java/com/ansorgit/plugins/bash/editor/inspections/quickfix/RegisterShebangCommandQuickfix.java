@@ -18,13 +18,14 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.editor.inspections.inspections.FixShebangInspection;
 import com.ansorgit.plugins.bash.lang.psi.api.BashShebang;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
 
 public class RegisterShebangCommandQuickfix extends AbstractBashQuickfix {
     private final FixShebangInspection inspection;
@@ -36,14 +37,14 @@ public class RegisterShebangCommandQuickfix extends AbstractBashQuickfix {
     }
 
     @Override
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+    public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         inspection.registerShebangCommand(shebang.shellCommand(true));
 
         //trigger a change to remove this inspection
         shebang.updateCommand(shebang.shellCommand(false));
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getName() {
         return "Mark as valid command";

@@ -18,19 +18,11 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.ExecutionResult;
-import com.intellij.execution.Executor;
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.configurations.RunProfile;
-import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.runners.DefaultProgramRunner;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.runners.RunContentBuilder;
-import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * This code is based on the intellij-batch plugin.
@@ -39,12 +31,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class BashRunner extends DefaultProgramRunner {
 
-    @NotNull
+    @Nonnull
     public String getRunnerId() {
         return "BashRunner";
     }
 
-    public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile) {
+    public boolean canRun(@Nonnull String executorId, @Nonnull RunProfile profile) {
         return executorId.equals(DefaultRunExecutor.EXECUTOR_ID) && profile instanceof BashRunConfiguration;
     }
 }

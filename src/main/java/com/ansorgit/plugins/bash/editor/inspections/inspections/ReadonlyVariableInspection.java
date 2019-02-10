@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
@@ -28,7 +30,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * This inspection marks unresolved variables.
@@ -41,20 +42,20 @@ public class ReadonlyVariableInspection extends AbstractBashInspection {
     //private static final Logger log = Logger.getInstance("#UnresolvedVariable");
 
     @Nls
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return "Readonly variable";
     }
 
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "readonlyVariableInspection";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getShortName() {
         return "Readonly variable";
@@ -65,9 +66,9 @@ public class ReadonlyVariableInspection extends AbstractBashInspection {
         return "Attempt to change a read-only variable. Read-only variables can not be modified once they are declared.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitVarDef(BashVarDef varDef) {
@@ -87,7 +88,7 @@ public class ReadonlyVariableInspection extends AbstractBashInspection {
         };
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.ERROR;

@@ -18,25 +18,17 @@
 
 package com.ansorgit.plugins.bash.lang.psi;
 
-import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashIncludeCommand;
 import com.ansorgit.plugins.bash.lang.psi.stubs.index.BashIncludeCommandIndex;
 import com.ansorgit.plugins.bash.lang.psi.stubs.index.BashIncludedFilenamesIndex;
 import com.ansorgit.plugins.bash.lang.psi.util.BashSearchScopes;
-import com.ansorgit.plugins.bash.util.BashFunctions;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.*;
 
@@ -49,8 +41,8 @@ public class FileInclusionManager {
     private FileInclusionManager() {
     }
 
-    @NotNull
-    public static Set<PsiFile> findIncludedFiles(@NotNull PsiFile sourceFile, boolean diveDeep, boolean bashOnly) {
+    @Nonnull
+    public static Set<PsiFile> findIncludedFiles(@Nonnull PsiFile sourceFile, boolean diveDeep, boolean bashOnly) {
         if (!(sourceFile instanceof BashFile)) {
             return Collections.emptySet();
         }
@@ -104,8 +96,8 @@ public class FileInclusionManager {
      * @param file    The file for which the includers should be found.
      * @return
      */
-    @NotNull
-    public static Set<BashFile> findIncluders(@NotNull Project project, @NotNull PsiFile file) {
+    @Nonnull
+    public static Set<BashFile> findIncluders(@Nonnull Project project, @Nonnull PsiFile file) {
         GlobalSearchScope searchScope = BashSearchScopes.moduleScope(file);
 
         Set<BashFile> includers = Sets.newHashSet();

@@ -18,13 +18,12 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashBackquote;
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.stubs.StubElement;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Date: 12.04.2009
@@ -43,7 +42,7 @@ public class BashBackquoteImpl extends BashCompositeElement implements BashBackq
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitBackquoteCommand(this);
         } else {

@@ -47,7 +47,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IStubFileElementType;
 import com.intellij.util.ReflectionUtil;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.lang.reflect.Constructor;
 
@@ -69,7 +69,7 @@ public interface BashElementTypes {
             myConstructor = ReflectionUtil.getDefaultConstructor(nodeClass);
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public ASTNode createCompositeNode() {
             return ReflectionUtil.createInstance(myConstructor);

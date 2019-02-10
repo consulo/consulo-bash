@@ -22,10 +22,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -82,7 +82,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
         updateCache(astNode);
     }
 
-    public BashCommandImpl(@NotNull T stub, @NotNull IStubElementType nodeType, @Nullable String name) {
+    public BashCommandImpl(@Nonnull T stub, @Nonnull IStubElementType nodeType, @Nullable String name) {
         super(stub, nodeType, name);
     }
 
@@ -182,7 +182,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
         return findChildrenByClass(BashVarDef.class);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public PsiReference getReference() {
         return isFunctionCall() ? functionReference : commandReference;
@@ -238,7 +238,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             BashVisitor v = (BashVisitor) visitor;
             if (isInternalCommand()) {
@@ -270,7 +270,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
     }
 
     @Override
-    public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
 /*        if (!processor.execute(this, state)) {
             return false;
         }
@@ -302,7 +302,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
             return element;
         }
 
-        @NotNull
+        @Nonnull
         public String getCanonicalText() {
             String referencedName = element.getReferencedCommandName();
             return referencedName != null ? referencedName : "";
@@ -312,7 +312,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
             throw new IncorrectOperationException();
         }
 
-        public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+        public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
             throw new IncorrectOperationException();
         }
 
@@ -327,7 +327,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
             return false;
         }
 
-        @NotNull
+        @Nonnull
         public Object[] getVariants() {
             return EMPTY_ARRAY;
         }
@@ -366,7 +366,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
             return result;
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public String getUnresolvedMessagePattern() {
             return "unresolved";
@@ -387,7 +387,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
             return TextRange.from(element.getStartOffsetInParent(), element.getTextLength());
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public String getCanonicalText() {
             String referencedName = cmd.getReferencedCommandName();
@@ -408,11 +408,11 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
         }
 
         @Override
-        public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+        public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
             throw new IncorrectOperationException("bindToElement not implemented");
         }
 
-        @NotNull
+        @Nonnull
         @Override
         public Object[] getVariants() {
             return EMPTY_ARRAY;

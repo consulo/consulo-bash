@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nls;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import consulo.annotations.RequiredDispatchThread;
+import consulo.ui.RequiredUIAccess;
 
 /**
  * Date: 12.05.2009
@@ -48,7 +48,7 @@ public class BashProjectSettingsConfigurable implements Configurable
 		return "Bash";
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	public JComponent createComponent()
 	{
 		if(settingsPanel == null)
@@ -59,7 +59,7 @@ public class BashProjectSettingsConfigurable implements Configurable
 		return settingsPanel.getPanel();
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	public boolean isModified()
 	{
 		if(settingsPanel == null)
@@ -70,19 +70,19 @@ public class BashProjectSettingsConfigurable implements Configurable
 		return settingsPanel.isModified(BashProjectSettings.storedSettings(project));
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	public void apply() throws ConfigurationException
 	{
 		settingsPanel.storeSettings(BashProjectSettings.storedSettings(project));
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	public void reset()
 	{
 		settingsPanel.setData(BashProjectSettings.storedSettings(project));
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	public void disposeUIResources()
 	{
 		this.settingsPanel = null;

@@ -20,7 +20,7 @@ package com.ansorgit.plugins.bash.lang.psi.api;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * Date: 12.04.2009

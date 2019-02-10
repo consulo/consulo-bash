@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.expression.BashSubshellCommand;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
@@ -25,7 +27,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Replaces a subshell command with the old-style backtick command.
@@ -41,12 +42,12 @@ public class SubshellQuickfix extends AbstractBashQuickfix {
         this.subshellCommand = subshellCommand;
     }
 
-    @NotNull
+    @Nonnull
     public String getName() {
         return "Replace with backquote command";
     }
 
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+    public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         Document document = PsiDocumentManager.getInstance(project).getDocument(file);
         if (document != null) {
             int startOffset = subshellCommand.getTextOffset() - 1; //to include the $

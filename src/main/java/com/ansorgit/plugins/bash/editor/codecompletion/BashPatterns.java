@@ -18,10 +18,11 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.patterns.CharPattern;
 import com.intellij.patterns.PatternCondition;
 import com.intellij.util.ProcessingContext;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * User: jansorg
@@ -40,7 +41,7 @@ class BashPatterns {
 
         CharPattern dollarChar() {
             return with(new PatternCondition<Character>("dollar") {
-                public boolean accepts(@NotNull final Character character, final ProcessingContext context) {
+                public boolean accepts(@Nonnull final Character character, final ProcessingContext context) {
                     return character.equals('$');
                 }
             });

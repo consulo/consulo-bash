@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.lang.psi.api;
 
 import com.intellij.openapi.util.TextRange;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Date: 16.04.2009
@@ -36,7 +36,7 @@ public interface BashShebang extends BashPsiElement {
 
     void updateCommand(String command);
 
-    @NotNull
+    @Nonnull
     TextRange commandRange();
 
     int getShellCommandOffset();

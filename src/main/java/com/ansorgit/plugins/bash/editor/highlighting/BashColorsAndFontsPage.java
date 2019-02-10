@@ -22,9 +22,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.google.common.collect.Maps;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
@@ -34,7 +36,7 @@ import com.intellij.openapi.options.colors.ColorSettingsPage;
 import com.intellij.openapi.util.io.StreamUtil;
 
 public class BashColorsAndFontsPage implements ColorSettingsPage {
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "Bash";
     }
@@ -77,23 +79,23 @@ public class BashColorsAndFontsPage implements ColorSettingsPage {
                     new AttributesDescriptor("Here-document end marker", BashSyntaxHighlighter.HERE_DOC_END),
             };
 
-    @NotNull
+    @Nonnull
     public AttributesDescriptor[] getAttributeDescriptors() {
         return ATTRS;
     }
 
-    @NotNull
+    @Nonnull
     public ColorDescriptor[] getColorDescriptors() {
         return ColorDescriptor.EMPTY_ARRAY;
     }
 
-    @NotNull
+    @Nonnull
     public SyntaxHighlighter getHighlighter() {
         return new BashSyntaxHighlighter();
     }
 
     @NonNls
-    @NotNull
+    @Nonnull
     public String getDemoText() {
         InputStream resource = getClass().getClassLoader().getResourceAsStream("/highlighterDemoText.sh");
         String demoText;

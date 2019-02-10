@@ -31,7 +31,7 @@ import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 import java.util.Set;
@@ -48,14 +48,14 @@ import java.util.Set;
  * Time: 12:41
  */
 public class UnusedFunctionParameterInspection extends AbstractBashInspection {
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "UnusedFunctionParams";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return "Unused function parameter";
@@ -66,7 +66,7 @@ public class UnusedFunctionParameterInspection extends AbstractBashInspection {
         return true;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getShortName() {
         return "Unused parameter";
@@ -79,15 +79,15 @@ public class UnusedFunctionParameterInspection extends AbstractBashInspection {
                 "which is not used inside of the function then it is highlighted.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.WARNING;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitGenericCommand(BashCommand bashCommand) {

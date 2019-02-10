@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashExpansion;
 import com.ansorgit.plugins.bash.lang.valueExpansion.ValueExpansionUtil;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
@@ -26,7 +28,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Evaluates an expansion and replaces the placeholder with the evaluated result.
@@ -44,7 +45,7 @@ public class EvaluateExpansionQuickfix extends AbstractBashQuickfix {
         this.project = project;
     }
 
-    @NotNull
+    @Nonnull
     public String getName() {
         boolean supportBash4 = BashProjectSettings.storedSettings(project).isSupportBash4();
         String replacement = ValueExpansionUtil.expand(expansion.getText(), supportBash4);
@@ -56,7 +57,7 @@ public class EvaluateExpansionQuickfix extends AbstractBashQuickfix {
         return "Replace with evaluated expansion";
     }
 
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+    public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         TextRange r = expansion.getTextRange();
 
         boolean supportBash4 = BashProjectSettings.storedSettings(project).isSupportBash4();

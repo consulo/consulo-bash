@@ -21,7 +21,7 @@ package com.ansorgit.plugins.bash.lang.psi.impl;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFunctionDefName;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.StubElement;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Date: 12.04.2009
@@ -34,7 +34,7 @@ public class BashFunctionDefNameImpl extends BashBaseStubElementImpl<StubElement
         super(astNode, "BashFunctionDefName");
     }
 
-    @NotNull
+    @Nonnull
     public String getNameString() {
         return getText();
     }

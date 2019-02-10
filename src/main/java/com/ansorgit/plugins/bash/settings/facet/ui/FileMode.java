@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.settings.facet.ui;
 
 import com.google.common.collect.Lists;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 import java.util.Map;
@@ -75,7 +75,7 @@ public final class FileMode implements Comparable<FileMode> {
         return autoMode;
     }
 
-    public static FileMode forId(@NotNull String id) {
+    public static FileMode forId(@Nonnull String id) {
         return idMap.get(id);
     }
 

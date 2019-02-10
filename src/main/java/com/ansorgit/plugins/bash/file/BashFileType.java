@@ -21,7 +21,7 @@ package com.ansorgit.plugins.bash.file;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.ansorgit.plugins.bash.lang.Bash;
 import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.settings.facet.ui.FileMode;
@@ -76,19 +76,19 @@ public class BashFileType extends LanguageFileType implements FileTypeIdentifiab
     }
 
     @Override
-	@NotNull
+	@Nonnull
     public String getName() {
         return Bash.lanuageName;
     }
 
     @Override
-	@NotNull
+	@Nonnull
     public String getDescription() {
         return Bash.languageDescription;
     }
 
     @Override
-	@NotNull
+	@Nonnull
     public String getDefaultExtension() {
         return DEFAULT_EXTENSION;
     }

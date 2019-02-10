@@ -22,7 +22,7 @@ import com.ansorgit.plugins.bash.lang.parser.*;
 import com.ansorgit.plugins.bash.lang.parser.util.ParserUtil;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.openapi.util.Pair;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * Here-docs are started in a command with a redirect.

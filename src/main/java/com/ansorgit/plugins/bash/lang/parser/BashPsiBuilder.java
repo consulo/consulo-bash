@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.ansorgit.plugins.bash.lang.BashVersion;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.util.ForwardingMarker;

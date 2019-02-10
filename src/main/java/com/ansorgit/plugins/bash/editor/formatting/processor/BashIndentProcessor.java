@@ -26,8 +26,8 @@ import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * This class is based on code taken from the Groovy plugin.
@@ -45,8 +45,8 @@ public abstract class BashIndentProcessor implements BashElementTypes, BashToken
      * @param prevChildNode previous child node
      * @return indent
      */
-    @NotNull
-    public static Indent getChildIndent(@NotNull final BashBlock parent, @Nullable final ASTNode prevChildNode, @NotNull final ASTNode child) {
+    @Nonnull
+    public static Indent getChildIndent(@Nonnull final BashBlock parent, @Nullable final ASTNode prevChildNode, @Nonnull final ASTNode child) {
         ASTNode astNode = parent.getNode();
         final PsiElement psiParent = astNode.getPsi();
 

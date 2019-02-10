@@ -18,7 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.api.BashBlock;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
@@ -48,7 +49,7 @@ public class BashGroupImpl extends BashCompositeElement implements BashBlock {
     }
 
     @Override
-    public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
         if (isFunctionBody()) {
             return BashElementSharedImpl.walkDefinitionScope(this, processor, state, lastParent, place);
         }

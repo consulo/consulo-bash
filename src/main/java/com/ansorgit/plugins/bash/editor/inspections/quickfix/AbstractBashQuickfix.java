@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInspection.LocalQuickFix;
@@ -25,7 +27,6 @@ import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Abstract base class for Bash quickfixes.
@@ -35,17 +36,17 @@ import org.jetbrains.annotations.NotNull;
  * Time: 10:47:27
  */
 abstract class AbstractBashQuickfix implements LocalQuickFix, IntentionAction {
-    @NotNull
+    @Nonnull
     public final String getText() {
         return getName();
     }
 
-    @NotNull
+    @Nonnull
     public String getFamilyName() {
         return "Bash";
     }
 
-    public boolean isAvailable(@NotNull Project project, Editor editor, PsiFile file) {
+    public boolean isAvailable(@Nonnull Project project, Editor editor, PsiFile file) {
         return file instanceof BashFile;
     }
 
@@ -53,7 +54,7 @@ abstract class AbstractBashQuickfix implements LocalQuickFix, IntentionAction {
         return true;
     }
 
-    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+    public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor descriptor) {
         invoke(project, null, descriptor.getPsiElement().getContainingFile());
     }
 }

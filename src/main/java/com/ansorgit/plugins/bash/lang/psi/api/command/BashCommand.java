@@ -22,8 +22,8 @@ import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ import java.util.List;
  */
 public interface BashCommand extends BashPsiElement {
 
-    @NotNull
+    @Nonnull
     PsiReference getReference();
 
     /**

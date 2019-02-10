@@ -25,7 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Abstract base class to wrap words in something else.
@@ -40,7 +40,7 @@ abstract class AbstractWordWrapQuickfix extends AbstractBashQuickfix {
         this.word = word;
     }
 
-    public void invoke(@NotNull Project project, Editor editor, PsiFile psiFile) throws IncorrectOperationException {
+    public void invoke(@Nonnull Project project, Editor editor, PsiFile psiFile) throws IncorrectOperationException {
         Document document = PsiDocumentManager.getInstance(project).getDocument(psiFile);
         if (document != null) {
             int endOffset = word.getTextOffset() + word.getTextLength();

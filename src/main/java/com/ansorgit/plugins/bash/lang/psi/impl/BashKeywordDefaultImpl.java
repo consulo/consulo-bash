@@ -19,15 +19,13 @@
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashKeyword;
-import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 
@@ -75,7 +73,7 @@ public abstract class BashKeywordDefaultImpl extends BashCompositeElement implem
         return this;
     }
 
-    @NotNull
+    @Nonnull
     public String getCanonicalText() {
         return getText();
     }
@@ -84,7 +82,7 @@ public abstract class BashKeywordDefaultImpl extends BashCompositeElement implem
         throw new IncorrectOperationException();
     }
 
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
         throw new IncorrectOperationException("bindToElement not implemented");
     }
 
@@ -92,7 +90,7 @@ public abstract class BashKeywordDefaultImpl extends BashCompositeElement implem
         return element == this;
     }
 
-    @NotNull
+    @Nonnull
     public Object[] getVariants() {
         return EMPTY;
     }

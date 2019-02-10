@@ -18,7 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.usages;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.lexer.BashLexer;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
@@ -58,19 +59,19 @@ public class BashFindUsagesProvider implements FindUsagesProvider, BashTokenType
         return new BashWordsScanner();
     }
 
-    public boolean canFindUsagesFor(@NotNull PsiElement psi) {
+    public boolean canFindUsagesFor(@Nonnull PsiElement psi) {
         return psi instanceof BashVar
                 || (psi instanceof BashCommand && ((BashCommand) psi).isFunctionCall())
                 || psi instanceof BashHereDocMarker
                 || psi instanceof BashFunctionDef;
     }
 
-    public String getHelpId(@NotNull PsiElement psiElement) {
+    public String getHelpId(@Nonnull PsiElement psiElement) {
         return null;
     }
 
-    @NotNull
-    public String getType(@NotNull PsiElement element) {
+    @Nonnull
+    public String getType(@Nonnull PsiElement element) {
         if (element instanceof BashFunctionDef) {
             return "function";
         }
@@ -87,8 +88,8 @@ public class BashFindUsagesProvider implements FindUsagesProvider, BashTokenType
         return "unknown type";
     }
 
-    @NotNull
-    public String getDescriptiveName(@NotNull PsiElement element) {
+    @Nonnull
+    public String getDescriptiveName(@Nonnull PsiElement element) {
         if (!canFindUsagesFor(element)) {
             return "";
         }
@@ -100,8 +101,8 @@ public class BashFindUsagesProvider implements FindUsagesProvider, BashTokenType
         return StringUtil.notNullize(((PsiNamedElement) element).getName());
     }
 
-    @NotNull
-    public String getNodeText(@NotNull PsiElement element, boolean useFullName) {
+    @Nonnull
+    public String getNodeText(@Nonnull PsiElement element, boolean useFullName) {
         return getDescriptiveName(element);
     }
 }

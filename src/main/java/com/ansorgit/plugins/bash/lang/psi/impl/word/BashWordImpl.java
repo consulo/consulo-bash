@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.word;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -30,7 +32,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * User: jansorg
@@ -46,7 +47,7 @@ public class BashWordImpl extends BashBaseStubElementImpl<StubElement> implement
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitCombinedWord(this);
         } else {
@@ -74,7 +75,7 @@ public class BashWordImpl extends BashBaseStubElementImpl<StubElement> implement
         return BashPsiUtils.isStaticWordExpr(getFirstChild());
     }
 
-    @NotNull
+    @Nonnull
     public TextRange getTextContentRange() {
         String text = getText();
         if (text.startsWith("'") && text.endsWith("'")) {

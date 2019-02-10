@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api.arithmetic;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * An arithmetic sum expression.
@@ -28,12 +28,12 @@ import org.jetbrains.annotations.NotNull;
  * Time: 10:57:11 AM
  */
 public interface TernaryExpression extends ArithmeticExpression {
-    @NotNull
+    @Nonnull
     ArithmeticExpression findCondition();
 
-    @NotNull
+    @Nonnull
     ArithmeticExpression findMainBranch();
 
-    @NotNull
+    @Nonnull
     ArithmeticExpression findElseBranch();
 }

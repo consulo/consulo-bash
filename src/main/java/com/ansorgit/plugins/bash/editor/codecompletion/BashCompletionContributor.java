@@ -23,7 +23,7 @@ import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionInitializationContext;
 import com.intellij.codeInsight.completion.OffsetMap;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import static com.intellij.codeInsight.completion.CompletionInitializationContext.IDENTIFIER_END_OFFSET;
 import static com.intellij.codeInsight.completion.CompletionInitializationContext.START_OFFSET;
@@ -41,12 +41,12 @@ public class BashCompletionContributor extends CompletionContributor {
     }
 
     @Override
-    public void beforeCompletion(@NotNull CompletionInitializationContext context) {
+    public void beforeCompletion(@Nonnull CompletionInitializationContext context) {
         context.setDummyIdentifier("ZZZ");
     }
 
     @Override
-    public void duringCompletion(@NotNull CompletionInitializationContext context) {
+    public void duringCompletion(@Nonnull CompletionInitializationContext context) {
         fixComposedWordEndOffset(context);
     }
 

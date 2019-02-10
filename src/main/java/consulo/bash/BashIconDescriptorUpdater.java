@@ -1,6 +1,6 @@
 package consulo.bash;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiElement;
@@ -14,7 +14,7 @@ import consulo.ide.IconDescriptorUpdater;
 public class BashIconDescriptorUpdater implements IconDescriptorUpdater
 {
 	@Override
-	public void updateIcon(@NotNull IconDescriptor iconDescriptor, @NotNull PsiElement element, int i)
+	public void updateIcon(@Nonnull IconDescriptor iconDescriptor, @Nonnull PsiElement element, int i)
 	{
 		if(element instanceof BashFunctionDef)
 		{

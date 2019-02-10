@@ -18,10 +18,11 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeHighlighting.HighlightDisplayLevel;
 import com.intellij.codeInspection.LocalInspectionTool;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Abstract base class for Bash inspections.
@@ -34,13 +35,13 @@ abstract class AbstractBashInspection extends LocalInspectionTool {
         return true;
     }
 
-    @NotNull
+    @Nonnull
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.WEAK_WARNING;
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     public String getGroupDisplayName() {
         return "Bash";
     }

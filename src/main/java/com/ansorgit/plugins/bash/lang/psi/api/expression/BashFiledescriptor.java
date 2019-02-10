@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.lang.psi.api.expression;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * User: jansorg

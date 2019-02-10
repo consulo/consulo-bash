@@ -18,7 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.icons.AllIcons;
@@ -47,7 +48,7 @@ final class PathLookupElement extends LookupElement {
         presentation.setIcon(isFile ? AllIcons.FileTypes.Text : AllIcons.Nodes.TreeClosed);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getLookupString() {
         return path;

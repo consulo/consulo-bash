@@ -5,9 +5,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import com.ansorgit.plugins.bash.settings.facet.OperationMode;
 import com.ansorgit.plugins.bash.settings.facet.ui.FileMode;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -27,12 +30,12 @@ public class BashModuleExtension extends ModuleExtensionImpl<BashModuleExtension
 
 	protected Map<VirtualFile, FileMode> myMapping = new HashMap<>();
 
-	public BashModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
+	public BashModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer moduleRootLayer)
 	{
 		super(id, moduleRootLayer);
 	}
 
-	@NotNull
+	@Nonnull
 	public FileMode findMode(@Nullable VirtualFile file)
 	{
 		if(myOperationMode == OperationMode.AcceptAll)
@@ -61,7 +64,7 @@ public class BashModuleExtension extends ModuleExtensionImpl<BashModuleExtension
 	}
 
 	@Override
-	protected void getStateImpl(@NotNull Element element)
+	protected void getStateImpl(@Nonnull Element element)
 	{
 		super.getStateImpl(element);
 		Element modeElement = new Element("operationMode");
@@ -115,7 +118,7 @@ public class BashModuleExtension extends ModuleExtensionImpl<BashModuleExtension
 	}
 
 	@Override
-	public void commit(@NotNull BashModuleExtension mutableModuleExtension)
+	public void commit(@Nonnull BashModuleExtension mutableModuleExtension)
 	{
 		super.commit(mutableModuleExtension);
 
@@ -124,7 +127,7 @@ public class BashModuleExtension extends ModuleExtensionImpl<BashModuleExtension
 	}
 
 	@Override
-	protected void loadStateImpl(@NotNull Element element)
+	protected void loadStateImpl(@Nonnull Element element)
 	{
 		super.loadStateImpl(element);
 

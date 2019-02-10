@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.ansorgit.plugins.bash.lang.lexer.BashLexer;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashPsiCreator;
@@ -44,20 +44,20 @@ import consulo.lang.LanguageVersion;
 public class BashParserDefinition implements ParserDefinition, BashElementTypes
 {
 	@Override
-	@NotNull
-	public Lexer createLexer(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public Lexer createLexer(@Nonnull LanguageVersion languageVersion)
 	{
 		return new BashLexer(languageVersion);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	public PsiParser createParser(@NotNull LanguageVersion languageVersion)
+	public PsiParser createParser(@Nonnull LanguageVersion languageVersion)
 	{
 		return new BashParser();
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public IFileElementType getFileNodeType()
 	{
@@ -65,22 +65,22 @@ public class BashParserDefinition implements ParserDefinition, BashElementTypes
 	}
 
 	@Override
-	@NotNull
-	public TokenSet getWhitespaceTokens(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public TokenSet getWhitespaceTokens(@Nonnull LanguageVersion languageVersion)
 	{
 		return BashTokenTypes.whitespaceTokens;
 	}
 
 	@Override
-	@NotNull
-	public TokenSet getCommentTokens(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public TokenSet getCommentTokens(@Nonnull LanguageVersion languageVersion)
 	{
 		return BashTokenTypes.commentTokens;
 	}
 
 	@Override
-	@NotNull
-	public TokenSet getStringLiteralElements(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion)
 	{
 		return BashTokenTypes.editorStringLiterals;
 	}
@@ -114,7 +114,7 @@ public class BashParserDefinition implements ParserDefinition, BashElementTypes
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement createElement(ASTNode node)
 	{
 		return BashPsiCreator.createElement(node);

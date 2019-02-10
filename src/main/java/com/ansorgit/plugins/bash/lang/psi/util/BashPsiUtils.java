@@ -38,8 +38,8 @@ import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -261,10 +261,10 @@ public final class BashPsiUtils {
      * @param state
      * @return
      */
-    public static boolean varResolveTreeWalkUp(@NotNull final PsiScopeProcessor processor,
-                                               @NotNull final BashVar entrance,
+    public static boolean varResolveTreeWalkUp(@Nonnull final PsiScopeProcessor processor,
+                                               @Nonnull final BashVar entrance,
                                                @Nullable final PsiElement maxScope,
-                                               @NotNull final ResolveState state) {
+                                               @Nonnull final ResolveState state) {
         PsiElement prevParent = entrance;
         PsiElement scope = entrance;
 
@@ -437,7 +437,7 @@ public final class BashPsiUtils {
         return false;
     }
 
-    public static boolean isInjectedElement(@NotNull PsiElement element) {
+    public static boolean isInjectedElement(@Nonnull PsiElement element) {
         //fixme languageManager is probably expensive
         InjectedLanguageManager languageManager = InjectedLanguageManager.getInstance(element.getProject());
         return languageManager.isInjectedFragment(element.getContainingFile()) || hasInjectionHostParent(element);

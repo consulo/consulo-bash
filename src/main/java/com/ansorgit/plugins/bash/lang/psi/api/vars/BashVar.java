@@ -20,7 +20,7 @@ package com.ansorgit.plugins.bash.lang.psi.api.vars;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.BashReference;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Date: 14.04.2009
@@ -62,6 +62,6 @@ public interface BashVar extends BashPsiElement {
      *
      * @return
      */
-    @NotNull
+    @Nonnull
     BashReference getReference();
 }

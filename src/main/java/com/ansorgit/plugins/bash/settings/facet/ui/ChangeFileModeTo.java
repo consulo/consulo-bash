@@ -21,8 +21,8 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author cdr
@@ -31,7 +31,7 @@ class ChangeFileModeTo extends AnAction implements DumbAware {
     private final VirtualFile myFile;
     private final FileMode myMode;
 
-    ChangeFileModeTo(@Nullable VirtualFile file, @NotNull FileMode mode) {
+    ChangeFileModeTo(@Nullable VirtualFile file, @Nonnull FileMode mode) {
         super(mode.getDisplayName(), "Change " + (file == null ? "default" : "file '" + file.getName() + "'") +
                 " mode to '" + mode.getDisplayName() + "'.", null);
         myFile = file;

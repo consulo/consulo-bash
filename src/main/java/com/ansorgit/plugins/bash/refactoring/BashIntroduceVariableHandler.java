@@ -25,7 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.refactoring.RefactoringActionHandler;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.ArrayList;
 
@@ -45,7 +45,7 @@ import java.util.ArrayList;
  * Time: 21:05
  */
 class BashIntroduceVariableHandler implements RefactoringActionHandler {
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file, DataContext dataContext) {
+    public void invoke(@Nonnull Project project, Editor editor, PsiFile file, DataContext dataContext) {
         SelectionModel selectionModel = editor.getSelectionModel();
         if (selectionModel.hasSelection()) {
             int start = selectionModel.getSelectionStart();
@@ -73,7 +73,7 @@ class BashIntroduceVariableHandler implements RefactoringActionHandler {
 
     }
 
-    public void invoke(@NotNull Project project, @NotNull PsiElement[] elements, DataContext dataContext) {
+    public void invoke(@Nonnull Project project, @Nonnull PsiElement[] elements, DataContext dataContext) {
 
     }
 }

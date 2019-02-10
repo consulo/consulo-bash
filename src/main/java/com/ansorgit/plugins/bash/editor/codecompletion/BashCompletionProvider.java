@@ -21,7 +21,7 @@ package com.ansorgit.plugins.bash.editor.codecompletion;
 import java.io.File;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.intellij.codeInsight.completion.CompletionContributor;
@@ -47,9 +47,9 @@ abstract class BashCompletionProvider implements CompletionProvider
     }
 
     @Override
-    public final void addCompletions(@NotNull CompletionParameters parameters,
+    public final void addCompletions(@Nonnull CompletionParameters parameters,
                                         ProcessingContext context,
-                                        @NotNull CompletionResultSet resultWithoutPrefix) {
+                                        @Nonnull CompletionResultSet resultWithoutPrefix) {
 
         addBashCompletions(findCurrentText(parameters, parameters.getPosition()), parameters, context, resultWithoutPrefix);
     }

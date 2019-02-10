@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Date: 12.04.2009
@@ -27,6 +27,6 @@ import org.jetbrains.annotations.NotNull;
  * @author Joachim Ansorg
  */
 public interface BashFunctionDefName extends BashPsiElement {
-    @NotNull
+    @Nonnull
     String getNameString();
 }

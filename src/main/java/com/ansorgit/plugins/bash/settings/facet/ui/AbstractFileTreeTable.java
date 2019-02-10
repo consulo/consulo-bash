@@ -31,6 +31,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JTree;
@@ -41,7 +42,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.ide.CommonActionsManager;
 import com.intellij.ide.DefaultTreeExpander;
 import com.intellij.ide.TreeExpander;
@@ -73,7 +73,7 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
     }
 
     public AbstractFileTreeTable(final Module module, Map<VirtualFile, T> map, final Class<T> valueClass, final String valueTitle,
-			@NotNull VirtualFileFilter filter) {
+			@Nonnull VirtualFileFilter filter) {
         super(new MyModel<T>(module, map, valueClass, valueTitle, filter));
         myModule = module;
 
@@ -194,7 +194,7 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
         }
     }
 
-    private void select(@NotNull VirtualFile toSelect, final TreeNode root) {
+    private void select(@Nonnull VirtualFile toSelect, final TreeNode root) {
         for (int i = 0; i < root.getChildCount(); i++) {
             TreeNode child = root.getChildAt(i);
             VirtualFile file = ((FileNode) child).getObject();
@@ -323,11 +323,11 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
     public static class ModuleRootNode extends ConvenientNode<Module> {
         private VirtualFileFilter myFilter;
 
-        public ModuleRootNode(@NotNull Module module) {
+        public ModuleRootNode(@Nonnull Module module) {
             this(module, VirtualFileFilter.ALL);
         }
 
-        public ModuleRootNode(@NotNull Module module, @NotNull VirtualFileFilter filter) {
+        public ModuleRootNode(@Nonnull Module module, @Nonnull VirtualFileFilter filter) {
             super(module);
             myFilter = filter;
         }
@@ -427,11 +427,11 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
         private final Module myModule;
         private VirtualFileFilter myFilter;
 
-        public FileNode(@NotNull VirtualFile file, final @NotNull Module module) {
+        public FileNode(@Nonnull VirtualFile file, final @Nonnull Module module) {
             this(file, module, VirtualFileFilter.ALL);
         }
 
-        public FileNode(@NotNull VirtualFile file, final @NotNull Module module, @NotNull VirtualFileFilter filter) {
+        public FileNode(@Nonnull VirtualFile file, final @Nonnull Module module, @Nonnull VirtualFileFilter filter) {
             super(file);
             myModule = module;
             myFilter = filter;

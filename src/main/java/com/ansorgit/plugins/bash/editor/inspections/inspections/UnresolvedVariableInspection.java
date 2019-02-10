@@ -30,7 +30,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Set;
 
@@ -45,20 +45,20 @@ public class UnresolvedVariableInspection extends AbstractBashInspection {
     //private static final Logger log = Logger.getInstance("#UnresolvedVariable");
 
     @Nls
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return "Unresolved variable";
     }
 
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "unresolvedVariableInspection";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getShortName() {
         return "Unresolved variable";
@@ -69,13 +69,13 @@ public class UnresolvedVariableInspection extends AbstractBashInspection {
         return "An unresolved variable has not been declared in earlier parts of the script";
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, boolean isOnTheFly) {
         return new UnresolvedVariableVisitor(holder);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.WARNING;

@@ -20,7 +20,8 @@ package com.ansorgit.plugins.bash.lang.psi.impl.word;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashCharSequence;
@@ -68,13 +69,13 @@ public class BashStringImpl extends BashBaseStubElementImpl<StubElement> impleme
         return BashPsiUtils.isStaticWordExpr(getFirstChild());
     }
 
-    @NotNull
+    @Nonnull
     public TextRange getTextContentRange() {
         return TextRange.create(1, getTextLength() - 1);
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitString(this);
         } else {
@@ -89,7 +90,7 @@ public class BashStringImpl extends BashBaseStubElementImpl<StubElement> impleme
     }
 
     @Override
-    public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
         boolean walkOn = super.processDeclarations(processor, state, lastParent, place);
 
         if (walkOn && isValidHost()) {
@@ -107,21 +108,21 @@ public class BashStringImpl extends BashBaseStubElementImpl<StubElement> impleme
     }
 
     @Override
-    public PsiLanguageInjectionHost updateText(@NotNull String text) {
+    public PsiLanguageInjectionHost updateText(@Nonnull String text) {
         ASTNode valueNode = getNode().getFirstChildNode();
         assert valueNode instanceof LeafElement;
         ((LeafElement)valueNode).replaceWithText(text);
         return this;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public LiteralTextEscaper<? extends PsiLanguageInjectionHost> createLiteralTextEscaper() {
         //TODO [VISALL]
         return new LiteralTextEscaper<BashStringImpl>(this)
 		{
 			@Override
-			public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder builder)
+			public boolean decode(@Nonnull TextRange rangeInsideHost, @Nonnull StringBuilder builder)
 			{
 				ProperTextRange.assertProperRange(rangeInsideHost);
 				builder.append(myHost.getText(), rangeInsideHost.getStartOffset(), rangeInsideHost.getEndOffset());
@@ -129,7 +130,7 @@ public class BashStringImpl extends BashBaseStubElementImpl<StubElement> impleme
 			}
 
 			@Override
-			public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost)
+			public int getOffsetInHost(int offsetInDecoded, @Nonnull TextRange rangeInsideHost)
 			{
 				int offset = offsetInDecoded + rangeInsideHost.getStartOffset();
 				if (offset < rangeInsideHost.getStartOffset()) offset = rangeInsideHost.getStartOffset();

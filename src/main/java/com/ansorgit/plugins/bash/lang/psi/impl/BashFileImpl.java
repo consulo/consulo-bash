@@ -18,7 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
@@ -41,7 +42,7 @@ public class BashFileImpl extends PsiFileBase implements BashFile {
         super(viewProvider, BashFileType.BASH_LANGUAGE);
     }
 
-    @NotNull
+    @Nonnull
     public FileType getFileType() {
         return BashFileType.INSTANCE;
     }
@@ -55,7 +56,7 @@ public class BashFileImpl extends PsiFileBase implements BashFile {
     }
 
     @Override
-    public boolean processDeclarations(@NotNull final PsiScopeProcessor processor, @NotNull final ResolveState state, final PsiElement lastParent, @NotNull final PsiElement place) {
+    public boolean processDeclarations(@Nonnull final PsiScopeProcessor processor, @Nonnull final ResolveState state, final PsiElement lastParent, @Nonnull final PsiElement place) {
         if (!processor.execute(this, state)) {
             return false;
         }
@@ -91,7 +92,7 @@ public class BashFileImpl extends PsiFileBase implements BashFile {
     }
 
     @Override
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    public void accept(@Nonnull PsiElementVisitor visitor) {
         if (visitor instanceof BashVisitor) {
             ((BashVisitor) visitor).visitFile(this);
         } else {

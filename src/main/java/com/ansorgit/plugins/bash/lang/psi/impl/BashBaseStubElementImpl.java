@@ -18,8 +18,9 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
@@ -49,12 +50,12 @@ public abstract class BashBaseStubElementImpl<T extends StubElement> extends Stu
         this.name = name;
     }
 
-    public BashBaseStubElementImpl(@NotNull T stub, @NotNull IStubElementType nodeType, @Nullable String name) {
+    public BashBaseStubElementImpl(@Nonnull T stub, @Nonnull IStubElementType nodeType, @Nullable String name) {
         super(stub, nodeType);
         this.name = name;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Language getLanguage() {
         return BashFileType.BASH_LANGUAGE;
@@ -65,20 +66,20 @@ public abstract class BashBaseStubElementImpl<T extends StubElement> extends Stu
         return "[PSI] " + (name == null ? super.toString() : name);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public SearchScope getUseScope() {
         return BashElementSharedImpl.getElementUseScope(this, getProject());
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public GlobalSearchScope getResolveScope() {
         return BashElementSharedImpl.getElementGlobalSearchScope(this, getProject());
     }
 
     @Override
-    public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
         if (!processor.execute(this, state)) {
             return false;
         }

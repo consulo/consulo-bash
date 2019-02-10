@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Converts a word like into an unquoted string 'a'.
@@ -38,7 +38,7 @@ public class WordToSinglequotedStringQuickfix extends AbstractWordWrapQuickfix {
         return "'" + text + "'";
     }
 
-    @NotNull
+    @Nonnull
     public String getName() {
         return "Convert to unquoted string '...'";
     }

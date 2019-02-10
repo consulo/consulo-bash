@@ -18,13 +18,14 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Replaces a static arithmetic expression with the evaluated result.
@@ -40,12 +41,12 @@ public class EvaluateArithExprQuickfix extends AbstractBashQuickfix {
         this.expression = expression;
     }
 
-    @NotNull
+    @Nonnull
     public String getName() {
         return "Replace '" + expression.getText() + "' with the result '" + expression.computeNumericValue() + "'";
     }
 
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+    public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         TextRange r = expression.getTextRange();
         String replacement = String.valueOf(expression.computeNumericValue());
         editor.getDocument().replaceString(r.getStartOffset(), r.getEndOffset(), replacement);

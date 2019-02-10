@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.structureview;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewTreeElement;
@@ -26,7 +28,6 @@ import com.intellij.ide.util.treeView.smartTree.Filter;
 import com.intellij.ide.util.treeView.smartTree.Grouper;
 import com.intellij.ide.util.treeView.smartTree.Sorter;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Date: 12.04.2009
@@ -48,28 +49,28 @@ class BashStructureViewModel extends TextEditorBasedStructureViewModel implement
         return myFile;
     }
 
-    @NotNull
+    @Nonnull
     public StructureViewTreeElement getRoot() {
         return new BashStructureViewElement(myFile);
     }
 
-    @NotNull
+    @Nonnull
     public Grouper[] getGroupers() {
         return Grouper.EMPTY_ARRAY;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     protected Class[] getSuitableClasses() {
         return CLASSS;
     }
 
-    @NotNull
+    @Nonnull
     public Sorter[] getSorters() {
         return SORTERS;
     }
 
-    @NotNull
+    @Nonnull
     public Filter[] getFilters() {
         return Filter.EMPTY_ARRAY;
     }

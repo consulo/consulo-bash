@@ -28,7 +28,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Map;
 
@@ -79,7 +79,7 @@ public class BashSyntaxHighlighter extends SyntaxHighlighterBase {
 
     public static final TextAttributesKey NONE = HighlighterColors.TEXT;
 
-    @NotNull
+    @Nonnull
     public Lexer getHighlightingLexer() {
         return new BashLexer();
     }
@@ -119,7 +119,7 @@ public class BashSyntaxHighlighter extends SyntaxHighlighterBase {
         fillMap(attributes1, badCharacterSet, HighlighterColors.BAD_CHARACTER);
     }
 
-    @NotNull
+    @Nonnull
     public TextAttributesKey[] getTokenHighlights(final IElementType tokenType) {
         return pack(attributes1.get(tokenType), attributes2.get(tokenType));
     }

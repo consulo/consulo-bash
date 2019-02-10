@@ -20,7 +20,6 @@ package com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting;
 
 import javax.annotation.Nonnull;
 
-import org.jetbrains.annotations.NotNull;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.intellij.codeHighlighting.TextEditorHighlightingPass;
 import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
@@ -39,7 +38,7 @@ public class RemoveHighlightingPassFactory implements TextEditorHighlightingPass
 		registrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassFactory.Registrar.Anchor.AFTER, HighlighterLayer.ADDITIONAL_SYNTAX, true);
 	}
 
-	public TextEditorHighlightingPass createHighlightingPass(@NotNull PsiFile file, @NotNull Editor editor)
+	public TextEditorHighlightingPass createHighlightingPass(@Nonnull PsiFile file, @Nonnull Editor editor)
 	{
 		if(file instanceof BashFile)
 		{

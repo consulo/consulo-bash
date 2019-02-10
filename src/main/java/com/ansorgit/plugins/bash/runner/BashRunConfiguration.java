@@ -18,7 +18,6 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import com.google.common.collect.Lists;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configuration.EnvironmentVariablesComponent;
@@ -36,7 +35,7 @@ import com.intellij.openapi.util.JDOMExternalizerUtil;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.util.text.StringUtil;
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.File;
 import java.util.Arrays;
@@ -89,7 +88,7 @@ public class BashRunConfiguration extends ModuleBasedConfiguration<RunConfigurat
         return new BashRunConfigurationEditor(this);
     }
 
-    public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment env) throws ExecutionException {
+    public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment env) throws ExecutionException {
         BashCommandLineState state = new BashCommandLineState(this, env);
 
         TextConsoleBuilder textConsoleBuilder = new TextConsoleBuilderImpl(getProject());

@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.expression.BashFiledescriptor;
@@ -28,7 +30,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.tree.TokenSet;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Detects invalid filedescriptors. Bash only supports the descriptors 0-9.
@@ -42,19 +43,19 @@ public class UnknownFiledescriptorInspection extends AbstractBashInspection {
     static final TokenSet FILTER = TokenSet.create(BashTokenTypes.FILEDESCRIPTOR);
 
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "UnknownFiledescriptor";
     }
 
-    @NotNull
+    @Nonnull
     public String getShortName() {
         return "Unknown filedescriptor";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "Unknown filedescriptor. Only &0 to &9 are valid.";
     }
@@ -64,15 +65,15 @@ public class UnknownFiledescriptorInspection extends AbstractBashInspection {
         return "Bash supports the numbers 0-9 to identify filedescriptors. 0 is stdin, 1 is stdout and 2 is stderr.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.WARNING;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitFiledescriptor(BashFiledescriptor descriptor) {

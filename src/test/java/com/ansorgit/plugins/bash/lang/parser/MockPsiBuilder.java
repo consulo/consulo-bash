@@ -24,8 +24,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.google.common.collect.Lists;
 import com.intellij.lang.ASTNode;
@@ -293,12 +294,12 @@ public class MockPsiBuilder implements PsiBuilder
 		return doneMarkers;
 	}
 
-	public <T> T getUserDataUnprotected(@NotNull Key<T> tKey)
+	public <T> T getUserDataUnprotected(@Nonnull Key<T> tKey)
 	{
 		return null;  //To change body of implemented methods use File | Settings | File Templates.
 	}
 
-	public <T> void putUserDataUnprotected(@NotNull Key<T> tKey, @Nullable T t)
+	public <T> void putUserDataUnprotected(@Nonnull Key<T> tKey, @Nullable T t)
 	{
 
 	}

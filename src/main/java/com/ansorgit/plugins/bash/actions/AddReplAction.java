@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.actions;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import consulo.awt.TargetAWT;
 import consulo.bash.module.extension.BashModuleExtension;
 import com.ansorgit.plugins.bash.runner.repl.BashConsoleRunner;

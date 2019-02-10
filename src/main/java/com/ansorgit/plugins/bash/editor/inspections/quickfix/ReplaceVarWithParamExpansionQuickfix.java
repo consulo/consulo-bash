@@ -18,7 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.openapi.editor.Document;
@@ -46,7 +47,7 @@ public class ReplaceVarWithParamExpansionQuickfix extends AbstractBashQuickfix i
         this.variableName = var.getReference().getReferencedName();
     }
 
-    @NotNull
+    @Nonnull
     public String getName() {
         if (variableName.length() > 10) {
             return "Replace with '${...}'";
@@ -55,7 +56,7 @@ public class ReplaceVarWithParamExpansionQuickfix extends AbstractBashQuickfix i
         }
     }
 
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+    public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         TextRange textRange = var.getTextRange();
 
         //replace this position with the same value, we have to trigger a reparse somehow

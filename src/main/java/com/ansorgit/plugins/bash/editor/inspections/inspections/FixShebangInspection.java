@@ -33,7 +33,7 @@ import com.intellij.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -55,19 +55,19 @@ public class FixShebangInspection extends AbstractBashInspection {
     private List<String> validShebangCommands = DEFAULT_COMMANDS;
 
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "FixShebang";
     }
 
-    @NotNull
+    @Nonnull
     public String getShortName() {
         return "Fix shebang";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     public String getDisplayName() {
         return "Fix unusual shebang lines";
     }
@@ -112,7 +112,7 @@ public class FixShebangInspection extends AbstractBashInspection {
         }
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.WARNING;
@@ -146,9 +146,9 @@ public class FixShebangInspection extends AbstractBashInspection {
         }
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitShebang(BashShebang shebang) {

@@ -27,7 +27,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.File;
 
@@ -38,20 +38,20 @@ import java.io.File;
  */
 public class MissingIncludeFileInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
-    @NotNull
+    @Nonnull
     @Override
     public String getID() {
         return "MissingInclude";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getShortName() {
         return "Missing include file";
     }
 
     @Nls
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return "Missing include file";
@@ -63,15 +63,15 @@ public class MissingIncludeFileInspection extends AbstractBashInspection {
                 "the element is highlighted as an error. Includes of files given as runtime values (e.g. variables) are not evaluated.";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.WARNING;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    public PsiElementVisitor buildVisitor(@Nonnull final ProblemsHolder holder, boolean isOnTheFly) {
         return new BashVisitor() {
             @Override
             public void visitIncludeCommand(BashIncludeCommand bashCommand) {

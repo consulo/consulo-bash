@@ -18,11 +18,12 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.arithmetic;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.TernaryExpression;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * User: jansorg
@@ -34,21 +35,21 @@ public class TernaryExpressionsImpl extends AbstractExpression implements Ternar
         super(astNode, "ArithTernaryExpr", Type.Unsupported);
     }
 
-    @NotNull
+    @Nonnull
     public ArithmeticExpression findCondition() {
         ArithmeticExpression[] firstChild = findChildrenByClass(ArithmeticExpression.class);
 
         return firstChild[0];
     }
 
-    @NotNull
+    @Nonnull
     public ArithmeticExpression findMainBranch() {
         ArithmeticExpression[] firstChild = findChildrenByClass(ArithmeticExpression.class);
 
         return firstChild[1];
     }
 
-    @NotNull
+    @Nonnull
     public ArithmeticExpression findElseBranch() {
         ArithmeticExpression[] firstChild = findChildrenByClass(ArithmeticExpression.class);
 

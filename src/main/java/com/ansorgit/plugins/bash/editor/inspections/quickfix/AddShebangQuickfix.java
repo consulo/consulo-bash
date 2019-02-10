@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
@@ -26,7 +28,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Date: 15.05.2009
@@ -36,12 +37,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class AddShebangQuickfix extends AbstractBashQuickfix {
 
-    @NotNull
+    @Nonnull
     public String getName() {
         return "Add shebang line";
     }
 
-    public void invoke(@NotNull final Project project, Editor editor, final PsiFile file) throws IncorrectOperationException {
+    public void invoke(@Nonnull final Project project, Editor editor, final PsiFile file) throws IncorrectOperationException {
         // work around a problem in a 9.0.2 eap which need a write session
         ApplicationManager.getApplication().runWriteAction(new Runnable() {
             public void run() {

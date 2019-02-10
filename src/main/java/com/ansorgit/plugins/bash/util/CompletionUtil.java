@@ -21,7 +21,7 @@ package com.ansorgit.plugins.bash.util;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -46,8 +46,8 @@ public class CompletionUtil {
      * @param accept
      * @return A list of full paths which match the prefix.
      */
-    @NotNull
-    public static List<String> completeAbsolutePath(@NotNull String prefix, Predicate<File> accept) {
+    @Nonnull
+    public static List<String> completeAbsolutePath(@Nonnull String prefix, Predicate<File> accept) {
         File base = new File(prefix);
 
         //a dot tricks Java into thinking dir/. is equal to dir and thus exists
@@ -95,8 +95,8 @@ public class CompletionUtil {
      * @param relativePath The relative path prefix used for the matching.
      * @return The list of files and directories which match an item in the subtree of baseDir. shownBaseDir is used as prefix, if set.
      */
-    @NotNull
-    public static List<String> completeRelativePath(@NotNull String baseDir, @NotNull String shownBaseDir, @NotNull String relativePath) {
+    @Nonnull
+    public static List<String> completeRelativePath(@Nonnull String baseDir, @Nonnull String shownBaseDir, @Nonnull String relativePath) {
         List<String> result = Lists.newLinkedList();
 
         for (String path : completeAbsolutePath(baseDir + "/" + relativePath, Predicates.<File>alwaysTrue())) {
@@ -108,8 +108,8 @@ public class CompletionUtil {
         return result;
     }
 
-    @NotNull
-    private static List<File> collectFiles(File basePath, @NotNull final String matchPart) {
+    @Nonnull
+    private static List<File> collectFiles(File basePath, @Nonnull final String matchPart) {
         File[] filtered = basePath.listFiles(new FileFilter() {
             public boolean accept(File pathname) {
                 return !".".equals(pathname.getName()) &&
