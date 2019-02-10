@@ -18,6 +18,9 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
+import java.util.Collection;
+import java.util.List;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -27,10 +30,7 @@ import com.intellij.codeInsight.completion.PrioritizedLookupElement;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiNamedElement;
-
-import javax.swing.*;
-import java.util.Collection;
-import java.util.List;
+import consulo.ui.image.Image;
 
 /**
  * User: jansorg
@@ -49,7 +49,7 @@ class CompletionProviderUtils {
         });
     }
 
-    static Collection<LookupElement> createItems(Iterable<String> items, final Icon icon) {
+    static Collection<LookupElement> createItems(Iterable<String> items, final Image icon) {
         return Lists.transform(Lists.newArrayList(items), new Function<String, LookupElement>() {
             public LookupElement apply(String from) {
                 return LookupElementBuilder.create(from).withCaseSensitivity(true).withIcon(icon);

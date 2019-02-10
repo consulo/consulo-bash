@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.ansorgit.plugins.bash.lang.psi.api.BashKeyword;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.TextRange;
@@ -25,9 +27,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
-import javax.annotation.Nonnull;
-
-import javax.swing.*;
+import consulo.ui.image.Image;
 
 /**
  * Date: 06.05.2009
@@ -111,7 +111,7 @@ public abstract class BashKeywordDefaultImpl extends BashCompositeElement implem
                 return null;
             }
 
-            public Icon getIcon(boolean open) {
+            public Image getIcon() {
                 return null;
             }
         };

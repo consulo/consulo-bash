@@ -81,7 +81,8 @@ abstract class ChooseFileModeAction extends ComboBoxAction {
         return enabled;
     }
 
-    @Nullable("returns null if filemode cannot be determined from content")
+    // returns null if filemode cannot be determined from content
+    @Nullable
     public static FileMode modeFromFile(final VirtualFile virtualFile) {
         if (virtualFile == null) {
             return null;

@@ -25,7 +25,6 @@ import com.ansorgit.plugins.bash.util.BashStrings;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import consulo.awt.TargetAWT;
 
 /**
  * Date: 17.04.2009
@@ -37,7 +36,7 @@ public class NewBashFileAction extends NewBashActionBase
 {
 	public NewBashFileAction()
 	{
-		super(BashStrings.message("newfile.menu.action.text"), BashStrings.message("newfile.menu.action.description"), TargetAWT.to(BashIcons.BASH_FILE_ICON));
+		super(BashStrings.message("newfile.menu.action.text"), BashStrings.message("newfile.menu.action.description"), BashIcons.BASH_FILE_ICON);
 	}
 
 

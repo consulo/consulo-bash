@@ -21,7 +21,6 @@ package com.ansorgit.plugins.bash.actions;
 import static com.ansorgit.plugins.bash.file.BashFileType.DEFAULT_EXTENSION;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
 import com.ansorgit.plugins.bash.file.BashFileType;
@@ -35,6 +34,7 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
+import consulo.ui.image.Image;
 
 /**
  * Date: 17.04.2009
@@ -45,7 +45,7 @@ import com.intellij.util.IncorrectOperationException;
 abstract class NewBashActionBase extends CreateElementActionBase {
     private static final Logger log = Logger.getInstance("#NewActionBase");
 
-    public NewBashActionBase(String text, String description, Icon icon) {
+    public NewBashActionBase(String text, String description, Image icon) {
         super(text, description, icon);
     }
 

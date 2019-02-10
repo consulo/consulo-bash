@@ -18,8 +18,6 @@
 
 package com.ansorgit.plugins.bash.util;
 
-import javax.swing.Icon;
-
 import com.intellij.openapi.util.IconLoader;
 import consulo.ui.image.Image;
 
@@ -28,17 +26,17 @@ import consulo.ui.image.Image;
  *
  * @author Joachim Ansorg, mail@ansorg-it.com.
  */
-public interface BashIcons {
+public interface BashIcons
+{
+	Image BASH_LARGE_ICON = IconLoader.findIcon("/icons/bash-64.png");
 
-	Icon BASH_LARGE_ICON = IconLoader.findIcon("/icons/bash-64.png");
+	Image BASH_FILE_ICON = IconLoader.findIcon("/icons/bash-16.png");
 
-    Image BASH_FILE_ICON = IconLoader.findIcon("/icons/bash-16.png");
+	Image FUNCTION_DEF_ICON = IconLoader.findIcon("/icons/function-16.png");
 
-    Icon FUNCTION_DEF_ICON = IconLoader.findIcon("/icons/function-16.png");
+	Image GLOBAL_VAR_ICON = IconLoader.findIcon("/icons/global-var-16.png");
 
-    Icon GLOBAL_VAR_ICON = IconLoader.findIcon("/icons/global-var-16.png");
+	Image BASH_VAR_ICON = IconLoader.findIcon("/icons/bash-var-16.png");
 
-    Icon BASH_VAR_ICON = IconLoader.findIcon("/icons/bash-var-16.png");
-
-    Icon BOURNE_VAR_ICON = IconLoader.findIcon("/icons/bash-var-16.png");
+	Image BOURNE_VAR_ICON = IconLoader.findIcon("/icons/bash-var-16.png");
 }

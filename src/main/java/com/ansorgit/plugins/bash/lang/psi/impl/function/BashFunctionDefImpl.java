@@ -21,10 +21,9 @@ package com.ansorgit.plugins.bash.lang.psi.impl.function;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.Icon;
+import javax.annotation.Nonnull;
 
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashBlock;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFunctionDefName;
@@ -52,8 +51,8 @@ import com.intellij.psi.scope.util.PsiScopesUtilCore;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
+import consulo.ui.image.Image;
 
 /**
  * @author Joachim Ansorg
@@ -171,8 +170,8 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
                 return null;
             }
 
-            public Icon getIcon(boolean open) {
-                return TargetAWT.to(IconDescriptorUpdaters.getIcon(BashFunctionDefImpl.this, 0));
+            public Image getIcon() {
+                return IconDescriptorUpdaters.getIcon(BashFunctionDefImpl.this, 0);
             }
         };
     }

@@ -23,9 +23,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
-
 import javax.annotation.Nullable;
+
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -61,6 +60,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import consulo.ui.image.Image;
 
 /**
  * @author Joachim Ansorg
@@ -263,7 +263,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
                 return null;
             }
 
-            public Icon getIcon(boolean open) {
+            public Image getIcon() {
                 return null;
             }
         };

@@ -21,8 +21,6 @@ package com.ansorgit.plugins.bash.structureview;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.Icon;
-
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.intellij.ide.structureView.StructureViewTreeElement;
@@ -34,8 +32,8 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiNamedElement;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
+import consulo.ui.image.Image;
 
 /**
  * Date: 12.04.2009
@@ -66,16 +64,12 @@ class BashStructureViewElement implements StructureViewTreeElement {
                 return ((PsiNamedElement) myElement).getName();
             }
 
-            public TextAttributesKey getTextAttributesKey() {
-                return null;
-            }
-
             public String getLocationString() {
                 return null;
             }
 
-            public Icon getIcon(boolean open) {
-                return TargetAWT.to(IconDescriptorUpdaters.getIcon(myElement, 0));
+            public Image getIcon() {
+                return IconDescriptorUpdaters.getIcon(myElement, 0);
             }
         };
     }
