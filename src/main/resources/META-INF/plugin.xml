@@ -84,6 +84,8 @@
 		<lang.tokenSeparatorGenerator language="Bash"
 									  implementationClass="com.ansorgit.plugins.bash.refactoring.BashTokenSeparatorGenerator"/>
 
+		<lang.syntaxHighlighterFactory language="Bash" implementationClass="com.ansorgit.plugins.bash.lang.BashHighlighterFactory"/>
+
 		<languageInjector implementation="com.ansorgit.plugins.bash.lang.BashInjector"/>
 
 		<readWriteAccessDetector
@@ -132,14 +134,14 @@
 								 mutableClass="consulo.bash.module.extension.BashMutableModuleExtension"
 								 immutableClass="consulo.bash.module.extension.BashModuleExtension"/>
 
-		<iconDescriptorUpdater implementation="consulo.bash.BashIconDescriptorUpdater" />
+		<iconDescriptorUpdater implementation="consulo.bash.BashIconDescriptorUpdater"/>
 
-		<textEditorHighlightingPassFactory implementation="com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting.RemoveHighlightingPassFactory" />
+		<textEditorHighlightingPassFactory implementation="com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting.RemoveHighlightingPassFactory"/>
 
-		<applicationService serviceImplementation="com.ansorgit.plugins.bash.editor.codecompletion.BashPathCommandCompletion" />
+		<applicationService serviceImplementation="com.ansorgit.plugins.bash.editor.codecompletion.BashPathCommandCompletion"/>
 
-		<projectConfigurable displayName="Bash" parentId="editor" instance="com.ansorgit.plugins.bash.settings.BashProjectSettingsConfigurable" />
+		<projectConfigurable displayName="Bash" parentId="editor" instance="com.ansorgit.plugins.bash.settings.BashProjectSettingsConfigurable"/>
 
-		<projectService serviceImplementation="com.ansorgit.plugins.bash.settings.BashProjectSettingsComponent" />
+		<projectService serviceImplementation="com.ansorgit.plugins.bash.settings.BashProjectSettingsComponent"/>
 	</extensions>
 </idea-plugin>

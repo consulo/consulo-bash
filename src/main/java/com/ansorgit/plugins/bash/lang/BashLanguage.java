@@ -18,13 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang;
 
-import javax.annotation.Nonnull;
-
-import com.ansorgit.plugins.bash.editor.highlighting.BashSyntaxHighlighter;
 import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 
 /**
  * Date: 22.03.2009
@@ -39,17 +33,5 @@ public class BashLanguage extends Language
 	public BashLanguage()
 	{
 		super("Bash", "application/x-bsh", "application/x-sh", "text/x-script.sh");
-
-		SyntaxHighlighterFactory.LANGUAGE_FACTORY.addExplicitExtension(this, new BashHighlighterFactory());
-	}
-
-	private static class BashHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory
-	{
-		@Override
-		@Nonnull
-		protected SyntaxHighlighter createHighlighter()
-		{
-			return new BashSyntaxHighlighter();
-		}
 	}
 }
