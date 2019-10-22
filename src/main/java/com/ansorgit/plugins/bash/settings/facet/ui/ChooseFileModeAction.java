@@ -24,14 +24,8 @@
  */
 package com.ansorgit.plugins.bash.settings.facet.ui;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.ex.ComboBoxAction;
 import com.intellij.openapi.editor.Document;
@@ -40,6 +34,11 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
+import java.util.List;
 
 abstract class ChooseFileModeAction extends ComboBoxAction {
     private final VirtualFile myVirtualFile;
@@ -97,7 +96,7 @@ abstract class ChooseFileModeAction extends ComboBoxAction {
     }
 
     @Nonnull
-    public DefaultActionGroup createPopupActionGroup(final DataContext context) {
+    public DefaultActionGroup createPopupActionGroup(final JComponent button) {
         return createGroup(true);
     }
 
