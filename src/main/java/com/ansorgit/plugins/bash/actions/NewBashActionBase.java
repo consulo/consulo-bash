@@ -18,11 +18,6 @@
 
 package com.ansorgit.plugins.bash.actions;
 
-import static com.ansorgit.plugins.bash.file.BashFileType.DEFAULT_EXTENSION;
-
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NonNls;
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.intellij.CommonBundle;
 import com.intellij.ide.actions.CreateElementActionBase;
@@ -35,6 +30,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
 import consulo.ui.image.Image;
+import org.jetbrains.annotations.NonNls;
+
+import javax.annotation.Nonnull;
+import java.util.function.Consumer;
+
+import static com.ansorgit.plugins.bash.file.BashFileType.DEFAULT_EXTENSION;
 
 /**
  * Date: 17.04.2009
@@ -49,15 +50,14 @@ abstract class NewBashActionBase extends CreateElementActionBase {
         super(text, description, icon);
     }
 
-    @Nonnull
-    protected final PsiElement[] invokeDialog(final Project project, final PsiDirectory directory) {
+    protected final void invokeDialog(final Project project, final PsiDirectory directory, Consumer<PsiElement[]> consumer) {
         log.debug("invokeDialog");
         final MyInputValidator validator = new MyInputValidator(project, directory);
         Messages.showInputDialog(project, getDialogPrompt(), getDialogTitle(), Messages.getQuestionIcon(), "", validator);
 
         final PsiElement[] elements = validator.getCreatedElements();
         log.debug("Result: " + elements);
-        return elements;
+        consumer.accept(elements);
     }
 
 
@@ -74,14 +74,12 @@ abstract class NewBashActionBase extends CreateElementActionBase {
         return BashTemplatesFactory.createFromTemplate(directory, className, filename);
     }
 
-    @Nonnull
-    protected PsiElement[] create(String newName, PsiDirectory directory) throws Exception {
+    protected void create(String newName, PsiDirectory directory, Consumer<PsiElement[]> consumer) throws Exception {
         log.debug("create " + newName + ", dir: " + directory);
-        return doCreate(newName, directory);
+        doCreate(newName, directory, consumer);
     }
 
-    @Nonnull
-    protected abstract PsiElement[] doCreate(String newName, PsiDirectory directory);
+    protected abstract void doCreate(String newName, PsiDirectory directory, Consumer<PsiElement[]> consumer);
 
     protected abstract String getDialogPrompt();
 

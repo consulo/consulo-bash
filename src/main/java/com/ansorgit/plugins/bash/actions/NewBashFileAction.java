@@ -18,13 +18,14 @@
 
 package com.ansorgit.plugins.bash.actions;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashStrings;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+
+import javax.annotation.Nonnull;
+import java.util.function.Consumer;
 
 /**
  * Date: 17.04.2009
@@ -60,14 +61,13 @@ public class NewBashFileAction extends NewBashActionBase
 		return BashStrings.message("newfile.menu.action.text");
 	}
 
-	@Nonnull
-	protected PsiElement[] doCreate(String newName, PsiDirectory directory)
+	protected void doCreate(String newName, PsiDirectory directory, Consumer<PsiElement[]> consumer)
 	{
 		PsiFile file = createFileFromTemplate(directory, newName, "bash-script.sh");
 		PsiElement child = file.getLastChild();
-		return child != null ? new PsiElement[]{
+		consumer.accept(child != null ? new PsiElement[]{
 				file,
 				child
-		} : new PsiElement[]{file};
+		} : new PsiElement[]{file});
 	}
 }
