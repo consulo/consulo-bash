@@ -74,12 +74,12 @@ abstract class NewBashActionBase extends CreateElementActionBase {
         return BashTemplatesFactory.createFromTemplate(directory, className, filename);
     }
 
-    protected void create(String newName, PsiDirectory directory, Consumer<PsiElement[]> consumer) throws Exception {
+    protected PsiElement[] create(String newName, PsiDirectory directory) throws Exception {
         log.debug("create " + newName + ", dir: " + directory);
-        doCreate(newName, directory, consumer);
+        return doCreate(newName, directory);
     }
 
-    protected abstract void doCreate(String newName, PsiDirectory directory, Consumer<PsiElement[]> consumer);
+    protected abstract PsiElement[] doCreate(String newName, PsiDirectory directory);
 
     protected abstract String getDialogPrompt();
 

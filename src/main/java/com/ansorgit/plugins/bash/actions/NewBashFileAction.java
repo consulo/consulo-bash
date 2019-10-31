@@ -61,13 +61,13 @@ public class NewBashFileAction extends NewBashActionBase
 		return BashStrings.message("newfile.menu.action.text");
 	}
 
-	protected void doCreate(String newName, PsiDirectory directory, Consumer<PsiElement[]> consumer)
+	protected PsiElement[] doCreate(String newName, PsiDirectory directory)
 	{
 		PsiFile file = createFileFromTemplate(directory, newName, "bash-script.sh");
 		PsiElement child = file.getLastChild();
-		consumer.accept(child != null ? new PsiElement[]{
+		return child != null ? new PsiElement[]{
 				file,
 				child
-		} : new PsiElement[]{file});
+		} : new PsiElement[]{file};
 	}
 }
