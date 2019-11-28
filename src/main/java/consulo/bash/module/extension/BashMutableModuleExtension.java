@@ -1,15 +1,14 @@
 package consulo.bash.module.extension;
 
-import javax.annotation.Nonnull;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
-import javax.annotation.Nullable;
 import com.ansorgit.plugins.bash.settings.facet.ui.BashFacetUI;
 import com.intellij.openapi.ui.VerticalFlowLayout;
-import consulo.ui.RequiredUIAccess;
 import consulo.module.extension.MutableModuleExtension;
 import consulo.roots.ModuleRootLayer;
+import consulo.ui.annotation.RequiredUIAccess;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
 
 /**
  * @author VISTALL

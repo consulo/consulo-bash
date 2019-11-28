@@ -18,13 +18,12 @@
 
 package com.ansorgit.plugins.bash.settings;
 
-import javax.swing.JComponent;
-
-import org.jetbrains.annotations.Nls;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import consulo.ui.RequiredUIAccess;
+import consulo.ui.annotation.RequiredUIAccess;
+
+import javax.swing.*;
 
 /**
  * Date: 12.05.2009
@@ -42,7 +41,6 @@ public class BashProjectSettingsConfigurable implements Configurable
 		this.project = project;
 	}
 
-	@Nls
 	public String getDisplayName()
 	{
 		return "Bash";
