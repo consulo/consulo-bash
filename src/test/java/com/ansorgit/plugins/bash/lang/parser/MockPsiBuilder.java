@@ -37,12 +37,12 @@ import com.intellij.lang.WhitespaceSkippedCallback;
 import com.intellij.lang.WhitespacesAndCommentsBinder;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.containers.Stack;
 import com.intellij.util.diff.FlyweightCapableTreeStructure;
+import consulo.util.dataholder.UnprotectedUserDataHolder;
 
 /**
  * Date: 24.03.2009
@@ -50,7 +50,7 @@ import com.intellij.util.diff.FlyweightCapableTreeStructure;
  *
  * @author Joachim Ansorg
  */
-public class MockPsiBuilder implements PsiBuilder
+public class MockPsiBuilder extends UnprotectedUserDataHolder implements PsiBuilder
 {
 	private static final Logger log = Logger.getInstance("#bash.MockPsiBuilder");
 	private List<IElementType> elements;
@@ -279,29 +279,9 @@ public class MockPsiBuilder implements PsiBuilder
 		return null;
 	}
 
-	public <T> T getUserData(Key<T> tKey)
-	{
-		return (T) userData.get(tKey);
-	}
-
-	public <T> void putUserData(Key<T> tKey, T t)
-	{
-		userData.put(tKey, t);
-	}
-
 	public List<Pair<MockMarker, IElementType>> getDoneMarkers()
 	{
 		return doneMarkers;
-	}
-
-	public <T> T getUserDataUnprotected(@Nonnull Key<T> tKey)
-	{
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	public <T> void putUserDataUnprotected(@Nonnull Key<T> tKey, @Nullable T t)
-	{
-
 	}
 
 	public final class MockMarker implements Marker

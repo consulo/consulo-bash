@@ -15,7 +15,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<idea-plugin>
+<consulo-plugin>
 	<id>consulo.bash</id>
 	<name>Bash Support</name>
 	<category>Custom Languages</category>
@@ -144,4 +144,4 @@
 
 		<projectService serviceImplementation="com.ansorgit.plugins.bash.settings.BashProjectSettingsComponent"/>
 	</extensions>
-</idea-plugin>
+</consulo-plugin>

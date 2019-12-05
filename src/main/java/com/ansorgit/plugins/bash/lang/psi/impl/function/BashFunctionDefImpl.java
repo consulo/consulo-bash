@@ -18,12 +18,6 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.function;
 
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NonNls;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashBlock;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFunctionDefName;
@@ -39,13 +33,8 @@ import com.google.common.collect.Lists;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.StubBasedPsiElement;
+import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.scope.util.PsiScopesUtilCore;
 import com.intellij.psi.stubs.IStubElementType;
@@ -53,6 +42,12 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import consulo.ide.IconDescriptorUpdaters;
 import consulo.ui.image.Image;
+import consulo.util.dataholder.Key;
+import org.jetbrains.annotations.NonNls;
+
+import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Joachim Ansorg
@@ -109,7 +104,7 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
         return body != null && body.isCommandGroup();
     }
 
-    Key<BashFunctionDefName> NAME_SYMBOL_KEY = Key.create("nameSymbol");
+    private static final Key<BashFunctionDefName> NAME_SYMBOL_KEY = Key.create("nameSymbol");
 
     public BashFunctionDefName getNameSymbol() {
         final BashFunctionDefName nameWord = findChildByClass(BashFunctionDefName.class);

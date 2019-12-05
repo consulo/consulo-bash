@@ -23,13 +23,11 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 import com.intellij.lang.injection.InjectedLanguageManager;
-import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.scope.PsiScopeProcessor;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
 
 /**
  * The base class for psi processors.

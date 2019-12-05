@@ -1,6 +1,7 @@
 package com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting;
 
-import com.intellij.openapi.util.Key;
+
+import consulo.util.dataholder.Key;
 
 public class HighlightingKeys {
     private HighlightingKeys() {
