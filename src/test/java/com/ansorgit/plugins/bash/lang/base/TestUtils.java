@@ -18,7 +18,6 @@
 
 package com.ansorgit.plugins.bash.lang.base;
 
-import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
@@ -67,7 +66,7 @@ public abstract class TestUtils {
 
     public static String getTestDataPath() {
         if (TEST_DATA_PATH == null) {
-            TEST_DATA_PATH = FileUtil.toSystemIndependentName(PathManager.getHomePath()) + "/svnPlugins/groovy/testdata";
+            TEST_DATA_PATH = "";
         }
         return TEST_DATA_PATH;
     }
