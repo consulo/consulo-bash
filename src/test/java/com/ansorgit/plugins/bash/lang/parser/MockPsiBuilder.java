@@ -57,7 +57,6 @@ public class MockPsiBuilder extends UnprotectedUserDataHolder implements PsiBuil
 	private List<String> textTokens;
 	private List<String> errors = new ArrayList<String>();
 	private Stack<MockMarker> markers = new Stack<MockMarker>();
-	private Map<Key<?>, Object> userData = new HashMap<Key<?>, Object>();
 
 	private List<Pair<MockMarker, IElementType>> doneMarkers = Lists.newLinkedList();
 
