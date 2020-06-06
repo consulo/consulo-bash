@@ -29,7 +29,7 @@ import junit.framework.Assert;
  * Date: 30.06.2010
  * Time: 20:51:09
  */
-public class HereDocResolveTest extends AbstractResolveTest {
+public abstract class HereDocResolveTest extends AbstractResolveTest {
     public void testResolveHereDocStartMarker() throws Exception {
         PsiReference endMarker = configure();
         Assert.assertNotNull(endMarker);

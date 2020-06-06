@@ -25,7 +25,7 @@ import org.junit.Assert;
  * Date: 17.07.2010
  * Time: 12:50:01
  */
-public class StaticExpressionTest extends AbstractArithExprTest {
+public abstract class StaticExpressionTest extends AbstractArithExprTest {
     public void testProductSimpleStaticExpression() throws Exception {
         Assert.assertTrue(configureTopArithExpression().isStatic());
     }

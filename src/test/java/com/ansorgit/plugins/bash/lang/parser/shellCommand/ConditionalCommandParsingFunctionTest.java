@@ -11,7 +11,7 @@ import org.junit.Test;
  * Date: 23.06.11
  * Time: 16:37
  */
-public class ConditionalCommandParsingFunctionTest extends MockPsiTest {
+public abstract class ConditionalCommandParsingFunctionTest extends MockPsiTest {
     MockFunction conditionalFunction = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

@@ -18,10 +18,10 @@
 
 package com.ansorgit.plugins.bash.lang.parser.command;
 
+import org.junit.Test;
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
 import com.ansorgit.plugins.bash.lang.parser.MockPsiTest;
 import com.ansorgit.plugins.bash.lang.parser.Parsing;
-import org.junit.Test;
 
 /**
  * Date: 25.03.2009
@@ -29,7 +29,7 @@ import org.junit.Test;
  *
  * @author Joachim Ansorg
  */
-public class TimeParsingTest extends MockPsiTest {
+public abstract class TimeParsingTest extends MockPsiTest {
     private final MockFunction timeTest = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

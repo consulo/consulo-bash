@@ -1,16 +1,16 @@
 package com.ansorgit.plugins.bash.lang.parser.variable;
 
+import org.junit.Test;
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
 import com.ansorgit.plugins.bash.lang.parser.MockPsiTest;
 import com.google.common.collect.Lists;
-import org.junit.Test;
 
 /**
  * User: jansorg
  * Date: 26.01.11
  * Time: 19:58
  */
-public class ComposedVariableParsingTest extends MockPsiTest {
+public abstract class ComposedVariableParsingTest extends MockPsiTest {
     protected MockFunction mockFunction = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

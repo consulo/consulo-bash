@@ -14,7 +14,7 @@ import org.junit.Assert;
  * Date: 06.02.11
  * Time: 12:57
  */
-public class ReferencesTestCase extends AbstractFileIncludeTest {
+public abstract class ReferencesTestCase extends AbstractFileIncludeTest {
     @Override
     protected String getTestDataPath() {
         return super.getTestDataPath() + "references/";

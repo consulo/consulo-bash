@@ -28,7 +28,7 @@ import org.junit.Test;
  *
  * @author Joachim Ansorg
  */
-public class CommandParsingTest extends MockPsiTest {
+public abstract class CommandParsingTest extends MockPsiTest {
     private MockFunction simpleCommandTest = new MockFunction() {
         public boolean apply(BashPsiBuilder builder) {
             return Parsing.command.parse(builder);

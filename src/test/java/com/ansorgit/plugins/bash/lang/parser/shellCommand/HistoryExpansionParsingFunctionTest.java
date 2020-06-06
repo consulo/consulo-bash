@@ -1,14 +1,14 @@
 package com.ansorgit.plugins.bash.lang.parser.shellCommand;
 
+import org.junit.Test;
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
 import com.ansorgit.plugins.bash.lang.parser.MockPsiTest;
 import com.ansorgit.plugins.bash.lang.parser.Parsing;
-import org.junit.Test;
 
 /**
  * @author Joachim Ansorg
  */
-public class HistoryExpansionParsingFunctionTest extends MockPsiTest {
+public abstract class HistoryExpansionParsingFunctionTest extends MockPsiTest {
     private MockFunction expansionParser = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

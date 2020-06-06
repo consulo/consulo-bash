@@ -18,12 +18,17 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
-import com.ansorgit.plugins.bash.lang.parser.util.ParserUtil;
+import static com.ansorgit.plugins.bash.lang.BashVersion.Bash_v3;
+import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.BACKQUOTE;
+import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.FOR_KEYWORD;
+import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.NUMBER;
+import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.VARIABLE;
+import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.WHITESPACE;
+import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.WORD;
+
 import org.junit.Assert;
 import org.junit.Test;
-
-import static com.ansorgit.plugins.bash.lang.BashVersion.Bash_v3;
-import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.*;
+import com.ansorgit.plugins.bash.lang.parser.util.ParserUtil;
 
 /**
  * Date: 26.03.2009
@@ -31,7 +36,7 @@ import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.*;
  *
  * @author Joachim Ansorg
  */
-public class ParserUtilTest {
+public abstract class ParserUtilTest {
     @Test
     public void testIsWordToken() {
         Assert.assertTrue(ParserUtil.isWordToken(WORD));

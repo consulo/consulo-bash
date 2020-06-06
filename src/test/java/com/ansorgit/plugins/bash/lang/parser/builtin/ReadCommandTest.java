@@ -18,18 +18,18 @@
 
 package com.ansorgit.plugins.bash.lang.parser.builtin;
 
+import org.junit.Test;
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
 import com.ansorgit.plugins.bash.lang.parser.MockPsiTest;
 import com.google.common.collect.Lists;
-import org.junit.Test;
 
 /**
  * User: jansorg
  * Date: 23.05.2009
  * Time: 23:51:45
  */
-public class ReadCommandTest extends MockPsiTest {
+public abstract class ReadCommandTest extends MockPsiTest {
     MockFunction parserFunction = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

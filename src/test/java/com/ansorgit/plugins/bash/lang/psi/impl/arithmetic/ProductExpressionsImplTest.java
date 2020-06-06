@@ -18,18 +18,18 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.arithmetic;
 
+import org.junit.Assert;
+import org.junit.Test;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * User: jansorg
  * Date: Apr 17, 2010
  * Time: 12:22:58 AM
  */
-public class ProductExpressionsImplTest {
+public abstract class ProductExpressionsImplTest {
     @Test
     public void testCompute() {
         ProductExpressionsImpl product = createDummyNode();

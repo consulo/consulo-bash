@@ -26,7 +26,7 @@ import org.junit.Test;
  * Date: 22.07.2010
  * Time: 19:05:25
  */
-public class BashInterpreterDetectionTest {
+public abstract class BashInterpreterDetectionTest {
     @Test
     public void testFindBestLocation() throws Exception {
         BashInterpreterDetection detection = new BashInterpreterDetection() {

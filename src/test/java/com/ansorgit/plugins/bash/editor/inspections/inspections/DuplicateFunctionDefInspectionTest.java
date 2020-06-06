@@ -5,7 +5,7 @@ package com.ansorgit.plugins.bash.editor.inspections.inspections;
  * Date: 28.12.10
  * Time: 16:50
  */
-public class DuplicateFunctionDefInspectionTest extends AbstractInspectionTestCase {
+public abstract class DuplicateFunctionDefInspectionTest extends AbstractInspectionTestCase {
     public DuplicateFunctionDefInspectionTest() {
         super(DuplicateFunctionDefInspection.class);
     }

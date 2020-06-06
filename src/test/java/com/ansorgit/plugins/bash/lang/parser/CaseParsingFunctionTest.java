@@ -26,7 +26,7 @@ import org.junit.Test;
  *
  * @author Joachim Ansorg
  */
-public class CaseParsingFunctionTest extends MockPsiTest {
+public abstract class CaseParsingFunctionTest extends MockPsiTest {
     private final MockFunction caseTest = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

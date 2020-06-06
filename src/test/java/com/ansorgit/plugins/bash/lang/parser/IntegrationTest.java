@@ -28,7 +28,7 @@ import org.junit.Test;
  *
  * @author Joachim Ansorg
  */
-public class IntegrationTest extends MockPsiTest {
+public abstract class IntegrationTest extends MockPsiTest {
     private static final MockFunction fileParsingTest = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder builder) {

@@ -23,7 +23,7 @@ import junit.framework.Assert;
 
 /**
  */
-public class BashPathCommandCompletionTest {
+public abstract class BashPathCommandCompletionTest {
     @Test
     public void testFindUpperLimit() throws Exception {
         BashPathCommandCompletion completion = new BashPathCommandCompletion();

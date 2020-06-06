@@ -1,16 +1,16 @@
 package com.ansorgit.plugins.bash.lang.parser.shellCommand;
 
+import org.junit.Test;
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
 import com.ansorgit.plugins.bash.lang.parser.MockPsiTest;
 import com.ansorgit.plugins.bash.lang.parser.Parsing;
-import org.junit.Test;
 
 /**
  * User: jansorg
  * Date: 31.03.11
  * Time: 19:45
  */
-public class BacktickParsingFunctionTest extends MockPsiTest {
+public abstract class BacktickParsingFunctionTest extends MockPsiTest {
     MockFunction backtickParser = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

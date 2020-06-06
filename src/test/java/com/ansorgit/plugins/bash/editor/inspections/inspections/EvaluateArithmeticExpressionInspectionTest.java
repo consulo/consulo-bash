@@ -5,7 +5,7 @@ package com.ansorgit.plugins.bash.editor.inspections.inspections;
  * Date: 29.12.10
  * Time: 12:33
  */
-public class EvaluateArithmeticExpressionInspectionTest extends AbstractInspectionTestCase {
+public abstract class EvaluateArithmeticExpressionInspectionTest extends AbstractInspectionTestCase {
     public EvaluateArithmeticExpressionInspectionTest() {
         super(EvaluateArithmeticExpressionInspection.class);
     }

@@ -18,19 +18,15 @@
 
 package com.ansorgit.plugins.bash.lang.parser.builtin;
 
-import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
-import com.ansorgit.plugins.bash.lang.parser.*;
-import com.google.common.collect.Lists;
-import com.intellij.openapi.util.Pair;
-import com.intellij.psi.tree.IElementType;
 import org.junit.Test;
-
-import java.util.List;
+import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
+import com.ansorgit.plugins.bash.lang.parser.MockPsiTest;
+import com.ansorgit.plugins.bash.lang.parser.Parsing;
 
 /**
  * @author Joachim Ansorg
  */
-public class UnsetCommandTest extends MockPsiTest {
+public abstract class UnsetCommandTest extends MockPsiTest {
     MockFunction parserFunction = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

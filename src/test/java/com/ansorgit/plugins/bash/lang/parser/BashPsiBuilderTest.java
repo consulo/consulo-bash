@@ -11,7 +11,7 @@ import com.ansorgit.plugins.bash.lang.BashVersion;
  * Date: 09.11.11
  * Time: 22:21
  */
-public class BashPsiBuilderTest extends MockPsiTest {
+public abstract class BashPsiBuilderTest extends MockPsiTest {
     @Test
     public void testWhitespaceDisabled() throws Exception {
         BashPsiBuilder builder = new BashPsiBuilder(builderFor(Collections.<String>emptyList(), NUMBER, WHITESPACE, WORD), BashVersion.Bash_v4);

@@ -25,7 +25,7 @@ import com.ansorgit.plugins.bash.settings.BashProjectSettings;
  * Date: 09.02.11
  * Time: 22:07
  */
-public class FunctionNameCompletionTest extends AbstractCompletionTest {
+public abstract class FunctionNameCompletionTest extends AbstractCompletionTest {
     @Override
     protected String getTestDir() {
         return "functionNameCompletion";

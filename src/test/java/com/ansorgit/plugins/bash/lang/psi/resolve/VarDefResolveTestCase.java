@@ -30,7 +30,7 @@ import junit.framework.Assert;
  * Date: 15.06.2010
  * Time: 19:14:20
  */
-public class VarDefResolveTestCase extends AbstractResolveTest {
+public abstract class VarDefResolveTestCase extends AbstractResolveTest {
     private BashVarDef assertIsValidVarDef() throws Exception {
         PsiReference ref = configure();
         PsiElement element = ref.resolve();

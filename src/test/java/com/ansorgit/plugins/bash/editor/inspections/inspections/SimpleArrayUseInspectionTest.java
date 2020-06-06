@@ -7,7 +7,7 @@ import org.junit.Test;
  * Date: 28.12.10
  * Time: 19:47
  */
-public class SimpleArrayUseInspectionTest extends AbstractInspectionTestCase {
+public abstract class SimpleArrayUseInspectionTest extends AbstractInspectionTestCase {
 
     public SimpleArrayUseInspectionTest() {
         super(SimpleArrayUseInspection.class);

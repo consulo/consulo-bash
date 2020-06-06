@@ -34,7 +34,7 @@ import java.util.List;
  *
  * @author Ilya.Sergey, Joachim Ansorg
  */
-public class DisabledFormatterTest extends BashFormatterTestCase {
+public abstract class DisabledFormatterTest extends BashFormatterTestCase {
     @Override
     protected String getBasePath() {
         return BashTestUtils.getBasePath() + "/disabledFormatter/";

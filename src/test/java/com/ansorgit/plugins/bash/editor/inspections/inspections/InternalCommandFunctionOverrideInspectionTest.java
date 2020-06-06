@@ -5,7 +5,7 @@ package com.ansorgit.plugins.bash.editor.inspections.inspections;
  * Date: 26.03.11
  * Time: 23:05
  */
-public class InternalCommandFunctionOverrideInspectionTest extends AbstractInspectionTestCase {
+public abstract class InternalCommandFunctionOverrideInspectionTest extends AbstractInspectionTestCase {
     public InternalCommandFunctionOverrideInspectionTest() {
         super(InternalCommandFunctionOverrideInspection.class);
     }

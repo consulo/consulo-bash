@@ -1,16 +1,16 @@
 package com.ansorgit.plugins.bash.lang.psi.fileInclude;
 
+import org.junit.Assert;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
-import org.junit.Assert;
 
 /**
  * User: jansorg
  * Date: 06.02.11
  * Time: 12:57
  */
-public class VarResolveFileIncludeTestCase extends AbstractFileIncludeTest {
+public abstract class VarResolveFileIncludeTestCase extends AbstractFileIncludeTest {
     @Override
     protected String getTestDataPath() {
         return super.getTestDataPath() + "varResolve/";

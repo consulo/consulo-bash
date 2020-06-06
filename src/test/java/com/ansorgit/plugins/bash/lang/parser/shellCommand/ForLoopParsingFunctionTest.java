@@ -18,17 +18,17 @@
 
 package com.ansorgit.plugins.bash.lang.parser.shellCommand;
 
+import org.junit.Test;
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
 import com.ansorgit.plugins.bash.lang.parser.MockPsiTest;
 import com.ansorgit.plugins.bash.lang.parser.Parsing;
-import org.junit.Test;
 
 /**
  * User: jansorg
  * Date: 05.06.2010
  * Time: 18:07:14
  */
-public class ForLoopParsingFunctionTest extends MockPsiTest {
+public abstract class ForLoopParsingFunctionTest extends MockPsiTest {
     MockFunction forLoop = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

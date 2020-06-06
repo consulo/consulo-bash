@@ -30,7 +30,7 @@ import junit.framework.Assert;
  * Date: 15.06.2010
  * Time: 19:14:20
  */
-public class FunctionResolveTestCase extends AbstractResolveTest {
+public abstract class FunctionResolveTestCase extends AbstractResolveTest {
     public void testBasicFunctionResolve() throws Exception {
         checkFunctionReference();
     }

@@ -7,7 +7,7 @@ import org.junit.Test;
  * Date: 28.12.10
  * Time: 19:15
  */
-public class UnusedFunctionDefInspectionTest extends AbstractInspectionTestCase {
+public abstract class UnusedFunctionDefInspectionTest extends AbstractInspectionTestCase {
     public UnusedFunctionDefInspectionTest() {
         super(UnusedFunctionDefInspection.class);
     }

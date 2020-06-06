@@ -18,13 +18,13 @@
 
 package com.ansorgit.plugins.bash.lang.parser.command;
 
+import org.junit.Ignore;
+import org.junit.Test;
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
 import com.ansorgit.plugins.bash.lang.parser.MockPsiTest;
 import com.ansorgit.plugins.bash.lang.parser.Parsing;
-import org.junit.Ignore;
-import org.junit.Test;
 
-public class FunctionDefParsingFunctionTest extends MockPsiTest {
+public abstract class FunctionDefParsingFunctionTest extends MockPsiTest {
     MockFunction f = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

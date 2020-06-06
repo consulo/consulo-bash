@@ -26,7 +26,7 @@ import org.junit.Test;
  *
  * @author Joachim Ansorg
  */
-public class PiplelineParsingTest extends MockPsiTest {
+public abstract class PiplelineParsingTest extends MockPsiTest {
     private final MockFunction testPipeline = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

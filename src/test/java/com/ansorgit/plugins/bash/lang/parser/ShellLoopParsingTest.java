@@ -26,7 +26,7 @@ import org.junit.Test;
  *
  * @author Joachim Ansorg
  */
-public class ShellLoopParsingTest extends MockPsiTest {
+public abstract class ShellLoopParsingTest extends MockPsiTest {
     private MockFunction forLoopTester = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder builder) {

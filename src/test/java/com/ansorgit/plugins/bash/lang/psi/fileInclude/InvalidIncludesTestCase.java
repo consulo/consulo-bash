@@ -13,7 +13,7 @@ import java.util.Set;
  * Date: 06.02.11
  * Time: 12:57
  */
-public class InvalidIncludesTestCase extends AbstractFileIncludeTest {
+public abstract class InvalidIncludesTestCase extends AbstractFileIncludeTest {
     @Override
     protected String getTestDataPath() {
         return super.getTestDataPath() + "invalidIncludes/";

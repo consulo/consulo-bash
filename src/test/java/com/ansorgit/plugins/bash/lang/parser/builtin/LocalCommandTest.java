@@ -18,19 +18,19 @@
 
 package com.ansorgit.plugins.bash.lang.parser.builtin;
 
+import org.junit.Test;
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
 import com.ansorgit.plugins.bash.lang.parser.MockPsiTest;
 import com.ansorgit.plugins.bash.lang.parser.Parsing;
 import com.google.common.collect.Lists;
-import org.junit.Test;
 
 /**
  * User: jansorg
  * Date: Jan 28, 2010
  * Time: 7:08:16 PM
  */
-public class LocalCommandTest extends MockPsiTest {
+public abstract class LocalCommandTest extends MockPsiTest {
     private MockFunction localParser = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

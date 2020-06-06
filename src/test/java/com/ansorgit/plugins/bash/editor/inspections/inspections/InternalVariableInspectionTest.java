@@ -7,7 +7,7 @@ import org.junit.Test;
  * Date: 28.12.10
  * Time: 19:47
  */
-public class InternalVariableInspectionTest extends AbstractInspectionTestCase {
+public abstract class InternalVariableInspectionTest extends AbstractInspectionTestCase {
     public InternalVariableInspectionTest() {
         super(InternalVariableInspection.class);
     }

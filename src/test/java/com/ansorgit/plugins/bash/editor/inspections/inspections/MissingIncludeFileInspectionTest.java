@@ -5,7 +5,7 @@ package com.ansorgit.plugins.bash.editor.inspections.inspections;
  * Date: 28.12.10
  * Time: 21:23
  */
-public class MissingIncludeFileInspectionTest extends AbstractInspectionTestCase {
+public abstract class MissingIncludeFileInspectionTest extends AbstractInspectionTestCase {
     public MissingIncludeFileInspectionTest() {
         super(MissingIncludeFileInspection.class);
     }

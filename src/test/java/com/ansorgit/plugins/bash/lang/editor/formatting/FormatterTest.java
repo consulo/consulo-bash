@@ -18,13 +18,13 @@
 
 package com.ansorgit.plugins.bash.lang.editor.formatting;
 
+import java.util.List;
+
 import com.ansorgit.plugins.bash.BashTestUtils;
 import com.ansorgit.plugins.bash.lang.base.BashFormatterTestCase;
 import com.ansorgit.plugins.bash.lang.base.TestUtils;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-
-import java.util.List;
 
 /**
  * Test suite for static formatting. Compares two files:
@@ -34,7 +34,7 @@ import java.util.List;
  *
  * @author Ilya.Sergey, Joachim Ansorg
  */
-public class FormatterTest extends BashFormatterTestCase {
+public abstract class FormatterTest extends BashFormatterTestCase {
     @Override
     protected String getBasePath() {
         return BashTestUtils.getBasePath() + "/formatter/";

@@ -5,7 +5,7 @@ package com.ansorgit.plugins.bash.editor.inspections.inspections;
  * Date: 29.12.10
  * Time: 12:29
  */
-public class SimpleVarUsageInspectionTest extends AbstractInspectionTestCase {
+public abstract class SimpleVarUsageInspectionTest extends AbstractInspectionTestCase {
     public SimpleVarUsageInspectionTest() {
         super(SimpleVarUsageInspection.class);
     }

@@ -18,15 +18,15 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.arithmetic;
 
-import junit.framework.Assert;
 import org.junit.Test;
+import junit.framework.Assert;
 
 /**
  * User: jansorg
  * Date: 26.05.2010
  * Time: 21:49:24
  */
-public class SimpleExpressionsImplTest {
+public abstract class SimpleExpressionsImplTest {
     @Test
     public void testDecimalLiteral() {
         Assert.assertEquals(0, SimpleExpressionsImpl.baseLiteralValue(10, "0"));

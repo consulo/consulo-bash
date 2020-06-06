@@ -18,15 +18,15 @@
 
 package com.ansorgit.plugins.bash.lang.psi.arithmetic;
 
-import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
 import org.junit.Assert;
+import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
 
 /**
  * User: jansorg
  * Date: 17.07.2010
  * Time: 10:27:57
  */
-public class StaticValueComputationTest extends AbstractArithExprTest {
+public abstract class StaticValueComputationTest extends AbstractArithExprTest {
     public void testExpressionTest() throws Exception {
         assertValueComputedResult(74430296);
     }

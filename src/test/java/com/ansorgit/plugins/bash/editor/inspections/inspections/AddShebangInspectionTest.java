@@ -5,7 +5,7 @@ package com.ansorgit.plugins.bash.editor.inspections.inspections;
  * Date: 28.12.10
  * Time: 16:50
  */
-public class AddShebangInspectionTest extends AbstractInspectionTestCase {
+public abstract class AddShebangInspectionTest extends AbstractInspectionTestCase {
     public AddShebangInspectionTest() {
         super(AddShebangInspection.class);
     }

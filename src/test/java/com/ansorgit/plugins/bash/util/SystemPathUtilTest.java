@@ -18,17 +18,17 @@
 
 package com.ansorgit.plugins.bash.util;
 
-import junit.framework.Assert;
-import org.junit.Test;
-
 import java.util.Arrays;
+
+import org.junit.Test;
+import junit.framework.Assert;
 
 /**
  * User: jansorg
  * Date: 08.05.2010
  * Time: 12:07:32
  */
-public class SystemPathUtilTest {
+public abstract class SystemPathUtilTest {
     @Test
     public void testFindBestExecutable() throws Exception {
         String path = SystemPathUtil.findBestExecutable("info");

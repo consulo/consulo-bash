@@ -24,7 +24,7 @@ import com.ansorgit.plugins.bash.lang.parser.Parsing;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class ArithmeticParserTest extends MockPsiTest {
+public abstract class ArithmeticParserTest extends MockPsiTest {
     private final MockFunction arithmeticTest = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

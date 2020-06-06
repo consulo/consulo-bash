@@ -18,17 +18,17 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
-import junit.framework.Assert;
-import org.junit.Test;
-
 import java.io.IOException;
+
+import org.junit.Test;
+import junit.framework.Assert;
 
 /**
  * User: jansorg
  * Date: 08.05.2010
  * Time: 12:04:49
  */
-public class SystemInfopageDocSourceTest {
+public abstract class SystemInfopageDocSourceTest {
     @Test
     public void testInfoPageCall() throws IOException {
         SystemInfopageDocSource source = new SystemInfopageDocSource();

@@ -31,7 +31,7 @@ import com.intellij.psi.tree.IElementType;
  *
  * @author Joachim Ansorg
  */
-public class BashLexerTest {
+public abstract class BashLexerTest {
     @Test
     public void testSimpleDefTokenization() {
         testTokenization("#", COMMENT);

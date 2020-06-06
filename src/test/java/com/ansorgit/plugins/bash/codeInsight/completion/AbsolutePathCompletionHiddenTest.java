@@ -5,7 +5,7 @@ package com.ansorgit.plugins.bash.codeInsight.completion;
  * Date: 09.02.11
  * Time: 20:59
  */
-public class AbsolutePathCompletionHiddenTest extends AbstractCompletionTest {
+public abstract class AbsolutePathCompletionHiddenTest extends AbstractCompletionTest {
     @Override
     protected String getTestDir() {
         return "absolutePathCompletionHidden";

@@ -8,7 +8,7 @@ import junit.framework.TestCase;
  * Date: 12.03.11
  * Time: 13:04
  */
-public class ErrorFilesTest extends TestCase
+public abstract class ErrorFilesTest extends TestCase
 {
     protected String getTestDataPath() {
         return BashTestUtils.getBasePath() + "/errorFiles/";

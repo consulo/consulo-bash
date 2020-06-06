@@ -11,7 +11,7 @@ import org.junit.Assert;
  * Date: 06.02.11
  * Time: 12:57
  */
-public class ResolveScopeTestCase extends AbstractFileIncludeTest {
+public abstract class ResolveScopeTestCase extends AbstractFileIncludeTest {
     @Override
     protected String getTestDataPath() {
         return super.getTestDataPath() + "resolveScope/";

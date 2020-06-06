@@ -31,7 +31,7 @@ import java.util.Collections;
  *
  * @author Joachim Ansorg
  */
-public class RedirectionParsingTest extends MockPsiTest {
+public abstract class RedirectionParsingTest extends MockPsiTest {
     MockFunction redirectionTest = new MockFunction() {
         public boolean apply(BashPsiBuilder builder) {
             return Parsing.redirection.parseList(builder, false);

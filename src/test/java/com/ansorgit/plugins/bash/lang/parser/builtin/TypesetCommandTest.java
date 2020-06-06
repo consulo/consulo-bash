@@ -18,11 +18,11 @@
 
 package com.ansorgit.plugins.bash.lang.parser.builtin;
 
+import org.junit.Test;
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
 import com.ansorgit.plugins.bash.lang.parser.MockPsiTest;
 import com.google.common.collect.Lists;
-import org.junit.Test;
 
 /**
  * Date: 15.04.2009
@@ -30,7 +30,7 @@ import org.junit.Test;
  *
  * @author Joachim Ansorg
  */
-public class TypesetCommandTest extends MockPsiTest {
+public abstract class TypesetCommandTest extends MockPsiTest {
     MockFunction typeset = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

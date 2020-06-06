@@ -1,16 +1,16 @@
 package com.ansorgit.plugins.bash.lang.psi.fileInclude;
 
-import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
-import com.intellij.psi.PsiElement;
 import org.junit.Assert;
 import org.junit.Test;
+import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
+import com.intellij.psi.PsiElement;
 
 /**
  * User: jansorg
  * Date: 18.02.11
  * Time: 20:25
  */
-public class FileReferenceTest extends AbstractFileIncludeTest {
+public abstract class FileReferenceTest extends AbstractFileIncludeTest {
     @Override
     protected String getTestDataPath() {
         return super.getTestDataPath() + "fileReference/";

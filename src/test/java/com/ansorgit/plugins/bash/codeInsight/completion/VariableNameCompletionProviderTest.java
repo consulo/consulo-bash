@@ -7,7 +7,7 @@ import com.ansorgit.plugins.bash.settings.BashProjectSettings;
  * Date: 09.02.11
  * Time: 20:59
  */
-public class VariableNameCompletionProviderTest extends AbstractCompletionTest {
+public abstract class VariableNameCompletionProviderTest extends AbstractCompletionTest {
     @Override
     protected String getTestDir() {
         return "variableNameCompletion";

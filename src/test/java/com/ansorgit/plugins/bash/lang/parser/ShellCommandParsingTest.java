@@ -29,7 +29,7 @@ import static com.ansorgit.plugins.bash.lang.BashVersion.Bash_v3;
  *
  * @author Joachim Ansorg
  */
-public class ShellCommandParsingTest extends MockPsiTest {
+public abstract class ShellCommandParsingTest extends MockPsiTest {
     private final MockFunction arithmeticParsingTester = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder builder) {

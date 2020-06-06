@@ -1,14 +1,14 @@
 package com.ansorgit.plugins.bash.codeInsight.completion;
 
-import com.intellij.codeInsight.lookup.LookupElement;
 import org.junit.Assert;
+import com.intellij.codeInsight.lookup.LookupElement;
 
 /**
  * User: jansorg
  * Date: 09.02.11
  * Time: 20:59
  */
-public class DynamicPathCompletionTest extends AbstractCompletionTest {
+public abstract class DynamicPathCompletionTest extends AbstractCompletionTest {
     @Override
     protected String getTestDir() {
         return "dynamicPathCompletion";

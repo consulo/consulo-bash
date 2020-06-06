@@ -27,7 +27,7 @@ import org.junit.Test;
  *
  * @author Joachim Ansorg
  */
-public class HereDocParsingTest extends MockPsiTest {
+public abstract class HereDocParsingTest extends MockPsiTest {
     MockFunction hereDoc = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder psi) {

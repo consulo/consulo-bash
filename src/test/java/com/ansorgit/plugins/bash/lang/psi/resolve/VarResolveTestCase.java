@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.resolve;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import com.ansorgit.plugins.bash.BashTestUtils;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
@@ -28,14 +30,12 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.LocalSearchScope;
 import junit.framework.Assert;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * User: jansorg
  * Date: 15.06.2010
  * Time: 19:14:20
  */
-public class VarResolveTestCase extends AbstractResolveTest {
+public abstract class VarResolveTestCase extends AbstractResolveTest {
     private BashVarDef assertIsWellDefinedVariable() throws Exception {
         PsiReference start = configure();
         PsiElement varDef = start.resolve();

@@ -26,7 +26,7 @@ import org.junit.Test;
  *
  * @author Joachim Ansorg
  */
-public class WordParsingTest extends MockPsiTest {
+public abstract class WordParsingTest extends MockPsiTest {
     private MockFunction wordTestParser = new MockFunction() {
         @Override
         public boolean apply(BashPsiBuilder builder) {

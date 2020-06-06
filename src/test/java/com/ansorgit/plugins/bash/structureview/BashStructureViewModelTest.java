@@ -27,7 +27,7 @@ import com.intellij.testFramework.UsefulTestCase;
  * Date: 17.07.2010
  * Time: 10:32:04
  */
-public class BashStructureViewModelTest extends UsefulTestCase
+public abstract class BashStructureViewModelTest extends UsefulTestCase
 {
     protected interface Test {
         void test(StructureViewComponent component);
