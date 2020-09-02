@@ -18,9 +18,6 @@
 
 package com.ansorgit.plugins.bash.actions;
 
-import javax.annotation.Nullable;
-import consulo.awt.TargetAWT;
-import consulo.bash.module.extension.BashModuleExtension;
 import com.ansorgit.plugins.bash.runner.repl.BashConsoleRunner;
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -32,12 +29,15 @@ import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import consulo.bash.module.extension.BashModuleExtension;
+
+import javax.annotation.Nullable;
 
 public class AddReplAction extends AnAction {
     private static final com.intellij.openapi.diagnostic.Logger log = com.intellij.openapi.diagnostic.Logger.getInstance("AddReplAction");
 
     public AddReplAction() {
-        super(TargetAWT.to(BashIcons.BASH_FILE_ICON));
+        super(BashIcons.BASH_FILE_ICON);
     }
 
     @Override
