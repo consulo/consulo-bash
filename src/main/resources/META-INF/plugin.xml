@@ -129,7 +129,7 @@
 
 		<moduleExtensionProvider key="bash"
 								 allowMixin="true"
-								 icon="/icons/bash-16.png"
+								 icon="consulo.bash.BashIconGroup@bash_icon"
 								 name="Bash"
 								 mutableClass="consulo.bash.module.extension.BashMutableModuleExtension"
 								 immutableClass="consulo.bash.module.extension.BashModuleExtension"/>

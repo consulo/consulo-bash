@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.util;
 
-import com.intellij.openapi.util.IconLoader;
+import consulo.bash.icon.BashIconGroup;
 import consulo.ui.image.Image;
 
 /**
@@ -28,15 +28,13 @@ import consulo.ui.image.Image;
  */
 public interface BashIcons
 {
-	Image BASH_LARGE_ICON = IconLoader.findIcon("/icons/bash-64.png");
+	Image BASH_FILE_ICON = BashIconGroup.bash_icon();
 
-	Image BASH_FILE_ICON = IconLoader.findIcon("/icons/bash-16.png");
+	Image FUNCTION_DEF_ICON = BashIconGroup.function_16();
 
-	Image FUNCTION_DEF_ICON = IconLoader.findIcon("/icons/function-16.png");
+	Image GLOBAL_VAR_ICON = BashIconGroup.global_var_16();
 
-	Image GLOBAL_VAR_ICON = IconLoader.findIcon("/icons/global-var-16.png");
+	Image BASH_VAR_ICON = BashIconGroup.bash_var_16();
 
-	Image BASH_VAR_ICON = IconLoader.findIcon("/icons/bash-var-16.png");
-
-	Image BOURNE_VAR_ICON = IconLoader.findIcon("/icons/bash-var-16.png");
+	Image BOURNE_VAR_ICON = BashIconGroup.bash_var_16();
 }
