@@ -23,7 +23,7 @@ import java.io.FileFilter;
 import java.util.Arrays;
 import java.util.TreeSet;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import com.intellij.openapi.application.ApplicationManager;
 

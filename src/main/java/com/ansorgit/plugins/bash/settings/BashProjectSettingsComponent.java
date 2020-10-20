@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.settings;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
