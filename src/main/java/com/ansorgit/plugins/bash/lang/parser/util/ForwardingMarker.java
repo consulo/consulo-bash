@@ -21,6 +21,8 @@ package com.ansorgit.plugins.bash.lang.parser.util;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesAndCommentsBinder;
 import com.intellij.psi.tree.IElementType;
+import consulo.localize.LocalizeValue;
+
 import javax.annotation.Nullable;
 
 /**
@@ -55,7 +57,7 @@ public abstract class ForwardingMarker implements PsiBuilder.Marker {
         original.doneBefore(type, before);
     }
 
-    public void doneBefore(IElementType type, PsiBuilder.Marker before, String errorMessage) {
+    public void doneBefore(IElementType type, PsiBuilder.Marker before, LocalizeValue errorMessage) {
         original.doneBefore(type, before, errorMessage);
     }
 
@@ -63,11 +65,11 @@ public abstract class ForwardingMarker implements PsiBuilder.Marker {
         original.drop();
     }
 
-    public void error(String message) {
+    public void error(LocalizeValue message) {
         original.error(message);
     }
 
-    public void errorBefore(String message, PsiBuilder.Marker marker) {
+    public void errorBefore(LocalizeValue message, PsiBuilder.Marker marker) {
         original.errorBefore(message, marker);
     }
 

@@ -21,6 +21,8 @@ package com.ansorgit.plugins.bash.lang.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesAndCommentsBinder;
 import com.intellij.psi.tree.IElementType;
+import consulo.localize.LocalizeValue;
+
 import javax.annotation.Nullable;
 
 /**
@@ -66,12 +68,12 @@ public final class BashSmartMarker implements PsiBuilder.Marker {
         open = false;
     }
 
-    public void doneBefore(IElementType type, PsiBuilder.Marker before, String errorMessage) {
+    public void doneBefore(IElementType type, PsiBuilder.Marker before, LocalizeValue errorMessage) {
         delegate.doneBefore(type, before, errorMessage);
         open = false;
     }
 
-    public void error(String message) {
+    public void error(LocalizeValue message) {
         delegate.error(message);
         open = false;
     }
@@ -84,7 +86,7 @@ public final class BashSmartMarker implements PsiBuilder.Marker {
         delegate.setCustomEdgeTokenBinders(whitespacesAndCommentsBinder, whitespacesAndCommentsBinder1);
     }
 
-    public void errorBefore(String message, PsiBuilder.Marker marker) {
+    public void errorBefore(LocalizeValue message, PsiBuilder.Marker marker) {
         delegate.errorBefore(message, marker);
         open = false;
     }

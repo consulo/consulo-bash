@@ -21,6 +21,8 @@ package com.ansorgit.plugins.bash.util;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesAndCommentsBinder;
 import com.intellij.psi.tree.IElementType;
+import consulo.localize.LocalizeValue;
+
 import javax.annotation.Nullable;
 
 /**
@@ -57,15 +59,15 @@ public class NullMarker implements PsiBuilder.Marker {
 
     }
 
-    public void doneBefore(IElementType iElementType, PsiBuilder.Marker marker, String s) {
+    public void doneBefore(IElementType iElementType, PsiBuilder.Marker marker, LocalizeValue s) {
 
     }
 
-    public void error(String s) {
+    public void error(LocalizeValue s) {
 
     }
 
-    public void errorBefore(String s, PsiBuilder.Marker marker) {
+    public void errorBefore(LocalizeValue s, PsiBuilder.Marker marker) {
     }
 
     public void setCustomEdgeTokenBinders(@Nullable WhitespacesAndCommentsBinder whitespacesAndCommentsBinder, @Nullable WhitespacesAndCommentsBinder whitespacesAndCommentsBinder1) {

@@ -18,7 +18,6 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
-import javax.annotation.Nullable;
 import com.ansorgit.plugins.bash.lang.BashVersion;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.util.ForwardingMarker;
@@ -28,6 +27,9 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.Stack;
+import consulo.localize.LocalizeValue;
+
+import javax.annotation.Nullable;
 
 /**
  * The PsiBuilder which has been enhanced to be more helpful for Bash parsing.
@@ -251,7 +253,7 @@ public class BashPsiBuilder extends PsiBuilderAdapter implements PsiBuilder {
         }
 
         @Override
-        public void error(final String errorMessage) {
+        public void error(final LocalizeValue errorMessage) {
             if (bashPsiBuilder.isErrorReportingEnabled()) {
                 original.error(errorMessage);
             } else {

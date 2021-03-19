@@ -18,23 +18,9 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.google.common.collect.Lists;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.ITokenTypeRemapper;
-import com.intellij.lang.LighterASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.WhitespaceSkippedCallback;
-import com.intellij.lang.WhitespacesAndCommentsBinder;
+import com.intellij.lang.*;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
@@ -42,7 +28,13 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.containers.Stack;
 import com.intellij.util.diff.FlyweightCapableTreeStructure;
+import consulo.localize.LocalizeValue;
 import consulo.util.dataholder.UnprotectedUserDataHolder;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Date: 24.03.2009
@@ -242,7 +234,7 @@ public class MockPsiBuilder extends UnprotectedUserDataHolder implements PsiBuil
 		return mockMarker;
 	}
 
-	public void error(String s)
+	public void error(LocalizeValue s)
 	{
 		errors.add("[" + elementPosition + "]: " + s);
 	}
@@ -375,20 +367,20 @@ public class MockPsiBuilder extends UnprotectedUserDataHolder implements PsiBuil
 			doneMarkers.add(Pair.create(this, elementType));
 		}
 
-		public void doneBefore(IElementType elementType, Marker marker, String s)
+		public void doneBefore(IElementType elementType, Marker marker, LocalizeValue s)
 		{
 			finishMarker();
 			doneMarkers.add(Pair.create(this, elementType));
 		}
 
-		public void error(String s)
+		public void error(LocalizeValue s)
 		{
 			MockPsiBuilder.this.error("Marker@" + position + ": " + s);
 			addedError = true;
 			finishMarker();
 		}
 
-		public void errorBefore(String s, Marker marker)
+		public void errorBefore(LocalizeValue s, Marker marker)
 		{
 			//fixme
 			error(s);
