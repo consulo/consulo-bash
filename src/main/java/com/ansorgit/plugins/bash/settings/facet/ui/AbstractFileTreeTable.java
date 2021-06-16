@@ -38,7 +38,6 @@ import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
 import consulo.awt.TargetAWT;
 import consulo.fileTypes.impl.VfsIconUtil;
-import gnu.trove.THashMap;
 
 import javax.annotation.Nonnull;
 import javax.swing.*;
@@ -134,7 +133,7 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
 
     public boolean clearSubdirectoriesOnDemandOrCancel(final VirtualFile parent, final String message, final String title) {
         Map<VirtualFile, T> mappings = myModel.myCurrentMapping;
-        Map<VirtualFile, T> subdirectoryMappings = new THashMap<VirtualFile, T>();
+        Map<VirtualFile, T> subdirectoryMappings = new HashMap<VirtualFile, T>();
         for (VirtualFile file : mappings.keySet()) {
             if (file != null && (parent == null || VfsUtil.isAncestor(parent, file, true))) {
                 subdirectoryMappings.put(file, mappings.get(file));

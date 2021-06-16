@@ -1,24 +1,17 @@
 package consulo.bash.module.extension;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
-import org.jdom.Element;
-
-import javax.annotation.Nullable;
-
 import com.ansorgit.plugins.bash.settings.facet.OperationMode;
 import com.ansorgit.plugins.bash.settings.facet.ui.FileMode;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.containers.hash.HashMap;
 import consulo.module.extension.impl.ModuleExtensionImpl;
 import consulo.roots.ModuleRootLayer;
+import org.jdom.Element;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
 /**
  * @author VISTALL
