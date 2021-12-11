@@ -18,11 +18,6 @@
 
 package com.ansorgit.plugins.bash.file;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import com.ansorgit.plugins.bash.lang.Bash;
 import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.settings.facet.ui.FileMode;
 import com.ansorgit.plugins.bash.util.BashIcons;
@@ -41,7 +36,12 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import consulo.bash.module.extension.BashModuleExtension;
+import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
+
+import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The file type implementation for Bash files.
@@ -77,14 +77,14 @@ public class BashFileType extends LanguageFileType implements FileTypeIdentifiab
 
     @Override
 	@Nonnull
-    public String getName() {
-        return Bash.lanuageName;
+    public String getId() {
+        return "Bash";
     }
 
     @Override
 	@Nonnull
-    public String getDescription() {
-        return Bash.languageDescription;
+    public LocalizeValue getDescription() {
+        return LocalizeValue.localizeTODO("Bourne Again Shell");
     }
 
     @Override

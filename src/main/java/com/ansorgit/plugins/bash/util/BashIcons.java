@@ -19,6 +19,7 @@
 package com.ansorgit.plugins.bash.util;
 
 import consulo.bash.icon.BashIconGroup;
+import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.ui.image.Image;
 
 /**
@@ -30,11 +31,7 @@ public interface BashIcons
 {
 	Image BASH_FILE_ICON = BashIconGroup.bash_icon();
 
-	Image FUNCTION_DEF_ICON = BashIconGroup.function_16();
-
 	Image GLOBAL_VAR_ICON = BashIconGroup.global_var_16();
 
-	Image BASH_VAR_ICON = BashIconGroup.bash_var_16();
-
-	Image BOURNE_VAR_ICON = BashIconGroup.bash_var_16();
+	Image BOURNE_VAR_ICON = PlatformIconGroup.nodesVariable();
 }

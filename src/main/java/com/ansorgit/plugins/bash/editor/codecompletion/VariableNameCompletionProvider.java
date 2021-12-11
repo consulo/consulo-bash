@@ -33,6 +33,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
+import consulo.platform.base.icon.PlatformIconGroup;
 
 import java.util.Collection;
 
@@ -103,7 +104,7 @@ class VariableNameCompletionProvider extends BashCompletionProvider {
 
     private void addBuildInVariables(CompletionResultSet result, Project project) {
         if (BashProjectSettings.storedSettings(project).isAutocompleteBuiltinVars()) {
-            Collection<LookupElement> shellBuiltIns = CompletionProviderUtils.createItems(LanguageBuiltins.bashShellVars, BashIcons.BASH_VAR_ICON);
+            Collection<LookupElement> shellBuiltIns = CompletionProviderUtils.createItems(LanguageBuiltins.bashShellVars, PlatformIconGroup.nodesVariable());
             result.addAllElements(CompletionProviderUtils.wrapInGroup(CompletionGrouping.BuiltInVar.ordinal(), shellBuiltIns));
 
             Collection<LookupElement> bashBuiltIns = CompletionProviderUtils.createItems(LanguageBuiltins.bourneShellVars, BashIcons.BOURNE_VAR_ICON);
