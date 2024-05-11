@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.lang.psi.api.command;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashFileReference;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 public interface BashIncludeCommand extends BashCommand {
     @Nullable

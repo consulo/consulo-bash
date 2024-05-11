@@ -18,25 +18,28 @@
 
 package com.ansorgit.plugins.bash.editor;
 
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFunctionDefName;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import com.intellij.codeHighlighting.Pass;
-import com.intellij.codeInsight.daemon.LineMarkerInfo;
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.editor.markup.GutterIconRenderer;
-import com.intellij.psi.PsiElement;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.AllIcons;
+import consulo.codeEditor.markup.GutterIconRenderer;
+import consulo.language.Language;
+import consulo.language.editor.Pass;
+import consulo.language.editor.gutter.LineMarkerInfo;
+import consulo.language.editor.gutter.LineMarkerProvider;
+import consulo.language.psi.PsiElement;
+
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Provides Bash line markers for a given element.
  *
  * @author Joachim Ansorg
  */
-public class BashLineMarkerProvider implements com.intellij.codeInsight.daemon.LineMarkerProvider
+@ExtensionImpl
+public class BashLineMarkerProvider implements LineMarkerProvider
 {
 	@Nullable
 	@Override
@@ -44,16 +47,17 @@ public class BashLineMarkerProvider implements com.intellij.codeInsight.daemon.L
 	{
 		if(element instanceof BashFunctionDefName && element.getParent() instanceof BashFunctionDef)
 		{
-			return new LineMarkerInfo<BashFunctionDefName>((BashFunctionDefName) element, element.getTextRange(), AllIcons.Nodes.Function,
+			return new LineMarkerInfo<>((BashFunctionDefName) element, element.getTextRange(), AllIcons.Nodes.Function,
 					Pass.UPDATE_ALL, null, null, GutterIconRenderer.Alignment.LEFT);
 		}
 
 		return null;
 	}
 
+	@Nonnull
 	@Override
-	public void collectSlowLineMarkers(@Nonnull List<PsiElement> elements, @Nonnull Collection<LineMarkerInfo> result)
+	public Language getLanguage()
 	{
-
+		return BashLanguage.INSTANCE;
 	}
 }

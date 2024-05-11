@@ -21,19 +21,18 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.ReadOnlyFragmentModificationException;
-import com.intellij.openapi.editor.ReadOnlyModificationException;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
-import consulo.psi.PsiElementWithSubtreeChangeNotifier;
+import consulo.application.ApplicationManager;
+import consulo.codeEditor.Editor;
+import consulo.document.ReadOnlyFragmentModificationException;
+import consulo.document.ReadOnlyModificationException;
+import consulo.document.util.TextRange;
+import consulo.language.psi.PsiElementWithSubtreeChangeNotifier;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 /**
  * Quickfix to register an unknown / unresolved variable as a globally defined variable.

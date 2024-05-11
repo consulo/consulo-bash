@@ -18,14 +18,14 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
+import consulo.codeEditor.Editor;
+import consulo.language.psi.PsiFile;
+import consulo.document.util.TextRange;
+import consulo.project.Project;
+import consulo.language.util.IncorrectOperationException;
 
 /**
  * Replaces a static arithmetic expression with the evaluated result.

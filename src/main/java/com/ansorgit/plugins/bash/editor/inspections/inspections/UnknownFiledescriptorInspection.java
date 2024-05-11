@@ -18,16 +18,17 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import javax.annotation.Nonnull;
+import consulo.annotation.component.ExtensionImpl;
+import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.expression.BashFiledescriptor;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.ast.TokenSet;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
 
@@ -39,6 +40,7 @@ import org.jetbrains.annotations.Nls;
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class UnknownFiledescriptorInspection extends AbstractBashInspection {
     static final TokenSet FILTER = TokenSet.create(BashTokenTypes.FILEDESCRIPTOR);
 

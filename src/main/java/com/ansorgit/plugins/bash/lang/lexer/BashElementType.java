@@ -18,10 +18,10 @@
 
 package com.ansorgit.plugins.bash.lang.lexer;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.file.BashFileType;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * The definition of a Bash element type.

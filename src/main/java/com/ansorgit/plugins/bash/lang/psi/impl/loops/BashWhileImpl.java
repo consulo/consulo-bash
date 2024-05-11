@@ -22,8 +22,7 @@ import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.api.loops.BashWhile;
 import com.ansorgit.plugins.bash.lang.psi.impl.BashKeywordDefaultImpl;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * Date: 06.05.2009

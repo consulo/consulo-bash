@@ -18,11 +18,10 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import javax.annotation.Nonnull;
+import consulo.language.psi.PsiFile;
 
-import com.intellij.psi.PsiFile;
-
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 public interface BashFileReference extends BashPsiElement {
     @Nullable

@@ -18,13 +18,13 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
-import javax.annotation.Nonnull;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiParser;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.tree.IElementType;
-import consulo.lang.LanguageVersion;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.parser.PsiBuilder;
+import consulo.logging.Logger;
+import consulo.language.version.LanguageVersion;
+import consulo.language.parser.PsiParser;
+import jakarta.annotation.Nonnull;
 
 /**
  * Consumes a stream of Bash tokens and generates a PSI tree for a Bash file.

@@ -1,9 +1,7 @@
 package com.ansorgit.plugins.bash.lang.psi.stubs.api;
 
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashIncludeCommand;
-import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import com.intellij.psi.stubs.NamedStub;
-import com.intellij.psi.stubs.StubElement;
+import consulo.language.psi.stub.StubElement;
 
 /**
  * @author jansorg

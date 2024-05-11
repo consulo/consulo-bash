@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang;
 
-import com.intellij.lang.Language;
+import consulo.language.Language;
 
 /**
  * Date: 22.03.2009
@@ -26,12 +26,10 @@ import com.intellij.lang.Language;
  *
  * @author Joachim Ansorg
  */
-public class BashLanguage extends Language
-{
-	public static final BashLanguage INSTANCE = new BashLanguage();
+public class BashLanguage extends Language {
+    public static final BashLanguage INSTANCE = new BashLanguage();
 
-	public BashLanguage()
-	{
-		super("Bash", "application/x-bsh", "application/x-sh", "text/x-script.sh");
-	}
+    public BashLanguage() {
+        super("Bash", "application/x-bsh", "application/x-sh", "text/x-script.sh");
+    }
 }

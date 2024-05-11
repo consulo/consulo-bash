@@ -18,11 +18,14 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.LocalInspectionTool;
+import com.ansorgit.plugins.bash.lang.BashLanguage;
+import consulo.language.Language;
+import consulo.language.editor.inspection.LocalInspectionTool;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.Nls;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * Abstract base class for Bash inspections.
@@ -40,9 +43,15 @@ abstract class AbstractBashInspection extends LocalInspectionTool {
         return HighlightDisplayLevel.WEAK_WARNING;
     }
 
+    @Nullable
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
+    }
+
     @Nls
     @Nonnull
     public String getGroupDisplayName() {
-        return "Bash";
+        return "General";
     }
 }

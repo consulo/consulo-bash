@@ -21,13 +21,14 @@ package com.ansorgit.plugins.bash.editor.inspections.inspections;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFileReference;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashIncludeCommand;
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import java.io.File;
 
@@ -36,6 +37,7 @@ import java.io.File;
  * Date: Nov 2, 2009
  * Time: 8:15:59 PM
  */
+@ExtensionImpl
 public class MissingIncludeFileInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull

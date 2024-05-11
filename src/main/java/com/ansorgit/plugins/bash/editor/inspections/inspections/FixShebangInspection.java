@@ -22,18 +22,17 @@ import com.ansorgit.plugins.bash.editor.inspections.quickfix.RegisterShebangComm
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.ShebangQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashShebang;
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.LocalQuickFix;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.editor.inspection.LocalQuickFix;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.util.xml.serializer.InvalidDataException;
+import consulo.util.xml.serializer.WriteExternalException;
+import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -48,8 +47,9 @@ import java.util.List;
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class FixShebangInspection extends AbstractBashInspection {
-    private static final List<String> DEFAULT_COMMANDS = Lists.newArrayList("/bin/bash", "/bin/sh");
+    private static final List<String> DEFAULT_COMMANDS = List.of("/bin/bash", "/bin/sh");
     private static final String ELEMENT_NAME_SHEBANG = "shebang";
 
     private List<String> validShebangCommands = DEFAULT_COMMANDS;
@@ -72,11 +72,11 @@ public class FixShebangInspection extends AbstractBashInspection {
         return "Fix unusual shebang lines";
     }
 
-    @Override
+    //@Override
     public JComponent createOptionsPanel() {
         FixShebangSettings settings = new FixShebangSettings();
         JTextArea textArea = settings.getValidCommandsTextArea();
-        textArea.setText(Joiner.on('\n').join(validShebangCommands));
+        textArea.setText(String.join("\n", validShebangCommands));
 
         textArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -123,9 +123,9 @@ public class FixShebangInspection extends AbstractBashInspection {
         return "This inspection can replace unknown shebang commands with one of the registered commands, like /bin/sh .";
     }
 
-    @Override
+    //@Override
     public void readSettings(Element node) throws InvalidDataException {
-        validShebangCommands = Lists.newLinkedList();
+        validShebangCommands = new LinkedList<>();
 
         List<Element> shebangs = node.getChildren(ELEMENT_NAME_SHEBANG);
         for (Element shebang : shebangs) {
@@ -137,7 +137,7 @@ public class FixShebangInspection extends AbstractBashInspection {
         }
     }
 
-    @Override
+    //@Override
     public void writeSettings(Element node) throws WriteExternalException {
         for (String shebangCommand : validShebangCommands) {
             Element shebandElement = new Element(ELEMENT_NAME_SHEBANG);
@@ -159,7 +159,7 @@ public class FixShebangInspection extends AbstractBashInspection {
                     //quickfix to register the shebang line
                     holder.registerProblem(shebang, "Mark as valid shebang command", new RegisterShebangCommandQuickfix(FixShebangInspection.this, shebang));
 
-                    LinkedList<LocalQuickFix> quickFixes = Lists.newLinkedList();
+                    LinkedList<LocalQuickFix> quickFixes = new LinkedList<>();
                     for (String validCommand : validShebangCommands) {
                         if (!validCommand.equals(shebang.shellCommand(false)) && !validCommand.equals(shebang.shellCommand(true))) {
                             quickFixes.add(new ShebangQuickfix(shebang, validCommand));

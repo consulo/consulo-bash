@@ -18,16 +18,14 @@
 
 package com.ansorgit.plugins.bash.util;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
-import javax.annotation.Nonnull;
-
+import jakarta.annotation.Nonnull;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Class to help with file path completions.
@@ -70,10 +68,10 @@ public class CompletionUtil {
         }
 
 
-        List<String> result = Lists.newLinkedList();
+        List<String> result = new LinkedList<>();
 
         for (File fileCandidate : collectFiles(basePath, matchPrefix)) {
-            if (!accept.apply(fileCandidate)) {
+            if (!accept.test(fileCandidate)) {
                 continue;
             }
 
@@ -97,9 +95,9 @@ public class CompletionUtil {
      */
     @Nonnull
     public static List<String> completeRelativePath(@Nonnull String baseDir, @Nonnull String shownBaseDir, @Nonnull String relativePath) {
-        List<String> result = Lists.newLinkedList();
+        List<String> result = new LinkedList<>();
 
-        for (String path : completeAbsolutePath(baseDir + "/" + relativePath, Predicates.<File>alwaysTrue())) {
+        for (String path : completeAbsolutePath(baseDir + "/" + relativePath, file -> true)) {
             if (path.startsWith(baseDir)) {
                 result.add(shownBaseDir + path.substring(baseDir.length()));
             }

@@ -24,13 +24,14 @@ import com.ansorgit.plugins.bash.lang.psi.api.command.BashCommand;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.intellij.codeInspection.ProblemHighlightType;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.editor.inspection.ProblemHighlightType;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.localVarDefCommands;
 
@@ -42,6 +43,7 @@ import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.localVarDefCommand
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class GlocalLocalVarDefInspection extends AbstractBashInspection {
 
     @Pattern("[a-zA-Z_0-9.]+")

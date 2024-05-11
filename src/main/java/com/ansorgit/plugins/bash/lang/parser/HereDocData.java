@@ -21,7 +21,7 @@ package com.ansorgit.plugins.bash.lang.parser;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.intellij.openapi.util.Trinity;
+import consulo.util.lang.Trinity;
 
 /**
  * Contains the status of here-doc parsing.
@@ -31,14 +31,14 @@ import com.intellij.openapi.util.Trinity;
  */
 public final class HereDocData {
     //Values are triples: marker text, type, strip/don't-strip
-    private final Queue<Trinity<String, MarkerType, Boolean>> expectedEnds = new LinkedList<Trinity<String, MarkerType, Boolean>>();
+    private final Queue<consulo.util.lang.Trinity<String, MarkerType, Boolean>> expectedEnds = new LinkedList<Trinity<String, MarkerType, Boolean>>();
 
     public enum MarkerType {
         Eval, NoEval
     }
 
     public void addExpectedDoc(String endName, MarkerType markerType, Boolean stripWhitespace) {
-        expectedEnds.add(Trinity.create(endName, markerType, stripWhitespace));
+        expectedEnds.add(consulo.util.lang.Trinity.create(endName, markerType, stripWhitespace));
     }
 
     public void removeExpectedEnd() {

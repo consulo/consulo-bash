@@ -25,11 +25,14 @@ import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.localVarDefCommand
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.*;
+import consulo.language.psi.resolve.PsiScopeProcessor;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
@@ -50,23 +53,14 @@ import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashIdentifierUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
-import com.intellij.codeInsight.daemon.EmptyResolveMessageProvider;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.StubBasedPsiElement;
-import com.intellij.psi.impl.source.resolve.reference.impl.CachingReference;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.refactoring.rename.BindablePsiReference;
-import com.intellij.util.IncorrectOperationException;
+import consulo.logging.Logger;
+import consulo.document.util.TextRange;
+import consulo.language.psi.resolve.ResolveState;
+import consulo.language.psi.StubBasedPsiElement;
+import consulo.language.psi.stub.IStubElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.psi.util.PsiTreeUtil;
+import consulo.language.util.IncorrectOperationException;
 
 /**
  * Date: 14.04.2009

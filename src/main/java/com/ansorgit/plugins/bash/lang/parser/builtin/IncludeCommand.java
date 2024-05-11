@@ -24,9 +24,8 @@ import com.ansorgit.plugins.bash.lang.parser.Parsing;
 import com.ansorgit.plugins.bash.lang.parser.ParsingFunction;
 import com.ansorgit.plugins.bash.lang.parser.ParsingTool;
 import com.ansorgit.plugins.bash.lang.parser.command.CommandParsingUtil;
-import com.google.common.collect.Sets;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.TokenSet;
+import consulo.language.parser.PsiBuilder;
 
 import java.util.Set;
 
@@ -36,7 +35,7 @@ import java.util.Set;
  * Time: 19:37
  */
 class IncludeCommand implements ParsingFunction, ParsingTool {
-    private final Set<String> acceptedCommands = Sets.newHashSet(".", "source");
+    private final Set<String> acceptedCommands = Set.of(".", "source");
     private final TokenSet invalidFollowups = TokenSet.create(EQ);
 
     public boolean isValid(BashPsiBuilder builder) {

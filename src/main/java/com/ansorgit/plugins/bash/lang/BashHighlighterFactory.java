@@ -1,17 +1,23 @@
 package com.ansorgit.plugins.bash.lang;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.editor.highlighting.BashSyntaxHighlighter;
-import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.editor.highlight.SingleLazyInstanceSyntaxHighlighterFactory;
+import consulo.language.editor.highlight.SyntaxHighlighter;
+import jakarta.annotation.Nonnull;
 
-public class BashHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory
-{
-	@Override
-	@Nonnull
-	protected SyntaxHighlighter createHighlighter()
-	{
-		return new BashSyntaxHighlighter();
-	}
+@ExtensionImpl
+public class BashHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
+    @Override
+    @Nonnull
+    protected SyntaxHighlighter createHighlighter() {
+        return new BashSyntaxHighlighter();
+    }
+
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
+    }
 }

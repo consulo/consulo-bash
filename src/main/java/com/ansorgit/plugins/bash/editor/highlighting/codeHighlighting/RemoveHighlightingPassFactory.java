@@ -18,33 +18,26 @@
 
 package com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting;
 
-import javax.annotation.Nonnull;
-
-import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
-import com.intellij.codeHighlighting.TextEditorHighlightingPass;
-import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.markup.HighlighterLayer;
-import com.intellij.psi.PsiFile;
-
 /**
  * Factory which provides text editor highlighters for the Bash file type.
+ *
+ * Fully disabled since using PassFactory not allowed from plugins
  */
-public class RemoveHighlightingPassFactory implements TextEditorHighlightingPassFactory
+public class RemoveHighlightingPassFactory //implements consulo.language.editor.impl.highlight.TextEditorHighlightingPassFactory
 {
-	@Override
-	public void register(@Nonnull Registrar registrar)
-	{
-		registrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassFactory.Registrar.Anchor.AFTER, HighlighterLayer.ADDITIONAL_SYNTAX, true);
-	}
-
-	public TextEditorHighlightingPass createHighlightingPass(@Nonnull PsiFile file, @Nonnull Editor editor)
-	{
-		if(file instanceof BashFile)
-		{
-			return new RemoveHighlightingPass(file.getProject(), (BashFile) file, editor);
-		}
-
-		return null;
-	}
+//	@Override
+//	public void register(@Nonnull Registrar registrar)
+//	{
+//		registrar.registerTextEditorHighlightingPass(this, consulo.language.editor.impl.highlight.TextEditorHighlightingPassFactory.Registrar.Anchor.AFTER, HighlighterLayer.ADDITIONAL_SYNTAX, true);
+//	}
+//
+//	public TextEditorHighlightingPass createHighlightingPass(@Nonnull PsiFile file, @Nonnull Editor editor)
+//	{
+//		if(file instanceof BashFile)
+//		{
+//			return new RemoveHighlightingPass(file.getProject(), (BashFile) file, editor);
+//		}
+//
+//		return null;
+//	}
 }

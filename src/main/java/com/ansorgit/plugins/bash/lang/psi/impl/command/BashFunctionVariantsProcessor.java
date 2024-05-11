@@ -21,11 +21,11 @@ package com.ansorgit.plugins.bash.lang.psi.impl.command;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.util.BashAbstractProcessor;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.google.common.collect.Lists;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.resolve.ResolveState;
 import consulo.util.dataholder.Key;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +35,7 @@ import java.util.List;
  * @author Joachim Ansorg
  */
 public class BashFunctionVariantsProcessor extends BashAbstractProcessor {
-    private final List<BashFunctionDef> functionDefs = Lists.newArrayList();
+    private final List<BashFunctionDef> functionDefs = new ArrayList<>();
     private PsiElement startElement;
 
     public BashFunctionVariantsProcessor(PsiElement startElement) {

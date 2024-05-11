@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api.arithmetic;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * An arithmetic sum expression.

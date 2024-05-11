@@ -1,16 +1,17 @@
 package com.ansorgit.plugins.bash.lang;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.api.BashString;
-import com.intellij.psi.InjectedLanguagePlaces;
-import com.intellij.psi.LanguageInjector;
-import com.intellij.psi.PsiLanguageInjectionHost;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.inject.LanguageInjector;
+import consulo.language.psi.PsiLanguageInjectionHost;
+import consulo.language.inject.InjectedLanguagePlaces;
+import jakarta.annotation.Nonnull;
 
-public class BashInjector implements LanguageInjector{
+@ExtensionImpl
+public class BashInjector implements LanguageInjector {
     @Override
-    public void getLanguagesToInject(@Nonnull PsiLanguageInjectionHost host, @Nonnull InjectedLanguagePlaces injectionPlacesRegistrar) {
+    public void injectLanguages(@Nonnull PsiLanguageInjectionHost host, @Nonnull InjectedLanguagePlaces injectionPlacesRegistrar) {
         if (host instanceof BashString && host.isValidHost()) {
             BashString string = (BashString) host;
             injectionPlacesRegistrar.addPlace(BashFileType.BASH_LANGUAGE, string.getTextContentRange(), null, null);

@@ -18,26 +18,28 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFunctionDefName;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import com.intellij.codeInspection.ProblemHighlightType;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.codeInspection.ex.UnfairLocalInspectionTool;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.searches.ReferencesSearch;
-import com.intellij.util.Query;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.util.query.Query;
+import consulo.language.editor.inspection.ProblemHighlightType;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.editor.inspection.UnfairLocalInspectionTool;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiReference;
+import consulo.language.psi.search.ReferencesSearch;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * Highlights unused function definitions.
  * <p/>
  * fixme: This inspection currently does not work. For a proper implementation we'd need an index.
  */
+@ExtensionImpl
 public class UnusedFunctionDefInspection extends AbstractBashInspection implements UnfairLocalInspectionTool {
 
     public static final String SHORT_NAME = "Unused function definition";

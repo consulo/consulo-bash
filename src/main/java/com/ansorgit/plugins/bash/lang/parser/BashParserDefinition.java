@@ -18,22 +18,26 @@
 
 package com.ansorgit.plugins.bash.lang.parser;
 
-import javax.annotation.Nonnull;
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.lang.lexer.BashLexer;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashPsiCreator;
 import com.ansorgit.plugins.bash.lang.psi.impl.BashFileImpl;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.PsiParser;
-import com.intellij.lexer.Lexer;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.TokenSet;
-import consulo.lang.LanguageVersion;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.IFileElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.file.FileViewProvider;
+import consulo.language.lexer.Lexer;
+import consulo.language.parser.ParserDefinition;
+import consulo.language.parser.PsiParser;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.version.LanguageVersion;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * Defines the implementation of the Bash parser. This is  the starting point for the parse.
@@ -41,8 +45,16 @@ import consulo.lang.LanguageVersion;
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class BashParserDefinition implements ParserDefinition, BashElementTypes
 {
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return BashLanguage.INSTANCE;
+	}
+
 	@Override
 	@Nonnull
 	public Lexer createLexer(@Nonnull LanguageVersion languageVersion)

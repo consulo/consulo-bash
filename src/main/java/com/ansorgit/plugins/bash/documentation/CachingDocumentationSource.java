@@ -21,11 +21,11 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
+import consulo.language.psi.PsiElement;
+
+import jakarta.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.annotation.Nullable;
-import com.intellij.psi.PsiElement;
 
 /**
  * Caches the result of the delegate documentation source after the first invocation for a certain command name.

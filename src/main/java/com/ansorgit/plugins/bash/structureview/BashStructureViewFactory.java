@@ -18,15 +18,18 @@
 
 package com.ansorgit.plugins.bash.structureview;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.ansorgit.plugins.bash.lang.BashLanguage;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
-import com.intellij.ide.structureView.StructureViewBuilder;
-import com.intellij.ide.structureView.StructureViewModel;
-import com.intellij.ide.structureView.TreeBasedStructureViewBuilder;
-import com.intellij.lang.PsiStructureViewFactory;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiFile;
+import consulo.fileEditor.structureView.StructureViewBuilder;
+import consulo.fileEditor.structureView.StructureViewModel;
+import consulo.language.editor.structureView.PsiStructureViewFactory;
+import consulo.codeEditor.Editor;
+import consulo.fileEditor.structureView.TreeBasedStructureViewBuilder;
+import consulo.language.psi.PsiFile;
 
 /**
  * Creates the structure view builder for Bash files.
@@ -36,6 +39,7 @@ import com.intellij.psi.PsiFile;
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class BashStructureViewFactory implements PsiStructureViewFactory
 {
 	@Override
@@ -56,5 +60,12 @@ public class BashStructureViewFactory implements PsiStructureViewFactory
 				return false;
 			}
 		};
+	}
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return BashLanguage.INSTANCE;
 	}
 }

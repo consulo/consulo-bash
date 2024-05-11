@@ -21,8 +21,8 @@
 
 package com.ansorgit.plugins.bash.settings.facet.ui;
 
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileFilter;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.VirtualFileFilter;
 
 /**
  * User: jansorg

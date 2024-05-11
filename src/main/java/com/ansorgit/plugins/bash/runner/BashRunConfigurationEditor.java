@@ -18,9 +18,10 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.SettingsEditor;
-import javax.annotation.Nonnull;
+import consulo.execution.configuration.ui.SettingsEditor;
+import consulo.configurable.ConfigurationException;
+
+import jakarta.annotation.Nonnull;
 
 import javax.swing.*;
 

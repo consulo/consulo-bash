@@ -18,12 +18,11 @@
 
 package com.ansorgit.plugins.bash.lang.parser.util;
 
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.WhitespacesAndCommentsBinder;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
+import consulo.language.parser.PsiBuilder;
+import consulo.language.parser.WhitespacesAndCommentsBinder;
 import consulo.localize.LocalizeValue;
-
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * A forwarding marker implementation which is useful for enhancements which

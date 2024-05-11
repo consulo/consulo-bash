@@ -20,21 +20,23 @@ package com.ansorgit.plugins.bash.actions;
 
 import com.ansorgit.plugins.bash.runner.repl.BashConsoleRunner;
 import com.ansorgit.plugins.bash.util.BashIcons;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.LangDataKeys;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.module.ModuleUtilCore;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import consulo.bash.module.extension.BashModuleExtension;
+import consulo.language.editor.LangDataKeys;
+import consulo.language.util.ModuleUtilCore;
+import consulo.logging.Logger;
+import consulo.module.Module;
+import consulo.module.ModuleManager;
+import consulo.process.ExecutionException;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.Presentation;
+import consulo.virtualFileSystem.VirtualFile;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 public class AddReplAction extends AnAction {
-    private static final com.intellij.openapi.diagnostic.Logger log = com.intellij.openapi.diagnostic.Logger.getInstance("AddReplAction");
+    private static final Logger log = Logger.getInstance("AddReplAction");
 
     public AddReplAction() {
         super(BashIcons.BASH_FILE_ICON);
@@ -66,7 +68,7 @@ public class AddReplAction extends AnAction {
                     BashConsoleRunner consoleRunner = new BashConsoleRunner(project, baseDir.getPath());
                     consoleRunner.initAndRun();
                 }
-            } catch (com.intellij.execution.ExecutionException ex) {
+            } catch (ExecutionException ex) {
                 log.warn("Error running bash repl", ex);
             }
         }

@@ -20,8 +20,8 @@ package com.ansorgit.plugins.bash.lang.psi.impl.heredoc;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.util.BashAbstractProcessor;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.resolve.ResolveState;
 import consulo.util.dataholder.Key;
 
 /**

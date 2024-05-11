@@ -22,12 +22,12 @@ import com.ansorgit.plugins.bash.editor.formatting.BashBlock;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
-import com.intellij.formatting.Indent;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.TokenSet;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.language.ast.TokenSet;
+import consulo.language.codeStyle.Indent;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * This class is based on code taken from the Groovy plugin.

@@ -24,7 +24,7 @@ import javax.swing.event.ChangeListener;
 
 import consulo.bash.module.extension.BashMutableModuleExtension;
 import com.ansorgit.plugins.bash.settings.facet.OperationMode;
-import com.intellij.util.ui.tree.TreeUtil;
+import consulo.ui.ex.awt.tree.TreeUtil;
 
 /**
  * GUI settings which are displayed for a Bash module facet.

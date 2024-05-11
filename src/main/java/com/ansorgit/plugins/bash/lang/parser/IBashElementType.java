@@ -1,8 +1,8 @@
 package com.ansorgit.plugins.bash.lang.parser;
 
-import org.jetbrains.annotations.NonNls;
 import com.ansorgit.plugins.bash.file.BashFileType;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
+import org.jetbrains.annotations.NonNls;
 
 public class IBashElementType extends IElementType {
     private final boolean myLeftBound;

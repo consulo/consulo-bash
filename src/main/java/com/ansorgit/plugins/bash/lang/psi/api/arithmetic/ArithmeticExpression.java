@@ -19,10 +19,10 @@
 package com.ansorgit.plugins.bash.lang.psi.api.arithmetic;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import javax.annotation.Nullable;
+import consulo.language.ast.IElementType;
+import consulo.language.psi.PsiElement;
 
+import jakarta.annotation.Nullable;
 import java.util.List;
 
 /**

@@ -6,18 +6,17 @@ import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import com.ansorgit.plugins.bash.util.BashFunctions;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Sets;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.LocalSearchScope;
-import com.intellij.psi.search.SearchScope;
-import javax.annotation.Nonnull;
+import consulo.content.scope.SearchScope;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.resolve.PsiScopeProcessor;
+import consulo.language.psi.resolve.ResolveState;
+import consulo.language.psi.scope.GlobalSearchScope;
+import consulo.language.psi.scope.LocalSearchScope;
+import consulo.project.Project;
+import consulo.util.collection.ContainerUtil;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
 
 import java.util.Collection;
 import java.util.Set;
@@ -30,7 +29,7 @@ public class BashElementSharedImpl {
         GlobalSearchScope currentFileScope = GlobalSearchScope.fileScope(psiFile);
 
         Set<PsiFile> includedFiles = FileInclusionManager.findIncludedFiles(psiFile, true, true);
-        Collection<VirtualFile> files = Collections2.transform(includedFiles, BashFunctions.psiToVirtualFile());
+        Collection<VirtualFile> files = includedFiles.stream().map(BashFunctions.psiToVirtualFile()).toList();
 
         return currentFileScope.uniteWith(GlobalSearchScope.filesScope(project, files));
     }
@@ -42,7 +41,7 @@ public class BashElementSharedImpl {
 
         PsiFile currentFile = BashPsiUtils.findFileContext(element);
         //PsiFile currentFile = element.getContainingFile();
-        Set<BashFile> includers = FileInclusionManager.findIncluders(project, currentFile);
+        Set includers = FileInclusionManager.findIncluders(project, currentFile);
         Set<PsiFile> included = FileInclusionManager.findIncludedFiles(currentFile, true, true);
 
         if (includers.isEmpty() && included.isEmpty()) {
@@ -51,7 +50,7 @@ public class BashElementSharedImpl {
             return new LocalSearchScope(currentFile);
         }
 
-        Collection<VirtualFile> virtualFiles = Collections2.transform(Sets.union(included, includers), BashFunctions.psiToVirtualFile());
+        Collection<VirtualFile> virtualFiles = ContainerUtil.map(ContainerUtil.<PsiFile>union(included, includers), BashFunctions.psiToVirtualFile());
         return GlobalSearchScope.fileScope(currentFile).union(GlobalSearchScope.filesScope(project, virtualFiles));
     }
 

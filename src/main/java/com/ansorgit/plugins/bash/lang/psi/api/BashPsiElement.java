@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * Marker interface for Bash psi elements.

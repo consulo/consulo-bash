@@ -18,18 +18,16 @@
 
 package com.ansorgit.plugins.bash.runner.repl;
 
-import javax.annotation.Nonnull;
-import com.ansorgit.plugins.bash.file.BashFileType;
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.ansorgit.plugins.bash.util.BashInterpreterDetection;
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.console.LanguageConsoleImpl;
-import com.intellij.execution.console.ProcessBackedConsoleExecuteActionHandler;
-import com.intellij.execution.process.ColoredProcessHandler;
-import com.intellij.execution.process.OSProcessHandler;
-import com.intellij.execution.runners.AbstractConsoleRunnerWithHistory;
-import com.intellij.openapi.project.Project;
+import consulo.execution.ui.console.language.*;
+import consulo.process.ExecutionException;
+import consulo.process.ProcessHandler;
+import consulo.process.ProcessHandlerBuilder;
+import consulo.process.cmd.GeneralCommandLine;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 /**
  * ConsoleRunner implementation to run a bash shell in a window.
@@ -38,7 +36,7 @@ import com.intellij.openapi.project.Project;
  * Date: 13.05.2010
  * Time: 00:45:23
  */
-public class BashConsoleRunner extends AbstractConsoleRunnerWithHistory<LanguageConsoleImpl>
+public class BashConsoleRunner extends AbstractConsoleRunnerWithHistory<LanguageConsoleView>
 {
 	public BashConsoleRunner(Project myProject, String workingDir)
 	{
@@ -46,16 +44,19 @@ public class BashConsoleRunner extends AbstractConsoleRunnerWithHistory<Language
 	}
 
 	@Override
-	protected LanguageConsoleImpl createConsoleView()
+	protected LanguageConsoleView createConsoleView()
 	{
-		LanguageConsoleImpl consoleView = new LanguageConsoleImpl(getProject(), "Bash", BashFileType.BASH_LANGUAGE);
-		consoleView.getFile().putUserData(BashFile.LANGUAGE_CONSOLE_MARKER, true);
+		LanguageConsoleBuilderFactory builderFactory = getProject().getInstance(LanguageConsoleBuilderFactory.class);
 
-		return consoleView;
+		LanguageConsoleBuilder builder = builderFactory.newBuilder(BashLanguage.INSTANCE);
+		LanguageConsoleView view = builder.build();
+		view.getFile().putUserData(BashFile.LANGUAGE_CONSOLE_MARKER, true);
+		return view;
 	}
 
+	@Nonnull
 	@Override
-	protected Process createProcess() throws ExecutionException
+	protected ProcessHandler createProcessHandler() throws ExecutionException
 	{
 		GeneralCommandLine commandLine = new GeneralCommandLine();
 
@@ -63,21 +64,13 @@ public class BashConsoleRunner extends AbstractConsoleRunnerWithHistory<Language
 		//fixme make this configurable
 		commandLine.setExePath(detect.findBestLocation());
 
-		if(getWorkingDir() != null)
-		{
+		if (getWorkingDir() != null) {
 			commandLine.setWorkDirectory(getWorkingDir());
 		}
 
 		//fixme
 		//commandLine.addParameters(provider.getArguments());
-
-		return commandLine.createProcess();
-	}
-
-	@Override
-	protected OSProcessHandler createProcessHandler(Process process)
-	{
-		return new ColoredProcessHandler(process, null);
+		return ProcessHandlerBuilder.create(commandLine).colored().killable().build();
 	}
 
 	@Nonnull

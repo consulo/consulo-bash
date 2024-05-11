@@ -17,13 +17,13 @@
  ******************************************************************************/
 package com.ansorgit.plugins.bash.settings.facet.ui;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.fileEditor.OpenFileDescriptor;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.pom.Navigatable;
+import consulo.language.editor.PlatformDataKeys;
+import consulo.navigation.Navigatable;
+import consulo.navigation.OpenFileDescriptor;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.DefaultActionGroup;
+import consulo.util.lang.Pair;
+import consulo.virtualFileSystem.VirtualFile;
 
 import java.text.MessageFormat;
 

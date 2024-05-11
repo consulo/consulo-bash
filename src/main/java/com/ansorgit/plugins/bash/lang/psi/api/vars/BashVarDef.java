@@ -18,15 +18,15 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api.vars;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.BashReference;
 import com.ansorgit.plugins.bash.lang.psi.api.DocumentationAwareElement;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNameIdentifierOwner;
-import com.intellij.psi.PsiNamedElement;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiNameIdentifierOwner;
+import consulo.language.psi.PsiNamedElement;
+import consulo.navigation.NavigationItem;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * Date: 14.04.2009

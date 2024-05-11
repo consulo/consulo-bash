@@ -20,15 +20,17 @@ package com.ansorgit.plugins.bash.editor.accessDetector;
 
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
-import com.intellij.codeInsight.highlighting.ReadWriteAccessDetector;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.editor.highlight.ReadWriteAccessDetector;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiReference;
 
 /**
  * User: jansorg
  * Date: 09.12.10
  * Time: 19:49
  */
+@ExtensionImpl
 public class BashReadWriteAccessDetector extends ReadWriteAccessDetector {
     @Override
     public boolean isReadWriteAccessible(PsiElement element) {

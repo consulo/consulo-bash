@@ -18,24 +18,24 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashCharSequence;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFileReference;
 import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiFileUtils;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.intellij.codeInsight.daemon.EmptyResolveMessageProvider;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.impl.CachingReference;
-import com.intellij.psi.stubs.StubElement;
-import com.intellij.util.IncorrectOperationException;
+import consulo.document.util.TextRange;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiReference;
+import consulo.language.psi.CachingReference;
+import consulo.language.psi.stub.StubElement;
+import consulo.language.util.IncorrectOperationException;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.EmptyResolveMessageProvider;
+import consulo.language.psi.PsiElementVisitor;
 
 public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> implements BashFileReference {
     private PsiReference cachingReference;

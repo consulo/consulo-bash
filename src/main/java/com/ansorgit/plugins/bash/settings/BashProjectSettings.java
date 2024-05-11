@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.settings;
 
-import com.intellij.openapi.project.Project;
+import consulo.project.Project;
 
 import java.io.Serializable;
 import java.util.HashSet;

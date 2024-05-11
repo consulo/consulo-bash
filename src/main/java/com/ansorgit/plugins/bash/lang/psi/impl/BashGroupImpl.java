@@ -18,15 +18,15 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.api.BashBlock;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.scope.util.PsiScopesUtilCore;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.resolve.PsiScopeProcessor;
+import consulo.language.psi.resolve.PsiScopesUtilCore;
+import consulo.language.psi.resolve.ResolveState;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * @author Joachim Ansorg

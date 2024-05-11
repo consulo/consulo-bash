@@ -20,9 +20,9 @@ package com.ansorgit.plugins.bash.editor.annotator;
 
 import com.ansorgit.plugins.bash.editor.highlighting.BashSyntaxHighlighter;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
-import com.intellij.lang.annotation.Annotation;
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.openapi.diagnostic.Logger;
+import consulo.language.editor.annotation.Annotation;
+import consulo.language.editor.annotation.AnnotationHolder;
+import consulo.logging.Logger;
 
 /**
  * Annotates a Bash variable usage element. It marks the Var psi elements as buildtin or composed variables,

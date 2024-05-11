@@ -18,59 +18,45 @@
 
 package com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting;
 
-import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
-import com.intellij.codeHighlighting.Pass;
-import com.intellij.codeHighlighting.TextEditorHighlightingPass;
-import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
-import com.intellij.codeInsight.daemon.ProblemHighlightFilter;
-import com.intellij.codeInsight.daemon.impl.FileStatusMap;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiModificationTracker;
-import consulo.util.dataholder.Key;
-
-import javax.annotation.Nonnull;
-
 /**
  * Factory which provides text editor post highlighter for the Bash file type.
  * <p>
  * This code is based on IntelliJ's PostHighlightingPassFactory .
  */
-public class BashPostHighlightingPassFactory implements TextEditorHighlightingPassFactory
+public class BashPostHighlightingPassFactory //implements TextEditorHighlightingPassFactory
 {
-	private static final Key<Long> LAST_POST_PASS_TIMESTAMP = Key.create("BASH_LAST_POST_PASS_TIMESTAMP");
-
-	@Override
-	public void register(@Nonnull Registrar registrar)
-	{
-		registrar.registerTextEditorHighlightingPass(this, new int[]{Pass.UPDATE_ALL}, null, true, Pass.UPDATE_ALL);
-	}
-
-	public static void markFileUpToDate(@Nonnull PsiFile file)
-	{
-		long lastStamp = PsiModificationTracker.SERVICE.getInstance(file.getProject()).getModificationCount();
-		file.putUserData(LAST_POST_PASS_TIMESTAMP, lastStamp);
-	}
-
-	public TextEditorHighlightingPass createHighlightingPass(@Nonnull PsiFile file, @Nonnull Editor editor)
-	{
-		TextRange textRange = FileStatusMap.getDirtyTextRange(editor, Pass.UPDATE_ALL);
-		if(textRange == null)
-		{
-			Long lastStamp = file.getUserData(LAST_POST_PASS_TIMESTAMP);
-			long currentStamp = PsiModificationTracker.SERVICE.getInstance(file.getProject()).getModificationCount();
-			if(lastStamp != null && lastStamp == currentStamp || !ProblemHighlightFilter.shouldHighlightFile(file))
-			{
-				return null;
-			}
-		}
-
-		if(file instanceof BashFile)
-		{
-			return new PostHighlightingPass(file.getProject(), file, editor, editor.getDocument());
-		}
-
-		return null;
-	}
+//	private static final Key<Long> LAST_POST_PASS_TIMESTAMP = Key.create("BASH_LAST_POST_PASS_TIMESTAMP");
+//
+//	@Override
+//	public void register(@Nonnull Registrar registrar)
+//	{
+//		registrar.registerTextEditorHighlightingPass(this, new int[]{Pass.UPDATE_ALL}, null, true, Pass.UPDATE_ALL);
+//	}
+//
+//	public static void markFileUpToDate(@Nonnull PsiFile file)
+//	{
+//		long lastStamp = PsiModificationTracker.SERVICE.getInstance(file.getProject()).getModificationCount();
+//		file.putUserData(LAST_POST_PASS_TIMESTAMP, lastStamp);
+//	}
+//
+//	public consulo.language.editor.impl.highlight.TextEditorHighlightingPass createHighlightingPass(@Nonnull PsiFile file, @Nonnull Editor editor)
+//	{
+//		TextRange textRange = FileStatusMap.getDirtyTextRange(editor, Pass.UPDATE_ALL);
+//		if(textRange == null)
+//		{
+//			Long lastStamp = file.getUserData(LAST_POST_PASS_TIMESTAMP);
+//			long currentStamp = PsiModificationTracker.SERVICE.getInstance(file.getProject()).getModificationCount();
+//			if(lastStamp != null && lastStamp == currentStamp || !ProblemHighlightFilter.shouldHighlightFile(file))
+//			{
+//				return null;
+//			}
+//		}
+//
+//		if(file instanceof BashFile)
+//		{
+//			return new PostHighlightingPass(file.getProject(), file, editor, editor.getDocument());
+//		}
+//
+//		return null;
+//	}
 }

@@ -24,8 +24,8 @@ import com.ansorgit.plugins.bash.lang.parser.ParsingFunction;
 import com.ansorgit.plugins.bash.lang.parser.ParsingTool;
 import com.ansorgit.plugins.bash.lang.parser.misc.ShellCommandParsing;
 import com.ansorgit.plugins.bash.lang.parser.util.ParserUtil;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.parser.PsiBuilder;
+import consulo.language.ast.IElementType;
 
 /**
  * Abstract base class for loops.

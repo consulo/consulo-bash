@@ -18,13 +18,12 @@
 
 package com.ansorgit.plugins.bash.lang.psi.stubs;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.ansorgit.plugins.bash.lang.psi.stubs.impl.BashFileStubImpl;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.stubs.DefaultStubBuilder;
-import com.intellij.psi.stubs.StubElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.stub.DefaultStubBuilder;
+import consulo.language.psi.stub.StubElement;
+import jakarta.annotation.Nonnull;
 
 public class BashFileStubBuilder extends DefaultStubBuilder {
     protected StubElement createStubForFile(@Nonnull final PsiFile file) {

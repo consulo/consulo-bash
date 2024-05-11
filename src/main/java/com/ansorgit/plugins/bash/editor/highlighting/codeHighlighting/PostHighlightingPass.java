@@ -1,38 +1,31 @@
 package com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import com.ansorgit.plugins.bash.editor.inspections.inspections.UnusedFunctionDefInspection;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFunctionDefName;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import com.intellij.codeHighlighting.Pass;
-import com.intellij.codeHighlighting.TextEditorHighlightingPass;
-import com.intellij.codeInsight.daemon.HighlightDisplayKey;
-import com.intellij.codeInsight.daemon.impl.HighlightInfo;
-import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
-import com.intellij.codeInsight.daemon.impl.UpdateHighlightersUtil;
-import com.intellij.codeInspection.InspectionProfile;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.project.Project;
-import com.intellij.profile.codeInspection.InspectionProjectProfileManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiRecursiveElementWalkingVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.searches.ReferencesSearch;
-import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.Query;
+import consulo.application.ApplicationManager;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.util.query.Query;
+import consulo.codeEditor.Editor;
+import consulo.document.Document;
+import consulo.language.editor.inspection.scheme.InspectionProfile;
+import consulo.language.editor.inspection.scheme.InspectionProjectProfileManager;
+import consulo.language.editor.rawHighlight.HighlightDisplayKey;
+import consulo.language.editor.rawHighlight.HighlightInfo;
+import consulo.language.editor.rawHighlight.HighlightInfoType;
+import consulo.language.psi.*;
+import consulo.language.psi.search.ReferencesSearch;
+import consulo.logging.Logger;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
-public class PostHighlightingPass extends TextEditorHighlightingPass
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class PostHighlightingPass //extends TextEditorHighlightingPass
 {
 	private static final Logger LOG = Logger.getInstance("#com.intellij.codeInsight.daemon.impl.PostHighlightingPass");
 	@Nonnull
@@ -50,7 +43,7 @@ public class PostHighlightingPass extends TextEditorHighlightingPass
 
 	PostHighlightingPass(@Nonnull Project project, @Nonnull PsiFile file, @Nullable Editor editor, @Nonnull Document document)
 	{
-		super(project, document, true);
+		//super(project, document, true);
 
 		this.project = project;
 		this.file = file;
@@ -61,7 +54,7 @@ public class PostHighlightingPass extends TextEditorHighlightingPass
 		endOffset = file.getTextLength();
 	}
 
-	@Override
+	//@Override
 	public List<HighlightInfo> getInfos()
 	{
 		return highlights == null ? null : new ArrayList<HighlightInfo>(highlights);
@@ -73,7 +66,7 @@ public class PostHighlightingPass extends TextEditorHighlightingPass
 				.create();
 	}
 
-	@Override
+	//@Override
 	public void doCollectInformation(@Nonnull final ProgressIndicator progress)
 	{
 		final List<HighlightInfo> highlights = new ArrayList<HighlightInfo>();
@@ -86,7 +79,7 @@ public class PostHighlightingPass extends TextEditorHighlightingPass
 	{
 		ApplicationManager.getApplication().assertReadAccessAllowed();
 
-		InspectionProfile profile = InspectionProjectProfileManager.getInstance(myProject).getInspectionProfile();
+		InspectionProfile profile = InspectionProjectProfileManager.getInstance(project).getInspectionProfile();
 
 		unusedSymbolInspection = HighlightDisplayKey.find(UnusedFunctionDefInspection.SHORT_NAME);
 
@@ -145,16 +138,16 @@ public class PostHighlightingPass extends TextEditorHighlightingPass
 		return null;
 	}
 
-	@Override
-	public void doApplyInformationToEditor()
-	{
-		if(highlights == null || highlights.isEmpty())
-		{
-			return;
-		}
-
-		UpdateHighlightersUtil.setHighlightersToEditor(myProject, myDocument, startOffset, endOffset, highlights, getColorsScheme(),
-				Pass.UPDATE_ALL);
-		BashPostHighlightingPassFactory.markFileUpToDate(file);
-	}
+//	@Override
+//	public void doApplyInformationToEditor()
+//	{
+//		if(highlights == null || highlights.isEmpty())
+//		{
+//			return;
+//		}
+//
+//		UpdateHighlightersUtil.setHighlightersToEditor(myProject, myDocument, startOffset, endOffset, highlights, getColorsScheme(),
+//				Pass.UPDATE_ALL);
+//		BashPostHighlightingPassFactory.markFileUpToDate(file);
+//	}
 }

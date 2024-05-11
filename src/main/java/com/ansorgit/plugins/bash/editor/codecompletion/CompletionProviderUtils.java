@@ -18,19 +18,18 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
-import java.util.Collection;
-import java.util.List;
-
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
-import com.intellij.codeInsight.completion.PrioritizedLookupElement;
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.psi.PsiNamedElement;
+import consulo.language.editor.completion.lookup.LookupElement;
+import consulo.language.editor.completion.lookup.LookupElementBuilder;
+import consulo.language.editor.completion.lookup.PrioritizedLookupElement;
+import consulo.language.psi.PsiNamedElement;
 import consulo.ui.image.Image;
+import consulo.util.collection.ContainerUtil;
+
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * User: jansorg
@@ -42,49 +41,29 @@ class CompletionProviderUtils {
     }
 
     static Collection<LookupElement> createPsiItems(Collection<? extends PsiNamedElement> elements) {
-        return Collections2.transform(elements, new Function<PsiNamedElement, LookupElement>() {
-            public LookupElement apply(PsiNamedElement from) {
-                return LookupElementBuilder.create(from).withCaseSensitivity(true);
-            }
-        });
+        return ContainerUtil.map(elements, from -> LookupElementBuilder.create(from).withCaseSensitivity(true));
     }
 
     static Collection<LookupElement> createItems(Iterable<String> items, final Image icon) {
-        return Lists.transform(Lists.newArrayList(items), new Function<String, LookupElement>() {
-            public LookupElement apply(String from) {
-                return LookupElementBuilder.create(from).withCaseSensitivity(true).withIcon(icon);
-            }
-        });
+        return ContainerUtil.map(ContainerUtil.newArrayList(items), from -> LookupElementBuilder.create(from).withCaseSensitivity(true).withIcon(icon));
     }
 
     static Collection<LookupElement> wrapInGroup(final int groupId, Collection<LookupElement> elements) {
-        return Collections2.transform(elements, new Function<LookupElement, LookupElement>() {
-            public LookupElement apply(LookupElement lookupElement) {
-                return PrioritizedLookupElement.withGrouping(lookupElement, groupId);
-            }
-        });
+        return ContainerUtil.map(elements, lookupElement -> PrioritizedLookupElement.withGrouping(lookupElement, groupId));
     }
 
     static Collection<LookupElement> createPathItems(List<String> paths) {
-        Function<String, LookupElement> transformationFunction = new Function<String, LookupElement>() {
-            public LookupElement apply(String path) {
-                return new PathLookupElement(path, !path.endsWith("/"));
-            }
-        };
+        Function<String, LookupElement> transformationFunction = path -> new PathLookupElement(path, !path.endsWith("/"));
 
-        Predicate<String> isRelativePath = new Predicate<String>() {
-            public boolean apply(String path) {
-                return !path.startsWith("/");
-            }
-        };
+        Predicate<String> isRelativePath = path -> !path.startsWith("/");
 
-        Collection<String> relativePaths = Collections2.filter(paths, isRelativePath);
-        Collection<LookupElement> relativePathItems = Collections2.transform(relativePaths, transformationFunction);
+        Collection<String> relativePaths = ContainerUtil.filter(paths, isRelativePath);
+        Collection<LookupElement> relativePathItems = ContainerUtil.map(relativePaths, transformationFunction);
 
-        Collection<String> absolutePaths = Collections2.filter(paths, Predicates.not(isRelativePath));
-        Collection<LookupElement> absolutePathItems = Collections2.transform(absolutePaths, transformationFunction);
+        Collection<String> absolutePaths = ContainerUtil.filter(paths, isRelativePath.negate());
+        Collection<LookupElement> absolutePathItems = ContainerUtil.map(absolutePaths, transformationFunction);
 
-        Collection<LookupElement> result = Lists.newLinkedList();
+        Collection<LookupElement> result = new LinkedList<>();
         result.addAll(wrapInGroup(CompletionGrouping.RelativeFilePath.ordinal(), relativePathItems));
         result.addAll(wrapInGroup(CompletionGrouping.AbsoluteFilePath.ordinal(), absolutePathItems));
 

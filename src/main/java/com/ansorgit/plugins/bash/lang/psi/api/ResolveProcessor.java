@@ -18,9 +18,11 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import javax.annotation.Nullable;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.resolve.PsiScopeProcessor;
+import jakarta.annotation.Nullable;
+
+import java.util.Collection;
 
 /**
  * Date: 12.04.2009
@@ -33,7 +35,7 @@ public interface ResolveProcessor extends PsiScopeProcessor {
     PsiElement getBestResult(boolean firstResult, PsiElement referenceElement);
 
     @Nullable
-    Iterable<PsiElement> getResults();
+    Collection<? extends PsiElement> getResults();
 
     boolean hasResults();
 

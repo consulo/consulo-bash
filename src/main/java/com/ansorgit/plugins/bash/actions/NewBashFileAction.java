@@ -20,12 +20,9 @@ package com.ansorgit.plugins.bash.actions;
 
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashStrings;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-
-import javax.annotation.Nonnull;
-import java.util.function.Consumer;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
 
 /**
  * Date: 17.04.2009

@@ -18,13 +18,14 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.CommandLineState;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.process.OSProcessHandler;
-import com.intellij.execution.process.ProcessTerminatedListener;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.openapi.util.text.StringUtil;
+import consulo.execution.configuration.CommandLineState;
+import consulo.execution.process.ProcessTerminatedListener;
+import consulo.execution.runner.ExecutionEnvironment;
+import consulo.process.ExecutionException;
+import consulo.process.ProcessHandler;
+import consulo.process.cmd.GeneralCommandLine;
+import consulo.process.local.ProcessHandlerFactory;
+import consulo.util.lang.StringUtil;
 
 /**
  * This code bases on the intellij-batch plugin by wibotwi.
@@ -40,12 +41,10 @@ public class BashCommandLineState extends CommandLineState {
     }
 
     @Override
-    protected OSProcessHandler startProcess() throws ExecutionException {
+    protected ProcessHandler startProcess() throws ExecutionException {
         GeneralCommandLine commandLine = generateCommandLine();
 
-        OSProcessHandler osProcessHandler = new OSProcessHandler(
-                commandLine.createProcess(),
-                commandLine.getCommandLineString());
+        ProcessHandler osProcessHandler = ProcessHandlerFactory.getInstance().createProcessHandler(commandLine);
         //osProcessHandler.putUserData(OSProcessHandler.SILENTLY_DESTROY_ON_CLOSE, Boolean.TRUE);
 
         //notifies in the status bar with a message and the exit code

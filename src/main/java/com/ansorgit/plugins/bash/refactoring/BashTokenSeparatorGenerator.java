@@ -18,8 +18,12 @@
 
 package com.ansorgit.plugins.bash.refactoring;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.TokenSeparatorGenerator;
+import com.ansorgit.plugins.bash.lang.BashLanguage;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.TokenSeparatorGenerator;
+import jakarta.annotation.Nonnull;
 
 /**
  * The token separator generator is called for PSI element replacements, e.g. during a rename refactoring.
@@ -29,8 +33,15 @@ import com.intellij.lang.TokenSeparatorGenerator;
  * Date: 10.12.10
  * Time: 18:01
  */
+@ExtensionImpl
 public class BashTokenSeparatorGenerator implements TokenSeparatorGenerator {
     public ASTNode generateWhitespaceBetweenTokens(ASTNode left, ASTNode right) {
         return null;
+    }
+
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
     }
 }

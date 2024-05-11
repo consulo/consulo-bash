@@ -18,14 +18,13 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.editor.inspections.inspections.FixShebangInspection;
 import com.ansorgit.plugins.bash.lang.psi.api.BashShebang;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
+import consulo.codeEditor.Editor;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 public class RegisterShebangCommandQuickfix extends AbstractBashQuickfix {
     private final FixShebangInspection inspection;

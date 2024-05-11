@@ -18,8 +18,6 @@
 
 package com.ansorgit.plugins.bash.editor.formatting.processor;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.editor.formatting.BashBlock;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
@@ -33,13 +31,15 @@ import com.ansorgit.plugins.bash.lang.psi.api.shell.BashCase;
 import com.ansorgit.plugins.bash.lang.psi.api.shell.BashIf;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashParameterExpansion;
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
-import com.intellij.formatting.Spacing;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.codeStyle.CodeStyleSettings;
+import consulo.language.codeStyle.Spacing;
+import consulo.language.psi.PsiElement;
+import consulo.logging.Logger;
+
+import jakarta.annotation.Nonnull;
 
 public abstract class BashSpacingProcessorBasic implements BashElementTypes, BashTokenTypes {
     private static final Logger log = Logger.getInstance("SpacingProcessorBasic");

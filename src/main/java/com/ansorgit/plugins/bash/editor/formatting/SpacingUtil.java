@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.editor.formatting;
 
-import com.intellij.lang.ASTNode;
+import consulo.language.ast.ASTNode;
 
 /**
  * User: jansorg

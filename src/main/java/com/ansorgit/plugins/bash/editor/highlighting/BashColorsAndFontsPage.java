@@ -18,23 +18,23 @@
 
 package com.ansorgit.plugins.bash.editor.highlighting;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
+import consulo.annotation.component.ExtensionImpl;
+import consulo.colorScheme.TextAttributesKey;
+import consulo.colorScheme.setting.AttributesDescriptor;
+import consulo.colorScheme.setting.ColorDescriptor;
+import consulo.language.editor.colorScheme.setting.ColorSettingsPage;
+import consulo.language.editor.highlight.SyntaxHighlighter;
+import consulo.util.io.StreamUtil;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nullable;
-import com.google.common.collect.Maps;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.options.colors.AttributesDescriptor;
-import com.intellij.openapi.options.colors.ColorDescriptor;
-import com.intellij.openapi.options.colors.ColorSettingsPage;
-import com.intellij.openapi.util.io.StreamUtil;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
+@ExtensionImpl
 public class BashColorsAndFontsPage implements ColorSettingsPage {
     @Nonnull
     public String getDisplayName() {
@@ -101,14 +101,15 @@ public class BashColorsAndFontsPage implements ColorSettingsPage {
         String demoText;
         try {
             demoText = StreamUtil.readText(resource, "UTF-8");
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new RuntimeException("BashSupport could not load the syntax highlighter demo text.", e);
         }
 
         return demoText;
     }
 
-    private static final Map<String, TextAttributesKey> tags = Maps.newHashMap();
+    private static final Map<String, TextAttributesKey> tags = new HashMap<>();
 
     static {
         tags.put("keyword", BashSyntaxHighlighter.KEYWORD);

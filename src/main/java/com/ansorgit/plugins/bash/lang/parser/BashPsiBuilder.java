@@ -21,15 +21,15 @@ package com.ansorgit.plugins.bash.lang.parser;
 import com.ansorgit.plugins.bash.lang.BashVersion;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.util.ForwardingMarker;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.impl.PsiBuilderAdapter;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.containers.Stack;
+import consulo.language.ast.IElementType;
+import consulo.language.parser.PsiBuilder;
+import consulo.language.parser.PsiBuilderAdapter;
 import consulo.localize.LocalizeValue;
+import consulo.logging.Logger;
+import consulo.util.collection.Stack;
+import consulo.util.lang.StringUtil;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * The PsiBuilder which has been enhanced to be more helpful for Bash parsing.

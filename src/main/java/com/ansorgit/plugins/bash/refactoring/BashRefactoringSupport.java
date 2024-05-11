@@ -18,12 +18,16 @@
 
 package com.ansorgit.plugins.bash.refactoring;
 
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDocMarker;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
-import com.intellij.lang.refactoring.RefactoringSupportProvider;
-import com.intellij.psi.PsiElement;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.editor.refactoring.RefactoringSupportProvider;
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nonnull;
 
 /**
  * Definition of the refactoring support available in this plugin.
@@ -33,6 +37,7 @@ import com.intellij.psi.PsiElement;
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class BashRefactoringSupport extends RefactoringSupportProvider {
     @Override
     public boolean isInplaceRenameAvailable(PsiElement element, PsiElement context) {
@@ -40,6 +45,12 @@ public class BashRefactoringSupport extends RefactoringSupportProvider {
                 (element instanceof BashFunctionDef) ||
                 (element instanceof BashVar) ||
                 (element instanceof BashHereDocMarker);
+    }
+
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
     }
 
 //    @Override

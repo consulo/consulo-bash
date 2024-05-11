@@ -1,20 +1,15 @@
 package com.ansorgit.plugins.bash.lang.psi.stubs.elements;
 
-import java.io.IOException;
-
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.stubs.BashFileStubBuilder;
 import com.ansorgit.plugins.bash.lang.psi.stubs.api.BashFileStub;
 import com.ansorgit.plugins.bash.lang.psi.stubs.impl.BashFileStubImpl;
 import com.ansorgit.plugins.bash.lang.psi.stubs.index.BashFullScriptNameIndex;
 import com.ansorgit.plugins.bash.lang.psi.stubs.index.BashScriptNameIndex;
-import com.intellij.psi.StubBuilder;
-import com.intellij.psi.stubs.IndexSink;
-import com.intellij.psi.stubs.StubElement;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
-import com.intellij.psi.tree.IStubFileElementType;
-import com.intellij.util.io.StringRef;
+import consulo.index.io.StringRef;
+import consulo.language.psi.stub.*;
+
+import java.io.IOException;
 
 /**
  * @author ilyas

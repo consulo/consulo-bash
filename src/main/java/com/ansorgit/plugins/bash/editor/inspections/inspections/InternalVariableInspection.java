@@ -18,15 +18,15 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.LocalQuickFix;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.editor.inspection.LocalQuickFix;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.language.psi.PsiElementVisitor;
+import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
 
@@ -37,6 +37,7 @@ import org.jetbrains.annotations.Nls;
  * Date: Jan 25, 2010
  * Time: 10:11:49 PM
  */
+@ExtensionImpl
 public class InternalVariableInspection extends AbstractBashInspection {
     //private static final Logger log = Logger.getInstance("#UnresolvedVariable");
 

@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import com.intellij.psi.PsiComment;
+import consulo.language.psi.PsiComment;
 
 import java.util.List;
 

@@ -18,15 +18,15 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.heredoc;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDocEndMarker;
 import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDocStartMarker;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiElement;
 
 /**
  * User: jansorg

@@ -18,10 +18,6 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.word;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashCharSequence;
@@ -29,19 +25,22 @@ import com.ansorgit.plugins.bash.lang.psi.api.BashString;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashCommand;
 import com.ansorgit.plugins.bash.lang.psi.impl.BashBaseStubElementImpl;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.injection.InjectedLanguageManager;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.ProperTextRange;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.LiteralTextEscaper;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiLanguageInjectionHost;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.impl.source.tree.LeafElement;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.stubs.StubElement;
+import consulo.document.util.ProperTextRange;
+import consulo.document.util.TextRange;
+import consulo.language.ast.ASTNode;
+import consulo.language.impl.ast.LeafElement;
+import consulo.language.inject.InjectedLanguageManager;
+import consulo.language.psi.LiteralTextEscaper;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiLanguageInjectionHost;
+import consulo.language.psi.resolve.PsiScopeProcessor;
+import consulo.language.psi.resolve.ResolveState;
+import consulo.language.psi.stub.StubElement;
+import consulo.util.lang.Pair;
+import jakarta.annotation.Nonnull;
+
+import java.util.List;
 
 /**
  * A string spanning start and end markers and content elements.

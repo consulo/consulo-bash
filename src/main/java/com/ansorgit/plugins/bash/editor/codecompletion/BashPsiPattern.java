@@ -18,8 +18,8 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
-import com.intellij.patterns.PsiElementPattern;
-import com.intellij.psi.PsiElement;
+import consulo.language.pattern.PsiElementPattern;
+import consulo.language.psi.PsiElement;
 
 /**
  * User: jansorg

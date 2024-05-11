@@ -20,16 +20,16 @@ package com.ansorgit.plugins.bash.editor.highlighting;
 
 import com.ansorgit.plugins.bash.lang.lexer.BashLexer;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
-import com.google.common.collect.Maps;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
-import com.intellij.openapi.editor.HighlighterColors;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import javax.annotation.Nonnull;
+import consulo.codeEditor.DefaultLanguageHighlighterColors;
+import consulo.codeEditor.HighlighterColors;
+import consulo.colorScheme.TextAttributesKey;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.editor.highlight.SyntaxHighlighterBase;
+import consulo.language.lexer.Lexer;
 
+import jakarta.annotation.Nonnull;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.conditionalOperators;
@@ -84,8 +84,8 @@ public class BashSyntaxHighlighter extends SyntaxHighlighterBase {
         return new BashLexer();
     }
 
-    private static final Map<IElementType, TextAttributesKey> attributes1 = Maps.newHashMap();
-    private static final Map<IElementType, TextAttributesKey> attributes2 = Maps.newHashMap();
+    private static final Map<IElementType, TextAttributesKey> attributes1 = new HashMap<>();
+    private static final Map<IElementType, TextAttributesKey> attributes2 = new HashMap<>();
 
     private static final TokenSet parenthesisSet = TokenSet.create(BashTokenTypes.LEFT_PAREN, BashTokenTypes.RIGHT_PAREN);
     private static final TokenSet bracesSet = TokenSet.create(BashTokenTypes.LEFT_CURLY, BashTokenTypes.RIGHT_CURLY);

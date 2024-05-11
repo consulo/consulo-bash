@@ -18,15 +18,14 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
-import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.codeInspection.LocalQuickFix;
-import com.intellij.codeInspection.ProblemDescriptor;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiFile;
+import consulo.codeEditor.Editor;
+import consulo.language.editor.inspection.LocalQuickFix;
+import consulo.language.editor.inspection.ProblemDescriptor;
+import consulo.language.editor.intention.SyntheticIntentionAction;
+import consulo.language.psi.PsiFile;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 /**
  * Abstract base class for Bash quickfixes.
@@ -35,7 +34,7 @@ import com.intellij.psi.PsiFile;
  * Date: 21.05.2009
  * Time: 10:47:27
  */
-abstract class AbstractBashQuickfix implements LocalQuickFix, IntentionAction {
+abstract class AbstractBashQuickfix implements LocalQuickFix, SyntheticIntentionAction {
     @Nonnull
     public final String getText() {
         return getName();

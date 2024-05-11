@@ -1,14 +1,14 @@
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.SearchScope;
+import consulo.content.scope.SearchScope;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.impl.psi.ASTWrapperPsiElement;
+import consulo.language.psi.scope.GlobalSearchScope;
 
 public class BashBaseElement extends ASTWrapperPsiElement implements BashPsiElement {
     private String name;

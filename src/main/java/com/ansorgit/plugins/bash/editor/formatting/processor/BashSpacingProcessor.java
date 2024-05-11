@@ -21,13 +21,13 @@ package com.ansorgit.plugins.bash.editor.formatting.processor;
 import com.ansorgit.plugins.bash.editor.formatting.BashBlock;
 import com.ansorgit.plugins.bash.editor.formatting.SpacingUtil;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
-import com.intellij.formatting.Spacing;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.impl.source.SourceTreeToPsiMap;
-import com.intellij.psi.impl.source.tree.CompositeElement;
+import consulo.language.ast.ASTNode;
+import consulo.language.codeStyle.CodeStyleSettings;
+import consulo.language.codeStyle.Spacing;
+import consulo.language.impl.ast.CompositeElement;
+import consulo.language.impl.psi.SourceTreeToPsiMap;
+import consulo.language.psi.PsiElement;
+import consulo.logging.Logger;
 
 /**
  * This code is based on code taken from the Groovy plugin.

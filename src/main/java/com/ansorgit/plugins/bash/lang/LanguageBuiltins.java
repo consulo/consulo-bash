@@ -18,29 +18,28 @@
 
 package com.ansorgit.plugins.bash.lang;
 
-import com.google.common.collect.Sets;
-
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * Contains definitions of built-in resources like variables or functions.
  */
 public final class LanguageBuiltins {
     //variables valid even in the very original shell implementation
-    public static final Collection<String> bourneShellVars = Sets.newHashSet(
+    public static final Collection<String> bourneShellVars = Set.of(
             "CDPATH", "HOME", "IFS", "MAIL", "MAILPATH", "OPTARG", "OPTIND", "PATH", "PS1", "PS2"
     );
 
     //variables which are references to parameters. This is just a reasonable default set, Bash doesn't seem to restrict
     //the range of valid parameter
-    public static final Collection<String> bashShellParamReferences = Sets.newHashSet(
+    public static final Collection<String> bashShellParamReferences = Set.of(
             "*", "@", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"
     );
 
     /**
      * A set of built-in variables. The variables are stored without the marker character (i.e. $).
      */
-    public static final Collection<String> bashShellVars = Sets.newHashSet(
+    public static final Collection<String> bashShellVars = Set.of(
             "$", "#", "*", "@", "-", "!", "_", "?",
             "BASH", "BASHOPTS", "BASHPID", "BASH_ALIASES", "BASH_ARGC",
             "BASH_ARGV", "BASH_CMDS", "BASH_COMMAND", "BASH_ENV",
@@ -51,7 +50,7 @@ public final class LanguageBuiltins {
             "DIRSTACK", "EMACS", "EUID", "FCEDIT",
             "FIGNORE", "FUNCNAME", "GLOBIGNORE", "GROUPS",
             "histchars", "HISTCMD", "HISTCONTROL", "HISTFILE",
-            "HISTFILESIZE", "HISTIGNORE", "HISTIGNORE", "HISTSIZE",
+            "HISTFILESIZE", "HISTIGNORE", "HISTSIZE",
             "HISTTIMEFORMAT", "HOSTFILE", "HOSTNAME", "HOSTTYPE",
             "IGNOREEOF", "INPUTRC", "LANG", "LC_ALL",
             "LC_COLLATE", "LC_CTYPE", "LC_MESSAGES", "LC_NUMERIC",
@@ -60,32 +59,24 @@ public final class LanguageBuiltins {
             "POSIXLY_CORRECT", "PPID", "PROMPT_COMMAND", "PROMPT_DIRTRIM",
             "PS3", "PS4", "PWD", "RANDOM",
             "REPLY", "SECONDS", "SHELL", "SHELLOPTS",
-            "SHLVL", "TIMEFORMAT", "TMOUT", "TMPDIR", "UID");
+            "SHLVL", "TIMEFORMAT", "TMOUT", "TMPDIR", "UID",
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19");
 
-    //register the shell parameter names
-    static {
-        bashShellVars.addAll(bashShellParamReferences);
-    }
-
-    public static final Collection<String> bashShellVars_v4 = Sets.newHashSet(
+    public static final Collection<String> bashShellVars_v4 = Set.of(
             "BASHPID", "PROMPT_DIRTRIM"
     );
 
-    public static final Collection<String> readonlyShellVars = Sets.newHashSet(
+    public static final Collection<String> readonlyShellVars = Set.of(
             "BASH", "BASHOPTS", "BASHPID", "BASH_SUBSHELL", "BASH_VERSINFO", "BASH_VERSION", "EUID",
-            "HOSTNAME", "HOSTTYPE", "OLDPWD", "PPID", "PWD", "UID"
+            "HOSTNAME", "HOSTTYPE", "OLDPWD", "PPID", "PWD", "UID",
+            "*", "@", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"
     );
-
-    //add existing definitions to the read-only variable set
-    static {
-        readonlyShellVars.addAll(bashShellParamReferences);
-    }
 
     public static boolean isInternalCommand(String commandName) {
         return commands.contains(commandName);
     }
 
-    public static final Collection<String> commands = Sets.newHashSet(
+    public static final Collection<String> commands = Set.of(
             ".", ":", "alias", "bg", "bind", "break", "builtin", "cd", "caller",
             "command", "compgen", "complete", "continue", "declare", "typeset",
             "dirs", "disown", "echo", "enable", "eval", "exec", "exit",
@@ -95,26 +86,26 @@ public final class LanguageBuiltins {
             "suspend", "test", "times", "trap", "type", "ulimit", "umask", "unalias", "wait"
     );
 
-    public static final Collection<String> commands_v4 = Sets.newHashSet(
+    public static final Collection<String> commands_v4 = Set.of(
             "coproc", "mapfile"
     );
 
-    public static final Collection<String> varDefCommands = Sets.newHashSet(
+    public static final Collection<String> varDefCommands = Set.of(
             "export", "read", "declare", "readonly", "typeset"
     );
 
-    public static final Collection<String> localVarDefCommands = Sets.newHashSet(
+    public static final Collection<String> localVarDefCommands = Set.of(
             "local"
 
     );
-    public static final Collection<String> readonlyVarDefCommands = Sets.newHashSet(
+    public static final Collection<String> readonlyVarDefCommands = Set.of(
             "readonly"
     );
-    public static final Collection<String> arithmeticCommands = Sets.newHashSet(
+    public static final Collection<String> arithmeticCommands = Set.of(
             "let"
     );
 
-    public static final Collection<String> bashInjectionHostCommand = Sets.newHashSet(
+    public static final Collection<String> bashInjectionHostCommand = Set.of(
             "eval", "trap"
     );
 }

@@ -18,11 +18,11 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
-import com.intellij.patterns.CharPattern;
-import com.intellij.patterns.PatternCondition;
-import com.intellij.util.ProcessingContext;
+import consulo.language.pattern.CharPattern;
+import consulo.language.util.ProcessingContext;
+import consulo.language.pattern.PatternCondition;
 
 /**
  * User: jansorg

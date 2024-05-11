@@ -18,19 +18,24 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionInitializationContext;
-import com.intellij.codeInsight.completion.OffsetMap;
-import com.intellij.psi.PsiElement;
-import javax.annotation.Nonnull;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.editor.completion.CompletionContributor;
+import consulo.language.editor.completion.CompletionInitializationContext;
+import consulo.language.psi.PsiElement;
+import consulo.language.editor.completion.OffsetMap;
 
-import static com.intellij.codeInsight.completion.CompletionInitializationContext.IDENTIFIER_END_OFFSET;
-import static com.intellij.codeInsight.completion.CompletionInitializationContext.START_OFFSET;
+import jakarta.annotation.Nonnull;
+
+import static consulo.language.editor.completion.CompletionInitializationContext.IDENTIFIER_END_OFFSET;
+import static consulo.language.editor.completion.CompletionInitializationContext.START_OFFSET;
 
 /**
  * Bash completion contributor.
  */
+@ExtensionImpl
 public class BashCompletionContributor extends CompletionContributor {
     public BashCompletionContributor() {
         new VariableNameCompletionProvider().addTo(this);
@@ -75,4 +80,9 @@ public class BashCompletionContributor extends CompletionContributor {
         }
     }
 
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
+    }
 }

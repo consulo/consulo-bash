@@ -2,22 +2,21 @@ package consulo.bash.module.extension;
 
 import com.ansorgit.plugins.bash.settings.facet.OperationMode;
 import com.ansorgit.plugins.bash.settings.facet.ui.FileMode;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.containers.ContainerUtil;
-import consulo.module.extension.impl.ModuleExtensionImpl;
-import consulo.roots.ModuleRootLayer;
+import consulo.module.content.layer.ModuleRootLayer;
+import consulo.module.content.layer.extension.ModuleExtensionBase;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.VirtualFileManager;
 import org.jdom.Element;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import java.util.*;
 
 /**
  * @author VISTALL
  * @since 19.11.13.
  */
-public class BashModuleExtension extends ModuleExtensionImpl<BashModuleExtension>
+public class BashModuleExtension extends ModuleExtensionBase<BashModuleExtension>
 {
 	protected OperationMode myOperationMode = OperationMode.IgnoreAll;
 
@@ -65,7 +64,7 @@ public class BashModuleExtension extends ModuleExtensionImpl<BashModuleExtension
 		element.addContent(modeElement);
 
 		List<VirtualFile> files = new ArrayList<>(myMapping.keySet());
-		ContainerUtil.quickSort(files, new Comparator<VirtualFile>()
+		files.sort(new Comparator<VirtualFile>()
 		{
 			@Override
 			public int compare(final VirtualFile o1, final VirtualFile o2)

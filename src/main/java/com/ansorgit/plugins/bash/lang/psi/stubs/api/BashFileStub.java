@@ -1,8 +1,8 @@
 package com.ansorgit.plugins.bash.lang.psi.stubs.api;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
-import com.intellij.psi.stubs.PsiFileStub;
-import com.intellij.util.io.StringRef;
+import consulo.index.io.StringRef;
+import consulo.language.psi.stub.PsiFileStub;
 
 /**
  * @author jansorg

@@ -29,11 +29,11 @@
 
 package com.ansorgit.plugins.bash.lang.lexer;
 
-import com.intellij.lexer.LexerBase;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.lexer.LexerBase;
+import consulo.language.ast.IElementType;
 import static com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes.*;
 
-import com.intellij.util.containers.Stack;
+import consulo.util.collection.Stack;
 
 %%
 

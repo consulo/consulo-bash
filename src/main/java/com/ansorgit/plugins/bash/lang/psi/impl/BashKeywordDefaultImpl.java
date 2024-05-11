@@ -18,16 +18,15 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.psi.api.BashKeyword;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.IncorrectOperationException;
+import consulo.document.util.TextRange;
+import consulo.navigation.ItemPresentation;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiReference;
+import consulo.language.ast.IElementType;
+import consulo.language.util.IncorrectOperationException;
 import consulo.ui.image.Image;
+import jakarta.annotation.Nonnull;
 
 /**
  * Date: 06.05.2009

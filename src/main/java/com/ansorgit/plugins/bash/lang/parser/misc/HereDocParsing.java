@@ -20,9 +20,10 @@ package com.ansorgit.plugins.bash.lang.parser.misc;
 
 import com.ansorgit.plugins.bash.lang.parser.*;
 import com.ansorgit.plugins.bash.lang.parser.util.ParserUtil;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.openapi.util.Pair;
-import javax.annotation.Nullable;
+import consulo.util.lang.Pair;
+import consulo.language.parser.PsiBuilder;
+
+import jakarta.annotation.Nullable;
 
 /**
  * Here-docs are started in a command with a redirect.

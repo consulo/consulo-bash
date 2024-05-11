@@ -3,9 +3,9 @@ package com.ansorgit.plugins.bash.lang.psi.util;
 import com.ansorgit.plugins.bash.lang.psi.api.ResolveProcessor;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.impl.vars.BashVarProcessor;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.ResolveState;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.resolve.ResolveState;
 
 public final class BashResolveUtil {
     public static PsiElement resolve(BashVar bashVar, boolean leaveInjectionHosts) {

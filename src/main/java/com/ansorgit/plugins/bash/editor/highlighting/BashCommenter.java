@@ -18,17 +18,22 @@
 
 package com.ansorgit.plugins.bash.editor.highlighting;
 
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
-import com.intellij.lang.CodeDocumentationAwareCommenter;
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.tree.IElementType;
-import javax.annotation.Nullable;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.CodeDocumentationAwareCommenter;
+import consulo.language.Language;
+import consulo.language.ast.IElementType;
+import consulo.language.psi.PsiComment;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Comment handler for the Bash language.
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class BashCommenter implements CodeDocumentationAwareCommenter, BashTokenTypes {
     public String getLineCommentPrefix() {
         return "#";
@@ -82,5 +87,11 @@ public class BashCommenter implements CodeDocumentationAwareCommenter, BashToken
 
     public boolean isDocumentationComment(PsiComment element) {
         return false;
+    }
+
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
     }
 }

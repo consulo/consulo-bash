@@ -18,13 +18,16 @@
 
 package com.ansorgit.plugins.bash.editor.highlighting;
 
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
-import com.intellij.lang.BracePair;
-import com.intellij.lang.PairedBraceMatcher;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.language.BracePair;
+import consulo.language.Language;
+import consulo.language.psi.PsiFile;
+import consulo.language.ast.IElementType;
+import consulo.language.PairedBraceMatcher;
+
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Braces matcher for bash files. Referenced by the plugin.xml file.
@@ -59,7 +62,9 @@ public class BashBraceMatcher implements PairedBraceMatcher {
                 || null == tokenType;
     }
 
-    public int getCodeConstructStart(final PsiFile file, int openingBraceOffset) {
-        return openingBraceOffset;
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
     }
 }

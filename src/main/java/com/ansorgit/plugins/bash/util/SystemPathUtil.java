@@ -18,12 +18,13 @@
 
 package com.ansorgit.plugins.bash.util;
 
+import consulo.util.lang.StringUtil;
+import jakarta.annotation.Nonnull;
+
 import java.io.File;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import com.intellij.openapi.util.text.StringUtil;
+import jakarta.annotation.Nullable;
 
 /**
  * User: jansorg

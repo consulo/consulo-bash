@@ -18,18 +18,19 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import javax.annotation.Nonnull;
+import consulo.annotation.component.ExtensionImpl;
+import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.AddShebangQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.intellij.codeInspection.InspectionManager;
-import com.intellij.codeInspection.ProblemDescriptor;
-import com.intellij.codeInspection.ProblemHighlightType;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
+import consulo.language.editor.inspection.scheme.InspectionManager;
+import consulo.language.editor.inspection.ProblemDescriptor;
+import consulo.language.editor.inspection.ProblemHighlightType;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
 
@@ -40,6 +41,7 @@ import org.jetbrains.annotations.Nls;
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class AddShebangInspection extends AbstractBashInspection {
 
     @Pattern("[a-zA-Z_0-9.]+")

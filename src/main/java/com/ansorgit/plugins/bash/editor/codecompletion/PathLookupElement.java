@@ -18,11 +18,10 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.codeInsight.lookup.LookupElementPresentation;
-import com.intellij.icons.AllIcons;
+import consulo.application.AllIcons;
+import consulo.language.editor.completion.lookup.LookupElement;
+import consulo.language.editor.completion.lookup.LookupElementPresentation;
+import jakarta.annotation.Nonnull;
 
 /**
  * Lookup element which contains a simple path element.

@@ -18,8 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiReference;
 
 /**
  * Interface to mark a class which implements a bash keyword construct.

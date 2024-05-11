@@ -23,13 +23,14 @@ import com.ansorgit.plugins.bash.lang.psi.FileInclusionManager;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFileReference;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashIncludeCommand;
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiFile;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import java.util.Set;
 
@@ -41,6 +42,7 @@ import java.util.Set;
  * Date: Nov 2, 2009
  * Time: 8:15:59 PM
  */
+@ExtensionImpl
 public class RecursiveIncludeFileInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull

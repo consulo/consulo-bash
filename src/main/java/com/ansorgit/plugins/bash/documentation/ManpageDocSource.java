@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.documentation;
 
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashCommand;
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * Looks up the documentation for external commands by calling the "man" program.

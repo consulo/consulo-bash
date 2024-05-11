@@ -18,8 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * Date: 12.04.2009

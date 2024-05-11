@@ -18,9 +18,9 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import com.intellij.execution.filters.Filter;
-import com.intellij.execution.filters.RegexpFilter;
-import com.intellij.openapi.project.Project;
+import consulo.execution.ui.console.Filter;
+import consulo.execution.ui.console.RegexpFilter;
+import consulo.project.Project;
 
 /**
  * This is a custom line filter to insert hyperlinks to the line which has a problem.

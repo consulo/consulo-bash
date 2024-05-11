@@ -18,12 +18,12 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
-import java.util.List;
+import consulo.language.psi.PsiElement;
+import consulo.logging.Logger;
+import consulo.util.lang.StringUtil;
 
-import com.google.common.collect.Lists;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class encapsulates the documentation retrieval.
@@ -37,7 +37,7 @@ import com.intellij.psi.PsiElement;
  */
 class DocumentationProvider {
     private static final Logger log = Logger.getInstance("#bash.DocumentationProvider");
-    private static final List<DocumentationSource> sourceList = Lists.newArrayList();
+    private static final List<DocumentationSource> sourceList = new ArrayList<>();
 
     static {
         sourceList.add(new FunctionPsiCommentSource());

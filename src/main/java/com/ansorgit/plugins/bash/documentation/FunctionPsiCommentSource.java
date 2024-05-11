@@ -20,10 +20,10 @@ package com.ansorgit.plugins.bash.documentation;
 
 import com.ansorgit.plugins.bash.lang.psi.api.DocumentationAwareElement;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashCommand;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiComment;
+import consulo.language.psi.PsiElement;
+import consulo.logging.Logger;
+import consulo.util.lang.StringUtil;
 
 import java.util.List;
 

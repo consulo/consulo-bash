@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.lang.psi.impl.vars;
 
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
-import com.intellij.psi.scope.PsiScopeProcessor;
+import consulo.language.psi.resolve.PsiScopeProcessor;
 
 import java.util.List;
 

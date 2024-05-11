@@ -19,7 +19,7 @@
 package com.ansorgit.plugins.bash.documentation;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashKeyword;
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * Provides documentation for Bash keyword elements like "if", "while" and "for".

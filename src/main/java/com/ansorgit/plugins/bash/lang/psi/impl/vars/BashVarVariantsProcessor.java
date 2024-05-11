@@ -20,12 +20,14 @@ package com.ansorgit.plugins.bash.lang.psi.impl.vars;
 
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
 import com.ansorgit.plugins.bash.lang.psi.util.BashAbstractProcessor;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.resolve.ResolveState;
+import consulo.util.collection.Lists;
+import consulo.util.collection.Sets;
 import consulo.util.dataholder.Key;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,8 +38,8 @@ import java.util.Set;
  * @author Joachim Ansorg
  */
 public class BashVarVariantsProcessor extends BashAbstractProcessor implements BashVarCollectorProcessor {
-    private final List<BashVarDef> variables = Lists.newLinkedList();
-    private final Set<String> variableNames = Sets.newHashSet();
+    private final List<BashVarDef> variables = new ArrayList<>();
+    private final Set<String> variableNames = new HashSet<>();
     private final PsiElement startElement;
 
     public BashVarVariantsProcessor(PsiElement startElement) {

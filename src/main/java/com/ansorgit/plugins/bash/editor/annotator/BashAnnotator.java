@@ -18,8 +18,6 @@
 
 package com.ansorgit.plugins.bash.editor.annotator;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.editor.highlighting.BashSyntaxHighlighter;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.api.BashBackquote;
@@ -37,17 +35,19 @@ import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDocStartMarker;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
-import com.intellij.lang.annotation.Annotation;
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.Annotator;
-import com.intellij.openapi.editor.HighlighterColors;
-import com.intellij.openapi.editor.colors.EditorColorsManager;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiRecursiveElementVisitor;
-import com.intellij.psi.tree.TokenSet;
+import consulo.codeEditor.HighlighterColors;
+import consulo.colorScheme.EditorColorsManager;
+import consulo.colorScheme.TextAttributes;
+import consulo.colorScheme.TextAttributesKey;
+import consulo.document.util.TextRange;
+import consulo.language.ast.TokenSet;
+import consulo.language.editor.annotation.Annotation;
+import consulo.language.editor.annotation.AnnotationHolder;
+import consulo.language.editor.annotation.Annotator;
+import consulo.language.editor.annotation.HighlightSeverity;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiRecursiveElementVisitor;
+import jakarta.annotation.Nonnull;
 
 /**
  * The annotator for the the Bash language.
@@ -143,9 +143,7 @@ public class BashAnnotator implements Annotator {
             @Override
             public void visitElement(PsiElement element) {
                 if (element instanceof BashVar) {
-                    //containedVars.add((BashVar) containerElement);
-                    Annotation infoAnnotation = holder.createInfoAnnotation(element, null);
-                    infoAnnotation.setTextAttributes(BashSyntaxHighlighter.VAR_USE);
+                    holder.newSilentAnnotation(HighlightSeverity.INFORMATION).range(element).create();
                 }
 
                 super.visitElement(element);

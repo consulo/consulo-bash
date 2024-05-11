@@ -19,20 +19,20 @@
 package com.ansorgit.plugins.bash.actions;
 
 import com.ansorgit.plugins.bash.file.BashFileType;
-import com.intellij.CommonBundle;
-import com.intellij.ide.actions.CreateElementActionBase;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
+import consulo.application.CommonBundle;
+import consulo.ide.action.CreateElementActionBase;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import consulo.logging.Logger;
+import consulo.project.Project;
+import consulo.ui.ex.awt.Messages;
 import consulo.ui.image.Image;
+import consulo.util.io.FileUtil;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.util.function.Consumer;
 
 import static com.ansorgit.plugins.bash.file.BashFileType.DEFAULT_EXTENSION;

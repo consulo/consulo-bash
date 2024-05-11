@@ -23,16 +23,15 @@ import java.util.List;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiNamedElement;
-import consulo.ide.IconDescriptorUpdaters;
+import consulo.fileEditor.structureView.StructureViewTreeElement;
+import consulo.language.psi.PsiElement;
+import consulo.navigation.NavigationItem;
+import consulo.logging.Logger;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiNamedElement;
+import consulo.fileEditor.structureView.tree.TreeElement;
+import consulo.language.icon.IconDescriptorUpdaters;
+import consulo.navigation.ItemPresentation;
 import consulo.ui.image.Image;
 
 /**

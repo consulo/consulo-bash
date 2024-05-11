@@ -20,23 +20,25 @@ package com.ansorgit.plugins.bash.runner;
 
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.util.BashInterpreterDetection;
-import com.intellij.execution.Location;
-import com.intellij.execution.RunnerAndConfigurationSettings;
-import com.intellij.execution.actions.ConfigurationContext;
-import com.intellij.execution.junit.RuntimeConfigurationProducer;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.execution.RunnerAndConfigurationSettings;
+import consulo.execution.action.ConfigurationContext;
+import consulo.execution.action.Location;
+import consulo.execution.action.RuntimeConfigurationProducer;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.ModuleUtilCore;
+import consulo.module.Module;
+import consulo.project.Project;
+import consulo.util.lang.StringUtil;
+import consulo.virtualFileSystem.VirtualFile;
 
 /**
  * This class is based on code of the intellij-batch plugin.
  *
  * @author wibotwi, jansorg
  */
+@ExtensionImpl
 public class BashRunConfigurationProducer extends RuntimeConfigurationProducer implements Cloneable {
     private PsiFile sourceFile;
 
@@ -71,7 +73,7 @@ public class BashRunConfigurationProducer extends RuntimeConfigurationProducer i
                 runConfiguration.setInterpreterPath(new BashInterpreterDetection().findBestLocation());
             }
 
-            Module module = ModuleUtil.findModuleForPsiElement(location.getPsiElement());
+            Module module = ModuleUtilCore.findModuleForPsiElement(location.getPsiElement());
             if (module != null) {
                 runConfiguration.setModule(module);
             }

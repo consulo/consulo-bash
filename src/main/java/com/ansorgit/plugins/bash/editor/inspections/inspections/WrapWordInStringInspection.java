@@ -18,18 +18,19 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.WordToDoublequotedStringQuickfix;
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.WordToSinglequotedStringQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashString;
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * Inspection which can wrap a word token inside of a string.
@@ -40,6 +41,7 @@ import org.jetbrains.annotations.Nls;
  * Date: 21.05.2009
  * Time: 10:32:31
  */
+@ExtensionImpl
 public class WrapWordInStringInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull

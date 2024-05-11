@@ -31,7 +31,7 @@ public interface BashIcons
 {
 	Image BASH_FILE_ICON = BashIconGroup.bash_icon();
 
-	Image GLOBAL_VAR_ICON = BashIconGroup.global_var_16();
+	Image GLOBAL_VAR_ICON = PlatformIconGroup.nodesValue();
 
 	Image BOURNE_VAR_ICON = PlatformIconGroup.nodesVariable();
 }

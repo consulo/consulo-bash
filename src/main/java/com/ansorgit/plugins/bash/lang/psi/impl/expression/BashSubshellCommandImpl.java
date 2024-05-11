@@ -22,9 +22,8 @@ import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.expression.BashSubshellCommand;
 import com.ansorgit.plugins.bash.lang.psi.impl.BashCompositeElement;
-import com.intellij.psi.PsiElementVisitor;
-
-import javax.annotation.Nonnull;
+import consulo.language.psi.PsiElementVisitor;
+import jakarta.annotation.Nonnull;
 
 /**
  * User: jansorg

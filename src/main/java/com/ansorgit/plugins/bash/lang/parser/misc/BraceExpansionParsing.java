@@ -20,8 +20,8 @@ package com.ansorgit.plugins.bash.lang.parser.misc;
 
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
 import com.ansorgit.plugins.bash.lang.parser.ParsingFunction;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.TokenSet;
+import consulo.language.parser.PsiBuilder;
 
 /**
  * Parsing function for brace expansions.

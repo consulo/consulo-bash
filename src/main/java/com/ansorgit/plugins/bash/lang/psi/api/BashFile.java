@@ -19,8 +19,8 @@
 package com.ansorgit.plugins.bash.lang.psi.api;
 
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.PsiFileWithStubSupport;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.stub.PsiFileWithStubSupport;
 import consulo.util.dataholder.Key;
 
 /**

@@ -18,29 +18,22 @@
 
 package com.ansorgit.plugins.bash.settings.facet.ui;
 
-import java.awt.Component;
-import java.awt.Container;
+import consulo.dataContext.DataContext;
+import consulo.module.Module;
+import consulo.project.Project;
+import consulo.ui.ex.action.ActionManager;
+import consulo.ui.ex.action.ActionPlaces;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.Presentation;
+import consulo.util.lang.Pair;
+import consulo.virtualFileSystem.VirtualFile;
+
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.Map;
-
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.ActionPlaces;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.actionSystem.impl.SimpleDataContext;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * User: jansorg
@@ -107,9 +100,10 @@ class ModuleFileTreeTable extends AbstractFileTreeTable<FileMode> {
             Presentation templatePresentation = changeAction.getTemplatePresentation();
             final JComponent comboComponent = changeAction.createCustomComponent(templatePresentation);
 
-            DataContext dataContext = SimpleDataContext.getSimpleContext(PlatformDataKeys.VIRTUAL_FILE,
-                    myVirtualFile,
-                    SimpleDataContext.getProjectContext(getModule().getProject()));
+            DataContext dataContext = DataContext.builder()
+                    .add(VirtualFile.KEY, myVirtualFile)
+                    .add(Project.KEY, getModule().getProject())
+                    .build();
 
             AnActionEvent event = new AnActionEvent(null,
                     dataContext,
@@ -156,7 +150,6 @@ class ModuleFileTreeTable extends AbstractFileTreeTable<FileMode> {
                 if (fileMode != null) {
                     setText(fileMode.getDisplayName());
                 }
-                //fixme
             }
 
             setEnabled(enabled);

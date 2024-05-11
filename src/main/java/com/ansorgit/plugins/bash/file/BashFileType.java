@@ -22,24 +22,22 @@ import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.settings.facet.ui.FileMode;
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.content.BashContentUtil;
-import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.module.ModuleUtilCore;
-import com.intellij.openapi.project.DumbServiceImpl;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectUtil;
-import com.intellij.openapi.roots.impl.DirectoryIndex;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import consulo.bash.module.extension.BashModuleExtension;
+import consulo.language.Language;
+import consulo.language.file.LanguageFileType;
+import consulo.language.util.ModuleUtilCore;
 import consulo.localize.LocalizeValue;
+import consulo.module.Module;
+import consulo.project.DumbService;
+import consulo.project.Project;
+import consulo.project.ProjectLocator;
 import consulo.ui.image.Image;
+import consulo.util.lang.StringUtil;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.fileType.FileTypeIdentifiableByVirtualFile;
+import consulo.virtualFileSystem.util.VirtualFileUtil;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,7 +51,7 @@ import java.util.List;
  */
 public class BashFileType extends LanguageFileType implements FileTypeIdentifiableByVirtualFile {
     public static final BashFileType INSTANCE = new BashFileType();
-	@Deprecated
+    @Deprecated
     public static final Language BASH_LANGUAGE = INSTANCE.getLanguage();
 
     /**
@@ -76,25 +74,25 @@ public class BashFileType extends LanguageFileType implements FileTypeIdentifiab
     }
 
     @Override
-	@Nonnull
+    @Nonnull
     public String getId() {
         return "Bash";
     }
 
     @Override
-	@Nonnull
+    @Nonnull
     public LocalizeValue getDescription() {
         return LocalizeValue.localizeTODO("Bourne Again Shell");
     }
 
     @Override
-	@Nonnull
+    @Nonnull
     public String getDefaultExtension() {
         return DEFAULT_EXTENSION;
     }
 
     @Override
-	public Image getIcon() {
+    public Image getIcon() {
         return BashIcons.BASH_FILE_ICON;
     }
 
@@ -109,7 +107,7 @@ public class BashFileType extends LanguageFileType implements FileTypeIdentifiab
      * @return True if BashSupport wants to take that file
      */
     @Override
-	public boolean isMyFileType(VirtualFile file) {
+    public boolean isMyFileType(VirtualFile file) {
         if (file == null) {
             return false;
         }
@@ -120,33 +118,30 @@ public class BashFileType extends LanguageFileType implements FileTypeIdentifiab
 
         if (extensionList.contains(file.getExtension())) {
             return true;
-        } else if (!file.isInLocalFileSystem()) {
+        }
+        else if (!file.isInLocalFileSystem()) {
             return false;
-        } else if (StringUtil.isEmpty(file.getExtension())) {
+        }
+        else if (StringUtil.isEmpty(file.getExtension())) {
             //no extensions, special checks (looking at the content, etc)
 
             //guess project
-            Project project = ProjectUtil.guessProjectForFile(file);
+            Project project = ProjectLocator.getInstance().guessProjectForFile(file);
             if (project == null) {
                 return false;
             }
 
-            DumbServiceImpl dumbService = DumbServiceImpl.getInstance(project);
+            DumbService dumbService = DumbService.getInstance(project);
             if (dumbService == null || dumbService.isDumb()) {
                 return false;
             }
 
-            DirectoryIndex directoryIndex = DirectoryIndex.getInstance(project);
-            if (directoryIndex == null) {
-                return false;
-            }
-
-            Module module = ModuleUtil.findModuleForFile(file, project);
+            Module module = ModuleUtilCore.findModuleForFile(file, project);
             if (module == null) {
                 return false;
             }
 
-			BashModuleExtension facet = ModuleUtilCore.getExtension(module, BashModuleExtension.class);
+            BashModuleExtension facet = ModuleUtilCore.getExtension(module, BashModuleExtension.class);
             if (facet == null) {
                 return false;
             }
@@ -155,10 +150,12 @@ public class BashFileType extends LanguageFileType implements FileTypeIdentifiab
 
             if (mode == FileMode.accept()) {
                 return true;
-            } else if (mode == FileMode.ignore()) {
+            }
+            else if (mode == FileMode.ignore()) {
                 return false;
-            } else if (mode == FileMode.auto()) {
-                return BashContentUtil.isProbablyBashFile(VfsUtil.virtualToIoFile(file), MIN_FILE_PROBABILIY, ProjectUtil.guessProjectForFile(file));
+            }
+            else if (mode == FileMode.auto()) {
+                return BashContentUtil.isProbablyBashFile(VirtualFileUtil.virtualToIoFile(file), MIN_FILE_PROBABILIY, project);
             }
         }
 

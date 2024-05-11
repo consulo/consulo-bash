@@ -19,16 +19,19 @@
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
 import com.ansorgit.plugins.bash.util.CompletionUtil;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.intellij.codeInsight.completion.*;
-import com.intellij.patterns.StandardPatterns;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.ProcessingContext;
-import javax.annotation.Nonnull;
+import consulo.application.util.matcher.PrefixMatcher;
+import consulo.language.editor.completion.CompletionContributor;
+import consulo.language.editor.completion.CompletionParameters;
+import consulo.language.editor.completion.CompletionResultSet;
+import consulo.language.editor.completion.CompletionType;
+import consulo.language.pattern.StandardPatterns;
+import consulo.language.psi.PsiElement;
+import consulo.language.util.ProcessingContext;
+import jakarta.annotation.Nonnull;
 
 import java.io.File;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * This completion provider provides code completion for file / directory paths in the file.
@@ -59,14 +62,14 @@ class AbsolutePathCompletionProvider extends BashCompletionProvider {
         final int invocationCount = parameters.getInvocationCount();
 
         Predicate<File> incovationCountPredicate = new Predicate<File>() {
-            public boolean apply(File file) {
+            public boolean test(File file) {
                 //accept hidden file with more than one invocation
                 //return file.isHidden() ? invocationCount >= 2 : true;
                 return (file.isHidden() && (invocationCount >= 2)) || ((invocationCount >= 1) && !file.isHidden());
             }
         };
 
-        List<String> completions = CompletionUtil.completeAbsolutePath(currentText, Predicates.<File>and(createFileFilter(), incovationCountPredicate));
+        List<String> completions = CompletionUtil.completeAbsolutePath(currentText, createFileFilter().and(incovationCountPredicate));
         result.addAllElements(CompletionProviderUtils.createPathItems(completions));
 
         int validResultCount = computeResultCount(completions, result);

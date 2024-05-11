@@ -18,11 +18,11 @@
 
 package com.ansorgit.plugins.bash.lang.lexer;
 
-import com.intellij.lexer.Lexer;
-import com.intellij.lexer.MergeFunction;
-import com.intellij.lexer.MergingLexerAdapterBase;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.TokenSet;
+import consulo.language.lexer.MergeFunction;
+import consulo.language.ast.IElementType;
+import consulo.language.lexer.Lexer;
+import consulo.language.lexer.MergingLexerAdapterBase;
 
 /**
  * Lexer which can merge several tokens into a new token type.

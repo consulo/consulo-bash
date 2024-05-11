@@ -18,32 +18,24 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.command;
 
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFileReference;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashIncludeCommand;
 import com.ansorgit.plugins.bash.lang.psi.stubs.api.BashIncludeCommandStub;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.google.common.base.Supplier;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.StubBasedPsiElement;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.scope.util.PsiScopesUtilCore;
-import com.intellij.psi.stubs.IStubElementType;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.StubBasedPsiElement;
+import consulo.language.psi.resolve.PsiScopeProcessor;
+import consulo.language.psi.resolve.PsiScopesUtilCore;
+import consulo.language.psi.resolve.ResolveState;
+import consulo.language.psi.stub.IStubElementType;
+import consulo.util.collection.MultiMap;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * User: jansorg
@@ -124,20 +116,16 @@ public class BashIncludeCommandImpl extends BashCommandImpl<BashIncludeCommandSt
         PsiFile containingFile = getContainingFile();
         PsiFile includedFile = BashPsiUtils.findIncludedFile(this);
 
-        Multimap<VirtualFile, PsiElement> visitedFiles = state.get(visitedIncludeFiles);
+        MultiMap<VirtualFile, PsiElement> visitedFiles = state.get(visitedIncludeFiles);
         if (visitedFiles == null) {
-            visitedFiles = Multimaps.newListMultimap(Maps.<VirtualFile, Collection<PsiElement>>newHashMap(), new Supplier<List<PsiElement>>() {
-                public List<PsiElement> get() {
-                    return Lists.newLinkedList();
-                }
-            });
+            visitedFiles = MultiMap.createLinked();
         }
 
         visitedFiles.put(containingFile.getVirtualFile(), null);
 
         if (includedFile != null && !visitedFiles.containsKey(includedFile.getVirtualFile())) {
             //mark the file as visited before the actual visit, otherwise we'll get a stack overflow
-            visitedFiles.put(includedFile.getVirtualFile(), this);
+            visitedFiles.putValue(includedFile.getVirtualFile(), this);
 
             state = state.put(visitedIncludeFiles, visitedFiles);
 

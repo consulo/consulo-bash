@@ -18,30 +18,28 @@
 
 package com.ansorgit.plugins.bash.editor.formatting;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.editor.formatting.noOpModel.NoOpBlock;
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
-import com.intellij.formatting.FormattingModel;
-import com.intellij.formatting.FormattingModelBuilder;
-import com.intellij.formatting.FormattingModelProvider;
-import com.intellij.formatting.Indent;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-
-import javax.annotation.Nullable;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.codeStyle.*;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import jakarta.annotation.Nonnull;
 
 /**
  * This code is based on code taken from the Groovy plugin.
  *
  * @author ilyas, jansorg
  */
+@ExtensionImpl
 public class BashFormattingModelBuilder implements FormattingModelBuilder {
     @Nonnull
-    public FormattingModel createModel(final PsiElement element, final CodeStyleSettings settings) {
+    public FormattingModel createModel(FormattingContext formattingContext) {
+        PsiElement element = formattingContext.getPsiElement();
+        CodeStyleSettings settings = formattingContext.getCodeStyleSettings();
         ASTNode node = element.getNode();
         assert node != null;
 
@@ -59,8 +57,9 @@ public class BashFormattingModelBuilder implements FormattingModelBuilder {
                 new BashBlock(astNode, null, Indent.getAbsoluteNoneIndent(), null, settings), settings);
     }
 
-    @Nullable
-    public TextRange getRangeAffectingIndent(PsiFile file, int offset, ASTNode elementAtOffset) {
-        return null;
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
     }
 }

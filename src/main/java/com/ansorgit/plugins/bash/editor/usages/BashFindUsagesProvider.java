@@ -18,7 +18,10 @@
 
 package com.ansorgit.plugins.bash.editor.usages;
 
-import javax.annotation.Nonnull;
+import com.ansorgit.plugins.bash.lang.BashLanguage;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.lexer.BashLexer;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
@@ -28,13 +31,13 @@ import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDocMarker;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
-import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
-import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.intellij.lang.findUsages.FindUsagesProvider;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.cacheBuilder.DefaultWordsScanner;
+import consulo.language.cacheBuilder.WordsScanner;
+import consulo.language.findUsage.FindUsagesProvider;
+import consulo.util.lang.StringUtil;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiNamedElement;
+import consulo.language.ast.TokenSet;
 
 /**
  * The find usages provider implementation for Bash.
@@ -44,7 +47,14 @@ import com.intellij.psi.tree.TokenSet;
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class BashFindUsagesProvider implements FindUsagesProvider, BashTokenTypes {
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
+    }
+
     private static final class BashWordsScanner extends DefaultWordsScanner {
         private static final TokenSet literals = TokenSet.create(BashElementTypes.STRING_ELEMENT, STRING2, INTEGER_LITERAL);
 

@@ -1,16 +1,19 @@
 package consulo.bash;
 
-import javax.annotation.Nonnull;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import com.intellij.icons.AllIcons;
-import com.intellij.psi.PsiElement;
-import consulo.ide.IconDescriptor;
-import consulo.ide.IconDescriptorUpdater;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.AllIcons;
+import consulo.language.icon.IconDescriptor;
+import consulo.language.icon.IconDescriptorUpdater;
+import consulo.language.psi.PsiElement;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL
  * @since 19.11.13.
  */
+@ExtensionImpl
 public class BashIconDescriptorUpdater implements IconDescriptorUpdater
 {
 	@Override

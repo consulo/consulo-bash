@@ -20,9 +20,9 @@ package com.ansorgit.plugins.bash.lang.psi.api.heredoc;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.BashReference;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.psi.PsiNameIdentifierOwner;
-import com.intellij.psi.PsiNamedElement;
+import consulo.language.psi.PsiNameIdentifierOwner;
+import consulo.language.psi.PsiNamedElement;
+import consulo.navigation.NavigationItem;
 
 /**
  * Marker interface for all heredoc marker psi elements.

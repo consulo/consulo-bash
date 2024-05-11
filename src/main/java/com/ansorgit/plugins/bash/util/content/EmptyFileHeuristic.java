@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.util.content;
 
-import com.intellij.openapi.project.Project;
+import consulo.project.Project;
 
 import java.io.File;
 

@@ -28,18 +28,21 @@ import com.ansorgit.plugins.bash.lang.psi.api.command.BashIncludeCommand;
 import com.ansorgit.plugins.bash.lang.psi.api.expression.BashSubshellCommand;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
-import com.google.common.collect.Lists;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.injection.InjectedLanguageManager;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
-import com.intellij.psi.impl.source.tree.CompositeElement;
-import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.IncorrectOperationException;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.document.util.TextRange;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.file.FileViewProvider;
+import consulo.language.impl.ast.CompositeElement;
+import consulo.language.inject.InjectedLanguageManager;
+import consulo.language.psi.PsiComment;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiLanguageInjectionHost;
+import consulo.language.psi.resolve.PsiScopeProcessor;
+import consulo.language.psi.resolve.ResolveState;
+import consulo.language.util.IncorrectOperationException;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -55,7 +58,7 @@ public final class BashPsiUtils {
     }
 
     public static PsiFile findFileContext(PsiElement element) {
-        PsiFile topLevelFile = InjectedLanguageUtil.getTopLevelFile(element);
+        PsiFile topLevelFile = InjectedLanguageManager.getInstance(element.getProject()).getTopLevelFile(element);
         if (topLevelFile instanceof BashFile) {
             return topLevelFile;
         }
@@ -303,7 +306,7 @@ public final class BashPsiUtils {
      * @return The list of commands, may be empty but wont be null
      */
     public static List<BashCommand> findIncludeCommands(PsiFile file, final PsiFile includedFile) {
-        final List<BashCommand> includeCommands = Lists.newLinkedList();
+        final List<BashCommand> includeCommands = new LinkedList<>();
 
         BashVisitor collecingVisitor = new BashVisitor() {
             @Override
@@ -395,7 +398,7 @@ public final class BashPsiUtils {
 
         PsiElement current = command.getPrevSibling();
 
-        LinkedList<PsiComment> result = Lists.newLinkedList();
+        LinkedList<PsiComment> result = new LinkedList<>();
 
         while (current != null && current.getNode() != null && current.getNode().getElementType() == BashTokenTypes.LINE_FEED) {
             current = current.getPrevSibling();

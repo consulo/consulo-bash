@@ -18,16 +18,16 @@
 
 package com.ansorgit.plugins.bash.lang.psi.util;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiFileFactory;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiFileFactory;
+import consulo.project.Project;
+import consulo.virtualFileSystem.fileType.FileType;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * Date: 16.04.2009

@@ -18,24 +18,26 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.Executor;
-import com.intellij.execution.configuration.EnvironmentVariablesComponent;
-import com.intellij.execution.configurations.*;
-import com.intellij.execution.filters.TextConsoleBuilder;
-import com.intellij.execution.filters.TextConsoleBuilderImpl;
-import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.util.Comparing;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.JDOMExternalizerUtil;
-import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.openapi.util.text.StringUtil;
+import consulo.execution.RuntimeConfigurationException;
+import consulo.execution.configuration.*;
+import consulo.execution.configuration.log.ui.AdditionalTabComponentManager;
+import consulo.execution.configuration.ui.SettingsEditor;
+import consulo.execution.executor.Executor;
+import consulo.execution.ui.awt.EnvironmentVariablesComponent;
+import consulo.execution.ui.console.TextConsoleBuilder;
+import consulo.execution.runner.ExecutionEnvironment;
+import consulo.execution.ui.console.TextConsoleBuilderFactory;
+import consulo.module.Module;
+import consulo.util.lang.Comparing;
+import consulo.util.lang.StringUtil;
+import consulo.util.xml.serializer.JDOMExternalizerUtil;
+import consulo.module.ModuleManager;
+import consulo.process.ExecutionException;
+import consulo.process.ProcessHandler;
+import consulo.util.xml.serializer.InvalidDataException;
+import consulo.util.xml.serializer.WriteExternalException;
+import jakarta.annotation.Nonnull;
 import org.jdom.Element;
-import javax.annotation.Nonnull;
 
 import java.io.File;
 import java.util.Arrays;
@@ -91,7 +93,7 @@ public class BashRunConfiguration extends ModuleBasedConfiguration<RunConfigurat
     public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment env) throws ExecutionException {
         BashCommandLineState state = new BashCommandLineState(this, env);
 
-        TextConsoleBuilder textConsoleBuilder = new TextConsoleBuilderImpl(getProject());
+        TextConsoleBuilder textConsoleBuilder = TextConsoleBuilderFactory.getInstance().createBuilder(getProject());
         textConsoleBuilder.addFilter(new BashLineErrorFilter(getProject()));
         state.setConsoleBuilder(textConsoleBuilder);
 

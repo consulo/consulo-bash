@@ -18,13 +18,12 @@
 
 package com.ansorgit.plugins.bash.lang.psi.util;
 
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiFile;
+import consulo.util.lang.StringUtil;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiFile;
+import jakarta.annotation.Nullable;
 
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 /**
  * User: jansorg

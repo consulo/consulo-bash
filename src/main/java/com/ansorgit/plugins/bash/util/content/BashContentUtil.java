@@ -18,10 +18,9 @@
 
 package com.ansorgit.plugins.bash.util.content;
 
-import com.google.common.collect.Lists;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.io.FileUtil;
-import javax.annotation.Nonnull;
+import consulo.project.Project;
+import consulo.util.io.FileUtil;
+import jakarta.annotation.Nonnull;
 
 import java.io.File;
 import java.io.FileReader;
@@ -39,7 +38,7 @@ public class BashContentUtil {
     private BashContentUtil() {
     }
 
-    private static final List<? extends ContentHeuristic> heuristics = Lists.newArrayList(
+    private static final List<? extends ContentHeuristic> heuristics = List.of(
             new ShebangHeuristic(1.0),
             new EmptyFileHeuristic(1.0d),
             new PermissionHeuristic(0.4d),

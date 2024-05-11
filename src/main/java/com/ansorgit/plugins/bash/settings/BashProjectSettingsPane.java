@@ -18,17 +18,10 @@
 
 package com.ansorgit.plugins.bash.settings;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import consulo.util.lang.StringUtil;
 
-import javax.swing.JCheckBox;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
-import com.intellij.openapi.util.text.StringUtil;
+import javax.swing.*;
+import java.util.*;
 
 /**
  * User: jansorg

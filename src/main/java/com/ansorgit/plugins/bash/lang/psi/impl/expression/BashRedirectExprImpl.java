@@ -21,10 +21,10 @@ package com.ansorgit.plugins.bash.lang.psi.impl.expression;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.expression.BashRedirectExpr;
 import com.ansorgit.plugins.bash.lang.psi.impl.BashBaseStubElementImpl;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.stubs.StubElement;
-import javax.annotation.Nonnull;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.stub.StubElement;
+import jakarta.annotation.Nonnull;
 
 /**
  * User: jansorg

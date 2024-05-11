@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.lexer;
 
-import com.intellij.util.containers.Stack;
+import consulo.util.collection.Stack;
 
 /**
  * Class to store information about the current parsing of strings.
@@ -69,7 +69,7 @@ final class StringParsingState {
         }
     }
 
-    private final Stack<SubshellState> subshells = new Stack<SubshellState>();
+    private final consulo.util.collection.Stack<SubshellState> subshells = new Stack<SubshellState>();
 
     public void reset() {
         stringData.setLength(0);

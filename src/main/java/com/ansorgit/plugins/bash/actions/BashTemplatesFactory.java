@@ -21,13 +21,14 @@ package com.ansorgit.plugins.bash.actions;
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashStrings;
-import com.intellij.ide.fileTemplates.FileTemplateGroupDescriptor;
-import com.intellij.ide.fileTemplates.FileTemplateGroupDescriptorFactory;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiFileFactory;
-import com.intellij.util.IncorrectOperationException;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.fileTemplate.FileTemplateGroupDescriptor;
+import consulo.fileTemplate.FileTemplateGroupDescriptorFactory;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiFileFactory;
+import consulo.language.util.IncorrectOperationException;
+import consulo.logging.Logger;
 
 /**
  * This class acts as a factory for file templates.
@@ -37,6 +38,7 @@ import com.intellij.util.IncorrectOperationException;
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class BashTemplatesFactory implements FileTemplateGroupDescriptorFactory {
     private static final String FILE_NAME = "bash-script.sh";
     private final FileTemplateGroupDescriptor templateGroup;

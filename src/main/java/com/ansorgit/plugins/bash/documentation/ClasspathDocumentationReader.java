@@ -18,9 +18,9 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.io.StreamUtil;
-import com.intellij.openapi.util.text.StringUtil;
+import consulo.logging.Logger;
+import consulo.util.io.StreamUtil;
+import consulo.util.lang.StringUtil;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

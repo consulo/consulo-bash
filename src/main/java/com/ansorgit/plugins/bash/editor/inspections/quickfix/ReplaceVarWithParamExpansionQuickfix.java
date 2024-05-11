@@ -18,19 +18,18 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
-import com.intellij.codeInspection.LocalQuickFix;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.ReadOnlyFragmentModificationException;
-import com.intellij.openapi.editor.ReadOnlyModificationException;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
-import consulo.psi.PsiElementWithSubtreeChangeNotifier;
+import consulo.codeEditor.Editor;
+import consulo.document.Document;
+import consulo.document.ReadOnlyFragmentModificationException;
+import consulo.document.ReadOnlyModificationException;
+import consulo.document.util.TextRange;
+import consulo.language.editor.inspection.LocalQuickFix;
+import consulo.language.psi.PsiElementWithSubtreeChangeNotifier;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 /**
  * THis quickfix replaces a simple variable usage with the equivalent parameter expansion form.

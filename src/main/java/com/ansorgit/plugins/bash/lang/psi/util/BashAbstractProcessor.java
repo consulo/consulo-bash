@@ -19,12 +19,11 @@
 package com.ansorgit.plugins.bash.lang.psi.util;
 
 import com.ansorgit.plugins.bash.lang.psi.api.ResolveProcessor;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.LinkedListMultimap;
-import com.google.common.collect.Multimap;
-import com.intellij.lang.injection.InjectedLanguageManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.scope.PsiScopeProcessor;
+import consulo.language.inject.InjectedLanguageManager;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.resolve.PsiScopeProcessor;
+import consulo.util.collection.ContainerUtil;
+import consulo.util.collection.MultiMap;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -38,7 +37,7 @@ import java.util.Collections;
  * @author Joachim Ansorg
  */
 public abstract class BashAbstractProcessor implements PsiScopeProcessor, ResolveProcessor {
-    private Multimap<Integer, PsiElement> results;
+    private MultiMap<Integer, PsiElement> results;
     private boolean preferNeigbourhood;
 
     protected BashAbstractProcessor(boolean preferNeighbourhood) {
@@ -52,7 +51,7 @@ public abstract class BashAbstractProcessor implements PsiScopeProcessor, Resolv
         return findBestResult(results, firstResult, referenceElement);
     }
 
-    public Collection<PsiElement> getResults() {
+    public Collection<? extends PsiElement> getResults() {
         if (results == null) {
             return Collections.emptyList();
         }
@@ -66,10 +65,10 @@ public abstract class BashAbstractProcessor implements PsiScopeProcessor, Resolv
 
     protected final void storeResult(PsiElement element, Integer rating) {
         if (results == null) {
-            results = LinkedListMultimap.create();
+            results = MultiMap.createLinked();
         }
 
-        results.put(rating, element);
+        results.putValue(rating, element);
     }
 
     /**
@@ -81,13 +80,13 @@ public abstract class BashAbstractProcessor implements PsiScopeProcessor, Resolv
      * @param referenceElement
      * @return The result
      */
-    private PsiElement findBestResult(Multimap<Integer, PsiElement> results, boolean firstResult, PsiElement referenceElement) {
+    private PsiElement findBestResult(MultiMap<Integer, PsiElement> results, boolean firstResult, PsiElement referenceElement) {
         if (!hasResults()) {
             return null;
         }
 
         if (firstResult) {
-            return Iterators.get(results.values().iterator(), 0);
+            return ContainerUtil.getFirstItem(results.values());
         }
 
         //if the first should not be used return the best element
@@ -108,7 +107,8 @@ public abstract class BashAbstractProcessor implements PsiScopeProcessor, Resolv
         //now get the best result
         //if there are equal definitions on the same level we prefer the first if the neighbourhood is not preferred
         if (preferNeigbourhood) {
-            return Iterators.getLast(results.get(bestRating).iterator());
+            Collection<PsiElement> elements = results.get(bestRating);
+            return ContainerUtil.iterateAndGetLastItem(elements);
         } else {
             //return the element which has the lowest textOffset
             long smallestOffset = Integer.MAX_VALUE;

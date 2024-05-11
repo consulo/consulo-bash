@@ -23,12 +23,11 @@ import com.ansorgit.plugins.bash.lang.psi.api.command.BashIncludeCommand;
 import com.ansorgit.plugins.bash.lang.psi.stubs.index.BashIncludeCommandIndex;
 import com.ansorgit.plugins.bash.lang.psi.stubs.index.BashIncludedFilenamesIndex;
 import com.ansorgit.plugins.bash.lang.psi.util.BashSearchScopes;
-import com.google.common.collect.Sets;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
-import javax.annotation.Nonnull;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.scope.GlobalSearchScope;
+import consulo.language.psi.stub.StubIndex;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 import java.util.*;
 
@@ -47,10 +46,10 @@ public class FileInclusionManager {
             return Collections.emptySet();
         }
 
-        Set<PsiFile> includersTodo = Sets.newHashSet(sourceFile.getContainingFile());
-        Set<PsiFile> includersDone = Sets.newHashSet();
+        Set<PsiFile> includersTodo = new HashSet<>(Set.of(sourceFile.getContainingFile()));
+        Set<PsiFile> includersDone = new HashSet<>();
 
-        Set<PsiFile> allIncludedFiles = Sets.newHashSet();
+        Set<PsiFile> allIncludedFiles = new HashSet<>();
 
         while (!includersTodo.isEmpty()) {
             Iterator<PsiFile> iterator = includersTodo.iterator();
@@ -100,7 +99,7 @@ public class FileInclusionManager {
     public static Set<BashFile> findIncluders(@Nonnull Project project, @Nonnull PsiFile file) {
         GlobalSearchScope searchScope = BashSearchScopes.moduleScope(file);
 
-        Set<BashFile> includers = Sets.newHashSet();
+        Set<BashFile> includers = new HashSet<>();
 
         Collection<BashIncludeCommand> includeCommands = StubIndex.getInstance().get(BashIncludedFilenamesIndex.KEY, file.getName(), project, searchScope);
         for (BashIncludeCommand command : includeCommands) {

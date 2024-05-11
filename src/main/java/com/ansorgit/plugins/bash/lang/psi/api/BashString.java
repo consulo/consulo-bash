@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import com.intellij.psi.PsiLanguageInjectionHost;
+import consulo.language.psi.PsiLanguageInjectionHost;
 
 /**
  * User: jansorg

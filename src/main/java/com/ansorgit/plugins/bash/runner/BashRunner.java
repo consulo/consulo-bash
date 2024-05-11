@@ -18,17 +18,18 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.execution.configurations.RunProfile;
-import com.intellij.execution.executors.DefaultRunExecutor;
-import com.intellij.execution.runners.DefaultProgramRunner;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.execution.configuration.RunProfile;
+import consulo.execution.executor.DefaultRunExecutor;
+import consulo.execution.runner.DefaultProgramRunner;
+import jakarta.annotation.Nonnull;
 
 /**
  * This code is based on the intellij-batch plugin.
  *
  * @author wibotwi, jansorg
  */
+@ExtensionImpl
 public class BashRunner extends DefaultProgramRunner {
 
     @Nonnull

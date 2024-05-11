@@ -20,12 +20,8 @@ package com.ansorgit.plugins.bash.editor.formatting;
 
 import com.ansorgit.plugins.bash.editor.formatting.processor.BashIndentProcessor;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
-import com.intellij.formatting.Alignment;
-import com.intellij.formatting.Block;
-import com.intellij.formatting.Indent;
-import com.intellij.formatting.Wrap;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
+import consulo.language.ast.ASTNode;
+import consulo.language.codeStyle.*;
 
 import java.util.ArrayList;
 import java.util.List;

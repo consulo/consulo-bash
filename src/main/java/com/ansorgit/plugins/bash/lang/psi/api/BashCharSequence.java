@@ -18,9 +18,9 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import javax.annotation.Nonnull;
+import consulo.document.util.TextRange;
 
-import com.intellij.openapi.util.TextRange;
+import jakarta.annotation.Nonnull;
 
 /**
  * User: jansorg
@@ -49,5 +49,5 @@ public interface BashCharSequence extends BashPsiElement {
      * @return The range inside this element around the content elements
      */
     @Nonnull
-    TextRange getTextContentRange();
+	TextRange getTextContentRange();
 }

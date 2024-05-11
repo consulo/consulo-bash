@@ -18,28 +18,27 @@
 
 package com.ansorgit.plugins.bash.settings.facet.ui;
 
-import com.intellij.ide.CommonActionsManager;
-import com.intellij.ide.DefaultTreeExpander;
-import com.intellij.ide.TreeExpander;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ModuleFileIndex;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileFilter;
-import com.intellij.ui.TableUtil;
-import com.intellij.ui.TreeTableSpeedSearch;
-import com.intellij.ui.treeStructure.treetable.TreeTable;
-import com.intellij.ui.treeStructure.treetable.TreeTableCellRenderer;
-import com.intellij.ui.treeStructure.treetable.TreeTableModel;
-import com.intellij.util.containers.Convertor;
-import com.intellij.util.ui.UIUtil;
-import com.intellij.util.ui.tree.TreeUtil;
-import consulo.awt.TargetAWT;
-import consulo.fileTypes.impl.VfsIconUtil;
+import consulo.module.Module;
+import consulo.module.content.ModuleFileIndex;
+import consulo.module.content.ModuleRootManager;
+import consulo.ui.ex.TreeExpander;
+import consulo.ui.ex.action.CommonActionsManager;
+import consulo.ui.ex.awt.Messages;
+import consulo.ui.ex.awt.UIUtil;
+import consulo.ui.ex.awt.speedSearch.TreeTableSpeedSearch;
+import consulo.ui.ex.awt.tree.DefaultTreeExpander;
+import consulo.ui.ex.awt.tree.TreeUtil;
+import consulo.ui.ex.awt.tree.table.TreeTable;
+import consulo.ui.ex.awt.tree.table.TreeTableCellRenderer;
+import consulo.ui.ex.awt.tree.table.TreeTableModel;
+import consulo.ui.ex.awt.util.TableUtil;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.VirtualFileFilter;
+import consulo.virtualFileSystem.VirtualFileManager;
+import consulo.virtualFileSystem.util.VirtualFileUtil;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -49,6 +48,7 @@ import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
+import java.util.function.Function;
 
 abstract class AbstractFileTreeTable<T> extends TreeTable {
     private final MyModel<T> myModel;
@@ -66,8 +66,8 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
         myModel = (MyModel) getTableModel();
         myModel.setTreeTable(this);
 
-        new TreeTableSpeedSearch(this, new Convertor<TreePath, String>() {
-            public String convert(final TreePath o) {
+        new TreeTableSpeedSearch(this, new Function<TreePath, String>() {
+            public String apply(final TreePath o) {
                 final DefaultMutableTreeNode node = (DefaultMutableTreeNode) o.getLastPathComponent();
                 final Object userObject = node.getUserObject();
                 if (userObject == null) {
@@ -135,7 +135,7 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
         Map<VirtualFile, T> mappings = myModel.myCurrentMapping;
         Map<VirtualFile, T> subdirectoryMappings = new HashMap<VirtualFile, T>();
         for (VirtualFile file : mappings.keySet()) {
-            if (file != null && (parent == null || VfsUtil.isAncestor(parent, file, true))) {
+            if (file != null && (parent == null || VirtualFileUtil.isAncestor(parent, file, true))) {
                 subdirectoryMappings.put(file, mappings.get(file));
             }
         }
@@ -184,7 +184,7 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
         for (int i = 0; i < root.getChildCount(); i++) {
             TreeNode child = root.getChildAt(i);
             VirtualFile file = ((FileNode) child).getObject();
-            if (VfsUtil.isAncestor(file, toSelect, false)) {
+            if (VirtualFileUtil.isAncestor(file, toSelect, false)) {
                 if (file == toSelect) {
                     TreeUtil.selectNode(getTree(), child);
                     getSelectionModel().clearSelection();
@@ -325,7 +325,7 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
             NextRoot:
             for (VirtualFile root : roots) {
                 for (VirtualFile candidate : roots) {
-                    if (VfsUtil.isAncestor(candidate, root, true)) {
+                    if (VirtualFileUtil.isAncestor(candidate, root, true)) {
                         continue NextRoot;
                     }
                 }
@@ -451,7 +451,7 @@ abstract class AbstractFileTreeTable<T> extends TreeTable {
                 setText(file.getPresentableUrl());
             }
 
-            setIcon(TargetAWT.to(VfsIconUtil.getIcon(file, 0, null)));
+            setIcon(TargetAWT.to(VirtualFileManager.getInstance().getFileIcon(file, null, 0)));
             return this;
         }
     }

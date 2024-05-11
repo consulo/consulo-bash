@@ -18,18 +18,17 @@
 
 package com.ansorgit.plugins.bash.util.content;
 
-import java.io.File;
-import java.util.Set;
-
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
-import com.google.common.collect.Sets;
-import com.intellij.lang.LanguageParserDefinitions;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
+import consulo.language.lexer.Lexer;
+import consulo.language.parser.ParserDefinition;
+import consulo.project.Project;
+
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Lexes the file and evaluates the characteristics of the lexing process.
@@ -55,14 +54,14 @@ class LexerHeuristic implements ContentHeuristic {
 
     @Override
 	public double isBashFile(File file, String data, Project project) {
-        ParserDefinition definition = LanguageParserDefinitions.INSTANCE.forLanguage(BashFileType.BASH_LANGUAGE);
+        ParserDefinition definition = ParserDefinition.forLanguage(BashFileType.BASH_LANGUAGE);
 
         Lexer lexer = definition.createLexer(BashLanguage.INSTANCE.getVersions()[0]);
         lexer.start(data);
 
         int tokenCount = 0;
-        Set<IElementType> tokenSet = Sets.newHashSet();
-        Set<Integer> modeSet = Sets.newHashSet();
+        Set<IElementType> tokenSet = new HashSet<>();
+        Set<Integer> modeSet = new HashSet<>();
         while (lexer.getTokenType() != BashTokenTypes.BAD_CHARACTER && lexer.getTokenType() != null) {
             tokenSet.add(lexer.getTokenType());
             modeSet.add(lexer.getState());

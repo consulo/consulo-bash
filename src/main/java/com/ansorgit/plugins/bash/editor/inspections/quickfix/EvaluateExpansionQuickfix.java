@@ -18,16 +18,15 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashExpansion;
 import com.ansorgit.plugins.bash.lang.valueExpansion.ValueExpansionUtil;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
+import consulo.codeEditor.Editor;
+import consulo.project.Project;
+import consulo.document.util.TextRange;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import jakarta.annotation.Nonnull;
 
 /**
  * Evaluates an expansion and replaces the placeholder with the evaluated result.

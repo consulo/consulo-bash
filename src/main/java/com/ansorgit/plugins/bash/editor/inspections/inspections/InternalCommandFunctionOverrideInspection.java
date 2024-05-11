@@ -18,21 +18,23 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import javax.annotation.Nonnull;
+import consulo.annotation.component.ExtensionImpl;
+import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import com.intellij.codeInspection.ProblemHighlightType;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.editor.inspection.ProblemHighlightType;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.psi.PsiElement;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
 
 /**
  * This inspection detects function names which override internal bash commands.
  */
+@ExtensionImpl
 public class InternalCommandFunctionOverrideInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull

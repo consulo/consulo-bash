@@ -23,16 +23,16 @@ import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashCommand;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.LocalQuickFix;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.editor.inspection.LocalQuickFix;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.util.collection.ContainerUtil;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
 
+import jakarta.annotation.Nonnull;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -47,6 +47,7 @@ import java.util.Set;
  * Date: 28.12.10
  * Time: 12:41
  */
+@ExtensionImpl
 public class UnusedFunctionParameterInspection extends AbstractBashInspection {
     @Nonnull
     @Override
@@ -97,11 +98,7 @@ public class UnusedFunctionParameterInspection extends AbstractBashInspection {
                         List<BashPsiElement> callerParameters = bashCommand.parameters();
                         List<BashVar> usedParameters = functionDef.findReferencedParameters();
 
-                        Set<String> definedParamNames = Sets.newHashSet(Lists.transform(usedParameters, new Function<BashVar, String>() {
-                            public String apply(BashVar var) {
-                                return var.getReference().getReferencedName();
-                            }
-                        }));
+                        Set<String> definedParamNames = new HashSet<>(ContainerUtil.map(usedParameters, var -> var.getReference().getReferencedName()));
 
                         //if the all parameter expansion feature is used consider all params as used
                         if (definedParamNames.contains("*") || definedParamNames.contains("@")) {

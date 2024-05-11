@@ -18,12 +18,11 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.arithmetic;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.TernaryExpression;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import jakarta.annotation.Nonnull;
 
 /**
  * User: jansorg

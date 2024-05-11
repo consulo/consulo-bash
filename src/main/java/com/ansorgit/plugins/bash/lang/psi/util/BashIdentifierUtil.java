@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.util;
 
-import com.intellij.openapi.util.text.StringUtil;
+import consulo.util.lang.StringUtil;
 
 /**
  * User: jansorg

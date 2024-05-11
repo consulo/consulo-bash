@@ -23,18 +23,19 @@ import com.ansorgit.plugins.bash.lang.psi.api.BashFunctionDefName;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.impl.command.BashFunctionProcessor;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.google.common.collect.Lists;
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.ProblemHighlightType;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.util.PsiTreeUtil;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.editor.inspection.ProblemHighlightType;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.resolve.ResolveState;
+import consulo.language.psi.util.PsiTreeUtil;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
 
+import jakarta.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,6 +45,7 @@ import java.util.List;
  * Date: Oct 31, 2009
  * Time: 8:25:43 PM
  */
+@ExtensionImpl
 public class DuplicateFunctionDefInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
@@ -93,7 +95,7 @@ public class DuplicateFunctionDefInspection extends AbstractBashInspection {
                 if (start != null) {
                     PsiTreeUtil.treeWalkUp(p, start, functionDef.getContainingFile(), ResolveState.initial());
 
-                    List<PsiElement> results = Lists.newArrayList(p.getResults());
+                    List<PsiElement> results = new ArrayList<>(p.getResults());
                     results.remove(functionDef);
 
                     if (results.size() > 0) {

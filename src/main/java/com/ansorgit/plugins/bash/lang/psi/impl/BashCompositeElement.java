@@ -1,30 +1,22 @@
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import javax.annotation.Nonnull;
-
-import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
-import com.intellij.lang.Language;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.impl.source.tree.CompositePsiElement;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.scope.util.PsiScopesUtilCore;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.SearchScope;
-import com.intellij.psi.tree.IElementType;
+import consulo.content.scope.SearchScope;
+import consulo.language.ast.IElementType;
+import consulo.language.impl.psi.CompositePsiElement;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.resolve.PsiScopeProcessor;
+import consulo.language.psi.resolve.PsiScopesUtilCore;
+import consulo.language.psi.resolve.ResolveState;
+import consulo.language.psi.scope.GlobalSearchScope;
+
+import jakarta.annotation.Nonnull;
 
 public abstract class BashCompositeElement extends CompositePsiElement implements BashPsiElement {
     private String name = null;
 
     protected BashCompositeElement(IElementType type) {
         super(type);
-    }
-
-    @Nonnull
-    @Override
-    public Language getLanguage() {
-        return BashFileType.BASH_LANGUAGE;
     }
 
     @Override

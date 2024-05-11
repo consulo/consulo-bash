@@ -18,14 +18,16 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
+import consulo.application.ApplicationManager;
+import jakarta.inject.Singleton;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Arrays;
 import java.util.TreeSet;
-
-import jakarta.inject.Singleton;
-
-import com.intellij.openapi.application.ApplicationManager;
 
 /**
  * Implements cached lookup of the global commands which are available in the configured paths of $PATH.
@@ -33,87 +35,73 @@ import com.intellij.openapi.application.ApplicationManager;
  * @author jansorg
  */
 @Singleton
-public class BashPathCommandCompletion
-{
-	public static BashPathCommandCompletion getInstance()
-	{
-		return ApplicationManager.getApplication().getComponent(BashPathCommandCompletion.class);
-	}
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+public class BashPathCommandCompletion {
+    public static BashPathCommandCompletion getInstance() {
+        return ApplicationManager.getApplication().getInstance(BashPathCommandCompletion.class);
+    }
 
-	//may only be modified in the initComponent method, because it's not serialzed
-	private final TreeSet<String> cachedCommands = new TreeSet<String>();
+    //may only be modified in the initComponent method, because it's not serialzed
+    private final TreeSet<String> cachedCommands = new TreeSet<String>();
 
-	public BashPathCommandCompletion()
-	{
-		String envPath = System.getenv("PATH");
-		if(envPath != null)
-		{
-			String[] split = envPath.split(":");
-			if(split != null)
-			{
-				//fixme better do this in a background task?
-				for(String path : Arrays.asList(split))
-				{
-					File dir = new File(path);
-					if(dir.exists() && dir.isDirectory())
-					{
-						File[] commands = dir.listFiles(new ExecutableFileFilter());
+    public BashPathCommandCompletion() {
+        String envPath = System.getenv("PATH");
+        if (envPath != null) {
+            String[] split = envPath.split(":");
+            if (split != null) {
+                //fixme better do this in a background task?
+                for (String path : Arrays.asList(split)) {
+                    File dir = new File(path);
+                    if (dir.exists() && dir.isDirectory()) {
+                        File[] commands = dir.listFiles(new ExecutableFileFilter());
 
-						for(File command : commands)
-						{
-							cachedCommands.add(command.getName());
-						}
-					}
-				}
-			}
-		}
-	}
+                        for (File command : commands) {
+                            cachedCommands.add(command.getName());
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	public Iterable<String> findCommands(String commandPrefix)
-	{
-		return cachedCommands.subSet(commandPrefix, findUpperLimit(commandPrefix));
-	}
+    public Iterable<String> findCommands(String commandPrefix) {
+        return cachedCommands.subSet(commandPrefix, findUpperLimit(commandPrefix));
+    }
 
-	/**
-	 * Find the upper limit of the TreeSet map lookup. E.g. "git" has a upper lookup limit of "giu" (exclusive).
-	 *
-	 * @param prefix The prefix which should be used to retrieve all keys which start with this value
-	 * @return The key to use for the upper limit l
-	 */
-	protected String findUpperLimit(String prefix)
-	{
-		if(prefix.isEmpty())
-		{
-			return "z";
-		}
+    /**
+     * Find the upper limit of the TreeSet map lookup. E.g. "git" has a upper lookup limit of "giu" (exclusive).
+     *
+     * @param prefix The prefix which should be used to retrieve all keys which start with this value
+     * @return The key to use for the upper limit l
+     */
+    protected String findUpperLimit(String prefix) {
+        if (prefix.isEmpty()) {
+            return "z";
+        }
 
-		if(prefix.length() == 1)
-		{
-			char c = prefix.charAt(0);
-			return c < 'z' ? Character.toString((char) (c + 1)) : "z";
-		}
+        if (prefix.length() == 1) {
+            char c = prefix.charAt(0);
+            return c < 'z' ? Character.toString((char) (c + 1)) : "z";
+        }
 
-		//change the last character to 'z' to create the lookup range
-		//if it already is 'z' then cut it of and call again with the substring
-		char lastChar = prefix.charAt(prefix.length() - 1);
-		if(lastChar < 'z')
-		{
-			return prefix.substring(0, prefix.length() - 1) + Character.toString((char) (lastChar + 1));
-		}
+        //change the last character to 'z' to create the lookup range
+        //if it already is 'z' then cut it of and call again with the substring
+        char lastChar = prefix.charAt(prefix.length() - 1);
+        if (lastChar < 'z') {
+            return prefix.substring(0, prefix.length() - 1) + Character.toString((char) (lastChar + 1));
+        }
 
-		return findUpperLimit(prefix.substring(0, prefix.length() - 1));
-	}
+        return findUpperLimit(prefix.substring(0, prefix.length() - 1));
+    }
 
-	private static final class ExecutableFileFilter implements FileFilter
-	{
-		ExecutableFileFilter()
-		{
-		}
+    private static final class ExecutableFileFilter implements FileFilter {
+        ExecutableFileFilter() {
+        }
 
-		@Override
-		public boolean accept(File file)
-		{
-			return file.isFile() && file.canExecute() && file.canRead();
-		}
-	}
+        @Override
+        public boolean accept(File file) {
+            return file.isFile() && file.canExecute() && file.canRead();
+        }
+    }
 }

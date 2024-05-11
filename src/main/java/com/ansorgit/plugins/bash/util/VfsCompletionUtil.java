@@ -18,12 +18,12 @@
 
 package com.ansorgit.plugins.bash.util;
 
-import com.google.common.collect.Lists;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiFile;
-import javax.annotation.Nonnull;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiFile;
+import consulo.virtualFileSystem.VirtualFile;
 
+import jakarta.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -73,7 +73,7 @@ public class VfsCompletionUtil {
         List<PsiFile> psiFiles = matchingFiles(parent, fileName);
         String commonPrefix = base.getVirtualFile().getPath();
 
-        List<String> result = Lists.newLinkedList();
+        List<String> result = new ArrayList<>();
 
         for (PsiFile f : psiFiles) {
             VirtualFile file = f.getVirtualFile();
@@ -98,7 +98,7 @@ public class VfsCompletionUtil {
      * @return The list of matching files. May be empty, won't be null.
      */
     public static List<PsiFile> matchingFiles(@Nonnull PsiDirectory parent, @Nonnull String fileName) {
-        List<PsiFile> result = Lists.newLinkedList();
+        List<PsiFile> result = new ArrayList<>();
 
         for (PsiFile f : parent.getFiles()) {
             if (f.getName().startsWith(fileName)) {

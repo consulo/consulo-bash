@@ -34,7 +34,7 @@ import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashExpansion;
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.language.psi.PsiElementVisitor;
 
 /**
  * Date: 15.05.2009

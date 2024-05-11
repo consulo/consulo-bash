@@ -2,23 +2,19 @@ package com.ansorgit.plugins.bash.lang.psi.stubs.elements;
 
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashStubElementType;
-import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
 import com.ansorgit.plugins.bash.lang.psi.impl.function.BashFunctionDefImpl;
 import com.ansorgit.plugins.bash.lang.psi.impl.vars.BashVarDefImpl;
-import com.ansorgit.plugins.bash.lang.psi.stubs.api.BashFunctionDefStub;
 import com.ansorgit.plugins.bash.lang.psi.stubs.api.BashVarDefStub;
-import com.ansorgit.plugins.bash.lang.psi.stubs.impl.BashFunctionDefStubImpl;
 import com.ansorgit.plugins.bash.lang.psi.stubs.impl.BashVarDefStubImpl;
-import com.ansorgit.plugins.bash.lang.psi.stubs.index.BashFunctionNameIndex;
 import com.ansorgit.plugins.bash.lang.psi.stubs.index.BashVarDefIndex;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IndexSink;
-import com.intellij.psi.stubs.StubElement;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
-import com.intellij.util.io.StringRef;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.stub.StubElement;
+import consulo.language.psi.stub.StubOutputStream;
+import consulo.index.io.StringRef;
+import consulo.language.psi.stub.IndexSink;
+import consulo.language.psi.stub.StubInputStream;
 
 import java.io.IOException;
 

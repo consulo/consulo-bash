@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * Extends a documentation source with a cache key providing method. A CachableDocumentationSource

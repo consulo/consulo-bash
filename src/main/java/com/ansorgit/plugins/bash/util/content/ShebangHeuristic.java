@@ -19,10 +19,10 @@
 package com.ansorgit.plugins.bash.util.content;
 
 import com.ansorgit.plugins.bash.util.BashInterpreterDetection;
-import com.google.common.collect.Lists;
-import com.intellij.openapi.project.Project;
+import consulo.project.Project;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +31,7 @@ import java.util.List;
  * Time: 11:28:48 AM
  */
 class ShebangHeuristic implements ContentHeuristic {
-    private static final List<String> validStarts = Lists.newArrayList();
+    private static final List<String> validStarts = new ArrayList<>();
 
     static {
         for (String location : BashInterpreterDetection.guessLocations) {

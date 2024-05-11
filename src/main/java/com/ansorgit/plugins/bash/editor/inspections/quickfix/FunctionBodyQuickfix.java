@@ -18,18 +18,17 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.lang.psi.api.BashBlock;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import com.intellij.codeInsight.CodeInsightUtilBase;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
+import consulo.codeEditor.Editor;
+import consulo.document.Document;
+import consulo.language.editor.FileModificationService;
+import consulo.language.psi.PsiDocumentManager;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import consulo.logging.Logger;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 /**
  * Wrap a function body in curly brackets.
@@ -53,7 +52,7 @@ public class FunctionBodyQuickfix extends AbstractBashQuickfix {
     }
 
     public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
-        if (!CodeInsightUtilBase.getInstance().prepareFileForWrite(file)) {
+        if (!FileModificationService.getInstance().prepareFileForWrite(file)) {
             return;
         }
 

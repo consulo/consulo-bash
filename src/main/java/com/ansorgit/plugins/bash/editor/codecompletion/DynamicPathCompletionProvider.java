@@ -20,15 +20,15 @@ package com.ansorgit.plugins.bash.editor.codecompletion;
 
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
 import com.ansorgit.plugins.bash.util.CompletionUtil;
-import com.google.common.collect.Sets;
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.completion.CompletionType;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.ProcessingContext;
-import javax.annotation.Nullable;
+import consulo.language.psi.PsiElement;
+import consulo.language.editor.completion.CompletionContributor;
+import consulo.language.editor.completion.CompletionParameters;
+import consulo.language.editor.completion.CompletionResultSet;
+import consulo.language.editor.completion.CompletionType;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.util.ProcessingContext;
+
+import jakarta.annotation.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -42,8 +42,8 @@ import java.util.Set;
  * Time: 10:32:06 PM
  */
 class DynamicPathCompletionProvider extends BashCompletionProvider {
-    private static final Set<String> homePrefixes = Sets.newHashSet("$HOME", "~");
-    private static final Set<String> supportedPrefixes = Sets.newHashSet("$HOME", "~", ".");
+    private static final Set<String> homePrefixes = Set.of("$HOME", "~");
+    private static final Set<String> supportedPrefixes = Set.of("$HOME", "~", ".");
 
     public DynamicPathCompletionProvider() {
     }

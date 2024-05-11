@@ -18,19 +18,18 @@
 
 package com.ansorgit.plugins.bash.editor.codecompletion;
 
+import consulo.application.util.matcher.PrefixMatcher;
+import consulo.language.editor.completion.CompletionContributor;
+import consulo.language.editor.completion.CompletionParameters;
+import consulo.language.editor.completion.CompletionProvider;
+import consulo.language.editor.completion.CompletionResultSet;
+import consulo.language.psi.PsiElement;
+import consulo.language.util.ProcessingContext;
+
+import jakarta.annotation.Nonnull;
 import java.io.File;
 import java.util.List;
-
-import javax.annotation.Nonnull;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.completion.PrefixMatcher;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.ProcessingContext;
-import consulo.codeInsight.completion.CompletionProvider;
+import java.util.function.Predicate;
 
 /**
  * Abstract base class for completion providers in Bash files.
@@ -43,7 +42,7 @@ abstract class BashCompletionProvider implements CompletionProvider
     abstract void addTo(CompletionContributor contributor);
 
     protected Predicate<File> createFileFilter() {
-        return Predicates.alwaysTrue();
+        return file -> true;
     }
 
     @Override

@@ -18,10 +18,11 @@
 
 package com.ansorgit.plugins.bash.util;
 
-import com.google.common.base.Function;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.virtualFileSystem.VirtualFile;
+
+import java.util.function.Function;
 
 /**
  * User: jansorg
@@ -30,18 +31,10 @@ import com.intellij.psi.PsiFile;
  */
 public class BashFunctions {
     public static Function<? super PsiFile, VirtualFile> psiToVirtualFile() {
-        return new Function<PsiFile, VirtualFile>() {
-            public VirtualFile apply(PsiFile psiFile) {
-                return psiFile.getVirtualFile();
-            }
-        };
+        return PsiFile::getVirtualFile;
     }
 
     public static Function<? super PsiElement, PsiFile> psiToContainingFile() {
-        return new Function<PsiElement, PsiFile>() {
-            public PsiFile apply(PsiElement psi) {
-                return psi.getContainingFile();
-            }
-        };
+        return PsiElement::getContainingFile;
     }
 }

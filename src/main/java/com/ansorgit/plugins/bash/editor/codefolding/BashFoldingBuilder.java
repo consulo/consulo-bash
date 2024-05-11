@@ -18,14 +18,18 @@
 
 package com.ansorgit.plugins.bash.editor.codefolding;
 
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.folding.FoldingBuilder;
-import com.intellij.lang.folding.FoldingDescriptor;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.tree.IElementType;
-import javax.annotation.Nonnull;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.document.Document;
+import consulo.document.util.TextRange;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.editor.folding.FoldingBuilder;
+import consulo.language.editor.folding.FoldingDescriptor;
+
+import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,7 @@ import java.util.List;
  *
  * @author Joachim Ansorg, mail@joachim-ansorg.de
  */
+@ExtensionImpl
 public class BashFoldingBuilder implements FoldingBuilder, BashElementTypes {
     @Nonnull
     public FoldingDescriptor[] buildFoldRegions(@Nonnull ASTNode node, @Nonnull Document document) {
@@ -109,5 +114,11 @@ public class BashFoldingBuilder implements FoldingBuilder, BashElementTypes {
 
     public boolean isCollapsedByDefault(@Nonnull ASTNode node) {
         return false;
+    }
+
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
     }
 }

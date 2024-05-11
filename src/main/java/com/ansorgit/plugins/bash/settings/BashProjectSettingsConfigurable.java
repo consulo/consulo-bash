@@ -18,10 +18,16 @@
 
 package com.ansorgit.plugins.bash.settings;
 
-import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.project.Project;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.configurable.ConfigurationException;
+import consulo.configurable.ProjectConfigurable;
+import consulo.configurable.StandardConfigurableIds;
+import consulo.disposer.Disposable;
+import consulo.project.Project;
 import consulo.ui.annotation.RequiredUIAccess;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import jakarta.inject.Inject;
 
 import javax.swing.*;
 
@@ -31,11 +37,13 @@ import javax.swing.*;
  *
  * @author Joachim Ansorg
  */
-public class BashProjectSettingsConfigurable implements Configurable
+@ExtensionImpl(id = "bash")
+public class BashProjectSettingsConfigurable implements ProjectConfigurable
 {
 	private BashProjectSettingsPane settingsPanel;
 	private final Project project;
 
+	@Inject
 	public BashProjectSettingsConfigurable(Project project)
 	{
 		this.project = project;
@@ -46,8 +54,22 @@ public class BashProjectSettingsConfigurable implements Configurable
 		return "Bash";
 	}
 
+	@Nonnull
+	@Override
+	public String getId()
+	{
+		return "bash";
+	}
+
+	@Nullable
+	@Override
+	public String getParentId()
+	{
+		return StandardConfigurableIds.EXECUTION_GROUP;
+	}
+
 	@RequiredUIAccess
-	public JComponent createComponent()
+	public JComponent createComponent(Disposable parent)
 	{
 		if(settingsPanel == null)
 		{

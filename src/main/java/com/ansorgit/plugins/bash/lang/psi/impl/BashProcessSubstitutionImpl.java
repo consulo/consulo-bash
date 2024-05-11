@@ -19,8 +19,8 @@
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashProcessSubstitution;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.StubElement;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.stub.StubElement;
 
 /**
  * User: jansorg

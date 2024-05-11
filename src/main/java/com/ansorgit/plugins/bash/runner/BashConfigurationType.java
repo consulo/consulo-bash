@@ -18,30 +18,31 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import javax.annotation.Nonnull;
-
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashInterpreterDetection;
-import com.intellij.execution.configurations.ConfigurationFactory;
-import com.intellij.execution.configurations.ConfigurationType;
-import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.execution.configurations.RunConfigurationModule;
-import com.intellij.openapi.extensions.Extensions;
-import com.intellij.openapi.project.Project;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.execution.configuration.ConfigurationFactory;
+import consulo.execution.configuration.ConfigurationType;
+import consulo.execution.configuration.RunConfiguration;
+import consulo.execution.configuration.RunConfigurationModule;
+import consulo.localize.LocalizeValue;
+import consulo.project.Project;
 import consulo.ui.image.Image;
+import jakarta.annotation.Nonnull;
 
 /**
  * This code is based on the intellij-batch plugin.
  *
  * @author wibotwi, jansorg
  */
+@ExtensionImpl
 public class BashConfigurationType implements ConfigurationType {
-    public String getDisplayName() {
-        return "Bash";
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Bash");
     }
 
-    public String getConfigurationTypeDescription() {
-        return "Bash run configuration";
+    public LocalizeValue getConfigurationTypeDescription() {
+        return LocalizeValue.localizeTODO("Bash run configuration");
     }
 
     public Image getIcon() {
@@ -54,15 +55,7 @@ public class BashConfigurationType implements ConfigurationType {
     }
 
     public static BashConfigurationType getInstance() {
-        ConfigurationType[] configurationTypes = Extensions.getExtensions(CONFIGURATION_TYPE_EP);
-
-        for (ConfigurationType configurationType : configurationTypes) {
-            if (configurationType instanceof BashConfigurationType) {
-                return (BashConfigurationType) configurationType;
-            }
-        }
-
-        throw new IllegalStateException("Invalid state in getInstance");
+        return EP_NAME.findExtensionOrFail(BashConfigurationType.class);
     }
 
     public ConfigurationFactory[] getConfigurationFactories() {

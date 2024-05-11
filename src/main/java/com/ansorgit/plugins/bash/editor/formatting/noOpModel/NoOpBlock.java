@@ -21,10 +21,11 @@
 
 package com.ansorgit.plugins.bash.editor.formatting.noOpModel;
 
-import com.intellij.formatting.*;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import javax.annotation.Nonnull;
+import consulo.language.ast.ASTNode;
+import consulo.document.util.TextRange;
+import consulo.language.codeStyle.*;
+
+import jakarta.annotation.Nonnull;
 
 import java.util.Collections;
 import java.util.List;

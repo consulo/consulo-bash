@@ -24,15 +24,15 @@ import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
 import com.ansorgit.plugins.bash.lang.psi.impl.Keys;
 import com.ansorgit.plugins.bash.lang.psi.util.BashAbstractProcessor;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.util.PsiTreeUtil;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.resolve.ResolveState;
+import consulo.language.psi.util.PsiTreeUtil;
+import consulo.util.collection.MultiMap;
+import consulo.util.collection.Sets;
 import consulo.util.dataholder.Key;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
 
-import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Set;
 
@@ -146,7 +146,7 @@ public class BashVarProcessor extends BashAbstractProcessor implements Keys {
             }
         } else {
             //working on a definition in an included file (maybe even over several include-steps)
-            Multimap<VirtualFile, PsiElement> includedFiles = resolveState.get(visitedIncludeFiles);
+            MultiMap<VirtualFile, PsiElement> includedFiles = resolveState.get(visitedIncludeFiles);
             Collection<PsiElement> includeCommands = includedFiles != null ? includedFiles.get(varDef.getContainingFile().getVirtualFile()) : null;
 
             if (includeCommands == null || includeCommands.isEmpty()) {

@@ -24,18 +24,17 @@ package com.ansorgit.plugins.bash.editor.highlighting.codeHighlighting;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDoc;
-import com.google.common.collect.Lists;
-import com.intellij.codeHighlighting.TextEditorHighlightingPass;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.markup.HighlighterLayer;
-import com.intellij.openapi.editor.markup.HighlighterTargetArea;
-import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiRecursiveElementVisitor;
+import consulo.application.progress.ProgressIndicator;
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.markup.HighlighterLayer;
+import consulo.codeEditor.markup.HighlighterTargetArea;
+import consulo.colorScheme.TextAttributes;
+import consulo.document.util.TextRange;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiRecursiveElementVisitor;
+import consulo.project.Project;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -46,22 +45,22 @@ import java.util.List;
  * <p/>
  * In this highlighting pass we remove all highlighting in heredoc subtokens.
  */
-class RemoveHighlightingPass extends TextEditorHighlightingPass {
+class RemoveHighlightingPass /*extends TextEditorHighlightingPass*/ {
     private final BashFile bashFile;
     private final Editor editor;
     private List<TextRange> unhighlightHeredocRanges;
     private List<TextRange> unhighlightUnusedFormat;
 
     public RemoveHighlightingPass(Project project, BashFile bashFile, Editor editor) {
-        super(project, editor.getDocument(), true);
+        //super(project, editor.getDocument(), true);
         this.bashFile = bashFile;
         this.editor = editor;
     }
 
-    @Override
+    //@Override
     public void doCollectInformation(ProgressIndicator progress) {
-        final List<TextRange> collectedRanges = Lists.newLinkedList();
-        final List<TextRange> collectedUnused = Lists.newLinkedList();
+        final List<TextRange> collectedRanges = new LinkedList<>();
+        final List<TextRange> collectedUnused = new LinkedList<>();
 
         PsiRecursiveElementVisitor visitor = new PsiRecursiveElementVisitor() {
             @Override
@@ -83,7 +82,7 @@ class RemoveHighlightingPass extends TextEditorHighlightingPass {
         unhighlightUnusedFormat = collectedUnused;
     }
 
-    @Override
+    //@Override
     public void doApplyInformationToEditor() {
         if (unhighlightHeredocRanges != null) {
             for (TextRange r : unhighlightHeredocRanges) {

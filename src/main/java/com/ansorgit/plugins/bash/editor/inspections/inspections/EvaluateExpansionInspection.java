@@ -18,14 +18,15 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import javax.annotation.Nonnull;
+import consulo.annotation.component.ExtensionImpl;
+import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.EvaluateExpansionQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashExpansion;
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.psi.PsiElementVisitor;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
 
@@ -37,6 +38,7 @@ import org.jetbrains.annotations.Nls;
  * Date: Nov 15, 2009
  * Time: 12:48:24 AM
  */
+@ExtensionImpl
 public class EvaluateExpansionInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull

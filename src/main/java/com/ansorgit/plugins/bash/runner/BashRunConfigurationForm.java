@@ -18,9 +18,9 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import com.intellij.ide.util.BrowseFilesListener;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.ui.RawCommandLineEditor;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.execution.ui.awt.RawCommandLineEditor;
+import consulo.ui.ex.awt.util.BrowseFilesListener;
 
 import javax.swing.*;
 import java.awt.*;

@@ -18,11 +18,13 @@
 
 package com.ansorgit.plugins.bash.settings;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
+import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.State;
+import consulo.component.persist.Storage;
 import jakarta.inject.Singleton;
-
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
 
 /**
  * User: jansorg
@@ -31,17 +33,16 @@ import com.intellij.openapi.components.Storage;
  */
 @Singleton
 @State(name = "BashSupportProjectSettings", storages = @Storage("bash.xml"))
-public class BashProjectSettingsComponent implements PersistentStateComponent<BashProjectSettings>
-{
-	private BashProjectSettings settings = new BashProjectSettings();
+@ServiceAPI(ComponentScope.PROJECT)
+@ServiceImpl
+public class BashProjectSettingsComponent implements PersistentStateComponent<BashProjectSettings> {
+    private BashProjectSettings settings = new BashProjectSettings();
 
-	public BashProjectSettings getState()
-	{
-		return settings;
-	}
+    public BashProjectSettings getState() {
+        return settings;
+    }
 
-	public void loadState(BashProjectSettings state)
-	{
-		this.settings = state;
-	}
+    public void loadState(BashProjectSettings state) {
+        this.settings = state;
+    }
 }

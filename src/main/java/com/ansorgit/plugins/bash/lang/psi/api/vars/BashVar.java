@@ -20,7 +20,7 @@ package com.ansorgit.plugins.bash.lang.psi.api.vars;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
 import com.ansorgit.plugins.bash.lang.psi.api.BashReference;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Date: 14.04.2009

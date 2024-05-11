@@ -18,10 +18,10 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import com.google.common.collect.Multimap;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
+import consulo.util.collection.MultiMap;
 import consulo.util.dataholder.Key;
+import consulo.virtualFileSystem.VirtualFile;
 
 import java.util.Set;
 
@@ -31,7 +31,7 @@ import java.util.Set;
  * Time: 18:27
  */
 public interface Keys {
-    Key<Multimap<VirtualFile, PsiElement>> visitedIncludeFiles = Key.create("visitedIncludeFiles");
+    Key<MultiMap<VirtualFile, PsiElement>> visitedIncludeFiles = Key.create("visitedIncludeFiles");
     Key<Set<PsiElement>> VISITED_SCOPES_KEY = Key.create("BASH_SCOPES_VISITED");
     /**
      * Defines whether the resolving of global identifiers should be done recursivly or flat on file level (happens after walking up to the toplevel)

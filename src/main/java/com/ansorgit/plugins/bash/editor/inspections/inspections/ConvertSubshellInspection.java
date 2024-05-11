@@ -18,13 +18,14 @@
 
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import javax.annotation.Nonnull;
+import consulo.annotation.component.ExtensionImpl;
+import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.SubshellQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.expression.BashSubshellCommand;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.editor.inspection.ProblemsHolder;
 import org.intellij.lang.annotations.Pattern;
 import org.jetbrains.annotations.Nls;
 
@@ -35,6 +36,7 @@ import org.jetbrains.annotations.Nls;
  * Date: 21.05.2009
  * Time: 13:49:05
  */
+@ExtensionImpl
 public class ConvertSubshellInspection extends AbstractBashInspection {
     @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull

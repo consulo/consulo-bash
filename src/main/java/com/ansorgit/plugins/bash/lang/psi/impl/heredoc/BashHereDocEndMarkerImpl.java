@@ -21,9 +21,9 @@ package com.ansorgit.plugins.bash.lang.psi.impl.heredoc;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDocEndMarker;
 import com.ansorgit.plugins.bash.lang.psi.api.heredoc.BashHereDocStartMarker;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
-import javax.annotation.Nonnull;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElementVisitor;
+import jakarta.annotation.Nonnull;
 
 /**
  * User: jansorg

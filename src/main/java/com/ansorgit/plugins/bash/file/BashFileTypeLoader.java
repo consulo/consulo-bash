@@ -18,16 +18,18 @@
 
 package com.ansorgit.plugins.bash.file;
 
-import javax.annotation.Nonnull;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.virtualFileSystem.fileType.FileTypeConsumer;
+import consulo.virtualFileSystem.fileType.FileTypeFactory;
 
-import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
+import jakarta.annotation.Nonnull;
 
 /**
  * The file type loader of the BashSupport plugin. Registered in the plugin.xml file.
  *
  * @author Joachim Ansorg
  */
+@ExtensionImpl
 public class BashFileTypeLoader extends FileTypeFactory {
     public void createFileTypes(@Nonnull FileTypeConsumer consumer) {
         consumer.consume(BashFileType.INSTANCE, BashFileType.DEFAULT_EXTENSION);

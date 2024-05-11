@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.word;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
@@ -26,12 +26,12 @@ import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
 import com.ansorgit.plugins.bash.lang.psi.impl.BashBaseStubElementImpl;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.stubs.StubElement;
-import com.intellij.psi.tree.TokenSet;
+import consulo.document.util.TextRange;
+import consulo.language.ast.TokenSet;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.stub.StubElement;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
 
 /**
  * User: jansorg

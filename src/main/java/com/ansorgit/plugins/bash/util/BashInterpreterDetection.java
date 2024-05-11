@@ -18,8 +18,6 @@
 
 package com.ansorgit.plugins.bash.util;
 
-import com.google.common.collect.Lists;
-
 import java.io.File;
 import java.util.List;
 
@@ -31,7 +29,7 @@ import java.util.List;
  * Time: 12:48:42 PM
  */
 public class BashInterpreterDetection {
-    public static final List<String> guessLocations = Lists.newArrayList(
+    public static final List<String> guessLocations = List.of(
             "/bin/bash",
             "/usr/bin/bash",
             "/usr/local/bin/bash",

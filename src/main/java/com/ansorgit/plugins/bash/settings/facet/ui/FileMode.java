@@ -18,9 +18,7 @@
 
 package com.ansorgit.plugins.bash.settings.facet.ui;
 
-import com.google.common.collect.Lists;
-import javax.annotation.Nonnull;
-
+import jakarta.annotation.Nonnull;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -56,7 +54,7 @@ public final class FileMode implements Comparable<FileMode> {
     }
 
     public static List<FileMode> all() {
-        return Lists.newArrayList(auto(), accept(), ignore());
+        return List.of(auto(), accept(), ignore());
     }
 
     public static FileMode defaultMode() {

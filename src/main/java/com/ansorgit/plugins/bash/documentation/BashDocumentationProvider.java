@@ -18,10 +18,14 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
-import com.intellij.lang.documentation.AbstractDocumentationProvider;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiManager;
+import com.ansorgit.plugins.bash.lang.BashLanguage;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.editor.documentation.LanguageDocumentationProvider;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiManager;
+import consulo.logging.Logger;
+import jakarta.annotation.Nonnull;
 
 import java.util.Collections;
 import java.util.List;
@@ -35,12 +39,10 @@ import java.util.List;
  *
  * @author Joachim Ansorg
  */
-public class BashDocumentationProvider extends AbstractDocumentationProvider {
+@ExtensionImpl
+public class BashDocumentationProvider implements LanguageDocumentationProvider {
     private static final Logger log = Logger.getInstance("#bash.BashDocumentationProvider");
 
-    public String getQuickNavigateInfo(PsiElement psiElement, PsiElement psiElement1) {
-        return null;
-    }
 
     @Override
     public List<String> getUrlFor(PsiElement element, PsiElement originalElement) {
@@ -75,5 +77,11 @@ public class BashDocumentationProvider extends AbstractDocumentationProvider {
     public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
         log.info("getDocumentationElementForLink: element: " + context);
         return context;
+    }
+
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return BashLanguage.INSTANCE;
     }
 }

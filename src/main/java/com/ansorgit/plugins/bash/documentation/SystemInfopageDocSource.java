@@ -18,20 +18,26 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.nio.charset.Charset;
-import java.util.concurrent.TimeUnit;
-
-import org.jetbrains.annotations.NonNls;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashCommand;
 import com.ansorgit.plugins.bash.util.SystemPathUtil;
-import com.intellij.execution.process.CapturingProcessHandler;
-import com.intellij.execution.process.ProcessOutput;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
+import consulo.application.Application;
+import consulo.language.psi.PsiElement;
+import consulo.logging.Logger;
+import consulo.process.ProcessHandler;
+import consulo.process.ProcessHandlerBuilderFactory;
+import consulo.process.cmd.GeneralCommandLine;
+import consulo.process.event.ProcessEvent;
+import consulo.process.event.ProcessListener;
+import consulo.process.util.CapturingProcessRunner;
+import consulo.process.util.CapturingProcessUtil;
+import consulo.process.util.ProcessOutput;
+import org.jetbrains.annotations.NonNls;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Provides documentation by calling the systems info program and converts the output to html.
@@ -84,28 +90,32 @@ class SystemInfopageDocSource implements DocumentationSource, CachableDocumentat
             }
 
             return simpleTextToHtml(infoPageData);
-        } catch (IOException e) {
+        }
+        catch (Exception e) {
             log.info("Failed to retrieve info page: ", e);
         }
 
         return null;
     }
 
-    boolean infoFileExists(String commandName) throws IOException {
-        //info -w locates an info file, exit status == 1 means that there is no info file 
-        ProcessBuilder processBuilder = new ProcessBuilder(infoExecutable, "-w", commandName);
+    boolean infoFileExists(String commandName) throws Exception {
+        //info -w locates an info file, exit status == 1 means that there is no info file
+        GeneralCommandLine cmd = new GeneralCommandLine();
+        cmd.setExePath(infoExecutable);
+        cmd.addParameters("-w", commandName);
 
-        CapturingProcessHandler processHandler = new CapturingProcessHandler(processBuilder.start(), Charset.forName(CHARSET_NAME), StringUtil.join(processBuilder.command(), " "));
-        ProcessOutput output = processHandler.runProcess(TIMEOUT_IN_MILLISECONDS);
-
+        ProcessOutput output = CapturingProcessUtil.execAndGetOutput(cmd, TIMEOUT_IN_MILLISECONDS);
         return output.getExitCode() == 0;
     }
 
-    String loadPlainTextInfoPage(String commandName) throws IOException {
+    String loadPlainTextInfoPage(String commandName) throws Exception {
+        GeneralCommandLine cmd = new GeneralCommandLine();
+        cmd.setExePath(infoExecutable);
+        cmd.addParameters("-o", "-", commandName);
+
         ProcessBuilder processBuilder = new ProcessBuilder(infoExecutable, "-o", "-", commandName);
 
-        CapturingProcessHandler processHandler = new CapturingProcessHandler(processBuilder.start(), Charset.forName(CHARSET_NAME), StringUtil.join(processBuilder.command(), " "));
-        ProcessOutput output = processHandler.runProcess(TIMEOUT_IN_MILLISECONDS);
+        ProcessOutput output = CapturingProcessUtil.execAndGetOutput(cmd, TIMEOUT_IN_MILLISECONDS);
 
         if (output.getExitCode() != 0) {
             return null;
@@ -114,17 +124,39 @@ class SystemInfopageDocSource implements DocumentationSource, CachableDocumentat
         return output.getStdout();
     }
 
-    String callTextToHtml(final String infoPageData) throws IOException {
+    String callTextToHtml(final String infoPageData) throws Exception {
         if (txt2htmlExecutable == null) {
             //cheap fallback
             return "<html><body><pre>" + infoPageData + "</pre></body></html>";
         }
 
-        ProcessBuilder processBuilder = new ProcessBuilder(txt2htmlExecutable, "--infile", "-");
+        GeneralCommandLine commandLine = new GeneralCommandLine();
+        commandLine.setExePath(txt2htmlExecutable);
+        commandLine.addParameters("--infile", "-");
 
-        CapturingProcessHandler processHandler = new MyCapturingProcessHandler(processBuilder.start(), infoPageData, StringUtil.join(processBuilder.command(), " "));
+        ProcessHandlerBuilderFactory factory = Application.get().getInstance(ProcessHandlerBuilderFactory.class);
 
-        ProcessOutput output = processHandler.runProcess(TIMEOUT_IN_MILLISECONDS);
+        ProcessHandler handler = factory.newBuilder(commandLine).build();
+
+        CapturingProcessRunner runner = new CapturingProcessRunner(handler);
+        handler.addProcessListener(new ProcessListener() {
+            @Override
+            public void startNotified(ProcessEvent event) {
+                OutputStream processInput = event.getProcessHandler().getProcessInput();
+                //we need to write after the stdout reader has been attached. Otherwise the process may block
+                //and wait for the stdout to be read
+                try {
+                    Writer stdinWriter = new OutputStreamWriter(processInput, CHARSET_NAME);
+                    stdinWriter.write(infoPageData);
+                    stdinWriter.close();
+                }
+                catch (IOException e) {
+                    log.info("Exception passing data to txt2html", e);
+                }
+            }
+        });
+
+        ProcessOutput output = runner.runProcess(TIMEOUT_IN_MILLISECONDS);
         if (output.getExitCode() != 0) {
             return null;
         }
@@ -152,29 +184,5 @@ class SystemInfopageDocSource implements DocumentationSource, CachableDocumentat
         }
 
         return null;
-    }
-
-    private class MyCapturingProcessHandler extends CapturingProcessHandler {
-        private final String stdinData;
-
-        public MyCapturingProcessHandler(Process process, String stdinData, String commandLine) {
-            super(process, Charset.forName(SystemInfopageDocSource.CHARSET_NAME), commandLine);
-            this.stdinData = stdinData;
-        }
-
-        @Override
-        public void startNotify() {
-            super.startNotify();
-
-            //we need to write after the stdout reader has been attached. Otherwise the process may block
-            //and wait for the stdout to be read
-            try {
-                Writer stdinWriter = new OutputStreamWriter(getProcessInput(), CHARSET_NAME);
-                stdinWriter.write(stdinData);
-                stdinWriter.close();
-            } catch (IOException e) {
-                log.info("Exception passing data to txt2html", e);
-            }
-        }
     }
 }

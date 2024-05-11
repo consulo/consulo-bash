@@ -18,8 +18,8 @@
 
 package com.ansorgit.plugins.bash.documentation;
 
-import com.intellij.psi.PsiElement;
-import javax.annotation.Nullable;
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nullable;
 
 /**
  * A documentation source provides HTML formatted data for a given PSI element.

@@ -18,8 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import com.intellij.openapi.util.TextRange;
-import javax.annotation.Nonnull;
+import consulo.document.util.TextRange;
+import jakarta.annotation.Nonnull;
 
 /**
  * Date: 16.04.2009

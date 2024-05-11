@@ -18,7 +18,7 @@
 
 package com.ansorgit.plugins.bash.lang.psi.api;
 
-import com.intellij.psi.PsiReference;
+import consulo.language.psi.PsiReference;
 
 /**
  * Date: 12.04.2009

@@ -18,12 +18,12 @@
 
 package com.ansorgit.plugins.bash.lang.valueExpansion;
 
+import consulo.util.lang.StringUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.intellij.openapi.util.text.StringUtil;
 
 /**
  * Class to work with expansions.

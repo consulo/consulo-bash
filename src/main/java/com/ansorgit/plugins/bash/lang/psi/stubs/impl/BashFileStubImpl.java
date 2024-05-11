@@ -3,9 +3,9 @@ package com.ansorgit.plugins.bash.lang.psi.stubs.impl;
 import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.ansorgit.plugins.bash.lang.psi.stubs.api.BashFileStub;
-import com.intellij.psi.stubs.PsiFileStubImpl;
-import com.intellij.psi.tree.IStubFileElementType;
-import com.intellij.util.io.StringRef;
+import consulo.index.io.StringRef;
+import consulo.language.psi.stub.IStubFileElementType;
+import consulo.language.psi.stub.PsiFileStubImpl;
 
 /**
  * @author jansorg
