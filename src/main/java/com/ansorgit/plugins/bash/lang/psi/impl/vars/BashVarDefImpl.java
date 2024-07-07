@@ -18,30 +18,10 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl.vars;
 
-import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.bashShellVars;
-import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.bashShellVars_v4;
-import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.bourneShellVars;
-import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.localVarDefCommands;
-
-import java.util.List;
-
-import jakarta.annotation.Nonnull;
-
-import consulo.language.ast.ASTNode;
-import consulo.language.psi.*;
-import consulo.language.psi.resolve.PsiScopeProcessor;
-import org.jetbrains.annotations.NonNls;
-
-import jakarta.annotation.Nullable;
-
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
-import com.ansorgit.plugins.bash.lang.psi.api.BashCharSequence;
-import com.ansorgit.plugins.bash.lang.psi.api.BashPsiElement;
-import com.ansorgit.plugins.bash.lang.psi.api.BashReference;
-import com.ansorgit.plugins.bash.lang.psi.api.BashString;
-import com.ansorgit.plugins.bash.lang.psi.api.ResolveProcessor;
+import com.ansorgit.plugins.bash.lang.psi.api.*;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashCommand;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashAssignmentList;
@@ -53,14 +33,23 @@ import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashIdentifierUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
-import consulo.logging.Logger;
 import consulo.document.util.TextRange;
-import consulo.language.psi.resolve.ResolveState;
-import consulo.language.psi.StubBasedPsiElement;
-import consulo.language.psi.stub.IStubElementType;
+import consulo.language.ast.ASTNode;
 import consulo.language.ast.TokenSet;
+import consulo.language.psi.*;
+import consulo.language.psi.resolve.PsiScopeProcessor;
+import consulo.language.psi.resolve.ResolveState;
+import consulo.language.psi.stub.IStubElementType;
 import consulo.language.psi.util.PsiTreeUtil;
 import consulo.language.util.IncorrectOperationException;
+import consulo.logging.Logger;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import org.jetbrains.annotations.NonNls;
+
+import java.util.List;
+
+import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.*;
 
 /**
  * Date: 14.04.2009
@@ -331,7 +320,7 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
         return BashPsiUtils.findDocumentationElementComments(this);
     }
 
-    private static final class CachedVarDefReference extends CachingReference implements BashReference, BindablePsiReference, EmptyResolveMessageProvider
+    private static final class CachedVarDefReference extends CachingReference implements BashReference, BindablePsiReference
 	{
         private final BashVarDefImpl bashVarDef;
 
@@ -407,12 +396,6 @@ public class BashVarDefImpl extends BashBaseStubElementImpl<BashVarDefStub> impl
             }
 
             return null;
-        }
-
-        @Nonnull
-        @Override
-        public String getUnresolvedMessagePattern() {
-            return "unresolved";
         }
     }
 }

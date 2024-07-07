@@ -331,7 +331,7 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
         }
     }
 
-    private static class CachedFunctionReference<T extends StubElement> extends CachingReference implements BashReference, EmptyResolveMessageProvider
+    private static class CachedFunctionReference<T extends StubElement> extends CachingReference implements BashReference
 	{
         private final BashCommandImpl<T> cmd;
 
@@ -358,12 +358,6 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
             }
 
             return result;
-        }
-
-        @Nonnull
-        @Override
-        public String getUnresolvedMessagePattern() {
-            return "unresolved";
         }
 
         @Override

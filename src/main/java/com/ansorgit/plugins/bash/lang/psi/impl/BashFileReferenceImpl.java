@@ -18,8 +18,6 @@
 
 package com.ansorgit.plugins.bash.lang.psi.impl;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashCharSequence;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFileReference;
@@ -27,15 +25,12 @@ import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiFileUtils;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import consulo.document.util.TextRange;
-import consulo.language.psi.PsiElement;
-import consulo.language.psi.PsiFile;
-import consulo.language.psi.PsiReference;
-import consulo.language.psi.CachingReference;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.*;
 import consulo.language.psi.stub.StubElement;
 import consulo.language.util.IncorrectOperationException;
-import consulo.language.ast.ASTNode;
-import consulo.language.psi.EmptyResolveMessageProvider;
-import consulo.language.psi.PsiElementVisitor;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> implements BashFileReference {
     private PsiReference cachingReference;
@@ -81,8 +76,7 @@ public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> 
     }
 
 
-    private static class CachingFileReference extends CachingReference implements EmptyResolveMessageProvider
-	{
+    private static class CachingFileReference extends CachingReference {
         private final BashFileReferenceImpl fileReference;
 
         public CachingFileReference(BashFileReferenceImpl fileReference) {
@@ -133,12 +127,6 @@ public class BashFileReferenceImpl extends BashBaseStubElementImpl<StubElement> 
         public PsiElement resolveInner() {
             PsiFile containingFile = BashPsiUtils.findFileContext(getElement());
             return BashPsiFileUtils.findRelativeFile(containingFile, fileReference.getFilename());
-        }
-
-        @Nonnull
-        @Override
-        public String getUnresolvedMessagePattern() {
-            return "unresolved";
         }
     }
 }

@@ -33,13 +33,15 @@ import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import com.ansorgit.plugins.bash.lang.psi.util.BashResolveUtil;
 import consulo.document.util.TextRange;
 import consulo.language.ast.ASTNode;
-import consulo.language.psi.*;
+import consulo.language.psi.BindablePsiReference;
+import consulo.language.psi.CachingReference;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
 import consulo.language.psi.resolve.PsiScopeProcessor;
 import consulo.language.psi.resolve.ResolveState;
 import consulo.language.psi.stub.StubElement;
 import consulo.language.util.IncorrectOperationException;
 import consulo.util.lang.StringUtil;
-
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -134,8 +136,7 @@ public class BashVarImpl extends BashBaseStubElementImpl<StubElement> implements
         return false;
     }
 
-    private static class CachedBashVarReference extends CachingReference implements BashReference, BindablePsiReference, EmptyResolveMessageProvider
-	{
+    private static class CachedBashVarReference extends CachingReference implements BashReference, BindablePsiReference {
         private final BashVarImpl bashVar;
 
         public CachedBashVarReference(BashVarImpl bashVar) {
@@ -151,12 +152,6 @@ public class BashVarImpl extends BashBaseStubElementImpl<StubElement> implements
         @Override
         public PsiElement resolveInner() {
             return BashResolveUtil.resolve(bashVar, true);
-        }
-
-        @Nonnull
-        @Override
-        public String getUnresolvedMessagePattern() {
-            return "unresolved var";
         }
 
         @Override
