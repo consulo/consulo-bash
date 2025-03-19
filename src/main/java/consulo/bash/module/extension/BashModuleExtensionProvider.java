@@ -1,7 +1,7 @@
 package consulo.bash.module.extension;
 
 import consulo.annotation.component.ExtensionImpl;
-import consulo.bash.icon.BashIconGroup;
+import consulo.execution.icon.ExecutionIconGroup;
 import consulo.localize.LocalizeValue;
 import consulo.module.content.layer.ModuleExtensionProvider;
 import consulo.module.content.layer.ModuleRootLayer;
@@ -36,7 +36,7 @@ public class BashModuleExtensionProvider implements ModuleExtensionProvider<Bash
     @Nonnull
     @Override
     public Image getIcon() {
-        return BashIconGroup.bash_icon();
+        return ExecutionIconGroup.console();
     }
 
     @Nonnull

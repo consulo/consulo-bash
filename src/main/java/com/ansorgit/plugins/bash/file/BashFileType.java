@@ -91,6 +91,7 @@ public class BashFileType extends LanguageFileType implements FileTypeIdentifiab
         return DEFAULT_EXTENSION;
     }
 
+    @Nonnull
     @Override
     public Image getIcon() {
         return BashIcons.BASH_FILE_ICON;
