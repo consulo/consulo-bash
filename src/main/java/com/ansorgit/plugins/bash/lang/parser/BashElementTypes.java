@@ -37,10 +37,8 @@ import com.ansorgit.plugins.bash.lang.psi.impl.shell.BashIfImpl;
 import com.ansorgit.plugins.bash.lang.psi.stubs.api.BashFunctionDefStub;
 import com.ansorgit.plugins.bash.lang.psi.stubs.api.BashIncludeCommandStub;
 import com.ansorgit.plugins.bash.lang.psi.stubs.api.BashVarDefStub;
-import com.ansorgit.plugins.bash.lang.psi.stubs.elements.BashFunctionDefElementType;
-import com.ansorgit.plugins.bash.lang.psi.stubs.elements.BashIncludeCommandElementType;
 import com.ansorgit.plugins.bash.lang.psi.stubs.elements.BashStubFileElementType;
-import com.ansorgit.plugins.bash.lang.psi.stubs.elements.BashVarDefElementType;
+import consulo.bash.parser.BashStubElementTypes;
 import consulo.language.ast.ASTNode;
 import consulo.language.ast.ICompositeElementType;
 import consulo.language.ast.IElementType;
@@ -101,10 +99,10 @@ public interface BashElementTypes {
 
     //command elements
     IElementType SIMPLE_COMMAND_ELEMENT = new BashElementType("simple command element");
-    BashStubElementType<BashVarDefStub, BashVarDef> VAR_DEF_ELEMENT = new BashVarDefElementType();
+    BashStubElementType<BashVarDefStub, BashVarDef> VAR_DEF_ELEMENT = BashStubElementTypes.VAR_DEF_ELEMENT;
 
     IElementType GENERIC_COMMAND_ELEMENT = new BashElementType("generic bash command");
-    BashStubElementType<BashIncludeCommandStub, BashIncludeCommand> INCLUDE_COMMAND_ELEMENT = new BashIncludeCommandElementType();
+    BashStubElementType<BashIncludeCommandStub, BashIncludeCommand> INCLUDE_COMMAND_ELEMENT = BashStubElementTypes.INCLUDE_COMMAND_ELEMENT;
 
     //pipeline commands
     IElementType PIPELINE_COMMAND = new BashElementType("pipeline command");
@@ -122,7 +120,7 @@ public interface BashElementTypes {
     IElementType SUBSHELL_COMMAND = new BashCompositeElementType("subshell shellcommand", BashSubshellCommandImpl::new);
     IElementType BACKQUOTE_COMMAND = new BashCompositeElementType("backquote shellcommand", BashBackquoteImpl::new);
 
-    BashStubElementType<BashFunctionDefStub, BashFunctionDef> FUNCTION_DEF_COMMAND = new BashFunctionDefElementType();
+    BashStubElementType<BashFunctionDefStub, BashFunctionDef> FUNCTION_DEF_COMMAND = BashStubElementTypes.FUNCTION_DEF_COMMAND;
 
     IElementType GROUP_COMMAND = new BashCompositeElementType("group command", BashGroupImpl::new);
 

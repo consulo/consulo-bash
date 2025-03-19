@@ -1,6 +1,5 @@
 package consulo.bash.parser;
 
-import com.ansorgit.plugins.bash.lang.parser.BashElementTypes;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.language.psi.stub.ObjectStubSerializerProvider;
 import consulo.language.psi.stub.StubElementTypeHolder;
@@ -15,7 +14,7 @@ import java.util.List;
  * @since 11.05.2024
  */
 @ExtensionImpl
-public class BashStubElementTypeHolder extends StubElementTypeHolder<BashElementTypes> {
+public class BashStubElementTypeHolder extends StubElementTypeHolder<BashStubElementTypes> {
     @Nullable
     @Override
     public String getExternalIdPrefix() {
@@ -25,6 +24,6 @@ public class BashStubElementTypeHolder extends StubElementTypeHolder<BashElement
     @Nonnull
     @Override
     public List<ObjectStubSerializerProvider> loadSerializers() {
-        return allFromStaticFields(BashElementTypes.class, Field::get);
+        return allFromStaticFields(BashStubElementTypes.class, Field::get);
     }
 }
