@@ -21,6 +21,7 @@ package com.ansorgit.plugins.bash.runner;
 import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashInterpreterDetection;
 import consulo.annotation.component.ExtensionImpl;
+import consulo.application.Application;
 import consulo.execution.configuration.ConfigurationFactory;
 import consulo.execution.configuration.ConfigurationType;
 import consulo.execution.configuration.RunConfiguration;
@@ -55,7 +56,7 @@ public class BashConfigurationType implements ConfigurationType {
     }
 
     public static BashConfigurationType getInstance() {
-        return EP_NAME.findExtensionOrFail(BashConfigurationType.class);
+        return Application.get().getExtensionPoint(ConfigurationType.class).findExtensionOrFail(BashConfigurationType.class);
     }
 
     public ConfigurationFactory[] getConfigurationFactories() {
