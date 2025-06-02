@@ -39,7 +39,7 @@ import consulo.virtualFileSystem.VirtualFile;
  * @author wibotwi, jansorg
  */
 @ExtensionImpl
-public class BashRunConfigurationProducer extends RuntimeConfigurationProducer implements Cloneable {
+public class BashRunConfigurationProducer extends RuntimeConfigurationProducer {
     private PsiFile sourceFile;
 
     public BashRunConfigurationProducer() {
@@ -84,7 +84,7 @@ public class BashRunConfigurationProducer extends RuntimeConfigurationProducer i
         return null;
     }
 
-    public int compareTo(Object o) {
+    public int compareTo(RuntimeConfigurationProducer o) {
         return 0;
     }
 }
