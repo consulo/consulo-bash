@@ -18,11 +18,13 @@
 
 package com.ansorgit.plugins.bash.settings;
 
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.configurable.ConfigurationException;
 import consulo.configurable.ProjectConfigurable;
 import consulo.configurable.StandardConfigurableIds;
 import consulo.disposer.Disposable;
+import consulo.localize.LocalizeValue;
 import consulo.project.Project;
 import consulo.ui.annotation.RequiredUIAccess;
 import jakarta.annotation.Nonnull;
@@ -49,9 +51,9 @@ public class BashProjectSettingsConfigurable implements ProjectConfigurable
 		this.project = project;
 	}
 
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return "Bash";
+		return BashLanguage.INSTANCE.getDisplayName();
 	}
 
 	@Nonnull

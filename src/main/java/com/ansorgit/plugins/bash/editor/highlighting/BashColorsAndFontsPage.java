@@ -18,12 +18,14 @@
 
 package com.ansorgit.plugins.bash.editor.highlighting;
 
+import com.ansorgit.plugins.bash.lang.BashLanguage;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.colorScheme.TextAttributesKey;
 import consulo.colorScheme.setting.AttributesDescriptor;
 import consulo.colorScheme.setting.ColorDescriptor;
 import consulo.language.editor.colorScheme.setting.ColorSettingsPage;
 import consulo.language.editor.highlight.SyntaxHighlighter;
+import consulo.localize.LocalizeValue;
 import consulo.util.io.StreamUtil;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -37,8 +39,8 @@ import java.util.Map;
 @ExtensionImpl
 public class BashColorsAndFontsPage implements ColorSettingsPage {
     @Nonnull
-    public String getDisplayName() {
-        return "Bash";
+    public LocalizeValue getDisplayName() {
+        return BashLanguage.INSTANCE.getDisplayName();
     }
 
     private static final AttributesDescriptor[] ATTRS =
