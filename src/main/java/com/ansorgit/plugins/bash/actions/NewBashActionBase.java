@@ -19,20 +19,21 @@
 package com.ansorgit.plugins.bash.actions;
 
 import com.ansorgit.plugins.bash.file.BashFileType;
-import consulo.application.CommonBundle;
 import consulo.ide.action.CreateElementActionBase;
 import consulo.language.psi.PsiDirectory;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
 import consulo.language.util.IncorrectOperationException;
+import consulo.localize.LocalizeValue;
 import consulo.logging.Logger;
+import consulo.platform.base.localize.CommonLocalize;
 import consulo.project.Project;
 import consulo.ui.ex.awt.Messages;
 import consulo.ui.image.Image;
 import consulo.util.io.FileUtil;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.NonNls;
 
-import jakarta.annotation.Nonnull;
 import java.util.function.Consumer;
 
 import static com.ansorgit.plugins.bash.file.BashFileType.DEFAULT_EXTENSION;
@@ -44,22 +45,22 @@ import static com.ansorgit.plugins.bash.file.BashFileType.DEFAULT_EXTENSION;
  * @author Joachim Ansorg
  */
 abstract class NewBashActionBase extends CreateElementActionBase {
-    private static final Logger log = Logger.getInstance("#NewActionBase");
+    private static final Logger log = Logger.getInstance(NewBashActionBase.class);
 
-    public NewBashActionBase(String text, String description, Image icon) {
+    public NewBashActionBase(LocalizeValue text, LocalizeValue description, Image icon) {
         super(text, description, icon);
     }
 
+    @Override
     protected final void invokeDialog(final Project project, final PsiDirectory directory, Consumer<PsiElement[]> consumer) {
         log.debug("invokeDialog");
         final MyInputValidator validator = new MyInputValidator(project, directory);
-        Messages.showInputDialog(project, getDialogPrompt(), getDialogTitle(), Messages.getQuestionIcon(), "", validator);
+        Messages.showInputDialog(project, getDialogPrompt().get(), getDialogTitle().get(), Messages.getQuestionIcon(), "", validator);
 
         final PsiElement[] elements = validator.getCreatedElements();
         log.debug("Result: " + elements);
         consumer.accept(elements);
     }
-
 
     protected static PsiFile createFileFromTemplate(final PsiDirectory directory,
                                                     String className,
@@ -81,12 +82,13 @@ abstract class NewBashActionBase extends CreateElementActionBase {
 
     protected abstract PsiElement[] doCreate(String newName, PsiDirectory directory);
 
-    protected abstract String getDialogPrompt();
+    protected abstract LocalizeValue getDialogPrompt();
 
-    protected abstract String getDialogTitle();
+    protected abstract LocalizeValue getDialogTitle();
 
-    protected String getErrorTitle() {
-        return CommonBundle.getErrorTitle();
+    @Override
+    protected LocalizeValue getErrorTitle() {
+        return CommonLocalize.titleError();
     }
 
     public static void checkCreateFile(@Nonnull PsiDirectory directory, String name) throws IncorrectOperationException {
