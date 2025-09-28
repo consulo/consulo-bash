@@ -20,7 +20,7 @@ package com.ansorgit.plugins.bash.actions;
 
 import com.ansorgit.plugins.bash.file.BashFileType;
 import com.ansorgit.plugins.bash.util.BashIcons;
-import com.ansorgit.plugins.bash.util.BashStrings;
+import com.ansorgit.plugins.bash.util.BashBundle;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.fileTemplate.FileTemplateGroupDescriptor;
 import consulo.fileTemplate.FileTemplateGroupDescriptorFactory;
@@ -45,7 +45,7 @@ public class BashTemplatesFactory implements FileTemplateGroupDescriptorFactory 
     private static final Logger log = Logger.getInstance("#BashTemplateFactory");
 
     public BashTemplatesFactory() {
-        templateGroup = new FileTemplateGroupDescriptor(BashStrings.message("file.template.group.title.bash"), BashIcons.BASH_FILE_ICON);
+        templateGroup = new FileTemplateGroupDescriptor(BashBundle.message("file.template.group.title.bash"), BashIcons.BASH_FILE_ICON);
         templateGroup.addTemplate(FILE_NAME);
     }
 

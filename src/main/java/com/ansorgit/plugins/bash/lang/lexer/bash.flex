@@ -89,9 +89,6 @@ import consulo.util.collection.Stack;
   //Help data to parse (nested) strings.
   private final StringParsingState string = new StringParsingState();
 
-  //helper
-  long yychar = 0;
-
   //parameter expansion parsing state
   boolean paramExpansionHash = false;
   boolean paramExpansionWord = false;
@@ -703,4 +700,4 @@ Filedescriptor = "&" {IntegerLiteral} | "&-"
 }
 
 /** END */
-  .                            { return BAD_CHARACTER; }
+[^]                            { return BAD_CHARACTER; }

@@ -20,7 +20,7 @@ package com.ansorgit.plugins.bash.lang.parser.util;
 
 import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.parser.BashPsiBuilder;
-import com.ansorgit.plugins.bash.util.BashStrings;
+import com.ansorgit.plugins.bash.util.BashBundle;
 import consulo.language.ast.IElementType;
 import consulo.language.ast.TokenSet;
 import consulo.language.parser.PsiBuilder;
@@ -44,15 +44,15 @@ public class ParserUtil {
     public static void errorToken(PsiBuilder builder, @PropertyKey(resourceBundle = BUNDLE) String message) {
         PsiBuilder.Marker marker = builder.mark();
         builder.advanceLexer();
-        marker.error(BashStrings.message(message));
+        marker.error(BashBundle.message(message));
     }
 
     public static void error(PsiBuilder builder, @PropertyKey(resourceBundle = BUNDLE) String message) {
-        builder.error(BashStrings.message(message));
+        builder.error(BashBundle.message(message));
     }
 
     public static void error(PsiBuilder.Marker marker, @PropertyKey(resourceBundle = BUNDLE) String message) {
-        marker.error(BashStrings.message(message));
+        marker.error(BashBundle.message(message));
     }
 
     /**

@@ -18,7 +18,10 @@
 
 package com.ansorgit.plugins.bash.util;
 
+import consulo.annotation.DeprecationInfo;
+import consulo.annotation.internal.MigratedExtensionsTo;
 import consulo.application.CommonBundle;
+import consulo.bash.localize.BashLocalize;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.PropertyKey;
 
@@ -31,7 +34,10 @@ import java.util.ResourceBundle;
  *
  * @author Joachim Ansorg
  */
-public class BashStrings {
+@Deprecated
+@DeprecationInfo("Use BashLocalize")
+@MigratedExtensionsTo(BashLocalize.class)
+public class BashBundle {
     private static Reference<ResourceBundle> ourBundle;
 
     @NonNls

@@ -1,0 +1,60 @@
+file.template.group.title.bash:
+    text: Bash file templates
+newfile.command.name:
+    text: Bash file
+newfile.dialog.prompt:
+    text: Create a new Bash file
+newfile.dialog.title:
+    text: Create Bash file
+newfile.menu.action.description:
+    text: Creates a new bash file
+newfile.menu.action.text:
+    text: Create bash file
+parser.command.expected.command:
+    text: Expected a command
+parser.heredoc.expectedEnd:
+    text: Expected end of here doc
+parser.list.expected.lineend:
+    text: Expected a line termination (either ';' , '&' or line feed)
+parser.pipeline.expected.pipeline:
+    text: Expected a command with optional pipeline
+parser.redirect.expected.notFound:
+    text: Expected a redirect clause
+parser.redirect.expected.string:
+    text: Expected a string
+parser.redirect.expected.target:
+    text: Expected a redirect target
+parser.redirected.expected.filedescriptor:
+    text: Expected a number for a filedescriptor
+parser.shell.conditional.expectedEnd:
+    text: Expected end of conditional expression
+parser.shell.expectedCommands:
+    text: Expected one or more commands
+parser.shell.expectedDo:
+    text: Expected keyword "do"
+parser.shell.expectedDone:
+    text: Expected keyword 'done'
+parser.shell.for.expectedWord:
+    text: Expected an identifier
+parser.shell.if.expectedCommands:
+    text: Expected one ore more command
+parser.shell.if.expectedElif:
+    text: Expected 'elif'
+parser.shell.if.expectedFi:
+    text: Expected keyword 'fi'
+parser.shell.if.expectedIf:
+    text: Expected 'if'
+parser.shell.if.expectedThen:
+    text: Expected keyword 'then"
+parser.shell.include.expectedFilename:
+    text: Expected a filename to include
+parser.shell.loop.expectedBody:
+    text: Expected loop body
+parser.time.expected.time:
+    text: Expected a time command
+parser.unexpected.token:
+    text: Unexpected token
+plugin.bash.description:
+    text: BashSupport provides support for Unix Bash scripts.
+plugin.bash.name:
+    text: BashSupport

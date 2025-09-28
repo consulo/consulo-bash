@@ -27,11 +27,10 @@ import consulo.ui.image.Image;
  *
  * @author Joachim Ansorg, mail@ansorg-it.com.
  */
-public interface BashIcons
-{
-	Image BASH_FILE_ICON = ExecutionIconGroup.console();
+public interface BashIcons {
+    Image BASH_FILE_ICON = ExecutionIconGroup.console();
 
-	Image GLOBAL_VAR_ICON = PlatformIconGroup.nodesValue();
+    Image GLOBAL_VAR_ICON = PlatformIconGroup.nodesValue();
 
-	Image BOURNE_VAR_ICON = PlatformIconGroup.nodesVariable();
+    Image BOURNE_VAR_ICON = PlatformIconGroup.nodesVariable();
 }

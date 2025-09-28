@@ -19,10 +19,11 @@
 package com.ansorgit.plugins.bash.actions;
 
 import com.ansorgit.plugins.bash.util.BashIcons;
-import com.ansorgit.plugins.bash.util.BashStrings;
+import consulo.bash.localize.BashLocalize;
 import consulo.language.psi.PsiDirectory;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
+import consulo.localize.LocalizeValue;
 
 /**
  * Date: 17.04.2009
@@ -30,41 +31,38 @@ import consulo.language.psi.PsiFile;
  *
  * @author Joachim Ansorg
  */
-public class NewBashFileAction extends NewBashActionBase
-{
-	public NewBashFileAction()
-	{
-		super(BashStrings.message("newfile.menu.action.text"), BashStrings.message("newfile.menu.action.description"), BashIcons.BASH_FILE_ICON);
-	}
+public class NewBashFileAction extends NewBashActionBase {
+    public NewBashFileAction() {
+        super(BashLocalize.newfileMenuActionText(), BashLocalize.newfileMenuActionDescription(), BashIcons.BASH_FILE_ICON);
+    }
 
+    @Override
+    protected LocalizeValue getDialogPrompt() {
+        return BashLocalize.newfileDialogPrompt();
+    }
 
-	protected String getDialogPrompt()
-	{
-		return BashStrings.message("newfile.dialog.prompt");
-	}
+    @Override
+    protected LocalizeValue getDialogTitle() {
+        return BashLocalize.newfileDialogTitle();
+    }
 
-	protected String getDialogTitle()
-	{
-		return BashStrings.message("newfile.dialog.title");
-	}
+    @Override
+    protected LocalizeValue getCommandName() {
+        return BashLocalize.newfileCommandName();
+    }
 
-	protected String getCommandName()
-	{
-		return BashStrings.message("newfile.command.name");
-	}
+    @Override
+    protected LocalizeValue getActionName(PsiDirectory directory, String newName) {
+        return BashLocalize.newfileMenuActionText();
+    }
 
-	protected String getActionName(PsiDirectory directory, String newName)
-	{
-		return BashStrings.message("newfile.menu.action.text");
-	}
-
-	protected PsiElement[] doCreate(String newName, PsiDirectory directory)
-	{
-		PsiFile file = createFileFromTemplate(directory, newName, "bash-script.sh");
-		PsiElement child = file.getLastChild();
-		return child != null ? new PsiElement[]{
-				file,
-				child
-		} : new PsiElement[]{file};
-	}
+    @Override
+    protected PsiElement[] doCreate(String newName, PsiDirectory directory) {
+        PsiFile file = createFileFromTemplate(directory, newName, "bash-script.sh");
+        PsiElement child = file.getLastChild();
+        return child != null ? new PsiElement[]{
+            file,
+            child
+        } : new PsiElement[]{file};
+    }
 }
