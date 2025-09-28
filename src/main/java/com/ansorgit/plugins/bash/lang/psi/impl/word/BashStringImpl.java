@@ -85,7 +85,8 @@ public class BashStringImpl extends BashBaseStubElementImpl<StubElement> impleme
     @Override
     public boolean isValidHost() {
         BashCommand command = BashPsiUtils.findParent(this, BashCommand.class);
-        return command != null && LanguageBuiltins.bashInjectionHostCommand.contains(command.getReferencedCommandName());
+        String refCommand = command == null ? null : command.getReferencedCommandName();
+        return refCommand != null && LanguageBuiltins.bashInjectionHostCommand.contains(refCommand);
     }
 
     @Override
