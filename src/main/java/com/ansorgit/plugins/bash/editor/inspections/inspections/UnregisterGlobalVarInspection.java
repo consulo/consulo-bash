@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.UnregisterGlobalVariableQuickfix;
@@ -26,32 +25,24 @@ import com.ansorgit.plugins.bash.settings.BashProjectSettings;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.ProblemHighlightType;
 import consulo.language.editor.inspection.ProblemsHolder;
-import consulo.language.psi.PsiElementVisitor;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
 
 import java.util.Set;
 
 /**
- * This inspection marks global variables and offers a unregister quickfix.
- * <p/>
- * Of course, there is a chance of false positives as both inclusions may be in conditional
- * statements.
+ * <p>This inspection marks global variables and offers a unregister quickfix.<p/>
+ *
+ * <p>Of course, there is a chance of false positives as both inclusions may be in conditional statements.</p>
  */
 @ExtensionImpl
 public class UnregisterGlobalVarInspection extends AbstractBashInspection {
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Unregister as a global variable";
-    }
-
     @Pattern("[a-zA-Z_0-9.]+")
-    @Nonnull
-    @Override
     public String getID() {
         return "unregisterGlobalVariableInspection";
     }
@@ -62,9 +53,16 @@ public class UnregisterGlobalVarInspection extends AbstractBashInspection {
         return "Unregister global variable";
     }
 
+    @Nonnull
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Unregister as a global variable");
+    }
+
     @Override
     public String getStaticDescription() {
-        return "Unknown variables can be registered as global variables to remove the error highlighting. This inspection provides an unregister action for already registered variables.";
+        return "Unknown variables can be registered as global variables to remove the error highlighting. " +
+            "This inspection provides an unregister action for already registered variables.";
     }
 
     @Nonnull

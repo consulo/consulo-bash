@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
@@ -26,31 +25,21 @@ import consulo.language.editor.inspection.LocalQuickFix;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
 
 /**
  * This inspection marks unresolved variables.
- * <p/>
- * User: jansorg
- * Date: Jan 25, 2010
- * Time: 10:11:49 PM
+ *
+ * @author jansorg
+ * @since 2010-01-25
  */
 @ExtensionImpl
 public class InternalVariableInspection extends AbstractBashInspection {
-    //private static final Logger log = Logger.getInstance("#UnresolvedVariable");
-
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Read-only shell variable";
-    }
-
     @Pattern("[a-zA-Z_0-9.]+")
-    @Nonnull
-    @Override
     public String getID() {
         return "internalVariableInspection";
     }
@@ -59,6 +48,12 @@ public class InternalVariableInspection extends AbstractBashInspection {
     @Override
     public String getShortName() {
         return "Change to a builtin, read-only shell variable";
+    }
+
+    @Nonnull
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Read-only shell variable");
     }
 
     @Override

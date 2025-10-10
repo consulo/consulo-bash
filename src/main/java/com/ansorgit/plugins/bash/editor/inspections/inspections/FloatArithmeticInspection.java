@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -25,38 +24,38 @@ import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.psi.PsiElementVisitor;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
 
 /**
  * This inspection detects floating point arithmetic using Bash arithmetic (so it probably does not produce
  * the intended results).
- * <p/>
- * Date: 15.05.2009
- * Time: 14:56:55
  *
  * @author Joachim Ansorg
+ * @since 2009-05-15
  */
 @ExtensionImpl
 public class FloatArithmeticInspection extends AbstractBashInspection {
-
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "FloatArithmetic";
     }
 
     @Nonnull
+    @Override
     public String getShortName() {
         return "Integer division with remainder found.";
     }
 
-    @Nls
     @Nonnull
-    public String getDisplayName() {
-        return "Integer division with remainder. Maybe you wanted floating point arithmetic (unsupported in Bash)?";
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO(
+            "Integer division with remainder. Maybe you wanted floating point arithmetic (unsupported in Bash)?"
+        );
     }
 
     @Override

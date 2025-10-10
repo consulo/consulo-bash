@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -29,10 +28,9 @@ import consulo.language.editor.inspection.UnfairLocalInspectionTool;
 import consulo.language.psi.PsiElementVisitor;
 import consulo.language.psi.PsiReference;
 import consulo.language.psi.search.ReferencesSearch;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
-
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
 
 /**
  * Highlights unused function definitions.
@@ -41,12 +39,11 @@ import jakarta.annotation.Nonnull;
  */
 @ExtensionImpl
 public class UnusedFunctionDefInspection extends AbstractBashInspection implements UnfairLocalInspectionTool {
-
     public static final String SHORT_NAME = "Unused function definition";
 
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "UnusedFunction";
     }
@@ -57,11 +54,10 @@ public class UnusedFunctionDefInspection extends AbstractBashInspection implemen
         return SHORT_NAME;
     }
 
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Unused function definition";
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Unused function definition");
     }
 
     @Override

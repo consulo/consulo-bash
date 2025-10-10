@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
@@ -28,16 +27,15 @@ import consulo.document.util.TextRange;
 import consulo.language.psi.PsiElementWithSubtreeChangeNotifier;
 import consulo.language.psi.PsiFile;
 import consulo.language.util.IncorrectOperationException;
+import consulo.localize.LocalizeValue;
 import consulo.project.Project;
-
 import jakarta.annotation.Nonnull;
 
 /**
  * Unregisters a global variable.
- * <p/>
- * User: jansorg
- * Date: Jan 25, 2010
- * Time: 10:30:22 PM
+ *
+ * @author jansorg
+ * @since 2010-01-25
  */
 public class UnregisterGlobalVariableQuickfix extends AbstractBashQuickfix {
     private final BashVar variable;
@@ -47,8 +45,9 @@ public class UnregisterGlobalVariableQuickfix extends AbstractBashQuickfix {
     }
 
     @Nonnull
-    public String getName() {
-        return "Unregister as global variable";
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Unregister as global variable");
     }
 
     public void invoke(@Nonnull Project project, Editor editor, final PsiFile file) throws IncorrectOperationException {
@@ -59,18 +58,19 @@ public class UnregisterGlobalVariableQuickfix extends AbstractBashQuickfix {
         //replace this position with the same value, we have to trigger a reparse somehow
         try {
             editor.getDocument().replaceString(textRange.getStartOffset(), textRange.getEndOffset(), variable.getText());
-        } catch (ReadOnlyModificationException e) {
+        }
+        catch (ReadOnlyModificationException e) {
             //ignore
-        } catch (ReadOnlyFragmentModificationException e) {
+        }
+        catch (ReadOnlyFragmentModificationException e) {
             //ignore
         }
 
         ApplicationManager.getApplication().runWriteAction(new Runnable() {
             public void run() {
                 ApplicationManager.getApplication().saveSettings();
-				((PsiElementWithSubtreeChangeNotifier)file).subtreeChanged();
+                ((PsiElementWithSubtreeChangeNotifier) file).subtreeChanged();
             }
         });
-
     }
 }

@@ -15,44 +15,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
-
-import consulo.annotation.component.ExtensionImpl;
-import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.LocalQuickFix;
-import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
+import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
 
 /**
  * This inspection marks unresolved variables.
- * <p/>
- * User: jansorg
- * Date: Jan 25, 2010
- * Time: 10:11:49 PM
+ *
+ * @author jansorg
+ * @since 2010-01-25
  */
 @ExtensionImpl
 public class ReadonlyVariableInspection extends AbstractBashInspection {
-    //private static final Logger log = Logger.getInstance("#UnresolvedVariable");
-
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Readonly variable";
-    }
-
     @Pattern("[a-zA-Z_0-9.]+")
-    @Nonnull
-    @Override
     public String getID() {
         return "readonlyVariableInspection";
     }
@@ -61,6 +49,12 @@ public class ReadonlyVariableInspection extends AbstractBashInspection {
     @Override
     public String getShortName() {
         return "Readonly variable";
+    }
+
+    @Nonnull
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Readonly variable");
     }
 
     @Override

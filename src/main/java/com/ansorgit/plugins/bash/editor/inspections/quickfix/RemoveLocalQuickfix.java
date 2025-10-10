@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
@@ -32,10 +32,9 @@ import consulo.project.Project;
 
 /**
  * Replaces a subshell command with the old-style backtick command.
- * <p/>
- * User: jansorg
- * Date: 21.05.2009
- * Time: 14:05:02
+ *
+ * @author jansorg
+ * @since 2009-05-21
  */
 public class RemoveLocalQuickfix extends AbstractBashQuickfix {
     private final BashVarDef varDef;
@@ -45,8 +44,9 @@ public class RemoveLocalQuickfix extends AbstractBashQuickfix {
     }
 
     @Nonnull
-    public String getName() {
-        return "Remove local part of the definition";
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Remove local part of the definition");
     }
 
     public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {

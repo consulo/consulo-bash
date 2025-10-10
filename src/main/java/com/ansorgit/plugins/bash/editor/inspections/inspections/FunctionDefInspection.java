@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.FunctionBodyQuickfix;
@@ -24,43 +23,42 @@ import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
 
 /**
  * In Bash a function definition must not have a command block as body. A body block is good style, though.
  * This inspection offers a quickfix to wrap the body in a block.
- * <p/>
- * Date: 15.05.2009
- * Time: 15:14:04
  *
  * @author Joachim Ansorg
+ * @since 2009-05-15
  */
 @ExtensionImpl
 public class FunctionDefInspection extends AbstractBashInspection {
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "WrapFunction";
     }
 
     @Nonnull
+    @Override
     public String getShortName() {
         return "Wrap function body";
     }
 
-    @Nls
     @Nonnull
-    public String getDisplayName() {
-        return "Wrap function body in {}";
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Wrap function body in {}");
     }
 
     @Override
     public String getStaticDescription() {
-        return "If the body of a function is not yet wrapped in curly brackets {} this inspection" +
-                "offers a quickfix to automatically do this.";
+        return "If the body of a function is not yet wrapped in curly brackets {} this inspection " +
+            "offers a quickfix to automatically do this.";
     }
 
     @Nonnull

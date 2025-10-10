@@ -15,44 +15,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
-
-import consulo.annotation.component.ExtensionImpl;
-import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashString;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVarDef;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.ProblemHighlightType;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
+import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
 
 /**
  * This inspection detects use of array variables without array element qualifiers.
  */
 @ExtensionImpl
 public class SimpleArrayUseInspection extends AbstractBashInspection {
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "SimpleArrayUse";
     }
 
     @Nonnull
+    @Override
     public String getShortName() {
         return "Simple use of array variable";
     }
 
-    @Nls
     @Nonnull
-    public String getDisplayName() {
-        return "Simple use of array variable";
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Simple use of array variable");
     }
 
     @Override

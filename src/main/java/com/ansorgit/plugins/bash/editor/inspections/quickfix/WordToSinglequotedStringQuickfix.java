@@ -15,21 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 
 /**
  * Converts a word like into an unquoted string 'a'.
- * <p/>
- * User: jansorg
- * Date: 21.05.2009
- * Time: 10:40:37
+ *
+ * @author jansorg
+ * @since 2009-05-21
  */
 public class WordToSinglequotedStringQuickfix extends AbstractWordWrapQuickfix {
-
     public WordToSinglequotedStringQuickfix(BashWord word) {
         super(word);
     }
@@ -39,8 +37,8 @@ public class WordToSinglequotedStringQuickfix extends AbstractWordWrapQuickfix {
     }
 
     @Nonnull
-    public String getName() {
-        return "Convert to unquoted string '...'";
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Convert to unquoted string '...'");
     }
-
 }

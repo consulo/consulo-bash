@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -28,25 +27,24 @@ import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.psi.PsiElementVisitor;
 import consulo.language.psi.PsiFile;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
 
 import java.util.Set;
 
 /**
  * This inspection detects recursive file inclusion.
  * It can detect whether another file actually back-includes this file.
- * <p/>
- * User: jansorg
- * Date: Nov 2, 2009
- * Time: 8:15:59 PM
+ *
+ * @author jansorg
+ * @since 2009-11-02
  */
 @ExtensionImpl
 public class RecursiveIncludeFileInspection extends AbstractBashInspection {
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "RecursiveInclusion";
     }
@@ -57,11 +55,10 @@ public class RecursiveIncludeFileInspection extends AbstractBashInspection {
         return "Recursive file inclusion";
     }
 
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Recursive file inclusion";
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Recursive file inclusion");
     }
 
     @Override

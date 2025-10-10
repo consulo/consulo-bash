@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.EvaluateArithExprQuickfix;
@@ -23,27 +22,26 @@ import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ParenthesesExpression;
 import consulo.annotation.component.ExtensionImpl;
-import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.psi.PsiElementVisitor;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
 
 import java.util.List;
 
 /**
  * Evaluate a static arithmetic expression. Offers a quickfix to insert the replacement value.
- * <p/>
- * User: jansorg
- * Date: Nov 15, 2009
- * Time: 12:48:24 AM
+ *
+ * @author jansorg
+ * @since 2009-11-15
  */
 @ExtensionImpl
 public class EvaluateArithmeticExpressionInspection extends AbstractBashInspection {
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "EvaluateArithmeticExpression";
     }
@@ -54,16 +52,16 @@ public class EvaluateArithmeticExpressionInspection extends AbstractBashInspecti
         return "Evaluate arithmetic expression";
     }
 
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Evaluate an arithmetic expression";
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Evaluate an arithmetic expression");
     }
 
     @Override
     public String getStaticDescription() {
-        return "Replaces a static arithmetic expression with the result. For example the expression 1 + 3 * 4 would be replaced with the evaluated result of 13.";
+        return "Replaces a static arithmetic expression with the result. " +
+            "For example the expression 1 + 3 * 4 would be replaced with the evaluated result of 13.";
     }
 
     @Nonnull
@@ -90,7 +88,8 @@ public class EvaluateArithmeticExpressionInspection extends AbstractBashInspecti
 
                     //run only if the parent is not a static expression itself
                     if (parent == null || !parent.isStatic()) {
-                        String template = "Replace '" + expression.getText() + "' with the evaluated result of '" + expression.computeNumericValue() + "'";
+                        String template =
+                            "Replace '" + expression.getText() + "' with the evaluated result of '" + expression.computeNumericValue() + "'";
                         holder.registerProblem(expression, template, new EvaluateArithExprQuickfix(expression));
                     }
                 }

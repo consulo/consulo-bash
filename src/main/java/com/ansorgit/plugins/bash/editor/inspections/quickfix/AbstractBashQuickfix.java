@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
@@ -24,25 +23,21 @@ import consulo.language.editor.inspection.LocalQuickFix;
 import consulo.language.editor.inspection.ProblemDescriptor;
 import consulo.language.editor.intention.SyntheticIntentionAction;
 import consulo.language.psi.PsiFile;
+import consulo.localize.LocalizeValue;
 import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 
 /**
  * Abstract base class for Bash quickfixes.
- * <p/>
- * User: jansorg
- * Date: 21.05.2009
- * Time: 10:47:27
+ *
+ * @author jansorg
+ * @since 2009-05-21
  */
 abstract class AbstractBashQuickfix implements LocalQuickFix, SyntheticIntentionAction {
     @Nonnull
-    public final String getText() {
+    @Override
+    public final LocalizeValue getText() {
         return getName();
-    }
-
-    @Nonnull
-    public String getFamilyName() {
-        return "Bash";
     }
 
     public boolean isAvailable(@Nonnull Project project, Editor editor, PsiFile file) {

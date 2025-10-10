@@ -15,33 +15,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFileReference;
 import com.ansorgit.plugins.bash.lang.psi.api.command.BashIncludeCommand;
 import consulo.annotation.component.ExtensionImpl;
-import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.editor.inspection.ProblemsHolder;
-import consulo.language.psi.PsiFile;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.psi.PsiElementVisitor;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
+import consulo.language.psi.PsiFile;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
 
 import java.io.File;
 
 /**
- * User: jansorg
- * Date: Nov 2, 2009
- * Time: 8:15:59 PM
+ * @author jansorg
+ * @since 2009-11-02
  */
 @ExtensionImpl
 public class MissingIncludeFileInspection extends AbstractBashInspection {
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "MissingInclude";
     }
@@ -52,17 +50,16 @@ public class MissingIncludeFileInspection extends AbstractBashInspection {
         return "Missing include file";
     }
 
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Missing include file";
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Missing include file");
     }
 
     @Override
     public String getStaticDescription() {
-        return "Checks the filenames of include directives. If a given file doesn't exist then" +
-                "the element is highlighted as an error. Includes of files given as runtime values (e.g. variables) are not evaluated.";
+        return "Checks the filenames of include directives. If a given file doesn't exist then the element is highlighted as an error. " +
+            "Includes of files given as runtime values (e.g. variables) are not evaluated.";
     }
 
     @Nonnull

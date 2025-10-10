@@ -15,43 +15,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
-
-import consulo.annotation.component.ExtensionImpl;
-import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
-import consulo.language.psi.PsiElementVisitor;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.ProblemHighlightType;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
+import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
 
 /**
  * This inspection detects function names which override internal bash commands.
  */
 @ExtensionImpl
 public class InternalCommandFunctionOverrideInspection extends AbstractBashInspection {
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "InternalCommandFunctionOverride";
     }
 
     @Nonnull
+    @Override
     public String getShortName() {
         return "Function overrides internal command";
     }
 
-    @Nls
     @Nonnull
-    public String getDisplayName() {
-        return "Function overrides internal command";
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Function overrides internal command");
     }
 
     @Override

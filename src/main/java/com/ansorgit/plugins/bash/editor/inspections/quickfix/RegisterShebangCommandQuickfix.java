@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.editor.inspections.inspections.FixShebangInspection;
@@ -23,6 +22,7 @@ import com.ansorgit.plugins.bash.lang.psi.api.BashShebang;
 import consulo.codeEditor.Editor;
 import consulo.language.psi.PsiFile;
 import consulo.language.util.IncorrectOperationException;
+import consulo.localize.LocalizeValue;
 import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 
@@ -35,17 +35,17 @@ public class RegisterShebangCommandQuickfix extends AbstractBashQuickfix {
         this.shebang = shebang;
     }
 
+    @Nonnull
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Mark as valid command");
+    }
+
     @Override
     public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         inspection.registerShebangCommand(shebang.shellCommand(true));
 
         //trigger a change to remove this inspection
         shebang.updateCommand(shebang.shellCommand(false));
-    }
-
-    @Nonnull
-    @Override
-    public String getName() {
-        return "Mark as valid command";
     }
 }

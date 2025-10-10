@@ -15,34 +15,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
-
-import consulo.annotation.component.ExtensionImpl;
-import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.EvaluateExpansionQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashExpansion;
-import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
+import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
 
 /**
  * This inspection detects expansions and offers a quickfix to calculate the expansion
  * and insert it instead of the original expansion placeholder.
- * <p/>
- * User: jansorg
- * Date: Nov 15, 2009
- * Time: 12:48:24 AM
+ *
+ * @author jansorg
+ * @since 2009-11-15
  */
 @ExtensionImpl
 public class EvaluateExpansionInspection extends AbstractBashInspection {
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "EvaluateExpression";
     }
@@ -53,16 +50,16 @@ public class EvaluateExpansionInspection extends AbstractBashInspection {
         return "Evaluate expansion";
     }
 
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Evaluate an expansion";
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Evaluate an expansion");
     }
 
     @Override
     public String getStaticDescription() {
-        return "Replaces a Bash expansion with the evaluated result. Only static value expansions are understood by this expansion, i.e. if an expansion contains a variable then the quickfix can not be applied.";
+        return "Replaces a Bash expansion with the evaluated result. Only static value expansions are understood by this expansion, " +
+            "i.e. if an expansion contains a variable then the quickfix can not be applied.";
     }
 
     @Nonnull
