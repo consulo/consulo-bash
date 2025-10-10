@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -31,25 +30,24 @@ import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
 import consulo.language.psi.resolve.ResolveState;
 import consulo.language.psi.util.PsiTreeUtil;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
-
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This inspection highlights duplicate function definitions.
- * <p/>
- * User: jansorg
- * Date: Oct 31, 2009
- * Time: 8:25:43 PM
+ *
+ * @author jansorg
+ * @since 2009-10-31
  */
 @ExtensionImpl
 public class DuplicateFunctionDefInspection extends AbstractBashInspection {
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "DuplicateFunction";
     }
@@ -60,17 +58,16 @@ public class DuplicateFunctionDefInspection extends AbstractBashInspection {
         return "Duplicate function";
     }
 
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Duplicate function definition";
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Duplicate function definition");
     }
 
     @Override
     public String getStaticDescription() {
-        return "Detects duplicate function definitions and highlights the double definitions. There is a chance of false" +
-                "positives if the earlier definition is inside of a conditional command.";
+        return "Detects duplicate function definitions and highlights the double definitions. " +
+            "There is a chance of false positives if the earlier definition is inside of a conditional command.";
     }
 
     @Nonnull
@@ -89,8 +86,8 @@ public class DuplicateFunctionDefInspection extends AbstractBashInspection {
 
                 boolean isOnGlobalLevel = BashPsiUtils.findNextVarDefFunctionDefScope(functionDef) == null;
                 PsiElement start = functionDef.getContext() != null && !isOnGlobalLevel
-                        ? functionDef.getContext()
-                        : functionDef.getPrevSibling();
+                    ? functionDef.getContext()
+                    : functionDef.getPrevSibling();
 
                 if (start != null) {
                     PsiTreeUtil.treeWalkUp(p, start, functionDef.getContainingFile(), ResolveState.initial());
@@ -110,14 +107,14 @@ public class DuplicateFunctionDefInspection extends AbstractBashInspection {
 
                         if (firstFunctionDef.getTextOffset() < functionDef.getTextOffset()) {
                             String message = "The function '" + functionDef.getName() +
-                                    "' is already defined at line " + BashPsiUtils.getElementLineNumber(firstFunctionDef) + ".";
+                                "' is already defined at line " + BashPsiUtils.getElementLineNumber(firstFunctionDef) + ".";
 
                             BashFunctionDefName nameSymbol = functionDef.getNameSymbol();
                             if (nameSymbol != null) {
                                 holder.registerProblem(
-                                        nameSymbol,
-                                        message,
-                                        ProblemHighlightType.GENERIC_ERROR_OR_WARNING
+                                    nameSymbol,
+                                    message,
+                                    ProblemHighlightType.GENERIC_ERROR_OR_WARNING
                                 );
                             }
 

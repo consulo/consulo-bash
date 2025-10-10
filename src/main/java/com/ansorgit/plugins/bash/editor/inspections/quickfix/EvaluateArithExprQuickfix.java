@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
@@ -29,10 +29,9 @@ import consulo.language.util.IncorrectOperationException;
 
 /**
  * Replaces a static arithmetic expression with the evaluated result.
- * <p/>
- * User: jansorg
- * Date: Nov 15, 2009
- * Time: 12:50:35 AM
+ *
+ * @author jansorg
+ * @since 2009-11-15
  */
 public class EvaluateArithExprQuickfix extends AbstractBashQuickfix {
     private final ArithmeticExpression expression;
@@ -42,8 +41,9 @@ public class EvaluateArithExprQuickfix extends AbstractBashQuickfix {
     }
 
     @Nonnull
-    public String getName() {
-        return "Replace '" + expression.getText() + "' with the result '" + expression.computeNumericValue() + "'";
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Replace '" + expression.getText() + "' with the result '" + expression.computeNumericValue() + "'");
     }
 
     public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {

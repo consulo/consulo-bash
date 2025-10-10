@@ -15,13 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashExpansion;
 import com.ansorgit.plugins.bash.lang.valueExpansion.ValueExpansionUtil;
 import com.ansorgit.plugins.bash.settings.BashProjectSettings;
 import consulo.codeEditor.Editor;
+import consulo.localize.LocalizeValue;
 import consulo.project.Project;
 import consulo.document.util.TextRange;
 import consulo.language.psi.PsiFile;
@@ -30,10 +30,9 @@ import jakarta.annotation.Nonnull;
 
 /**
  * Evaluates an expansion and replaces the placeholder with the evaluated result.
- * <p/>
- * User: jansorg
- * Date: Nov 15, 2009
- * Time: 12:50:35 AM
+ *
+ * @author jansorg
+ * @since 2009-11-15
  */
 public class EvaluateExpansionQuickfix extends AbstractBashQuickfix {
     private final BashExpansion expansion;
@@ -45,15 +44,16 @@ public class EvaluateExpansionQuickfix extends AbstractBashQuickfix {
     }
 
     @Nonnull
-    public String getName() {
+    @Override
+    public LocalizeValue getName() {
         boolean supportBash4 = BashProjectSettings.storedSettings(project).isSupportBash4();
         String replacement = ValueExpansionUtil.expand(expansion.getText(), supportBash4);
 
         if (replacement.length() < 20) {
-            return "Replace with the result '" + replacement + "'";
+            return LocalizeValue.localizeTODO("Replace with the result '" + replacement + "'");
         }
 
-        return "Replace with evaluated expansion";
+        return LocalizeValue.localizeTODO("Replace with evaluated expansion");
     }
 
     public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {

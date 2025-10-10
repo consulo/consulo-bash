@@ -18,7 +18,6 @@
 
 /*
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
@@ -31,15 +30,15 @@ import consulo.document.util.TextRange;
 import consulo.language.psi.PsiElementWithSubtreeChangeNotifier;
 import consulo.language.psi.PsiFile;
 import consulo.language.util.IncorrectOperationException;
+import consulo.localize.LocalizeValue;
 import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 
 /**
  * Quickfix to register an unknown / unresolved variable as a globally defined variable.
- * <p/>
- * User: jansorg
- * Date: Jan 25, 2010
- * Time: 10:36:04 PM
+ *
+ * @author jansorg
+ * @since 2010-01-25
  */
 public class RegisterGlobalVariableQuickfix extends AbstractBashQuickfix {
     private final BashVar bashVar;
@@ -49,8 +48,9 @@ public class RegisterGlobalVariableQuickfix extends AbstractBashQuickfix {
     }
 
     @Nonnull
-    public String getName() {
-        return "Register as global variable";
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Register as global variable");
     }
 
     public void invoke(@Nonnull Project project, Editor editor, final PsiFile file) throws IncorrectOperationException {

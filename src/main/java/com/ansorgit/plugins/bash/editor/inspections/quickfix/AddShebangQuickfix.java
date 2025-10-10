@@ -15,30 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
 import consulo.application.ApplicationManager;
-import consulo.project.Project;
+import consulo.codeEditor.Editor;
+import consulo.document.Document;
 import consulo.language.psi.PsiDocumentManager;
 import consulo.language.psi.PsiFile;
 import consulo.language.util.IncorrectOperationException;
-import consulo.codeEditor.Editor;
-import consulo.document.Document;
+import consulo.localize.LocalizeValue;
+import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 
 /**
- * Date: 15.05.2009
- * Time: 16:15:38
- *
  * @author Joachim Ansorg
+ * @since 2009-05-15
  */
 public class AddShebangQuickfix extends AbstractBashQuickfix {
-
     @Nonnull
-    public String getName() {
-        return "Add shebang line";
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Add shebang line");
     }
 
     public void invoke(@Nonnull final Project project, Editor editor, final PsiFile file) throws IncorrectOperationException {

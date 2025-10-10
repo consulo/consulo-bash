@@ -15,18 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 
 /**
  * Wraps a word like a in a quoted string, i.e. "a".
- * <p/>
- * User: jansorg
- * Date: 21.05.2009
- * Time: 10:40:37
+ *
+ * @author jansorg
+ * @since 2009-05-21
  */
 public class WordToDoublequotedStringQuickfix extends AbstractWordWrapQuickfix {
     public WordToDoublequotedStringQuickfix(BashWord word) {
@@ -38,7 +37,8 @@ public class WordToDoublequotedStringQuickfix extends AbstractWordWrapQuickfix {
     }
 
     @Nonnull
-    public String getName() {
-        return "Convert to quoted string \"...\"";
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Convert to quoted string \"...\"");
     }
 }

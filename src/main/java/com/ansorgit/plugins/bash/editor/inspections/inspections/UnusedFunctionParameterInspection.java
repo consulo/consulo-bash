@@ -28,43 +28,37 @@ import consulo.language.editor.inspection.LocalQuickFix;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
 import consulo.util.collection.ContainerUtil;
-import org.jetbrains.annotations.Nls;
-
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 /**
- * Inspects function calls and checks whether the given parameters are actually used in the function definition.
- * <p/>
- * This inspection is not capable to evaluate the control flow, e.g. parameter references in unreachable if
- * statements are still evaluated.
- * <p/>
- * <p/>
- * User: jansorg
- * Date: 28.12.10
- * Time: 12:41
+ * <p>Inspects function calls and checks whether the given parameters are actually used in the function definition.<p/>
+ *
+ * <p>This inspection is not capable to evaluate the control flow, e.g. parameter references in unreachable if
+ * statements are still evaluated.<p/>
+ *
+ * @author jansorg
+ * @since 2010-12-28
  */
 @ExtensionImpl
 public class UnusedFunctionParameterInspection extends AbstractBashInspection {
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "UnusedFunctionParams";
     }
 
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Unused function parameter";
-    }
-
-    @Override
-    public boolean isEnabledByDefault() {
-        return true;
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Unused function parameter");
     }
 
     @Nonnull

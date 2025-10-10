@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.RegisterShebangCommandQuickfix;
@@ -27,12 +26,12 @@ import consulo.language.editor.inspection.LocalQuickFix;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
 import consulo.util.xml.serializer.InvalidDataException;
 import consulo.util.xml.serializer.WriteExternalException;
 import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
 import org.jdom.Element;
-import org.jetbrains.annotations.Nls;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -54,22 +53,23 @@ public class FixShebangInspection extends AbstractBashInspection {
 
     private List<String> validShebangCommands = DEFAULT_COMMANDS;
 
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "FixShebang";
     }
 
     @Nonnull
+    @Override
     public String getShortName() {
         return "Fix shebang";
     }
 
-    @Nls
     @Nonnull
-    public String getDisplayName() {
-        return "Fix unusual shebang lines";
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Fix unusual shebang lines");
     }
 
     //@Override

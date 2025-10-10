@@ -15,17 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.lang.BashLanguage;
 import consulo.language.Language;
 import consulo.language.editor.inspection.LocalInspectionTool;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
-import jakarta.annotation.Nullable;
-import org.jetbrains.annotations.Nls;
-
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Abstract base class for Bash inspections.
@@ -49,9 +47,9 @@ abstract class AbstractBashInspection extends LocalInspectionTool {
         return BashLanguage.INSTANCE;
     }
 
-    @Nls
     @Nonnull
-    public String getGroupDisplayName() {
-        return "General";
+    @Override
+    public LocalizeValue getGroupDisplayName() {
+        return LocalizeValue.localizeTODO("General");
     }
 }

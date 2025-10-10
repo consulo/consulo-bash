@@ -15,23 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashShebang;
 import consulo.codeEditor.Editor;
 import consulo.language.psi.PsiFile;
 import consulo.language.util.IncorrectOperationException;
+import consulo.localize.LocalizeValue;
 import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 
 /**
  * Replaces an existing, but invalid shebang command with a known command.
- * <p/>
- * Date: 06.05.2009
- * Time: 13:52:33
  *
  * @author Joachim Ansorg
+ * @since 2009-50-06
  */
 public class ShebangQuickfix extends AbstractBashQuickfix {
     private final BashShebang shebang;
@@ -43,8 +41,9 @@ public class ShebangQuickfix extends AbstractBashQuickfix {
     }
 
     @Nonnull
-    public String getName() {
-        return "Replace with " + command;
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Replace with " + command);
     }
 
     public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {

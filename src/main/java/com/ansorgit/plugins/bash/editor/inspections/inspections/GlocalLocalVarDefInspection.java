@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.RemoveLocalQuickfix;
@@ -29,39 +28,37 @@ import consulo.language.editor.inspection.ProblemHighlightType;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
 
 import static com.ansorgit.plugins.bash.lang.LanguageBuiltins.localVarDefCommands;
 
 /**
  * This inspection detects local variable declarations on the global level, i.e. outside of functions.
- * <p/>
- * Date: 15.05.2009
- * Time: 14:56:55
  *
  * @author Joachim Ansorg
+ * @since 2009-05-15
  */
 @ExtensionImpl
 public class GlocalLocalVarDefInspection extends AbstractBashInspection {
-
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "GlobalLocalVarDef";
     }
 
     @Nonnull
+    @Override
     public String getShortName() {
         return "Global definition of local var";
     }
 
-    @Nls
     @Nonnull
-    public String getDisplayName() {
-        return "Global definition of a local variable";
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Global definition of a local variable");
     }
 
     @Override
@@ -93,10 +90,12 @@ public class GlocalLocalVarDefInspection extends AbstractBashInspection {
 
                             if (!isInFunction) {
                                 PsiElement problemHolder = varDef.getContext();
-                                holder.registerProblem(problemHolder,
-                                        "'local' must be used in a function",
-                                        ProblemHighlightType.GENERIC_ERROR,
-                                        new RemoveLocalQuickfix(varDef));
+                                holder.registerProblem(
+                                    problemHolder,
+                                    "'local' must be used in a function",
+                                    ProblemHighlightType.GENERIC_ERROR,
+                                    new RemoveLocalQuickfix(varDef)
+                                );
                             }
                         }
                     }

@@ -15,11 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
-
-import consulo.annotation.component.ExtensionImpl;
-import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.ReplaceVarWithParamExpansionQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -27,38 +23,40 @@ import com.ansorgit.plugins.bash.lang.psi.api.BashString;
 import com.ansorgit.plugins.bash.lang.psi.api.arithmetic.ArithmeticExpression;
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.ProblemsHolder;
-import consulo.language.psi.PsiElementVisitor;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
+import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
 
 /**
  * This inspection detects simple variable usages and offers a quickfix to replace it with
  * the equivalent parameter expansion, e.g. $a would be replaced with ${a}.
- * <p/>
- * User: jansorg
- * Date: 21.05.2009
- * Time: 13:49:05
+ *
+ * @author jansorg
+ * @since 2009-05-21
  */
 @ExtensionImpl
 public class SimpleVarUsageInspection extends AbstractBashInspection {
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "SimpleVarUsage";
     }
 
     @Nonnull
+    @Override
     public String getShortName() {
         return "Simple variable usage";
     }
 
-    @Nls
     @Nonnull
-    public String getDisplayName() {
-        return "Replace with the equivalent parameter expansion";
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Replace with the equivalent parameter expansion");
     }
 
     @Override

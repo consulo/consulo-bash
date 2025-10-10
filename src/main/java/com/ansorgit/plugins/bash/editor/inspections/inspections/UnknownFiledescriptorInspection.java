@@ -15,51 +15,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
-import consulo.annotation.component.ExtensionImpl;
-import jakarta.annotation.Nonnull;
-
-import com.ansorgit.plugins.bash.lang.lexer.BashTokenTypes;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.expression.BashFiledescriptor;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import consulo.language.psi.PsiElementVisitor;
-import consulo.language.ast.TokenSet;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.localize.LocalizeValue;
+import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
 
 /**
  * Detects invalid filedescriptors. Bash only supports the descriptors 0-9.
- * <p/>
- * <p/>
- * Date: 09.05.2010
  *
  * @author Joachim Ansorg
+ * @since 2010-05-09
  */
 @ExtensionImpl
 public class UnknownFiledescriptorInspection extends AbstractBashInspection {
-    static final TokenSet FILTER = TokenSet.create(BashTokenTypes.FILEDESCRIPTOR);
-
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "UnknownFiledescriptor";
     }
 
     @Nonnull
+    @Override
     public String getShortName() {
         return "Unknown filedescriptor";
     }
 
-    @Nls
     @Nonnull
-    public String getDisplayName() {
-        return "Unknown filedescriptor. Only &0 to &9 are valid.";
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Unknown filedescriptor. Only &0 to &9 are valid.");
     }
 
     @Override

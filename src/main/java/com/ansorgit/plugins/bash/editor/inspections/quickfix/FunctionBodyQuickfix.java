@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.BashBlock;
@@ -26,17 +25,16 @@ import consulo.language.editor.FileModificationService;
 import consulo.language.psi.PsiDocumentManager;
 import consulo.language.psi.PsiFile;
 import consulo.language.util.IncorrectOperationException;
+import consulo.localize.LocalizeValue;
 import consulo.logging.Logger;
 import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 
 /**
  * Wrap a function body in curly brackets.
- * <p/>
- * Date: 12.04.2009
- * Time: 15:22:48
  *
  * @author Joachim Ansorg
+ * @since 2009-04-12
  */
 public class FunctionBodyQuickfix extends AbstractBashQuickfix {
     private static final Logger log = Logger.getInstance("#bash.FunctionBodyQuickfix");
@@ -47,8 +45,9 @@ public class FunctionBodyQuickfix extends AbstractBashQuickfix {
     }
 
     @Nonnull
-    public String getName() {
-        return "Wrap function body in curly brackets";
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Wrap function body in curly brackets");
     }
 
     public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {

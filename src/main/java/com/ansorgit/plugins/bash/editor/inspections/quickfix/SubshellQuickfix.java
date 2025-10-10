@@ -15,25 +15,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
-
-import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.lang.psi.api.expression.BashSubshellCommand;
 import consulo.codeEditor.Editor;
-import consulo.language.psi.PsiFile;
-import consulo.project.Project;
-import consulo.language.psi.PsiDocumentManager;
-import consulo.language.util.IncorrectOperationException;
 import consulo.document.Document;
+import consulo.language.psi.PsiDocumentManager;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import consulo.localize.LocalizeValue;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 /**
  * Replaces a subshell command with the old-style backtick command.
- * <p/>
- * User: jansorg
- * Date: 21.05.2009
- * Time: 14:05:02
+ *
+ * @author jansorg
+ * @since 2009-05-21
  */
 public class SubshellQuickfix extends AbstractBashQuickfix {
     private final BashSubshellCommand subshellCommand;
@@ -43,8 +41,9 @@ public class SubshellQuickfix extends AbstractBashQuickfix {
     }
 
     @Nonnull
-    public String getName() {
-        return "Replace with backquote command";
+    @Override
+    public LocalizeValue getName() {
+        return LocalizeValue.localizeTODO("Replace with backquote command");
     }
 
     public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {

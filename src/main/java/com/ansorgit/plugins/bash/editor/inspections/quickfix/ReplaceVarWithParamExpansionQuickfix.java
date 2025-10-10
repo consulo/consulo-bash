@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.vars.BashVar;
@@ -28,14 +27,15 @@ import consulo.language.editor.inspection.LocalQuickFix;
 import consulo.language.psi.PsiElementWithSubtreeChangeNotifier;
 import consulo.language.psi.PsiFile;
 import consulo.language.util.IncorrectOperationException;
+import consulo.localize.LocalizeValue;
 import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 
 /**
- * THis quickfix replaces a simple variable usage with the equivalent parameter expansion form.
- * User: jansorg
- * Date: 28.12.10
- * Time: 12:19
+ * This quickfix replaces a simple variable usage with the equivalent parameter expansion form.
+ *
+ * @author jansorg
+ * @since 2010-12-28
  */
 public class ReplaceVarWithParamExpansionQuickfix extends AbstractBashQuickfix implements LocalQuickFix {
     private final BashVar var;
@@ -47,11 +47,13 @@ public class ReplaceVarWithParamExpansionQuickfix extends AbstractBashQuickfix i
     }
 
     @Nonnull
-    public String getName() {
+    @Override
+    public LocalizeValue getName() {
         if (variableName.length() > 10) {
-            return "Replace with '${...}'";
-        } else {
-            return String.format("Replace '%s' with '${%s}'", variableName, variableName);
+            return LocalizeValue.localizeTODO("Replace with '${...}'");
+        }
+        else {
+            return LocalizeValue.localizeTODO(String.format("Replace '%s' with '${%s}'", variableName, variableName));
         }
     }
 
@@ -62,10 +64,12 @@ public class ReplaceVarWithParamExpansionQuickfix extends AbstractBashQuickfix i
         try {
             Document document = file.getViewProvider().getDocument();
             document.replaceString(textRange.getStartOffset(), textRange.getEndOffset(), "${" + variableName + "}");
-			((PsiElementWithSubtreeChangeNotifier)file).subtreeChanged();
-        } catch (ReadOnlyModificationException e) {
+            ((PsiElementWithSubtreeChangeNotifier) file).subtreeChanged();
+        }
+        catch (ReadOnlyModificationException e) {
             //ignore
-        } catch (ReadOnlyFragmentModificationException e) {
+        }
+        catch (ReadOnlyFragmentModificationException e) {
             //ignore
         }
     }

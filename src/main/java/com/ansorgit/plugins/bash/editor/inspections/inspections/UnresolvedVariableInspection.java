@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.RegisterGlobalVariableQuickfix;
@@ -29,33 +28,23 @@ import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
 
 import java.util.Set;
 
 /**
  * This inspection marks unresolved variables.
- * <p/>
- * User: jansorg
- * Date: Jan 25, 2010
- * Time: 10:11:49 PM
+ *
+ * @author jansorg
+ * @since 2010-01-25
  */
 @ExtensionImpl
 public class UnresolvedVariableInspection extends AbstractBashInspection {
-    //private static final Logger log = Logger.getInstance("#UnresolvedVariable");
-
-    @Nls
     @Nonnull
     @Override
-    public String getDisplayName() {
-        return "Unresolved variable";
-    }
-
     @Pattern("[a-zA-Z_0-9.]+")
-    @Nonnull
-    @Override
     public String getID() {
         return "unresolvedVariableInspection";
     }
@@ -64,6 +53,12 @@ public class UnresolvedVariableInspection extends AbstractBashInspection {
     @Override
     public String getShortName() {
         return "Unresolved variable";
+    }
+
+    @Nonnull
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Unresolved variable");
     }
 
     @Override

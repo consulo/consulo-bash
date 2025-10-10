@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.quickfix;
 
 import com.ansorgit.plugins.bash.lang.psi.api.word.BashWord;
@@ -30,9 +29,9 @@ import jakarta.annotation.Nonnull;
 
 /**
  * Abstract base class to wrap words in something else.
- * User: jansorg
- * Date: 21.05.2009
- * Time: 11:05:40
+ *
+ * @author jansorg
+ * @since 2009-05-21
  */
 abstract class AbstractWordWrapQuickfix extends AbstractBashQuickfix {
     protected final BashWord word;

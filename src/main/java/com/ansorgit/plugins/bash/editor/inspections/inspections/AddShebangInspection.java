@@ -15,57 +15,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
-
-import consulo.annotation.component.ExtensionImpl;
-import jakarta.annotation.Nonnull;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.AddShebangQuickfix;
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
 import com.ansorgit.plugins.bash.lang.psi.api.BashFile;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
-import consulo.language.editor.inspection.scheme.InspectionManager;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.ProblemDescriptor;
 import consulo.language.editor.inspection.ProblemHighlightType;
 import consulo.language.editor.inspection.ProblemsHolder;
-import consulo.language.psi.PsiFile;
+import consulo.language.editor.inspection.scheme.InspectionManager;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiFile;
+import consulo.localize.LocalizeValue;
+import jakarta.annotation.Nonnull;
 import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
 
 /**
  * This inspection detects a missing shebang line and offers a file-level quickfix to add one.
- * Date: 15.05.2009
- * Time: 14:56:55
  *
  * @author Joachim Ansorg
+ * @since 2009-05-15
  */
 @ExtensionImpl
 public class AddShebangInspection extends AbstractBashInspection {
-
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "AddShebangLine";
     }
 
     @Nonnull
+    @Override
     public String getShortName() {
         return "Add Shebang line";
     }
 
-    @Nls
     @Nonnull
-    public String getDisplayName() {
-        return "Add missing shebang line to file";
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Add missing shebang line to file");
     }
 
     @Override
     public String getStaticDescription() {
-        return "If a file does not yet have a shebang line this inspection offers " +
-                "a file wide quickfix to add one.";
+        return "If a file does not yet have a shebang line this inspection offers a file wide quickfix to add one.";
     }
 
     @Override

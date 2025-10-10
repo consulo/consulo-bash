@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.editor.inspections.inspections;
 
 import com.ansorgit.plugins.bash.editor.inspections.quickfix.WordToDoublequotedStringQuickfix;
@@ -27,38 +26,36 @@ import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.Nls;
-
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
+import org.intellij.lang.annotations.Pattern;
 
 /**
  * Inspection which can wrap a word token inside of a string.
- * It offers options to either convert to a double quoted string or into
- * a single quoted string.
- * <p/>
- * User: jansorg
- * Date: 21.05.2009
- * Time: 10:32:31
+ * It offers options to either convert to a double quoted string or into a single quoted string.
+ *
+ * @author jansorg
+ * @since 2009-05-21
  */
 @ExtensionImpl
 public class WrapWordInStringInspection extends AbstractBashInspection {
-    @Pattern("[a-zA-Z_0-9.]+")
     @Nonnull
     @Override
+    @Pattern("[a-zA-Z_0-9.]+")
     public String getID() {
         return "ConvertToString";
     }
 
     @Nonnull
+    @Override
     public String getShortName() {
         return "Convert to string";
     }
 
-    @Nls
     @Nonnull
-    public String getDisplayName() {
-        return "Convert to a quoted or unquoted string";
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("Convert to a quoted or unquoted string");
     }
 
     @Override
