@@ -27,116 +27,101 @@ import java.util.List;
 
 public class PostHighlightingPass //extends TextEditorHighlightingPass
 {
-	private static final Logger LOG = Logger.getInstance("#com.intellij.codeInsight.daemon.impl.PostHighlightingPass");
-	@Nonnull
-	private final Project project;
-	@Nonnull
-	private final PsiFile file;
-	@Nullable
-	private final Editor editor;
-	@Nonnull
-	private final Document document;
-	private HighlightDisplayKey unusedSymbolInspection;
-	private int startOffset;
-	private int endOffset;
-	private Collection<HighlightInfo> highlights;
+    private static final Logger LOG = Logger.getInstance("#com.intellij.codeInsight.daemon.impl.PostHighlightingPass");
+    @Nonnull
+    private final Project project;
+    @Nonnull
+    private final PsiFile file;
+    @Nullable
+    private final Editor editor;
+    @Nonnull
+    private final Document document;
+    private HighlightDisplayKey unusedSymbolInspection;
+    private int startOffset;
+    private int endOffset;
+    private Collection<HighlightInfo> highlights;
 
-	PostHighlightingPass(@Nonnull Project project, @Nonnull PsiFile file, @Nullable Editor editor, @Nonnull Document document)
-	{
-		//super(project, document, true);
+    PostHighlightingPass(@Nonnull Project project, @Nonnull PsiFile file, @Nullable Editor editor, @Nonnull Document document) {
+        //super(project, document, true);
 
-		this.project = project;
-		this.file = file;
-		this.editor = editor;
-		this.document = document;
+        this.project = project;
+        this.file = file;
+        this.editor = editor;
+        this.document = document;
 
-		startOffset = 0;
-		endOffset = file.getTextLength();
-	}
+        startOffset = 0;
+        endOffset = file.getTextLength();
+    }
 
-	//@Override
-	public List<HighlightInfo> getInfos()
-	{
-		return highlights == null ? null : new ArrayList<HighlightInfo>(highlights);
-	}
+    //@Override
+    public List<HighlightInfo> getInfos() {
+        return highlights == null ? null : new ArrayList<HighlightInfo>(highlights);
+    }
 
-	public static HighlightInfo createUnusedSymbolInfo(@Nonnull PsiElement element, @Nullable String message)
-	{
-		return HighlightInfo.newHighlightInfo(HighlightInfoType.UNUSED_SYMBOL).range(element).descriptionAndTooltip(message)
-				.create();
-	}
+    public static HighlightInfo createUnusedSymbolInfo(@Nonnull PsiElement element, @Nullable String message) {
+        return HighlightInfo.newHighlightInfo(HighlightInfoType.RAW_UNUSED_SYMBOL).range(element).descriptionAndTooltip(message)
+            .create();
+    }
 
-	//@Override
-	public void doCollectInformation(@Nonnull final ProgressIndicator progress)
-	{
-		final List<HighlightInfo> highlights = new ArrayList<HighlightInfo>();
+    //@Override
+    public void doCollectInformation(@Nonnull final ProgressIndicator progress) {
+        final List<HighlightInfo> highlights = new ArrayList<HighlightInfo>();
 
-		collectHighlights(highlights, progress);
-		this.highlights = highlights;
-	}
+        collectHighlights(highlights, progress);
+        this.highlights = highlights;
+    }
 
-	private void collectHighlights(@Nonnull final List<HighlightInfo> result, @Nonnull final ProgressIndicator progress)
-	{
-		ApplicationManager.getApplication().assertReadAccessAllowed();
+    private void collectHighlights(@Nonnull final List<HighlightInfo> result, @Nonnull final ProgressIndicator progress) {
+        ApplicationManager.getApplication().assertReadAccessAllowed();
 
-		InspectionProfile profile = InspectionProjectProfileManager.getInstance(project).getInspectionProfile();
+        InspectionProfile profile = InspectionProjectProfileManager.getInstance(project).getInspectionProfile();
 
-		unusedSymbolInspection = HighlightDisplayKey.find(UnusedFunctionDefInspection.SHORT_NAME);
+        unusedSymbolInspection = HighlightDisplayKey.find(UnusedFunctionDefInspection.SHORT_NAME);
 
-		boolean findUnusedFunctions = profile.isToolEnabled(unusedSymbolInspection, file);
-		if(findUnusedFunctions)
-		{
-			final BashVisitor bashVisitor = new BashVisitor()
-			{
-				@Override
-				public void visitFunctionDef(BashFunctionDef functionDef)
-				{
-					HighlightingKeys.IS_UNUSED.set(functionDef, null);
+        boolean findUnusedFunctions = profile.isToolEnabled(unusedSymbolInspection, file);
+        if (findUnusedFunctions) {
+            final BashVisitor bashVisitor = new BashVisitor() {
+                @Override
+                public void visitFunctionDef(BashFunctionDef functionDef) {
+                    HighlightingKeys.IS_UNUSED.set(functionDef, null);
 
-					if(!PsiUtilCore.hasErrorElementChild(functionDef))
-					{
-						HighlightInfo highlightInfo = processFunctionDef(functionDef, progress);
-						if(highlightInfo != null)
-						{
-							result.add(highlightInfo);
-						}
-					}
-				}
-			};
+                    if (!PsiUtilCore.hasErrorElementChild(functionDef)) {
+                        HighlightInfo highlightInfo = processFunctionDef(functionDef, progress);
+                        if (highlightInfo != null) {
+                            result.add(highlightInfo);
+                        }
+                    }
+                }
+            };
 
-			file.accept(new PsiRecursiveElementWalkingVisitor()
-			{
-				@Override
-				public void visitElement(PsiElement element)
-				{
-					element.accept(bashVisitor);
-					super.visitElement(element);
-				}
-			});
-		}
-	}
+            file.accept(new PsiRecursiveElementWalkingVisitor() {
+                @Override
+                public void visitElement(PsiElement element) {
+                    element.accept(bashVisitor);
+                    super.visitElement(element);
+                }
+            });
+        }
+    }
 
-	private HighlightInfo processFunctionDef(BashFunctionDef functionDef, ProgressIndicator progress)
-	{
-		BashFunctionDefName nameSymbol = functionDef.getNameSymbol();
-		if(nameSymbol != null)
-		{
-			Query<PsiReference> search = ReferencesSearch.search(functionDef, functionDef.getUseScope(), true);
-			progress.checkCanceled();
+    private HighlightInfo processFunctionDef(BashFunctionDef functionDef, ProgressIndicator progress) {
+        BashFunctionDefName nameSymbol = functionDef.getNameSymbol();
+        if (nameSymbol != null) {
+            Query<PsiReference> search = ReferencesSearch.search(functionDef, functionDef.getUseScope(), true);
+            progress.checkCanceled();
 
-			PsiReference first = search.findFirst();
-			progress.checkCanceled();
+            PsiReference first = search.findFirst();
+            progress.checkCanceled();
 
-			if(first == null)
-			{
-				HighlightingKeys.IS_UNUSED.set(functionDef, Boolean.TRUE);
+            if (first == null) {
+                HighlightingKeys.IS_UNUSED.set(functionDef, Boolean.TRUE);
 
-				return createUnusedSymbolInfo(nameSymbol, null);
-			}
-		}
+                return createUnusedSymbolInfo(nameSymbol, null);
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
 //	@Override
 //	public void doApplyInformationToEditor()
