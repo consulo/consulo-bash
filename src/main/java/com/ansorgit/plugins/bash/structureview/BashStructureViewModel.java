@@ -19,6 +19,7 @@
 package com.ansorgit.plugins.bash.structureview;
 
 import com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef;
+import consulo.codeEditor.Editor;
 import consulo.fileEditor.structureView.StructureViewModel;
 import consulo.fileEditor.structureView.StructureViewTreeElement;
 import consulo.fileEditor.structureView.tree.Filter;
@@ -35,24 +36,20 @@ import jakarta.annotation.Nonnull;
  * @author Joachim Ansorg
  */
 class BashStructureViewModel extends TextEditorBasedStructureViewModel implements StructureViewModel {
-    private final PsiFile myFile;
     private static final Class[] CLASSS = new Class[]{BashFunctionDef.class};
     private static final Sorter[] SORTERS = new Sorter[]{Sorter.ALPHA_SORTER};
 
-    public BashStructureViewModel(PsiFile psiFile) {
-        super(psiFile);
-        myFile = psiFile;
+    public BashStructureViewModel(Editor editor, PsiFile psiFile) {
+        super(editor, psiFile);
     }
 
-    protected PsiFile getPsiFile() {
-        return myFile;
-    }
-
+    @Override
     @Nonnull
     public StructureViewTreeElement getRoot() {
-        return new BashStructureViewElement(myFile);
+        return new BashStructureViewElement(getPsiFile());
     }
 
+    @Override
     @Nonnull
     public Grouper[] getGroupers() {
         return Grouper.EMPTY_ARRAY;
@@ -64,11 +61,13 @@ class BashStructureViewModel extends TextEditorBasedStructureViewModel implement
         return CLASSS;
     }
 
+    @Override
     @Nonnull
     public Sorter[] getSorters() {
         return SORTERS;
     }
 
+    @Override
     @Nonnull
     public Filter[] getFilters() {
         return Filter.EMPTY_ARRAY;
