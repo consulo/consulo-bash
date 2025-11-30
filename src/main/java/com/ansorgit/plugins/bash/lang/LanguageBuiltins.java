@@ -18,6 +18,8 @@
 
 package com.ansorgit.plugins.bash.lang;
 
+import jakarta.annotation.Nullable;
+
 import java.util.Collection;
 import java.util.Set;
 
@@ -72,8 +74,8 @@ public final class LanguageBuiltins {
             "*", "@", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"
     );
 
-    public static boolean isInternalCommand(String commandName) {
-        return commands.contains(commandName);
+    public static boolean isInternalCommand(@Nullable String commandName) {
+        return commandName != null && commands.contains(commandName);
     }
 
     public static final Collection<String> commands = Set.of(
