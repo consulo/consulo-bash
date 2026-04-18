@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.lang.psi.resolve;
 
 import consulo.language.psi.PsiReference;
@@ -25,9 +24,8 @@ import com.intellij.testFramework.TestDataFile;
 import com.intellij.testFramework.UsefulTestCase;
 
 /**
- * User: jansorg
- * Date: 15.06.2010
- * Time: 21:09:35
+ * @author jansorg
+ * @since 2010-06-15
  */
 public abstract class AbstractResolveTest extends UsefulTestCase
 {
@@ -44,7 +42,7 @@ public abstract class AbstractResolveTest extends UsefulTestCase
         final VirtualFile vFile = LocalFileSystem.getInstance().findFileByPath(fullPath.replace(File.separatorChar, '/'));
         assertNotNull("file " + filePath + " not found", vFile);
 
-        String fileText = StringUtil.convertLineSeparators(VfsUtil.loadText(vFile));
+        String fileText = StringUtil.convertLineSeparators(VirtualFileUtil.loadText(vFile));
 
         final String fileName = vFile.getName();
 
