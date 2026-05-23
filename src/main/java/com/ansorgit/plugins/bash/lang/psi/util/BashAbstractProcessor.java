@@ -21,9 +21,11 @@ package com.ansorgit.plugins.bash.lang.psi.util;
 import com.ansorgit.plugins.bash.lang.psi.api.ResolveProcessor;
 import consulo.language.inject.InjectedLanguageManager;
 import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiLanguageInjectionHost;
 import consulo.language.psi.resolve.PsiScopeProcessor;
 import consulo.util.collection.ContainerUtil;
 import consulo.util.collection.MultiMap;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -115,11 +117,16 @@ public abstract class BashAbstractProcessor implements PsiScopeProcessor, Resolv
             PsiElement bestElement = null;
 
             for (PsiElement e : results.get(bestRating)) {
+                InjectedLanguageManager injectedLanguageManager = InjectedLanguageManager.getInstance(e.getProject());
+
                 //if the element is injected compute the text offset in the real file
                 int textOffset = e.getTextOffset();
                 if (BashPsiUtils.isInjectedElement(e)) {
                     //fixme optimize this
-                    textOffset = textOffset + InjectedLanguageManager.getInstance(e.getProject()).getInjectionHost(e).getTextOffset();
+                    PsiLanguageInjectionHost host = injectedLanguageManager.getInjectionHost(e);
+                    if (host != null) {
+                        textOffset = textOffset + host.getTextOffset();
+                    }
                 }
 
                 if (textOffset < smallestOffset) {
