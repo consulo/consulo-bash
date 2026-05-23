@@ -5,19 +5,18 @@ import java.io.File;
 import consulo.language.psi.PsiFile;
 import consulo.project.Project;
 import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.util.VirtualFileUtil;
 import org.jetbrains.annotations.NonNls;
 import com.ansorgit.plugins.bash.BashTestUtils;
 import consulo.language.editor.completion.lookup.LookupElement;
 import consulo.util.lang.StringUtil;
 import consulo.virtualFileSystem.LocalFileSystem;
-import consulo.ide.impl.idea.openapi.vfs.VfsUtil;
 import com.intellij.testFramework.TestDataFile;
 import com.intellij.testFramework.UsefulTestCase;
 
 /**
- * User: jansorg
- * Date: 09.02.11
- * Time: 21:11
+ * @author jansorg
+ * @since 2011-02-09
  */
 public abstract class AbstractCompletionTest extends UsefulTestCase
 {
@@ -67,7 +66,7 @@ public abstract class AbstractCompletionTest extends UsefulTestCase
 		final VirtualFile vFile = LocalFileSystem.getInstance().findFileByPath(fullPath.replace(File.separatorChar, '/'));
 		// assertNotNull("file " + filePath + " not found", vFile);
 
-		String fileText = StringUtil.convertLineSeparators(VfsUtil.loadText(vFile));
+		String fileText = StringUtil.convertLineSeparators(VirtualFileUtil.loadText(vFile));
 
 		final String fileName = vFile.getName();
 
