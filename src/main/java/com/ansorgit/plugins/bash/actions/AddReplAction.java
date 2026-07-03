@@ -30,12 +30,13 @@ import consulo.process.ExecutionException;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import consulo.ui.ex.action.Presentation;
 import consulo.virtualFileSystem.VirtualFile;
 
 import jakarta.annotation.Nullable;
 
-public class AddReplAction extends AnAction {
+public class AddReplAction extends AnAction implements AnActionWithSyncUpdate {
     private static final Logger log = Logger.getInstance("AddReplAction");
 
     public AddReplAction() {
@@ -53,8 +54,6 @@ public class AddReplAction extends AnAction {
         }
 
         presentation.setEnabled(true);
-
-        super.update(e);
     }
 
     public void actionPerformed(AnActionEvent e) {
