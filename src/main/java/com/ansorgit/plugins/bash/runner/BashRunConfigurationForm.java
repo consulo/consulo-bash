@@ -18,12 +18,21 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import consulo.ui.ex.awt.TextFieldWithBrowseButton;
-import consulo.execution.ui.awt.RawCommandLineEditor;
-import consulo.ui.ex.awt.util.BrowseFilesListener;
-
-import javax.swing.*;
-import java.awt.*;
+import consulo.bash.localize.BashLocalize;
+import consulo.disposer.Disposable;
+import consulo.fileChooser.FileChooserDescriptorFactory;
+import consulo.fileChooser.FileChooserTextBoxBuilder;
+import consulo.platform.base.icon.PlatformIconGroup;
+import consulo.process.cmd.ParametersListUtil;
+import consulo.project.Project;
+import consulo.ui.Component;
+import consulo.ui.TextBoxWithExpandAction;
+import consulo.ui.annotation.RequiredUIAccess;
+import consulo.ui.layout.DockLayout;
+import consulo.ui.layout.LabeledLayout;
+import consulo.ui.layout.VerticalLayout;
+import consulo.ui.util.FormBuilder;
+import consulo.util.lang.StringUtil;
 
 /**
  * The configuration user interface to configure a new Bash run configuration.
@@ -33,43 +42,72 @@ import java.awt.*;
  * Time: 21:30:48
  */
 public class BashRunConfigurationForm implements BashRunConfigurationParams {
-    private JPanel rootPanel;
-    private TextFieldWithBrowseButton scriptNameEdit;
-    private RawCommandLineEditor commandLineEdit;
-    private JPanel commonOptionsPlaceholder;
-    private final BashCommonOptionsForm commonOptionsForm;
-    private final BashRunConfiguration bashRunConfiguration;
+    private final FileChooserTextBoxBuilder.Controller myScriptName;
+    private final TextBoxWithExpandAction myScriptParameters;
+    private final BashCommonOptionsForm myCommonOptionsForm;
+    private final Component myComponent;
 
-    public BashRunConfigurationForm(BashRunConfiguration bashRunConfiguration) {
-        this.bashRunConfiguration = bashRunConfiguration;
+    @RequiredUIAccess
+    public BashRunConfigurationForm(Project project, Disposable uiDisposable) {
+        myScriptName = FileChooserTextBoxBuilder.create(project)
+            .dialogTitle(BashLocalize.runConfigurationSelectScriptTitle())
+            .fileChooserDescriptor(FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor())
+            .uiDisposable(uiDisposable)
+            .build();
 
-        commonOptionsForm = new BashCommonOptionsForm(bashRunConfiguration);
-        commonOptionsPlaceholder.add(commonOptionsForm.getRootPanel(), BorderLayout.CENTER);
+        myScriptParameters = TextBoxWithExpandAction.create(
+            PlatformIconGroup.actionsShow(),
+            BashLocalize.runConfigurationScriptParametersDialogTitle().get(),
+            ParametersListUtil.DEFAULT_LINE_PARSER,
+            ParametersListUtil.DEFAULT_LINE_JOINER
+        );
 
-        scriptNameEdit.addBrowseFolderListener("Select script", "", bashRunConfiguration.getProject(), BrowseFilesListener.SINGLE_FILE_DESCRIPTOR);
+        myCommonOptionsForm = new BashCommonOptionsForm(project, uiDisposable);
+
+        Component scriptForm = FormBuilder.create()
+            .addLabeled(BashLocalize.runConfigurationScriptNameLabel(), myScriptName.getComponent())
+            .addLabeled(BashLocalize.runConfigurationScriptParametersLabel(), myScriptParameters)
+            .build();
+
+        VerticalLayout layout = VerticalLayout.create();
+        layout.add(scriptForm);
+        layout.add(LabeledLayout.create(
+            BashLocalize.runConfigurationCommonOptionsTitle(),
+            DockLayout.create().center(myCommonOptionsForm.getComponent())
+        ));
+        myComponent = layout;
     }
 
+    public Component getComponent() {
+        return myComponent;
+    }
+
+    @Override
     public CommonBashRunConfigurationParams getCommonParams() {
-        return commonOptionsForm;
+        return myCommonOptionsForm;
     }
 
+    @Override
+    @RequiredUIAccess
     public String getScriptName() {
-        return scriptNameEdit.getText();
+        return myScriptName.getValue();
     }
 
+    @Override
+    @RequiredUIAccess
     public void setScriptName(String scriptName) {
-        this.scriptNameEdit.setText(scriptName);
+        myScriptName.setValue(StringUtil.notNullize(scriptName));
     }
 
+    @Override
+    @RequiredUIAccess
     public String getScriptParameters() {
-        return commandLineEdit.getText();
+        return StringUtil.notNullize(myScriptParameters.getValue());
     }
 
+    @Override
+    @RequiredUIAccess
     public void setScriptParameters(String scriptParameters) {
-        commandLineEdit.setText(scriptParameters);
-    }
-
-    public JComponent getRootPanel() {
-        return rootPanel;
+        myScriptParameters.setValue(StringUtil.notNullize(scriptParameters));
     }
 }

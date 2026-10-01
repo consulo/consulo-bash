@@ -22,6 +22,7 @@ import com.ansorgit.plugins.bash.util.BashIcons;
 import com.ansorgit.plugins.bash.util.BashInterpreterDetection;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.application.Application;
+import consulo.bash.localize.BashLocalize;
 import consulo.execution.configuration.ConfigurationFactory;
 import consulo.execution.configuration.ConfigurationType;
 import consulo.execution.configuration.RunConfiguration;
@@ -39,11 +40,11 @@ import jakarta.annotation.Nonnull;
 @ExtensionImpl
 public class BashConfigurationType implements ConfigurationType {
     public LocalizeValue getDisplayName() {
-        return LocalizeValue.localizeTODO("Bash");
+        return BashLocalize.runConfigurationTypeName();
     }
 
     public LocalizeValue getConfigurationTypeDescription() {
-        return LocalizeValue.localizeTODO("Bash run configuration");
+        return BashLocalize.runConfigurationTypeDescription();
     }
 
     public Image getIcon() {

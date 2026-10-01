@@ -18,12 +18,22 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import consulo.ui.ex.awt.util.BrowseFilesListener;
-import consulo.ui.ex.awt.TextFieldWithBrowseButton;
-import consulo.execution.ui.awt.RawCommandLineEditor;
-import consulo.execution.ui.awt.EnvironmentVariablesComponent;
+import consulo.bash.localize.BashLocalize;
+import consulo.disposer.Disposable;
+import consulo.execution.localize.ExecutionLocalize;
+import consulo.execution.ui.awt.EnvironmentVariablesTextFieldWithBrowseButton;
+import consulo.fileChooser.FileChooserDescriptorFactory;
+import consulo.fileChooser.FileChooserTextBoxBuilder;
+import consulo.localize.LocalizeValue;
+import consulo.platform.base.icon.PlatformIconGroup;
+import consulo.process.cmd.ParametersListUtil;
+import consulo.project.Project;
+import consulo.ui.Component;
+import consulo.ui.TextBoxWithExpandAction;
+import consulo.ui.annotation.RequiredUIAccess;
+import consulo.ui.util.FormBuilder;
+import consulo.util.lang.StringUtil;
 
-import javax.swing.*;
 import java.util.Map;
 
 /**
@@ -32,52 +42,105 @@ import java.util.Map;
  * Time: 21:43:12
  */
 public class BashCommonOptionsForm implements CommonBashRunConfigurationParams {
-    private JPanel rootPanel;
-    private RawCommandLineEditor interpreterOptions;
-    private EnvironmentVariablesComponent environmentVariablesEdit;
-    private TextFieldWithBrowseButton bashInterpreterEdit;
-    private TextFieldWithBrowseButton workingDirEdit;
-    private BashRunConfiguration bashRunConfiguration;
+    private final FileChooserTextBoxBuilder.Controller myInterpreterPath;
+    private final TextBoxWithExpandAction myInterpreterOptions;
+    private final FileChooserTextBoxBuilder.Controller myWorkingDirectory;
+    private final EnvironmentVariablesTextFieldWithBrowseButton myEnvironmentVariables;
+    private final Component myComponent;
 
-    public BashCommonOptionsForm(BashRunConfiguration bashRunConfiguration) {
-        this.bashRunConfiguration = bashRunConfiguration;
-        bashInterpreterEdit.addBrowseFolderListener("Select Bash Interpreter", "", bashRunConfiguration.getProject(), BrowseFilesListener.SINGLE_FILE_DESCRIPTOR);
-        workingDirEdit.addBrowseFolderListener("Select Working Directory", "", bashRunConfiguration.getProject(), BrowseFilesListener.SINGLE_DIRECTORY_DESCRIPTOR);
+    @RequiredUIAccess
+    public BashCommonOptionsForm(Project project, Disposable uiDisposable) {
+        myInterpreterPath = FileChooserTextBoxBuilder.create(project)
+            .dialogTitle(BashLocalize.runConfigurationSelectInterpreterTitle())
+            .fileChooserDescriptor(FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor())
+            .uiDisposable(uiDisposable)
+            .build();
+
+        myInterpreterOptions = TextBoxWithExpandAction.create(
+            PlatformIconGroup.actionsShow(),
+            BashLocalize.runConfigurationInterpreterOptionsDialogTitle().get(),
+            ParametersListUtil.DEFAULT_LINE_PARSER,
+            ParametersListUtil.DEFAULT_LINE_JOINER
+        );
+
+        myWorkingDirectory = FileChooserTextBoxBuilder.create(project)
+            .dialogTitle(BashLocalize.runConfigurationSelectWorkingDirectoryTitle())
+            .fileChooserDescriptor(FileChooserDescriptorFactory.createSingleFolderDescriptor())
+            .uiDisposable(uiDisposable)
+            .build();
+
+        myEnvironmentVariables = new EnvironmentVariablesTextFieldWithBrowseButton();
+
+        myComponent = FormBuilder.create()
+            .addLabeled(BashLocalize.runConfigurationInterpreterPathLabel(), myInterpreterPath.getComponent())
+            .addLabeled(BashLocalize.runConfigurationInterpreterOptionsLabel(), myInterpreterOptions)
+            .addLabeled(BashLocalize.runConfigurationWorkingDirectoryLabel(), myWorkingDirectory.getComponent())
+            .addLabeled(
+                LocalizeValue.join(ExecutionLocalize.environmentVariablesComponentTitle(), LocalizeValue.colon()),
+                myEnvironmentVariables.getComponent()
+            )
+            .build();
     }
 
+    public Component getComponent() {
+        return myComponent;
+    }
+
+    @Override
+    @RequiredUIAccess
     public String getInterpreterOptions() {
-        return interpreterOptions.getText();
+        return StringUtil.notNullize(myInterpreterOptions.getValue());
     }
 
+    @Override
+    @RequiredUIAccess
     public void setInterpreterOptions(String options) {
-        interpreterOptions.setText(options);
+        myInterpreterOptions.setValue(StringUtil.notNullize(options));
     }
 
+    @Override
+    @RequiredUIAccess
     public String getWorkingDirectory() {
-        return workingDirEdit.getText();
+        return myWorkingDirectory.getValue();
     }
 
+    @Override
+    @RequiredUIAccess
     public void setWorkingDirectory(String workingDirectory) {
-        workingDirEdit.setText(workingDirectory);
+        myWorkingDirectory.setValue(StringUtil.notNullize(workingDirectory));
     }
 
+    @Override
+    public boolean isPassParentEnvs() {
+        return myEnvironmentVariables.isPassParentEnvs();
+    }
+
+    @Override
+    @RequiredUIAccess
+    public void setPassParentEnvs(boolean passParentEnvs) {
+        myEnvironmentVariables.setPassParentEnvs(passParentEnvs);
+    }
+
+    @Override
     public Map<String, String> getEnvs() {
-        return environmentVariablesEdit.getEnvs();
+        return myEnvironmentVariables.getEnvs();
     }
 
+    @Override
+    @RequiredUIAccess
     public void setEnvs(Map<String, String> envs) {
-        environmentVariablesEdit.setEnvs(envs);
+        myEnvironmentVariables.setEnvs(envs);
     }
 
+    @Override
+    @RequiredUIAccess
     public String getInterpreterPath() {
-        return bashInterpreterEdit.getText();
+        return myInterpreterPath.getValue();
     }
 
+    @Override
+    @RequiredUIAccess
     public void setInterpreterPath(String path) {
-        this.bashInterpreterEdit.setText(path);
-    }
-
-    public JComponent getRootPanel() {
-        return rootPanel;
+        myInterpreterPath.setValue(StringUtil.notNullize(path));
     }
 }

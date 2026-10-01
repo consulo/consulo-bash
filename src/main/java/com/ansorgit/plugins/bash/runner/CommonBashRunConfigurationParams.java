@@ -34,6 +34,10 @@ public interface CommonBashRunConfigurationParams {
 
     void setWorkingDirectory(String workingDirectory);
 
+    boolean isPassParentEnvs();
+
+    void setPassParentEnvs(boolean passParentEnvs);
+
     Map<String, String> getEnvs();
 
     void setEnvs(Map<String, String> envs);

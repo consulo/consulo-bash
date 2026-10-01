@@ -18,12 +18,12 @@
 
 package com.ansorgit.plugins.bash.runner;
 
-import consulo.execution.configuration.ui.SettingsEditor;
 import consulo.configurable.ConfigurationException;
-
-import jakarta.annotation.Nonnull;
-
-import javax.swing.*;
+import consulo.execution.configuration.ui.SettingsEditor;
+import consulo.project.Project;
+import consulo.ui.Component;
+import consulo.ui.annotation.RequiredUIAccess;
+import jakarta.annotation.Nullable;
 
 /**
  * Uses code from the intellij-batch plugin.
@@ -31,26 +31,43 @@ import javax.swing.*;
  * @author wibotwi, jansorg
  */
 public class BashRunConfigurationEditor extends SettingsEditor<BashRunConfiguration> {
+    private final Project myProject;
+
+    @Nullable
     private BashRunConfigurationForm myForm;
 
-    public BashRunConfigurationEditor(BashRunConfiguration batchRunConfiguration) {
-        this.myForm = new BashRunConfigurationForm(batchRunConfiguration);
+    public BashRunConfigurationEditor(BashRunConfiguration runConfiguration) {
+        myProject = runConfiguration.getProject();
     }
 
     @Override
+    @RequiredUIAccess
     protected void resetEditorFrom(BashRunConfiguration runConfiguration) {
-        BashRunConfiguration.copyParams(runConfiguration, myForm);
+        BashRunConfigurationForm form = myForm;
+        if (form == null) {
+            return;
+        }
+
+        BashRunConfiguration.copyParams(runConfiguration, form);
     }
 
     @Override
+    @RequiredUIAccess
     protected void applyEditorTo(BashRunConfiguration runConfiguration) throws ConfigurationException {
-        BashRunConfiguration.copyParams(myForm, runConfiguration);
+        BashRunConfigurationForm form = myForm;
+        if (form == null) {
+            return;
+        }
+
+        BashRunConfiguration.copyParams(form, runConfiguration);
     }
 
     @Override
-    @Nonnull
-    protected JComponent createEditor() {
-        return myForm.getRootPanel();
+    @RequiredUIAccess
+    protected Component createUIComponent() {
+        BashRunConfigurationForm form = new BashRunConfigurationForm(myProject, this);
+        myForm = form;
+        return form.getComponent();
     }
 
     @Override

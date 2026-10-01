@@ -58,3 +58,35 @@ plugin.bash.description:
     text: BashSupport provides support for Unix Bash scripts.
 plugin.bash.name:
     text: BashSupport
+run.configuration.common.options.title:
+    text: Common options
+run.configuration.error.invalid.interpreter:
+    text: Interpreter path is invalid or not readable.
+run.configuration.error.no.interpreter:
+    text: No interpreter path given.
+run.configuration.error.no.script:
+    text: No script name given.
+run.configuration.interpreter.options.dialog.title:
+    text: Interpreter Options
+run.configuration.interpreter.options.label:
+    text: 'Interpreter options:'
+run.configuration.interpreter.path.label:
+    text: 'Bash interpreter:'
+run.configuration.script.name.label:
+    text: 'Script name:'
+run.configuration.script.parameters.dialog.title:
+    text: Script Parameters
+run.configuration.script.parameters.label:
+    text: 'Script parameters:'
+run.configuration.select.interpreter.title:
+    text: Select Bash Interpreter
+run.configuration.select.script.title:
+    text: Select Script
+run.configuration.select.working.directory.title:
+    text: Select Working Directory
+run.configuration.type.description:
+    text: Bash run configuration
+run.configuration.type.name:
+    text: Bash
+run.configuration.working.directory.label:
+    text: 'Working directory:'

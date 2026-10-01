@@ -18,6 +18,7 @@
 
 package com.ansorgit.plugins.bash.runner;
 
+import consulo.bash.localize.BashLocalize;
 import consulo.execution.RuntimeConfigurationException;
 import consulo.execution.configuration.*;
 import consulo.execution.configuration.log.ui.AdditionalTabComponentManager;
@@ -113,16 +114,16 @@ public class BashRunConfiguration extends ModuleBasedConfiguration<RunConfigurat
         super.checkConfiguration();
 
         if (StringUtil.isEmptyOrSpaces(interpreterPath)) {
-            throw new RuntimeConfigurationException("No interpreter path given.");
+            throw new RuntimeConfigurationException(BashLocalize.runConfigurationErrorNoInterpreter());
         }
 
         File interpreterFile = new File(interpreterPath);
         if (!interpreterFile.isFile() || !interpreterFile.canRead()) {
-            throw new RuntimeConfigurationException("Interpreter path is invalid or not readable.");
+            throw new RuntimeConfigurationException(BashLocalize.runConfigurationErrorInvalidInterpreter());
         }
 
         if (StringUtil.isEmptyOrSpaces(scriptName)) {
-            throw new RuntimeConfigurationException("No script name given.");
+            throw new RuntimeConfigurationException(BashLocalize.runConfigurationErrorNoScript());
         }
     }
 
@@ -190,7 +191,7 @@ public class BashRunConfiguration extends ModuleBasedConfiguration<RunConfigurat
         to.setInterpreterOptions(from.getInterpreterOptions());
         to.setWorkingDirectory(from.getWorkingDirectory());
         to.setInterpreterPath(from.getInterpreterPath());
-        //to.setPassParentEnvs(from.isPassParentEnvs());
+        to.setPassParentEnvs(from.isPassParentEnvs());
     }
 
     public static void copyParams(BashRunConfigurationParams from, BashRunConfigurationParams to) {
