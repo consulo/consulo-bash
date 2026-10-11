@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.lang.psi.impl.function;
 
 import com.ansorgit.plugins.bash.lang.psi.BashVisitor;
@@ -29,6 +28,8 @@ import com.ansorgit.plugins.bash.lang.psi.impl.BashGroupImpl;
 import com.ansorgit.plugins.bash.lang.psi.stubs.api.BashFunctionDefStub;
 import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
+import consulo.annotation.access.RequiredReadAction;
+import consulo.annotation.access.RequiredWriteAction;
 import consulo.language.ast.ASTNode;
 import consulo.language.icon.IconDescriptorUpdaters;
 import consulo.language.psi.PsiComment;
@@ -40,15 +41,16 @@ import consulo.language.psi.resolve.PsiScopesUtilCore;
 import consulo.language.psi.resolve.ResolveState;
 import consulo.language.psi.stub.IStubElementType;
 import consulo.language.psi.util.PsiTreeUtil;
+import consulo.language.util.IncorrectOperationException;
+import consulo.localize.LocalizeValue;
 import consulo.logging.Logger;
 import consulo.navigation.ItemPresentation;
 import consulo.ui.image.Image;
 import consulo.util.dataholder.Key;
-import consulo.language.util.IncorrectOperationException;
 import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NonNls;
-
 import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.Nullable;
+
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -67,15 +69,16 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
         super(stub, nodeType, null);
     }
 
-    public PsiElement setName(@Nonnull @NonNls String name) throws IncorrectOperationException {
+    @RequiredWriteAction
+    public PsiElement setName(@Nonnull String name) throws IncorrectOperationException {
         if (StringUtil.isEmpty(name)) {
             return null;
         }
 
         //fixme validate name
 
-        final PsiElement nameNode = getNameSymbol();
-        final PsiElement newNameSymbol = BashChangeUtil.createSymbol(getProject(), name);
+        PsiElement nameNode = getNameSymbol();
+        PsiElement newNameSymbol = BashChangeUtil.createSymbol(getProject(), name);
 
         if (log.isDebugEnabled()) {
             log.debug("renamed to symbol " + newNameSymbol);
@@ -86,10 +89,13 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
     }
 
     @Override
+    @RequiredReadAction
     public String getName() {
         return getDefinedName();
     }
 
+    @Override
+    @RequiredReadAction
     public BashBlock body() {
         BashGroupImpl bashGroup = findChildByClass(BashGroupImpl.class);
 
@@ -100,21 +106,25 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
         return bashGroup;
     }
 
+    @Override
+    @RequiredReadAction
     public boolean hasCommandGroup() {
         log.debug("hasCommandGroup");
 
-        final BashBlock body = body();
+        BashBlock body = body();
 
         return body != null && body.isCommandGroup();
     }
 
     private static final Key<BashFunctionDefName> NAME_SYMBOL_KEY = Key.create("nameSymbol");
 
+    @Override
+    @RequiredReadAction
     public BashFunctionDefName getNameSymbol() {
-        final BashFunctionDefName nameWord = findChildByClass(BashFunctionDefName.class);
+        BashFunctionDefName nameWord = findChildByClass(BashFunctionDefName.class);
 
         if (log.isDebugEnabled()) {
-            log.debug("getNameSymbole result: " + nameWord);
+            log.debug("getNameSymbol result: " + nameWord);
         }
 
         putUserData(NAME_SYMBOL_KEY, nameWord);
@@ -122,13 +132,16 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
         return nameWord;
     }
 
+    @Override
     public List<PsiComment> findAttachedComment() {
         return BashPsiUtils.findDocumentationElementComments(this);
     }
 
     @Nonnull
+    @Override
+    @RequiredReadAction
     public List<BashVar> findReferencedParameters() {
-        //call the visitor to find all uses of the parameter varaiables
+        //call the visitor to find all uses of the parameter variables
         Collection<BashVar> usedVariables = PsiTreeUtil.collectElementsOfType(this, BashVar.class);
 
         List<BashVar> parameters = new LinkedList<>();
@@ -144,6 +157,7 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
 
     private Key<String> DEFINED_NAME_KEY = Key.create("definedName");
 
+    @RequiredReadAction
     public String getDefinedName() {
         BashFunctionDefName symbol = getNameSymbol();
         String result = symbol == null ? "" : symbol.getNameString();
@@ -153,43 +167,59 @@ public class BashFunctionDefImpl extends BashBaseStubElementImpl<BashFunctionDef
         return result;
     }
 
+    @Override
+    @RequiredReadAction
     public int getTextOffset() {
-        final ASTNode name = getNameSymbol().getNode();
+        ASTNode name = getNameSymbol().getNode();
         return name != null ? name.getStartOffset() : super.getTextOffset();
     }
 
     @Override
     public ItemPresentation getPresentation() {
         return new ItemPresentation() {
-            public String getPresentableText() {
-                return getName() + "()";
+            @Override
+            @RequiredReadAction
+            public LocalizeValue getPresentableText() {
+                return LocalizeValue.of(getName() + "()");
             }
 
-            public String getLocationString() {
+            @Override
+            public @Nullable String getLocationString() {
                 return null;
             }
 
-            public Image getIcon() {
+            @Override
+            @RequiredReadAction
+            public @Nullable Image getIcon() {
                 return IconDescriptorUpdaters.getIcon(BashFunctionDefImpl.this, 0);
             }
         };
     }
 
+    @Override
+    @RequiredReadAction
     public PsiElement getNameIdentifier() {
         return getNameSymbol();
     }
 
     @Override
     public void accept(@Nonnull PsiElementVisitor visitor) {
-        if (visitor instanceof BashVisitor) {
-            ((BashVisitor) visitor).visitFunctionDef(this);
-        } else {
+        if (visitor instanceof BashVisitor bashVisitor) {
+            bashVisitor.visitFunctionDef(this);
+        }
+        else {
             visitor.visitElement(this);
         }
     }
 
     @Override
-    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
+    @RequiredReadAction
+    public boolean processDeclarations(
+        @Nonnull PsiScopeProcessor processor,
+        @Nonnull ResolveState state,
+        PsiElement lastParent,
+        @Nonnull PsiElement place
+    ) {
         if (!processor.execute(this, state)) {
             return false;
         }

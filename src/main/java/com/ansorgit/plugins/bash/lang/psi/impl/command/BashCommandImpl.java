@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ansorgit.plugins.bash.lang.psi.impl.command;
 
 import com.ansorgit.plugins.bash.lang.LanguageBuiltins;
@@ -34,6 +33,7 @@ import com.ansorgit.plugins.bash.lang.psi.impl.BashBaseStubElementImpl;
 import com.ansorgit.plugins.bash.lang.psi.impl.Keys;
 import com.ansorgit.plugins.bash.lang.psi.util.BashChangeUtil;
 import com.ansorgit.plugins.bash.lang.psi.util.BashPsiUtils;
+import consulo.annotation.access.RequiredReadAction;
 import consulo.document.util.TextRange;
 import consulo.language.ast.ASTNode;
 import consulo.language.psi.*;
@@ -44,12 +44,13 @@ import consulo.language.psi.stub.IStubElementType;
 import consulo.language.psi.stub.StubElement;
 import consulo.language.psi.util.PsiTreeUtil;
 import consulo.language.util.IncorrectOperationException;
+import consulo.localize.LocalizeValue;
 import consulo.navigation.ItemPresentation;
 import consulo.ui.image.Image;
 import consulo.util.dataholder.Key;
 import consulo.util.lang.StringUtil;
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -248,16 +249,20 @@ public class BashCommandImpl<T extends StubElement> extends BashBaseStubElementI
     @Override
     public ItemPresentation getPresentation() {
         return new ItemPresentation() {
-            public String getPresentableText() {
-                final PsiElement element = BashCommandImpl.this.commandElement();
-                return element == null ? "unknown" : element.getText();
+            @Override
+            @RequiredReadAction
+            public LocalizeValue getPresentableText() {
+                PsiElement element = BashCommandImpl.this.commandElement();
+                return element == null ? LocalizeValue.localizeTODO("unknown") : LocalizeValue.of(element.getText());
             }
 
+            @Override
             public String getLocationString() {
                 return null;
             }
 
-            public Image getIcon() {
+            @Override
+            public @Nullable Image getIcon() {
                 return null;
             }
         };
