@@ -1,5 +1,27 @@
 file.template.group.title.bash:
     text: Bash file templates
+module.extension.description:
+    text: Here you can configure how BashSupport treats files without extensions.
+module.extension.do.not.override.button:
+    text: Do Not Override
+module.extension.file.column:
+    text: File/Directory
+module.extension.mode.accept.all:
+    text: Accept all files without extension
+module.extension.mode.column:
+    text: Ignore / Accept / Guess
+module.extension.mode.custom:
+    text: Custom settings
+module.extension.mode.ignore.all:
+    text: Ignore files without extension
+module.extension.module.node:
+    text: Module {0}
+module.extension.override.button:
+    text: Override
+module.extension.override.message:
+    text: There are settings specified for the subdirectories. Override them?
+module.extension.override.title:
+    text: Override Subdirectory Settings
 newfile.command.name:
     text: Bash file
 newfile.dialog.prompt:

@@ -26,7 +26,9 @@ import consulo.configurable.StandardConfigurableIds;
 import consulo.disposer.Disposable;
 import consulo.localize.LocalizeValue;
 import consulo.project.Project;
+import consulo.ui.Component;
 import consulo.ui.annotation.RequiredUIAccess;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import jakarta.inject.Inject;
@@ -71,14 +73,14 @@ public class BashProjectSettingsConfigurable implements ProjectConfigurable
 	}
 
 	@RequiredUIAccess
-	public JComponent createComponent(Disposable parent)
+	public Component createUIComponent(Disposable parent)
 	{
 		if(settingsPanel == null)
 		{
 			settingsPanel = new BashProjectSettingsPane();
 		}
 
-		return settingsPanel.getPanel();
+		return TargetAWT.wrap(settingsPanel.getPanel());
 	}
 
 	@RequiredUIAccess

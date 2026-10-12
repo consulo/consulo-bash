@@ -36,8 +36,6 @@ import org.jspecify.annotations.Nullable;
  * @since 2009-05-06
  */
 public abstract class BashKeywordDefaultImpl extends BashCompositeElement implements PsiReference, BashKeyword {
-    private static final Object[] EMPTY = new Object[0];
-
     protected BashKeywordDefaultImpl(IElementType type) {
         super(type);
     }
@@ -103,13 +101,6 @@ public abstract class BashKeywordDefaultImpl extends BashCompositeElement implem
     @RequiredReadAction
     public boolean isReferenceTo(PsiElement element) {
         return element == this;
-    }
-
-    @Nonnull
-    @Override
-    @RequiredReadAction
-    public Object[] getVariants() {
-        return EMPTY;
     }
 
     @Override

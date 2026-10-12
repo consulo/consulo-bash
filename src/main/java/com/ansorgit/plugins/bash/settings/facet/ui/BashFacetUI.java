@@ -16,15 +16,35 @@
 
 package com.ansorgit.plugins.bash.settings.facet.ui;
 
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import consulo.bash.module.extension.BashMutableModuleExtension;
 import com.ansorgit.plugins.bash.settings.facet.OperationMode;
-import consulo.ui.ex.awt.tree.TreeUtil;
+import consulo.bash.localize.BashLocalize;
+import consulo.bash.module.extension.BashMutableModuleExtension;
+import consulo.disposer.Disposable;
+import consulo.disposer.Disposer;
+import consulo.localize.LocalizeValue;
+import consulo.module.Module;
+import consulo.ui.ComboBox;
+import consulo.ui.Component;
+import consulo.ui.Label;
+import consulo.ui.MessageBoxBuilder;
+import consulo.ui.MessageButtonRole;
+import consulo.ui.RadioGroup;
+import consulo.ui.TableItemEditor;
+import consulo.ui.TreeTable;
+import consulo.ui.UIAccess;
+import consulo.ui.ValueComponent;
+import consulo.ui.annotation.RequiredUIAccess;
+import consulo.ui.layout.DockLayout;
+import consulo.ui.layout.ScrollableLayout;
+import consulo.ui.layout.VerticalLayout;
+import consulo.util.lang.ThreeState;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.util.VirtualFileUtil;
+import jakarta.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * GUI settings which are displayed for a Bash module facet.
@@ -33,66 +53,137 @@ import consulo.ui.ex.awt.tree.TreeUtil;
  * Date: Feb 11, 2010
  * Time: 10:21:10 PM
  */
-public class BashFacetUI extends JPanel
-{
-	private JRadioButton ignoreFilesWithoutExtensionRadioButton;
-	private JRadioButton acceptAllFilesWithoutRadioButton;
-	private JRadioButton customSettingsRadioButton;
-	private JPanel basePanel;
-	private JScrollPane treeScollArea;
+public final class BashFacetUI {
+    private BashFacetUI() {
+    }
 
-	private ModuleFileTreeTable fileTreeTable;
+    @RequiredUIAccess
+    public static Component create(BashMutableModuleExtension extension, Disposable uiDisposable) {
+        Map<VirtualFile, FileMode> mapping = extension.getMapping();
 
-	public BashFacetUI(final BashMutableModuleExtension bashMutableModuleExtension)
-	{
-		customSettingsRadioButton.addChangeListener(new ChangeListener()
-		{
-			@Override
-			public void stateChanged(ChangeEvent e)
-			{
-				JRadioButton button = (JRadioButton) e.getSource();
-				treeScollArea.setEnabled(button.isSelected());
+        TreeTable<Object> fileTable = TreeTable.create(new BashModuleFileTreeModel(extension.getModule()));
+        Disposer.register(uiDisposable, fileTable.destroyHook());
+        fileTable.setTreeColumnHeader(BashLocalize.moduleExtensionFileColumn());
+        fileTable.addColumn(BashLocalize.moduleExtensionModeColumn(), value -> getMode(mapping, value))
+            .setRender((presentation, item) -> {
+                FileMode mode = item.getValue();
+                if (mode != null) {
+                    presentation.append(mode.getDisplayName());
+                }
+            })
+            .setEditor(new TableItemEditor<>() {
+                @Override
+                @RequiredUIAccess
+                public ValueComponent<FileMode> createComponent(Object item) {
+                    ComboBox<FileMode> modeBox =
+                        ComboBox.create(FileMode.defaultMode(), FileMode.auto(), FileMode.accept(), FileMode.ignore());
+                    modeBox.setTextRenderer(mode -> mode == null ? LocalizeValue.empty() : LocalizeValue.of(mode.getDisplayName()));
+                    FileMode mode = getMode(mapping, item);
+                    modeBox.setValue(mode == null ? FileMode.defaultMode() : mode);
+                    return modeBox;
+                }
 
-				basePanel.setEnabled(customSettingsRadioButton.isSelected());
-				fileTreeTable.setEnabled(customSettingsRadioButton.isSelected());
-			}
-		});
+                @Override
+                @RequiredUIAccess
+                public void commit(Object item, @Nullable FileMode value) {
+                    changeMode(fileTable, mapping, item instanceof VirtualFile file ? file : null, value);
+                }
 
-		ChangeListener changeListener = new ChangeListener()
-		{
-			@Override
-			public void stateChanged(ChangeEvent e)
-			{
-				bashMutableModuleExtension.setOperationMode(findMode());
-			}
-		};
+                @Override
+                public boolean isEditable(Object item) {
+                    return item instanceof Module || item instanceof VirtualFile;
+                }
+            });
 
-		ignoreFilesWithoutExtensionRadioButton.addChangeListener(changeListener);
-		acceptAllFilesWithoutRadioButton.addChangeListener(changeListener);
-		customSettingsRadioButton.addChangeListener(changeListener);
+        RadioGroup<OperationMode> modeGroup = RadioGroup.create();
+        VerticalLayout modeLayout = VerticalLayout.create();
+        modeLayout.add(modeGroup.newButton(BashLocalize.moduleExtensionModeIgnoreAll(), OperationMode.IgnoreAll));
+        modeLayout.add(modeGroup.newButton(BashLocalize.moduleExtensionModeAcceptAll(), OperationMode.AcceptAll));
+        modeLayout.add(modeGroup.newButton(BashLocalize.moduleExtensionModeCustom(), OperationMode.Custom));
+        modeGroup.setValue(extension.getOperationMode(), false);
+        modeGroup.addValueListener(mode -> {
+            if (mode == null) {
+                return;
+            }
 
-		fileTreeTable = new ModuleFileTreeTable(bashMutableModuleExtension.getModule(), bashMutableModuleExtension.getMapping());
-		treeScollArea.setViewportView(fileTreeTable);
-		TreeUtil.expandAll(fileTreeTable.getTree());
-	}
+            extension.setOperationMode(mode);
+            fileTable.setEnabled(mode == OperationMode.Custom);
+        });
 
-	private void createUIComponents()
-	{
-		basePanel = this;
-	}
+        fileTable.setEnabled(extension.getOperationMode() == OperationMode.Custom);
 
-	private OperationMode findMode()
-	{
-		if(ignoreFilesWithoutExtensionRadioButton.isSelected())
-		{
-			return OperationMode.IgnoreAll;
-		}
+        VerticalLayout topLayout = VerticalLayout.create();
+        topLayout.add(Label.create(BashLocalize.moduleExtensionDescription()));
+        topLayout.add(modeLayout);
 
-		if(acceptAllFilesWithoutRadioButton.isSelected())
-		{
-			return OperationMode.AcceptAll;
-		}
+        DockLayout layout = DockLayout.create();
+        layout.top(topLayout);
+        layout.center(ScrollableLayout.create(fileTable));
+        return layout;
+    }
 
-		return OperationMode.Custom;
-	}
+    private static @Nullable FileMode getMode(Map<VirtualFile, FileMode> mapping, @Nullable Object value) {
+        if (value instanceof Module) {
+            return mapping.get(null);
+        }
+        if (value instanceof VirtualFile file) {
+            return mapping.get(file);
+        }
+        return null;
+    }
+
+    @RequiredUIAccess
+    private static void changeMode(
+        TreeTable<Object> fileTable,
+        Map<VirtualFile, FileMode> mapping,
+        @Nullable VirtualFile file,
+        @Nullable FileMode mode
+    ) {
+        List<VirtualFile> subdirectoryFiles = new ArrayList<>();
+        for (VirtualFile mappedFile : mapping.keySet()) {
+            if (mappedFile != null && (file == null || VirtualFileUtil.isAncestor(file, mappedFile, true))) {
+                subdirectoryFiles.add(mappedFile);
+            }
+        }
+
+        if (subdirectoryFiles.isEmpty()) {
+            setMode(mapping, file, mode);
+            fileTable.refreshAll();
+            return;
+        }
+
+        UIAccess uiAccess = UIAccess.current();
+        MessageBoxBuilder.<ThreeState>create()
+            .asWarning()
+            .title(BashLocalize.moduleExtensionOverrideTitle())
+            .text(BashLocalize.moduleExtensionOverrideMessage())
+            .button(MessageButtonRole.YES, BashLocalize.moduleExtensionOverrideButton(), ThreeState.YES)
+            .asDefaultButton()
+            .button(MessageButtonRole.NO, BashLocalize.moduleExtensionDoNotOverrideButton(), ThreeState.NO)
+            .button(MessageButtonRole.CANCEL, ThreeState.UNSURE)
+            .asExitButton()
+            .showAsync(fileTable)
+            .whenCompleteAsync((answer, error) -> {
+                if (error != null || answer == null || answer == ThreeState.UNSURE) {
+                    return;
+                }
+
+                if (answer == ThreeState.YES) {
+                    for (VirtualFile subdirectoryFile : subdirectoryFiles) {
+                        mapping.remove(subdirectoryFile);
+                    }
+                }
+                setMode(mapping, file, mode);
+                fileTable.refreshAll();
+            }, uiAccess);
+    }
+
+    private static void setMode(Map<VirtualFile, FileMode> mapping, @Nullable VirtualFile file, @Nullable FileMode mode) {
+        if (mode == null || FileMode.defaultMode().equals(mode)) {
+            mapping.remove(file);
+        }
+        else {
+            mapping.put(file, mode);
+        }
+    }
 }
