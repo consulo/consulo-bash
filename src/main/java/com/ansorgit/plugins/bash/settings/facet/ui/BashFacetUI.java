@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package com.ansorgit.plugins.bash.settings.facet.ui;
 
 import com.ansorgit.plugins.bash.settings.facet.OperationMode;
@@ -48,10 +47,9 @@ import java.util.Map;
 
 /**
  * GUI settings which are displayed for a Bash module facet.
- * <p/>
- * User: jansorg
- * Date: Feb 11, 2010
- * Time: 10:21:10 PM
+ *
+ * @author jansorg
+ * @since 2010-02-11
  */
 public final class BashFacetUI {
     private BashFacetUI() {
@@ -65,7 +63,7 @@ public final class BashFacetUI {
         Disposer.register(uiDisposable, fileTable.destroyHook());
         fileTable.setTreeColumnHeader(BashLocalize.moduleExtensionFileColumn());
         fileTable.addColumn(BashLocalize.moduleExtensionModeColumn(), value -> getMode(mapping, value))
-            .setRender((presentation, item) -> {
+            .setRenderer((presentation, item) -> {
                 FileMode mode = item.getValue();
                 if (mode != null) {
                     presentation.append(mode.getDisplayName());
